@@ -3,3 +3,12 @@
 
 // AdminLTE
 @import '~admin-lte/dist/css/adminlte.css';
+
+// Fontawesome
+$fa-font-path: "../webfonts";
+			
+// *import the icons
+// Fontawesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
