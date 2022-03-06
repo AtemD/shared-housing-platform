@@ -2,6 +2,9 @@
 
 namespace App\Actions\Fortify;
 
+use App\Classes\UserAccountStatus;
+use App\Classes\UserType;
+use App\Classes\UserVerificationStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -20,8 +23,12 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        // dd($input);
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string'],
+            'user_type' => ['required', 'integer', Rule::in([UserType::LISTER, UserType::SEARCHER])],
             'email' => [
                 'required',
                 'string',
@@ -33,8 +40,14 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         return User::create([
-            'name' => $input['name'],
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+            'phone' => $input['phone'],
             'email' => $input['email'],
+            'last_active' => now(),
+            'verification_status' => UserVerificationStatus::UNVERIFIED,
+            'account_status' => UserAccountStatus::ACTIVATED,
+            'user_type' => $input['user_type'],
             'password' => Hash::make($input['password']),
         ]);
     }
