@@ -13,10 +13,33 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <h5 class="text-muted">What are you looking to do?</h5>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="user_type_1">List a Place</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="user_type_2">Search for a Place</label>
+                                </div>
+                            </div>
+
+                            @error('user_type')
+                            <span class="text-danger pl-3" role="alert">
+                                <small><strong>{{ $message }}</strong></small>
+                            </span>
+                            @enderror
+                        </div>
+                        <hr>
+
                         <div class="form-group row">
 
                             <div class="col-md-6 pb-1">
-                                <input id="first_name" type="text" placeholder="First Name" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                <input id="first_name" type="text" placeholder="First Name" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
 
                                 @error('first_name')
                                 <span class="invalid-feedback" role="alert">
@@ -26,7 +49,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <input id="last_name" type="text" placeholder="Last Name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                <input id="last_name" type="text" placeholder="Last Name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" autocomplete="last_name">
 
                                 @error('last_name')
                                 <span class="invalid-feedback" role="alert">
@@ -38,7 +61,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -51,8 +74,8 @@
                         <div class="form-group row">
 
                             <div class="col-3 pr-0">
-                                <select class="custom-select" required>
-                                    <option value="251">+251</option>
+                                <select class="custom-select">
+                                    <option value="+251">+251</option>
                                 </select>
 
                                 @error('area_code')
@@ -63,7 +86,7 @@
                             </div>
 
                             <div class="col-9 pl-0 bl-0">
-                                <input id="phone" type="tel" placeholder="980 123456" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                                <input id="phone" type="tel" placeholder="980 123456" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -76,7 +99,7 @@
                         <div class="form-group row">
 
                             <div class="col-md-12">
-                                <input id="password" type="password" placeholder="New Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" placeholder="New Password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -89,7 +112,7 @@
                         <div class="form-group row">
 
                             <div class="col-md-12">
-                                <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 

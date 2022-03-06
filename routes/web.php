@@ -18,3 +18,13 @@ Route::get('/', function () {
 });
 
 // Note: Login and register auth routes in FortifyServiceProvider.php
+
+Route::get('/user/dashboard', function () {
+    // return view('welcome');
+    dd(\Illuminate\Support\Facades\Auth::user());
+});
+
+Route::get('/admin/dashboard', function () {
+    // return view('welcome');
+    dd(\Illuminate\Support\Facades\Auth::user());
+});
