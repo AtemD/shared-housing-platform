@@ -4,6 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Classes\UserType;
+use App\Classes\UserAccountStatus;
+use App\Classes\UserVerificationStatus;
 
 class UserFactory extends Factory
 {
@@ -15,7 +18,13 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'last_active'=> now(),
+            'verification_status' => $this->faker->randomElement([UserVerificationStatus::VERIFIED, UserVerificationStatus::UNVERIFIED]),
+            'account_status' => $this->faker->randomElement([UserAccountStatus::ACTIVATED , UserAccountStatus::DEACTIVATED]),
+            'user_type' => $this->faker->randomElement([UserType::LISTER, UserType::SEARCHER]),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
