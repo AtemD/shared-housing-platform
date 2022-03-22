@@ -9,22 +9,8 @@ class Image extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-    ];
-
-
-    public function user()
+    public function imageable()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function PlaceListing()
-    {
-        return $this->
+        return $this->morphTo();
     }
 }

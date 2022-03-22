@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Classes\UserType;
+use App\References\UserType;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -80,5 +82,30 @@ class User extends Authenticatable
     public function isAdmin()
      {
          return Auth::check() && $this->user_type === UserType::ADMIN;
+     }
+
+     public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+     public function basicProfile()
+     {
+         return $this->hasOne(BasicProfile::class);
+     }
+
+     public function placeListingPreferences()
+     {
+         return $this->hasOne(PlaceListingPreference::class);
+     }
+
+     public function placeListings()
+     {
+         return $this->hasMany(PlaceListing::class);
+     }
+
+     public function images()
+     {
+         return $this->morphMany(Image::class, 'imageable');
      }
 }

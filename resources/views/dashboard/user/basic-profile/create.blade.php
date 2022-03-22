@@ -17,13 +17,13 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input form-control @error('user_type') is-invalid @enderror" value="{{App\References\UserType::LISTER}}" {{ old('user_type')== App\References\UserType::LISTER ? 'checked' : '' }}>
+                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="user_type_1">List a Place</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input form-control @error('user_type') is-invalid @enderror" value="{{App\References\UserType::SEARCHER}}" {{ old('user_type')== App\References\UserType::SEARCHER ? 'checked' : '' }}>
+                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="user_type_2">Search for a Place</label>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
 
                             <div class="col-3 pr-0">
                                 <select class="custom-select">
-                                    <option value="+251">+251</option>
+                                    <option value="{{App\Classes\AreaCode::ETHIOPIA}}">{{App\Classes\AreaCode::ETHIOPIA}}</option>
                                 </select>
 
                                 @error('area_code')

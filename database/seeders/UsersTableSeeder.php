@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Classes\UserType;
-use App\Classes\UserAccountStatus;
-use App\Classes\UserVerificationStatus;
+use App\References\UserType;
+use App\References\UserAccountStatus;
+use App\References\UserVerificationStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
 
-        User::factory()->times(200)->create();
+        User::factory()->times(10)->create();
 
         User::factory()->create([
             'first_name' => 'Admin',
@@ -29,7 +29,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@example.com',
             'verification_status' => UserVerificationStatus::VERIFIED,
             'account_status' => UserAccountStatus::ACTIVATED, 
-            'user_type' => UserType::ADMIN
+            'type' => UserType::ADMIN,
+            'is_profile_complete' => true,
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

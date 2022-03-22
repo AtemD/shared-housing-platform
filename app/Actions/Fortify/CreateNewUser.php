@@ -2,9 +2,9 @@
 
 namespace App\Actions\Fortify;
 
-use App\Classes\UserAccountStatus;
-use App\Classes\UserType;
-use App\Classes\UserVerificationStatus;
+use App\References\UserAccountStatus;
+use App\References\UserType;
+use App\References\UserVerificationStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

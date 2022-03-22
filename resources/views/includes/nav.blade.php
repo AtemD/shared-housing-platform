@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{{url('/')}}">
-            <span class="text-primary text-capitalize"><b>SHUMA</b></span>
+            <span class="text-primary text-capitalize"><b>1234</b></span>
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

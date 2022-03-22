@@ -4,15 +4,14 @@
         @include('includes.header')
     </head>
 
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <div id="app">
             @include('includes.nav')
            
             <main class="pb-4">
                 @yield('content')
             </main>
-
-            @include('includes.footer')
         </div>
+        @include('includes.footer')
     </body>
 </html>

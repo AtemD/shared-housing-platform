@@ -49,8 +49,13 @@ class PlaceListing extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function featuredImage(): BelongsTo
+    public function featuredImage()
     {
         return $this->belongsTo(Image::class, 'featured_image_id');
     }
+
+    public function images()
+     {
+         return $this->morphMany(Image::class, 'imageable');
+     }
 }
