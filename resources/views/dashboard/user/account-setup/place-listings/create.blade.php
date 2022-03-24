@@ -10,17 +10,31 @@
                         <small class="text-muted">Here you specify the details of the place you are listing.</small>
                 </div>
                 <!-- 
-    *user_id, description, *rent_amount, *rent_period, *rent_currency, *min_stay_period, profile_image, *living_place_type,
+    *user_id, description, *rent_amount, *rent_period, *rent_currency, *min_stay_period, profile_image, *place_type,
     bills_included, *move_in_date/availability_date, *furnishing_type, *slug, *created_at, *updated_at
  -->
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.account-setup.place-listings.store') }}">
+                    <form method="POST" action="{{ route('user.account-setup.place-listings.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
-                            <div class="col-md-6 pb-1">
+                            <div class="col-md-7 pb-1">
                                 <label for="rent_amount">Rent Amount (ETB)</label>
-                                <input id="rent_amount" type="number" placeholder="rent amount" class="form-control @error('rent_amount') is-invalid @enderror" name="rent_amount" value="{{ old('rent_amount') }}" autofocus>
+
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-8 pr-0">
+                                        <input id="rent_amount" type="number" placeholder="rent amount" class="form-control @error('rent_amount') is-invalid @enderror" name="rent_amount" value="{{ old('rent_amount') }}" autofocus>
+                                    </div>
+                                    <div class="col-4 pl-0">
+                                        <select class="custom-select form-control @error('currency') is-invalid @enderror" id="currency" name="currency">
+                                            @forelse(App\References\Currency::currencyList() as $key => $value)
+                                            <option value="{{$key}}" {{ old('currency')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                            @empty
+                                            <option value="">Error...</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
 
                                 @error('rent_amount')
                                 <span class="invalid-feedback" role="alert">
@@ -29,7 +43,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="rent_period">Rent Per</label>
                                     <select class="custom-select form-control @error('rent_period') is-invalid @enderror" id="rent_period" name="rent_period">
@@ -78,17 +92,17 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="living_place_type">Living Place Type</label>
-                                    <select class="custom-select form-control @error('living_place_type') is-invalid @enderror" id="living_place_type" name="living_place_type">
+                                    <label for="place_type">Place Type</label>
+                                    <select class="custom-select form-control @error('place_type') is-invalid @enderror" id="place_type" name="place_type">
                                         <option value="">Select...</option>
-                                        @forelse(App\References\LivingPlaceType::livingPlaceTypeList() as $key => $value)
-                                        <option value="{{$key}}" {{ old('living_place_type')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                        @forelse(App\References\PlaceType::placeTypeList() as $key => $value)
+                                        <option value="{{$key}}" {{ old('place_type')== $key  ? 'selected' : '' }}>{{$value}}</option>
                                         @empty
                                         <option value="">Error...</option>
                                         @endforelse
                                     </select>
 
-                                    @error('living_place_type')
+                                    @error('place_type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -164,12 +178,24 @@
 
                         <div class="form-group row">
                             <div class="col-12">
-                                <label class="mb-0">Place Profile Image</label><br>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input @error('place_profile_image') is-invalid @enderror" id="place_profile_image" name="place_profile_image">
-                                    <label class="custom-file-label" for="place_profile_image">Choose file...</label>
+                                <label for="validationTextarea">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="description">{{ old('description') }}</textarea>
 
-                                    @error('place_profile_image')
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="featured_image">Select a Featured Image</label>
+                                    <input type="file" class="form-control-file @error('featured_image') is-invalid @enderror" id="featured_image" name="featured_image">
+
+                                    @error('featured_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -177,6 +203,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <hr>
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">

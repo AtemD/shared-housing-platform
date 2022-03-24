@@ -3,16 +3,34 @@
 namespace App\Models;
 
 use App\References\FurnishingType;
-use App\References\LivingPlaceType;
+use App\References\PlaceType;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PlaceListing extends Model
 {
     use HasFactory, HasSlug;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'rent_amount',
+        'rent_period',
+        'bills_included',
+        'currency',
+        'place_type',
+        'furnishing_type',
+        'min_stay_period',
+        'availability_date',
+        'description',
+        'featured_image_id',
+        'rent_currency',
+    ];
 
     /**
      * Get the options for generating the slug.
@@ -20,16 +38,16 @@ class PlaceListing extends Model
     public function getSlugOptions() : SlugOptions
     {
         // Obtain living place type as string
-        $living_place_types = LivingPlaceType::livingPlaceTypeList();
-        $living_place_type = $living_place_types[$this->living_place_type];
+        $place_types = PlaceType::placeTypeList();
+        $place_type = $place_types[$this->place_type];
 
         // Obtain furnishing as string
         $furnishing_types = FurnishingType::furnishingTypeList();
         $furnishing_type = $furnishing_types[$this->furnishing_type];
 
         return SlugOptions::create()
-            ->generateSlugsFrom(function() use($living_place_type, $furnishing_type){
-                return "{$living_place_type} {$furnishing_type}";
+            ->generateSlugsFrom(function() use($place_type, $furnishing_type){
+                return "{$place_type} {$furnishing_type}";
             })
             ->saveSlugsTo('slug');
     }

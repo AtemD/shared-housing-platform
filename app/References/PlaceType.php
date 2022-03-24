@@ -2,7 +2,7 @@
 
 namespace App\References;
 
-class LivingPlaceType
+class PlaceType
 {
     const PRIVATE_ROOM = 1;
     const SHARED_ROOM = 2;
@@ -13,7 +13,7 @@ class LivingPlaceType
      * 
      * @return array
      */
-     public static function livingPlaceTypeList()
+     public static function placeTypeList()
      {
         return [
             self::PRIVATE_ROOM => 'Private Room',

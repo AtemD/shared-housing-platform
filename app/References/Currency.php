@@ -14,7 +14,7 @@ class Currency
      public static function currencyList()
      {
         return [
-            self::ETHIOPIAN_BIRR => 'Ethiopian Birr',
+            self::ETHIOPIAN_BIRR => 'ETB',
         ];
      }
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User\AccountSetup;
 
 use App\Http\Controllers\Controller;
-use App\References\LivingPlaceType;
+use App\Models\PlaceListing;
+use App\References\Currency;
+use App\References\PlaceType;
 use App\References\FurnishingType;
 use App\References\PeriodType;
 use Illuminate\Validation\Rule;
@@ -56,30 +58,53 @@ class PlaceListingsController extends Controller
             'rent_amount' => ['required', 'integer'],
             'rent_period' => ['required', 'integer'],
             'bills_included' => ['required', 'boolean'],
-            'living_place_type' => ['required', 'integer', Rule::in(array_keys(LivingPlaceType::livingPlaceTypeList()))],
+            'currency' => ['required', 'integer', Rule::in(array_keys(Currency::currencyList()))],
+            'place_type' => ['required', 'integer', Rule::in(array_keys(PlaceType::placeTypeList()))],
             'furnishing_type' => ['required', 'integer', Rule::in(array_keys(FurnishingType::furnishingTypeList()))],
             'min_stay_period' => ['required', 'integer'],
             'min_stay_period_type' => ['required', 'integer', Rule::in(array_keys(PeriodType::rentPeriodTypeList()))],
             'availability_date' => ['required', 'date_format:Y-m-d'],
-            'featured_image' => ['required', 'file', 'max:5000', 'mimes:jpg,png'],
+            'description' => ['required', 'max:1000'],
+            'featured_image' => ['required', 'image', 'max:4096', 'mimes:jpg,jpeg,png'],
         ]);
 
-        dd($validatedData);
+        // dd($validatedData);
+
+        // Start a db transaction
+        // Store the image in the database
+        // Then create the place listing
+        // Exit the transaction
+
+        // auth()->user()->placeListings()->create([
+        //     'rent_amount' => $validatedData['rent_amount'],
+        //     'rent_period' => $validatedData['rent_period'],
+        //     'rent_currency' => $validatedData['currency'],
+        //     'bills_included' => $validatedData['bills_included'],
+        //     'place_type' => $validatedData['place_type'],
+        //     'furnishing_type' => $validatedData['furnishing_type'],
+        //     'min_stay_period' => PeriodType::convertPeriodTypeToDays($validatedData['min_stay_period_type']),
+        //     'availability_date' => $validatedData['availability_date'],
+        //     'description' => $validatedData['description'],
+        //     'featured_image_id' => 1, 
+        // ]);
+
+        // dd('created');
 
         // Store the validated data in the session
         $request->session()->put('account_setup.place_listing', [
             'rent_amount' => $validatedData['rent_amount'],
             'rent_period' => $validatedData['rent_period'],
+            'rent_currency' => $validatedData['currency'],
             'bills_included' => $validatedData['bills_included'],
-            'living_place_type' => $validatedData['living_place_type'],
+            'place_type' => $validatedData['place_type'],
             'furnishing_type' => $validatedData['furnishing_type'],
-            'min_stay_period' => $validatedData['min_stay_period'], 
-            'min_stay_period_in_days' => $validatedData['min_stay_period_in_days'],PeriodType::convertPeriodTypeToDays($validatedData['rent_period_type']),
+            'min_stay_period' => PeriodType::convertPeriodTypeToDays($validatedData['min_stay_period_type']),
             'availability_date' => $validatedData['availability_date'],
-            'featured_image' => $validatedData['featured_image'], 
-            // 'rent_period' => PeriodType::convertPeriodTypeToDays($validatedData['rent_period_type']),
+            'description' => $validatedData['description'],
+            'featured_image_id' => $validatedData['featured_image'],
         ]);
-        // dd($request->session());
+
+        dd(session('account_setup.place_listing'));
 
         return redirect()->route('user.account-setup.place-listing-preferences.create');
     }

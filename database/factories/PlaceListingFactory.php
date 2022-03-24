@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Image;
 use App\Models\User;
 use App\References\PeriodType;
 use App\References\FurnishingType;
-use App\References\LivingPlaceType;
+use App\References\PlaceType;
 use App\References\Currency;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,14 +29,12 @@ class PlaceListingFactory extends Factory
             'rent_period' => $this->faker->randomElement(array_keys(PeriodType::periodTypeToDaysList())),
             'rent_currency' => $this->faker->randomElement(array_keys(Currency::currencyList())),
             'min_stay_period' => $this->faker->randomElement(array_keys(PeriodType::periodTypeToDaysList())),
-            'profile_image' => $this->faker->randomElement([
-                'place_1.jpg',
-                'place_2.jpg',
-                'place_3.jpg',
-            ]),
-            'living_place_type' => $this->faker->randomElement(array_keys(LivingPlaceType::livingPlaceTypeList())),
+            'featured_image_id' => function () {
+                return Image::factory()->create()->id;
+            },
+            'place_type' => $this->faker->randomElement(array_keys(PlaceType::placeTypeList())),
             'bills_included' => $this->faker->randomElement([true, false]),
-            'move_in_date' => Carbon::parse($this->faker->dateTimeBetween('2022/01/01', '2022/12/31')),
+            'availability_date' => Carbon::parse($this->faker->dateTimeBetween('2022/01/01', '2022/12/31')),
             'furnishing_type' => $this->faker->randomElement(array_keys(FurnishingType::furnishingTypeList())),
         ];
     }

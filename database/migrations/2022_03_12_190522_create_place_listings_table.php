@@ -16,7 +16,7 @@ class CreatePlaceListingsTable extends Migration
         Schema::create('place_listings', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('user_id')->nullable()->unsigned()->unique();
+            $table->bigInteger('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
             $table->text('description');
@@ -26,11 +26,11 @@ class CreatePlaceListingsTable extends Migration
             $table->smallInteger('min_stay_period');
 
             $table->bigInteger('featured_image_id')->nullable()->unsigned();
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+            $table->foreign('featured_image_id')->references('id')->on('images')->onDelete('cascade');
             
-            $table->tinyInteger('living_place_type'); // private room, shared room, entire place
+            $table->tinyInteger('place_type'); // private room, shared room, entire place
             $table->boolean('bills_included');
-            $table->date('move_in_date');
+            $table->date('availability_date'); // the move in date
             $table->tinyInteger('furnishing_type'); // fully furnished, partially furnished, not furnished
             // $table->tinyInteger('size');
             // $table->tinyInteger('size_type');
