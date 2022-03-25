@@ -88,9 +88,16 @@ class PlaceListingsController extends Controller
         //     'featured_image_id' => 1, 
         // ]);
 
-        // dd('created');
-
         // Store the validated data in the session
+        if($request->session()->has('account_setup.place_listing')){
+            $request->session('account_setup.place_listing')->forget(['featured_image']);
+        }  
+        
+        // dd($request->session('account_setup'));
+
+        // store the image in temporary storage to be processed later.
+        $path = request()->file('featured_image')->storePublicly('/temp');
+
         $request->session()->put('account_setup.place_listing', [
             'rent_amount' => $validatedData['rent_amount'],
             'rent_period' => $validatedData['rent_period'],
@@ -101,12 +108,12 @@ class PlaceListingsController extends Controller
             'min_stay_period' => PeriodType::convertPeriodTypeToDays($validatedData['min_stay_period_type']),
             'availability_date' => $validatedData['availability_date'],
             'description' => $validatedData['description'],
-            'featured_image_id' => $validatedData['featured_image'],
+            'featured_image' => $path,
         ]);
 
-        dd(session('account_setup.place_listing'));
+        // dd(session('account_setup'));
 
-        return redirect()->route('user.account-setup.place-listing-preferences.create');
+        return redirect()->route('user.account-setup.personal-preferences.create');
     }
 
     /**
