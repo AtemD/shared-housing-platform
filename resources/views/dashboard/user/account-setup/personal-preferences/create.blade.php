@@ -7,8 +7,9 @@
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
                     <h5>(2/6) <b>{{ __('Personal Preferences') }}</b></h4>
+                        <small class="text-muted">Here you select the habits that describe you best.</small>
                 </div>
-<!-- 
+                <!-- 
     Diet habits, 
     smoking habits, - smoker, non-smoker 
     alcohol habits, - occasional, frequent, none
@@ -23,20 +24,20 @@
 
                         <h5>Diet Habits?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\DietHabit::dietHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Vegetarian</label>
+                                    <input type="radio" id="diet_habit_{{$key}}" name="diet_habit" class="custom-control-input @error('diet_habit') is-invalid @enderror" value="{{$key}}" {{ old('diet_habit')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="diet_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Non-vegetarian</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Diet Habits to show, report this issue!
                             </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('diet_habit')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -45,20 +46,20 @@
 
                         <h5>Smoking Habits?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\SmokingHabit::smokingHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Non-smoker</label>
+                                    <input type="radio" id="smoking_habit_{{$key}}" name="smoking_habit" class="custom-control-input @error('smoking_habit') is-invalid @enderror" value="{{$key}}" {{ old('smoking_habit')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="smoking_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Smoker</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Smoking Habits to show, report this issue!
                             </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('smoking_habit')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -67,26 +68,20 @@
 
                         <h5>Alcohol Habits?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\AlcoholHabit::alcoholHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Occasional</label>
+                                    <input type="radio" id="alcohol_habit_{{$key}}" name="alcohol_habit" class="custom-control-input @error('alcohol_habit') is-invalid @enderror" value="{{$key}}" {{ old('alcohol_habit')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="alcohol_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Frequent</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Alcohol Habits to show, report this issue!
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">None</label>
-                                </div>
-                            </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('alcohol_habit')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -95,26 +90,20 @@
 
                         <h5>Partying Habits?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\PartyingHabit::partyingHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Occasional</label>
+                                    <input type="radio" id="partying_habit_{{$key}}" name="partying_habit" class="custom-control-input @error('partying_habit') is-invalid @enderror" value="{{$key}}" {{ old('partying_habit')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="partying_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Frequent</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Partying Habits to show, report this issue!
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">None</label>
-                                </div>
-                            </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('partying_habit')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -123,26 +112,20 @@
 
                         <h5>Guest Habits?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\GuestHabit::guestHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Occasional</label>
+                                    <input type="radio" id="guest_habit_{{$key}}" name="guest_habit" class="custom-control-input @error('guest_habit') is-invalid @enderror" value="{{$key}}" {{ old('guest_habit')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="guest_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Frequent</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Guest Habits to show, report this issue!
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">None</label>
-                                </div>
-                            </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('guest_habit')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -151,20 +134,20 @@
 
                         <h5>Marital Status?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\MaritalStatus::maritalStatusList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Married</label>
+                                    <input type="radio" id="marital_status_{{$key}}" name="marital_status" class="custom-control-input @error('marital_status') is-invalid @enderror" value="{{$key}}" {{ old('marital_status')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="marital_status_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Un-Married</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Marital Status to show, report this issue!
                             </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('marital_status')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -173,26 +156,20 @@
 
                         <h5>Occupation Type?</h5>
                         <div class="form-group row">
+                            @forelse(App\References\OccupationType::occupationTypeList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::LISTER}}" {{ old('user_type')== App\Classes\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_1">Working Professional</label>
+                                    <input type="radio" id="occupation_type_{{$key}}" name="occupation_type" class="custom-control-input @error('occupation_type') is-invalid @enderror" value="{{$key}}" {{ old('occupation_type')== $key ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-normal" for="occupation_type_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Student</label>
-                                </div>
+                            @empty
+                            <div class="alert alert-warning" role="alert">
+                                There are no Occupation Type to show, report this issue!
                             </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\Classes\UserType::SEARCHER}}" {{ old('user_type')== App\Classes\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label font-weight-normal" for="user_type_2">Working professional and Student</label>
-                                </div>
-                            </div>
+                            @endforelse
 
-                            @error('user_type')
+                            @error('occupation_type')
                             <span class="text-danger pl-3" role="alert">
                                 <small><strong>{{ $message }}</strong></small>
                             </span>
@@ -201,7 +178,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
-                            <button type="submit" class="btn btn-warning">
+                                <button type="submit" class="btn btn-warning">
                                     {{ __('<< prev') }}
                                 </button>
                                 <button type="submit" class="btn btn-primary">

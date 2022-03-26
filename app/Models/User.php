@@ -108,4 +108,9 @@ class User extends Authenticatable
      {
          return $this->morphMany(Image::class, 'imageable');
      }
+
+     public function personalPreference()
+     {
+         return $this->hasOne(PersonalPreference::class);
+     }
 }

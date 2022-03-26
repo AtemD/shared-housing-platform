@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         // $this->call(ImagesTableSeeder::class);
         // $this->call(PlaceListingsTableSeeder::class);
-        $this->call(BasicProfilesTableSeeder::class);
-        $this->call(PlaceListingPreferencesTableSeeder::class);
+        // $this->call(BasicProfilesTableSeeder::class);
+        // $this->call(PlaceListingPreferencesTableSeeder::class);
+        $this->call(PersonalPreferencesTableSeeder::class);
     }
 }
