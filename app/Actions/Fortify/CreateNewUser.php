@@ -6,6 +6,7 @@ use App\References\UserAccountStatus;
 use App\References\UserType;
 use App\References\UserVerificationStatus;
 use App\Models\User;
+use App\References\ProfileStatus;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -47,7 +48,8 @@ class CreateNewUser implements CreatesNewUsers
             'last_active' => now(),
             'verification_status' => UserVerificationStatus::UNVERIFIED,
             'account_status' => UserAccountStatus::ACTIVATED,
-            'user_type' => $input['user_type'],
+            'profile_status' => ProfileStatus::INCOMPLETE,
+            'type' => $input['user_type'],
             'password' => Hash::make($input['password']),
         ]);
     }

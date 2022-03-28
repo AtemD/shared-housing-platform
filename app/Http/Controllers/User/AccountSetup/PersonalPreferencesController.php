@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\AccountSetup;
 
 use App\Http\Controllers\Controller;
+use App\Helpers\AccountSetup;
 use App\References\DietHabit;
 use App\References\SmokingHabit;
 use App\References\AlcoholHabit;
@@ -78,6 +79,7 @@ class PersonalPreferencesController extends Controller
         //     'marital_status' => $validatedData['marital_status'],
         // ]);
 
-        return redirect()->route('user.account-setup.compatibility-preferences.create');
+        $next_step = AccountSetup::determineNextStep();
+        return redirect($next_step);
     }
 }

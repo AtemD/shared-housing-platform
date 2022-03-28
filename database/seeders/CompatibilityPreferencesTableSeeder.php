@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\BasicProfile;
+use App\References\UserType;
+use App\Models\CompatibilityPreference;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\References\UserType;
 
-class BasicProfilesTableSeeder extends Seeder
+class CompatibilityPreferencesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,13 +18,12 @@ class BasicProfilesTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('basic_profiles')->truncate();
+        DB::table('compatibility_preferences')->truncate();
 
-        // for every user that is not an admin, create a basic profile
-        $users = User::all();
-        
+        // for every user that is not an admin, create a compatibility preference
+        $users = User::where('type', '!=', UserType::ADMIN)->get();
         $users->each(function($user){
-            BasicProfile::factory()->make([
+            CompatibilityPreference::factory()->make([
                 'user_id' => $user->id,
             ])->save();
         });

@@ -11,7 +11,6 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -32,6 +31,7 @@ class User extends Authenticatable
         'last_active',
         'verification_status',
         'account_status',
+        'profile_status',
         'user_type',
     ];
 
@@ -112,5 +112,15 @@ class User extends Authenticatable
      public function personalPreference()
      {
          return $this->hasOne(PersonalPreference::class);
+     }
+
+     public function compatibilityPreference()
+     {
+         return $this->hasOne(CompatibilityPreference::class);
+     }
+
+     public function interests()
+     {
+         return $this->belongsToMany(Interest::class, 'user_has_interests', 'user_id', 'interest_id');
      }
 }

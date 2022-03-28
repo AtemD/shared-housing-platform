@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_active');
             $table->tinyInteger('verification_status');
             $table->tinyInteger('account_status');
+            $table->tinyInteger('profile_status');
             $table->tinyInteger('type');
-            $table->boolean('is_profile_complete')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

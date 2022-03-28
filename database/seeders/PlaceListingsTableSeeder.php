@@ -20,8 +20,9 @@ class PlaceListingsTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('place_listings')->truncate();
 
-        // for every user that is not an admin, create a place listing
-        $users = User::where('type', '!=', UserType::ADMIN)->get();
+        // Obtain all users of type lister
+        $users = User::where('type', '=', UserType::LISTER)->get();
+
         $users->each(function($user){
             PlaceListing::factory()->make([
                 'user_id' => $user->id,

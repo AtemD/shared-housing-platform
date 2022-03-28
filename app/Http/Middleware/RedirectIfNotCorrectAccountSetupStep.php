@@ -2,13 +2,15 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\AccountSetup;
+use App\References\ProfileStatus;
 use Closure;
 use Illuminate\Http\Request;
-use App\References\UserType;
 
 class RedirectIfNotCorrectAccountSetupStep
 {
     // use AccountSetup;
+
     /**
      * Handle an incoming request.
      *
@@ -18,52 +20,48 @@ class RedirectIfNotCorrectAccountSetupStep
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd('hit new middleware');
-        $this->redirectIfNotCorrectStep($request->user());
+        // if (auth()->user()->is_profile_complete == false) {
+            // if($request->session('account_setup_ste'))
+            // if($request->session()->has('account_setup_step')){
+            //     $request->session('account_setup_step') == AccountSetup::STEP_7;
+            //     return $next($request);
+            // }
+
+        //     $next_step = AccountSetup::determineNextStep();
+        //     return redirect($next_step);
+        // }
+
+        if(auth()->user()->profile_status == ProfileStatus::INCOMPLETE){
+            $next_step = AccountSetup::determineNextStep();
+            return redirect($next_step);
+        }
+
 
         return $next($request);
     }
 
-    public function redirectIfNotCorrectStep($user)
-    {
+    // public function redirectIfNotCorrectStep($user)
+    // {
+        // Check if the users profile is complete,
+        // if not display a message on the home page to prompt the user to go and complete their profile
+        // if (auth()->user()->is_profile_complete == false) {
 
-        $user_type = $user->user_type;
-// dd($user_type);
-        if (!$this->hasBasicProfile($user)) {
-            return redirect()->route('user.account-setup.basic-profile.create');
-        }
+            // session()->has('account_setup_step') ?: session(['account_setup_step' => 1]); 
+            // dd(session());
 
-        if ((!$this->hasPlaceListingPreferences($user)) && ($user_type == UserType::SEARCHER)) {
-            return redirect()->route('user.account-setup.place-listing-preferences.create');
-        }
+            // Redirect the user to appropriate step page
 
-        if (!$this->hasPlaceListings($user) && ($user_type == UserType::LISTER)) {
-            dd('hit rr');
-            return redirect('user/dashboard/account-setup/place-listings/create');
-        }
-
-
-        // if(!$this->hasPersonalPreferences($user)){
-
+        //     return view('dashboard/user/home');
         // }
 
-        // if(!$this->hasCompatibilityPreferences($user)){
-
-        // }
-
-        // if(!$this->hasHobbies($user)){
-
-        // }
-
-        // if(!$this->hasCompatibilityQuestions($user)){
-
-        // }
+        // dd('hitttt');
+        // return redirect()->route('user.account-setup.basic-profile.create');
 
         // redirect to homepage if we reach here.
-        if ($user_type == UserType::LISTER) {
-            return redirect()->route('user.home');
-        }
-        return redirect()->route('admin.home');
+        // if ($user_type == UserType::LISTER) {
+        //     return redirect()->route('user.home');
+        // }
+        // return redirect()->route('admin.home');
 
 
         // Determine percentage completion of users profile, redirect to appropriate step
@@ -77,38 +75,6 @@ class RedirectIfNotCorrectAccountSetupStep
 
         // Obtain the currently authenticated user.
         // $user = auth()->user();
-    }
-
-    /**
-     * Check whether the users has a basic profile.
-     * 
-     * @return bool
-     */
-    public function hasBasicProfile($user)
-    {
-        $result = $user->basicProfile()->exists();
-        return $result;
-    }
-
-    /**
-     * Check whether the users has living place preferences.
-     * 
-     * @return bool
-     */
-    public function hasPlaceListingPreferences($user)
-    {
-        $result = $user->placeListingPreferences()->exists();
-        return $result;
-    }
-
-    /**
-     * Check whether the users has living place listings.
-     * 
-     * @return bool
-     */
-    public function hasPlaceListings($user)
-    {
-        $result = $user->placeListings()->exists();
-        return $result;
-    }
+    // }
+    
 }

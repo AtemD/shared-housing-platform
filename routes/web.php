@@ -8,6 +8,7 @@ use App\Http\Controllers\User\AccountSetup\PersonalPreferencesController as Pers
 use App\Http\Controllers\User\AccountSetup\CompatibilityPreferencesController as CompatibilityPreferencesSetupController;
 use App\Http\Controllers\User\AccountSetup\PlaceListingPreferencesController as PlaceListingPreferencesSetupController;
 use App\Http\Controllers\User\AccountSetup\PlaceListingsController as PlaceListingsSetupController;
+use App\Http\Controllers\User\AccountSetup\InterestsController as InterestsSetupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +73,8 @@ Route::get('/user/dashboard/account-setup/compatibility-preferences/create', [Co
 ->name('user.account-setup.compatibility-preferences.create');
 Route::post('/user/dashboard/account-setup/compatibility-preferences/store', [CompatibilityPreferencesSetupController::class, 'store'])
 ->name('user.account-setup.compatibility-preferences.store');
+
+Route::get('/user/dashboard/account-setup/interests/create', [InterestsSetupController::class, 'create'])
+->name('user.account-setup.interests.create');
+Route::post('/user/dashboard/account-setup/interests/store', [InterestsSetupController::class, 'store'])
+->name('user.account-setup.interests.store');

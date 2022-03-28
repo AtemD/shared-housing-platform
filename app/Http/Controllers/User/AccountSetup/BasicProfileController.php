@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\User\AccountSetup;
 
+use App\Helpers\AccountSetup;
 use App\References\Gender;
 use Illuminate\Http\Request;
-use App\References\UserType;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Models\BasicProfile;
 
 class BasicProfileController extends Controller
 {
@@ -34,9 +35,12 @@ class BasicProfileController extends Controller
         // The you can show the form, if this is the correct next step.
         // dd('hit bpc');
 
-        if ($request->session()->has('account_setup.basic_profile')) {
-            // dd('has session');
-        }
+        // if ($request->session()->has('account_setup.basic_profile')) {
+        //     // dd('has session');
+        // }
+
+        // use policy to check if the user is allowed to create a basic profile
+        $this->authorize('create', BasicProfile::class);
 
         return view('dashboard/user/account-setup/basic-profile/create');
     }
@@ -49,9 +53,7 @@ class BasicProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(auth()->user()->id);
-        // First use the account controller to determine if the user is in the right step,
-        // The account controller should determine which step is next.
+        $this->authorize('create', BasicProfile::class);
 
         // Validate the request data
         $validatedData = $request->validate([
@@ -67,21 +69,7 @@ class BasicProfileController extends Controller
             'bio' => $validatedData['bio'],
         ]);
 
-        
-        // dd($request->session('account_setup.basic_profile'));
-
-        $user_type = auth()->user()->type;
-
-        if ($user_type == UserType::LISTER) {
-            // dd('hit l');
-            return redirect()->route('user.account-setup.place-listings.create');
-        }
-
-        if ($user_type == UserType::SEARCHER) {
-            // dd('hit s');
-            return redirect()->route('user.account-setup.place-listing-preferences.create');
-        }
-
-        return redirect()->route('welcome');
+        $next_step = AccountSetup::determineNextStep();
+        return redirect($next_step);
     }
 }

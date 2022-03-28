@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\References\ProfileStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\References\UserType;
@@ -24,11 +25,11 @@ class UserFactory extends Factory
             'last_active'=> now(),
             'verification_status' => $this->faker->randomElement([UserVerificationStatus::VERIFIED, UserVerificationStatus::UNVERIFIED]),
             'account_status' => $this->faker->randomElement([UserAccountStatus::ACTIVATED , UserAccountStatus::DEACTIVATED]),
+            'profile_status' => $this->faker->randomElement([ProfileStatus::INCOMPLETE]),
             'type' => $this->faker->randomElement([UserType::LISTER, UserType::SEARCHER]),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'is_profile_complete' => false,
             'remember_token' => Str::random(10),
         ];
     }

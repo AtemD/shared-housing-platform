@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class CompatibilityPreference extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,17 @@ class Image extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'diet_habit',
+        'smoking_habit',
+        'alcohol_habit',
+        'partying_habit',
+        'guest_habit',
+        'occupation_type',
+        'marital_status'
     ];
 
-    public function imageable()
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class);
     }
 }

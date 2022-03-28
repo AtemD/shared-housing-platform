@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\AccountSetup;
 
 use App\Http\Controllers\Controller;
+use App\Helpers\AccountSetup;
 use App\References\DietHabit;
 use App\References\SmokingHabit;
 use App\References\AlcoholHabit;
@@ -63,18 +64,18 @@ class CompatibilityPreferencesController extends Controller
             'marital_status' => ['required', 'integer', Rule::in(array_keys(MaritalStatus::maritalStatusList()))],
         ]);
         
-        dd($validatedData);
+        // dd($validatedData);
         
         // Store the compatibility preferences in the session
-        // $request->session()->put('account_setup.compatibility_preferences', [
-        //     'diet_habit' => $validatedData['diet_habit'],
-        //     'smoking_habit' => $validatedData['smoking_habit'],
-        //     'alcohol_habit' => $validatedData['alcohol_habit'],
-        //     'partying_habit' => $validatedData['partying_habit'],
-        //     'guest_habit' => $validatedData['guest_habit'],
-        //     'occupation_type' => $validatedData['occupation_type'],
-        //     'marital_status' => $validatedData['marital_status'],
-        // ]);
+        $request->session()->put('account_setup.compatibility_preferences', [
+            'diet_habit' => $validatedData['diet_habit'],
+            'smoking_habit' => $validatedData['smoking_habit'],
+            'alcohol_habit' => $validatedData['alcohol_habit'],
+            'partying_habit' => $validatedData['partying_habit'],
+            'guest_habit' => $validatedData['guest_habit'],
+            'occupation_type' => $validatedData['occupation_type'],
+            'marital_status' => $validatedData['marital_status'],
+        ]);
 
         // dd(session('account_setup.compatibility_preferences'));
 
@@ -88,9 +89,8 @@ class CompatibilityPreferencesController extends Controller
         //     'marital_status' => $validatedData['marital_status'],
         // ]);
 
-        dd('hit');
-
-        // return redirect()->route('user.account-setup.compatibility-preferences.create');
+        $next_step = AccountSetup::determineNextStep();
+        return redirect($next_step);
     }
 
     /**

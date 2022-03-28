@@ -30,7 +30,6 @@ class UsersTableSeeder extends Seeder
             'verification_status' => UserVerificationStatus::VERIFIED,
             'account_status' => UserAccountStatus::ACTIVATED, 
             'type' => UserType::ADMIN,
-            'is_profile_complete' => true,
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

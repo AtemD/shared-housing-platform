@@ -8,6 +8,8 @@
         <div id="app">
             @include('includes.nav')
            
+            @include('includes.messages')
+
             <main class="pb-4">
                 @yield('content')
             </main>

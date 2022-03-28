@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Interest extends Model
 {
     use HasFactory;
 
@@ -18,8 +18,9 @@ class Image extends Model
         'name',
     ];
 
-    public function imageable()
+
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsToMany(User::class, 'user_has_interests', 'interest_id', 'user_id');
     }
 }

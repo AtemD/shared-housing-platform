@@ -26,7 +26,7 @@ class AccountController extends Controller
 
     }
 
-    private function determineAccountCompletionPercentage(){
+    // private function determineAccountCompletionPercentage(){
 
-    }
+    // }
 }
