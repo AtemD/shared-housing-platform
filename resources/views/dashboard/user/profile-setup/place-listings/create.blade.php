@@ -14,7 +14,7 @@
     bills_included, *move_in_date/availability_date, *furnishing_type, *slug, *created_at, *updated_at
  -->
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.account-setup.place-listings.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.profile-setup.place-listings.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

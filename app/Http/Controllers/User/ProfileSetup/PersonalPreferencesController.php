@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\User\AccountSetup;
+namespace App\Http\Controllers\User\ProfileSetup;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\AccountSetup;
+use App\Helpers\ProfileSetup;
 use App\References\DietHabit;
 use App\References\SmokingHabit;
 use App\References\AlcoholHabit;
@@ -14,7 +14,7 @@ use App\References\OccupationType;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
-class CompatibilityPreferencesController extends Controller
+class PersonalPreferencesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,23 +27,13 @@ class CompatibilityPreferencesController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('dashboard/user/account-setup/compatibility-preferences/create');
+        return view('dashboard/user/profile-setup/personal-preferences/create');
     }
 
     /**
@@ -54,6 +44,8 @@ class CompatibilityPreferencesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->toArray());
+
         $validatedData = $request->validate([
             'diet_habit' => ['required', 'integer', Rule::in(array_keys(DietHabit::dietHabitList()))],
             'smoking_habit' => ['required', 'integer', Rule::in(array_keys(SmokingHabit::smokingHabitList()))],
@@ -64,10 +56,8 @@ class CompatibilityPreferencesController extends Controller
             'marital_status' => ['required', 'integer', Rule::in(array_keys(MaritalStatus::maritalStatusList()))],
         ]);
         
-        // dd($validatedData);
-        
-        // Store the compatibility preferences in the session
-        $request->session()->put('account_setup.compatibility_preferences', [
+        // Store the personal preferences in the session
+        $request->session()->put('profile_setup.personal_preferences', [
             'diet_habit' => $validatedData['diet_habit'],
             'smoking_habit' => $validatedData['smoking_habit'],
             'alcohol_habit' => $validatedData['alcohol_habit'],
@@ -77,9 +67,9 @@ class CompatibilityPreferencesController extends Controller
             'marital_status' => $validatedData['marital_status'],
         ]);
 
-        // dd(session('account_setup.compatibility_preferences'));
+        // dd(session('profile_setup.personal_preferences'));
 
-        // auth()->user()->compatibilityPreference()->create([
+        // auth()->user()->personalPreference()->create([
         //     'diet_habit' => $validatedData['diet_habit'],
         //     'smoking_habit' => $validatedData['smoking_habit'],
         //     'alcohol_habit' => $validatedData['alcohol_habit'],
@@ -89,52 +79,7 @@ class CompatibilityPreferencesController extends Controller
         //     'marital_status' => $validatedData['marital_status'],
         // ]);
 
-        $next_step = AccountSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep();
         return redirect($next_step);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

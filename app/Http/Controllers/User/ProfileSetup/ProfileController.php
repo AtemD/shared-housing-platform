@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User\AccountSetup;
+namespace App\Http\Controllers\User\ProfileSetup;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AccountController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -26,7 +26,7 @@ class AccountController extends Controller
 
     }
 
-    // private function determineAccountCompletionPercentage(){
+    // private function determineProfileCompletionPercentage(){
 
     // }
 }

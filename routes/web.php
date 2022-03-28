@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\User\AccountSetup\BasicProfileController as BasicProfileSetupController;
-use App\Http\Controllers\User\AccountSetup\PersonalPreferencesController as PersonalPreferencesSetupController;
-use App\Http\Controllers\User\AccountSetup\CompatibilityPreferencesController as CompatibilityPreferencesSetupController;
-use App\Http\Controllers\User\AccountSetup\PlaceListingPreferencesController as PlaceListingPreferencesSetupController;
-use App\Http\Controllers\User\AccountSetup\PlaceListingsController as PlaceListingsSetupController;
-use App\Http\Controllers\User\AccountSetup\InterestsController as InterestsSetupController;
+use App\Http\Controllers\User\ProfileSetup\BasicProfileController as BasicProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\PersonalPreferencesController as PersonalPreferencesSetupController;
+use App\Http\Controllers\User\ProfileSetup\CompatibilityPreferencesController as CompatibilityPreferencesSetupController;
+use App\Http\Controllers\User\ProfileSetup\PlaceListingPreferencesController as PlaceListingPreferencesSetupController;
+use App\Http\Controllers\User\ProfileSetup\PlaceListingsController as PlaceListingsSetupController;
+use App\Http\Controllers\User\ProfileSetup\InterestsController as InterestsSetupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +35,15 @@ Route::get('/user/dashboard/', [UserHomeController::class, 'index'])
 Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
 ->name('admin.home');
 
-Route::get('/user/dashboard/account-setup/place-listing-preferences/create', [PlaceListingPreferencesSetupController::class, 'create'])
-->name('user.account-setup.place-listing-preferences.create');
-Route::post('/user/dashboard/account-setup/place-listing-preferences/store', [PlaceListingPreferencesSetupController::class, 'store'])
-->name('user.account-setup.place-listing-preferences.store');
+Route::get('/user/dashboard/profile-setup/place-listing-preferences/create', [PlaceListingPreferencesSetupController::class, 'create'])
+->name('user.profile-setup.place-listing-preferences.create');
+Route::post('/user/dashboard/profile-setup/place-listing-preferences/store', [PlaceListingPreferencesSetupController::class, 'store'])
+->name('user.profile-setup.place-listing-preferences.store');
 
-Route::get('/user/dashboard/account-setup/place-listings/create', [PlaceListingsSetupController::class, 'create'])
-->name('user.account-setup.place-listings.create');
-Route::post('/user/dashboard/account-setup/places-listings/store', [PlaceListingsSetupController::class, 'store'])
-->name('user.account-setup.place-listings.store');
+Route::get('/user/dashboard/profile-setup/place-listings/create', [PlaceListingsSetupController::class, 'create'])
+->name('user.profile-setup.place-listings.create');
+Route::post('/user/dashboard/profile-setup/places-listings/store', [PlaceListingsSetupController::class, 'store'])
+->name('user.profile-setup.place-listings.store');
 
 // Basic profile
 // Route::get('/user/dashboard/account/basic-profile/create', [BasicProfileController::class, 'create'])
@@ -59,22 +59,22 @@ Route::post('/user/dashboard/account-setup/places-listings/store', [PlaceListing
 
 
 // Profile Setup Routes
-Route::get('/user/dashboard/account-setup/basic-profile/create', [BasicProfileSetupController::class, 'create'])
-->name('user.account-setup.basic-profile.create');
-Route::post('/user/dashboard/account-setup/basic-profile', [BasicProfileSetupController::class, 'store'])
-->name('user.account-setup.basic-profile.store');
+Route::get('/user/dashboard/profile-setup/basic-profile/create', [BasicProfileSetupController::class, 'create'])
+->name('user.profile-setup.basic-profile.create');
+Route::post('/user/dashboard/profile-setup/basic-profile', [BasicProfileSetupController::class, 'store'])
+->name('user.profile-setup.basic-profile.store');
 
-Route::get('/user/dashboard/account-setup/personal-preferences/create', [PersonalPreferencesSetupController::class, 'create'])
-->name('user.account-setup.personal-preferences.create');
-Route::post('/user/dashboard/account-setup/personal-preferences/store', [PersonalPreferencesSetupController::class, 'store'])
-->name('user.account-setup.personal-preferences.store');
+Route::get('/user/dashboard/profile-setup/personal-preferences/create', [PersonalPreferencesSetupController::class, 'create'])
+->name('user.profile-setup.personal-preferences.create');
+Route::post('/user/dashboard/profile-setup/personal-preferences/store', [PersonalPreferencesSetupController::class, 'store'])
+->name('user.profile-setup.personal-preferences.store');
 
-Route::get('/user/dashboard/account-setup/compatibility-preferences/create', [CompatibilityPreferencesSetupController::class, 'create'])
-->name('user.account-setup.compatibility-preferences.create');
-Route::post('/user/dashboard/account-setup/compatibility-preferences/store', [CompatibilityPreferencesSetupController::class, 'store'])
-->name('user.account-setup.compatibility-preferences.store');
+Route::get('/user/dashboard/profile-setup/compatibility-preferences/create', [CompatibilityPreferencesSetupController::class, 'create'])
+->name('user.profile-setup.compatibility-preferences.create');
+Route::post('/user/dashboard/profile-setup/compatibility-preferences/store', [CompatibilityPreferencesSetupController::class, 'store'])
+->name('user.profile-setup.compatibility-preferences.store');
 
-Route::get('/user/dashboard/account-setup/interests/create', [InterestsSetupController::class, 'create'])
-->name('user.account-setup.interests.create');
-Route::post('/user/dashboard/account-setup/interests/store', [InterestsSetupController::class, 'store'])
-->name('user.account-setup.interests.store');
+Route::get('/user/dashboard/profile-setup/interests/create', [InterestsSetupController::class, 'create'])
+->name('user.profile-setup.interests.create');
+Route::post('/user/dashboard/profile-setup/interests/store', [InterestsSetupController::class, 'store'])
+->name('user.profile-setup.interests.store');

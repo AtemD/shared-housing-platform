@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.account-setup.place-listing-preferences.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.place-listing-preferences.store') }}">
                         @csrf
 
                         <div class="form-group row">

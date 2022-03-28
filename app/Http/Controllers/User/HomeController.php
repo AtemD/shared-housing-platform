@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'account.setup']);
+        $this->middleware(['auth', 'profile.setup']);
     }
 
     /**
@@ -28,7 +28,7 @@ class HomeController extends Controller
         // if not display a message on the home page to prompt the user to go and complete their profile
         // if (auth()->user()->is_profile_complete == false) {
 
-        //     session()->has('account_setup_step') ?: session(['account_setup_step' => 1]); 
+        //     session()->has('profile_setup_step') ?: session(['profile_setup_step' => 1]); 
         //     // dd(session());
 
         //     // Redirect the user to appropriate step page

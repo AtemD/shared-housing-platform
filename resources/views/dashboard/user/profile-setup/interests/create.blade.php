@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.account-setup.interests.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.interests.store') }}">
                         @csrf
 
                         <div class="form-group">

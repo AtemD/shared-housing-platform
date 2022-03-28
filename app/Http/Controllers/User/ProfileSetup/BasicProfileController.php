@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\User\AccountSetup;
+namespace App\Http\Controllers\User\ProfileSetup;
 
-use App\Helpers\AccountSetup;
+use App\Helpers\ProfileSetup;
 use App\References\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -35,14 +35,14 @@ class BasicProfileController extends Controller
         // The you can show the form, if this is the correct next step.
         // dd('hit bpc');
 
-        // if ($request->session()->has('account_setup.basic_profile')) {
+        // if ($request->session()->has('profile_setup.basic_profile')) {
         //     // dd('has session');
         // }
 
         // use policy to check if the user is allowed to create a basic profile
         $this->authorize('create', BasicProfile::class);
 
-        return view('dashboard/user/account-setup/basic-profile/create');
+        return view('dashboard/user/profile-setup/basic-profile/create');
     }
 
     /**
@@ -63,13 +63,13 @@ class BasicProfileController extends Controller
         ]);
 
         // Store the validated data in the session
-        $request->session()->put('account_setup.basic_profile', [
+        $request->session()->put('profile_setup.basic_profile', [
             'gender' => $validatedData['gender'],
             'dob' => $validatedData['dob'],
             'bio' => $validatedData['bio'],
         ]);
 
-        $next_step = AccountSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep();
         return redirect($next_step);
     }
 }

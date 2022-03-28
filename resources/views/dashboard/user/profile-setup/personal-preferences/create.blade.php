@@ -6,12 +6,20 @@
         <div class="col-md-5">
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
-                    <h5>(3/6) <b>{{ __('Compatibility Preferences') }}</b></h4>
-                    <small class="text-muted">Here you select, what you want from a potential match</small>
+                    <h5>(2/6) <b>{{ __('Personal Preferences') }}</b></h4>
+                        <small class="text-muted">Here you select the habits that describe you best.</small>
                 </div>
-
+                <!-- 
+    Diet habits, 
+    smoking habits, - smoker, non-smoker 
+    alcohol habits, - occasional, frequent, none
+    marital status, - married, unmarried
+    partying habits, - occasional, frequent, none
+    guest habits, - occasional, frequent, none
+    occupation - working professional, student, undergraduate student, graduate student
+-->
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.account-setup.compatibility-preferences.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.personal-preferences.store') }}">
                         @csrf
 
                         <h5>Diet Habits?</h5>

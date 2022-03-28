@@ -2,15 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\AccountSetup;
+use App\Helpers\ProfileSetup;
 use App\References\ProfileStatus;
 use Closure;
 use Illuminate\Http\Request;
 
-class RedirectIfNotCorrectAccountSetupStep
+class RedirectIfNotCorrectProfileSetupStep
 {
-    // use AccountSetup;
-
     /**
      * Handle an incoming request.
      *
@@ -23,16 +21,16 @@ class RedirectIfNotCorrectAccountSetupStep
         // if (auth()->user()->is_profile_complete == false) {
             // if($request->session('account_setup_ste'))
             // if($request->session()->has('account_setup_step')){
-            //     $request->session('account_setup_step') == AccountSetup::STEP_7;
+            //     $request->session('account_setup_step') == ProfileSetup::STEP_7;
             //     return $next($request);
             // }
 
-        //     $next_step = AccountSetup::determineNextStep();
+        //     $next_step = ProfileSetup::determineNextStep();
         //     return redirect($next_step);
         // }
 
         if(auth()->user()->profile_status == ProfileStatus::INCOMPLETE){
-            $next_step = AccountSetup::determineNextStep();
+            $next_step = ProfileSetup::determineNextStep();
             return redirect($next_step);
         }
 

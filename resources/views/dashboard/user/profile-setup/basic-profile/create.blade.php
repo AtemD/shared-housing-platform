@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.account-setup.basic-profile.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.basic-profile.store') }}">
                         @csrf
 
                         <div class="form-group row">

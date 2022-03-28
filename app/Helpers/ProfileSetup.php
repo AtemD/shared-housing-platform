@@ -2,11 +2,11 @@
 
 namespace App\Helpers;
 
-use App\Jobs\SetupUserAccount;
+use App\Jobs\SetupUserProfile;
 use App\References\ProfileStatus;
 use App\References\UserType;
 
-class AccountSetup
+class ProfileSetup
 {
     const STEP_1 = "basic_profile";
     const STEP_2 = "place_listing";
@@ -23,66 +23,66 @@ class AccountSetup
      */
      public static function determineNextStep()
      {
-        // session(['account_setup_step' => self::STEP_1]);
-        // dd(session('account_setup_step'));
-        session()->has('account_setup_step') ?: session(['account_setup_step' => self::STEP_1]);
+        // session(['profile_setup_step' => self::STEP_1]);
+        // dd(session('profile_setup_step'));
+        session()->has('profile_setup_step') ?: session(['profile_setup_step' => self::STEP_1]);
 
-        // dd(session('account_setup_step'));
+        // dd(session('profile_setup_step'));
         
-        $step = session('account_setup_step');
+        $step = session('profile_setup_step');
 
         // basic profile
         if($step == self::STEP_1){
-            $url = route('user.account-setup.basic-profile.create');
+            $url = route('user.profile-setup.basic-profile.create');
 
             // user type is needed to choose between step 2 or step 3
             $user_type = auth()->user()->type;
             if($user_type == UserType::LISTER){
-                session(['account_setup_step' => self::STEP_2]);
+                session(['profile_setup_step' => self::STEP_2]);
             }
             if($user_type == UserType::SEARCHER){
-                session(['account_setup_step' => self::STEP_3]);
+                session(['profile_setup_step' => self::STEP_3]);
             }
 
             return $url;
         }
 
         if($step == self::STEP_2){
-            $url = route('user.account-setup.place-listings.create');
-            session(['account_setup_step' => self::STEP_4]);
+            $url = route('user.profile-setup.place-listings.create');
+            session(['profile_setup_step' => self::STEP_4]);
             return $url;
         }
 
         if($step == self::STEP_3){
-            $url = route('user.account-setup.place-listing-preferences.create');
-            session(['account_setup_step' => self::STEP_4]);
+            $url = route('user.profile-setup.place-listing-preferences.create');
+            session(['profile_setup_step' => self::STEP_4]);
             return $url;
         }
 
         if($step == self::STEP_4){
-            $url = route('user.account-setup.personal-preferences.create');
-            session(['account_setup_step' => self::STEP_5]);
+            $url = route('user.profile-setup.personal-preferences.create');
+            session(['profile_setup_step' => self::STEP_5]);
             return $url;
         }
 
         if($step == self::STEP_5){
-            $url = route('user.account-setup.compatibility-preferences.create');
-            session(['account_setup_step' => self::STEP_6]);
+            $url = route('user.profile-setup.compatibility-preferences.create');
+            session(['profile_setup_step' => self::STEP_6]);
             return $url;
         }
 
         if($step == self::STEP_6){
-            $url = route('user.account-setup.interests.create');
+            $url = route('user.profile-setup.interests.create');
             // $url = route('user.home');
-            session(['account_setup_step' => self::STEP_7]);
+            session(['profile_setup_step' => self::STEP_7]);
 
             // Dispatch the account setup job
-            // SetupUserAccount::dispatch(session('account_setup'));
+            // SetupUserProfile::dispatch(session('profile_setup'));
 
             // clear the session.
             // change the profile status
             
-            // push all session account-setup information to the queue for processing
+            // push all session profile-setup information to the queue for processing
             // notify the user that their account if being setup
             // at the homepage, once profile setup is complete, retrieve the filtered results and show them
             // session(['info' => 'Your profile is being setup, you will be notified when its complete']);
@@ -94,9 +94,11 @@ class AccountSetup
             $url = route('user.home');
 
             // Dispatch the account setup job
-            // SetupUserAccount::dispatch(session('account_setup'));
+            // SetupUserAccount::dispatch(session('profile_setup'));
 
             // clear the session.
+            // session()->forget('profile_setup');
+
             // change the profile status
             auth()->user()->update(['profile_status' => ProfileStatus::PROCESSING]);
             // notify the user that their account if being setup

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\User\AccountSetup;
+namespace App\Http\Controllers\User\ProfileSetup;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
-use App\Helpers\AccountSetup;
+use App\Helpers\ProfileSetup;
 use App\References\PeriodType;
 use Illuminate\Http\Request;
 
@@ -37,7 +37,7 @@ class PlaceListingPreferencesController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/account-setup/place-listing-preferences/create');
+        return view('dashboard/user/profile-setup/place-listing-preferences/create');
     }
 
     /**
@@ -56,13 +56,13 @@ class PlaceListingPreferencesController extends Controller
         ]);
 
         // Store the validated data in the session
-        $request->session()->put('account_setup.place_listing_preference', [
+        $request->session()->put('profile_setup.place_listing_preference', [
             'min_rent_amount' => $validatedData['min_rent_amount'],
             'max_rent_amount' => $validatedData['max_rent_amount'],
             'rent_period' => PeriodType::convertPeriodTypeToDays($validatedData['rent_period_type']),
         ]);
         
-        $next_step = AccountSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep();
         return redirect($next_step);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\AccountSetup;
+namespace App\Http\Controllers\User\ProfileSetup;
 
 use App\Http\Controllers\Controller;
 use App\Models\PlaceListing;
@@ -41,7 +41,7 @@ class PlaceListingsController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/account-setup/place-listings/create');
+        return view('dashboard/user/profile-setup/place-listings/create');
     }
 
     /**
@@ -89,16 +89,16 @@ class PlaceListingsController extends Controller
         // ]);
 
         // Store the validated data in the session
-        if($request->session()->has('account_setup.place_listing')){
-            $request->session('account_setup.place_listing')->forget(['featured_image']);
+        if($request->session()->has('profile_setup.place_listing')){
+            $request->session('profile_setup.place_listing')->forget(['featured_image']);
         }  
         
-        // dd($request->session('account_setup'));
+        // dd($request->session('profile_setup'));
 
         // store the image in temporary storage to be processed later.
         $path = request()->file('featured_image')->storePublicly('/temp');
 
-        $request->session()->put('account_setup.place_listing', [
+        $request->session()->put('profile_setup.place_listing', [
             'rent_amount' => $validatedData['rent_amount'],
             'rent_period' => $validatedData['rent_period'],
             'rent_currency' => $validatedData['currency'],
@@ -111,9 +111,9 @@ class PlaceListingsController extends Controller
             'featured_image' => $path,
         ]);
 
-        // dd(session('account_setup'));
+        // dd(session('profile_setup'));
 
-        return redirect()->route('user.account-setup.personal-preferences.create');
+        return redirect()->route('user.profile-setup.personal-preferences.create');
     }
 
     /**

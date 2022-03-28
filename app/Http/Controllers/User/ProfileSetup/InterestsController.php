@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\User\AccountSetup;
+namespace App\Http\Controllers\User\ProfileSetup;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\AccountSetup;
+use App\Helpers\ProfileSetup;
 use App\Models\Interest;
 use Illuminate\Http\Request;
 
@@ -39,7 +39,7 @@ class InterestsController extends Controller
         $interests = Interest::all();
         // dd($interests->toArray());
 
-        return view('dashboard/user/account-setup/interests/create', compact('interests'));
+        return view('dashboard/user/profile-setup/interests/create', compact('interests'));
     }
 
     /**
@@ -55,11 +55,11 @@ class InterestsController extends Controller
         ]);
 
         // Store the personal preferences in the session
-        $request->session()->put('account_setup.interests', [
+        $request->session()->put('profile_setup.interests', [
             'interests' => $validatedData['interests'],
         ]);
 
-        // dd(session('account_setup.interests'));
+        dd(session('profile_setup'));
         
         // auth()->user()->interests()->attach($validatedData['interests']);
 
@@ -69,7 +69,7 @@ class InterestsController extends Controller
          * is being setup, and they will be notified when complete.
          */
 
-        $next_step = AccountSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep();
         return redirect($next_step);
     }
 
