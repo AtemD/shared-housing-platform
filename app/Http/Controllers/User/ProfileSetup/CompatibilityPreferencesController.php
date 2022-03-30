@@ -89,7 +89,7 @@ class CompatibilityPreferencesController extends Controller
         //     'marital_status' => $validatedData['marital_status'],
         // ]);
 
-        $next_step = ProfileSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_4);
         return redirect($next_step);
     }
 

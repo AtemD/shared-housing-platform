@@ -69,7 +69,7 @@ class BasicProfileController extends Controller
             'bio' => $validatedData['bio'],
         ]);
 
-        $next_step = ProfileSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_1);
         return redirect($next_step);
     }
 }

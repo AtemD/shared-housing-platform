@@ -6,8 +6,8 @@
         <div class="col-md-5">
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
-                    <h5><span class="badge badge-info text-wrap">(2/6)</span> <b>{{ __('Place Listing Preferences') }}</b></h4>
-                        <small class="text-muted">Here you select the type of place you are looking for.</small>
+                    <h5><span class="badge badge-primary text-wrap">(2/5)</span> <b>{{ __('Place Listing Preferences') }}</b></h4>
+                        <small class="text-muted">Here you give details of the type of place you are looking for.</small>
                 </div>
 
                 <div class="card-body">
@@ -103,9 +103,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
-                                <button type="submit" class="btn btn-warning">
-                                    {{ __('<< Prev Step') }}
-                                </button>
+                                <a href="{{ route('user.profile-setup.compatibility-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Continue >>') }}
                                 </button>

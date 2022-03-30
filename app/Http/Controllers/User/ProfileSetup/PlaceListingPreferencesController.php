@@ -62,7 +62,7 @@ class PlaceListingPreferencesController extends Controller
             'rent_period' => PeriodType::convertPeriodTypeToDays($validatedData['rent_period_type']),
         ]);
         
-        $next_step = ProfileSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_2_SEARCHER);
         return redirect($next_step);
     }
 

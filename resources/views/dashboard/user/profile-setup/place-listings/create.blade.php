@@ -6,13 +6,10 @@
         <div class="col-md-5">
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
-                    <h5><span class="badge badge-info text-wrap">(3/6)</span> <b>{{ __('Place Listings') }}</b></h4>
+                    <h5><span class="badge badge-primary text-wrap">(Step 2/5)</span> <b>{{ __('Place Listings') }}</b></h4>
                         <small class="text-muted">Here you specify the details of the place you are listing.</small>
                 </div>
-                <!-- 
-    *user_id, description, *rent_amount, *rent_period, *rent_currency, *min_stay_period, profile_image, *place_type,
-    bills_included, *move_in_date/availability_date, *furnishing_type, *slug, *created_at, *updated_at
- -->
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.profile-setup.place-listings.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -23,12 +20,12 @@
 
                                 <div class="row d-flex justify-content-between">
                                     <div class="col-8 pr-0">
-                                        <input id="rent_amount" type="number" placeholder="rent amount" class="form-control @error('rent_amount') is-invalid @enderror" name="rent_amount" value="{{ old('rent_amount') }}" autofocus>
+                                        <input id="rent_amount" type="number" placeholder="rent amount" class="form-control @error('rent_amount') is-invalid @enderror" name="rent_amount" value="{{ old('rent_amount') ? old('rent_amount') : session('profile_setup.place_listings.rent_amount') }}" autofocus>
                                     </div>
                                     <div class="col-4 pl-0">
                                         <select class="custom-select form-control @error('currency') is-invalid @enderror" id="currency" name="currency">
                                             @forelse(App\References\Currency::currencyList() as $key => $value)
-                                            <option value="{{$key}}" {{ old('currency')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                            <option value="{{$key}}" {{ old('currency')== $key || (session('profile_setup.place_listings.currency') == $key) ? 'selected' : '' }}>{{$value}}</option>
                                             @empty
                                             <option value="">Error...</option>
                                             @endforelse
@@ -49,7 +46,7 @@
                                     <select class="custom-select form-control @error('rent_period') is-invalid @enderror" id="rent_period" name="rent_period">
                                         <option value="">Select...</option>
                                         @forelse(App\References\PeriodType::rentPeriodTypeList() as $key => $value)
-                                        <option value="{{$key}}" {{ old('rent_period')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                        <option value="{{$key}}" {{ old('rent_period')== $key || (session('profile_setup.place_listings.rent_period') == $key)  ? 'selected' : '' }}>{{$value}}</option>
                                         @empty
                                         <option value="">Error...</option>
                                         @endforelse
@@ -70,12 +67,12 @@
                                     <label class="mb-0">Bills</label><br>
                                     <small class="text-muted">(Are water and electricity included in rent amount above?)</small><br>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="bills_included_1" name="bills_included" class="custom-control-input form-control @error('bills_included') is-invalid @enderror" value="1" {{ old('bills_included')==1 ? 'checked': '' }}>
+                                        <input type="radio" id="bills_included_1" name="bills_included" class="custom-control-input form-control @error('bills_included') is-invalid @enderror" value="yes" {{ old('bills_included')=='yes' || session('profile_setup.place_listings.bills_included') == 'yes' ? 'checked': '' }}>
                                         <label class="custom-control-label font-weight-normal" for="bills_included_1">Bills Included</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="bills_included_2" name="bills_included" class="custom-control-input form-control @error('bills_included') is-invalid @enderror" value="0" {{ old('bills_included')==0 ? 'checked': '' }}>
+                                        <input type="radio" id="bills_included_2" name="bills_included" class="custom-control-input form-control @error('bills_included') is-invalid @enderror" value="no" {{ old('bills_included')=='no' ? 'checked': '' }}>
                                         <label class="custom-control-label font-weight-normal" for="bills_included_2">Bills Not Included</label>
                                         <br>
                                         @error('bills_included')
@@ -96,7 +93,7 @@
                                     <select class="custom-select form-control @error('place_type') is-invalid @enderror" id="place_type" name="place_type">
                                         <option value="">Select...</option>
                                         @forelse(App\References\PlaceType::placeTypeList() as $key => $value)
-                                        <option value="{{$key}}" {{ old('place_type')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                        <option value="{{$key}}" {{ old('place_type')== $key || (session('profile_setup.place_listings.place_type') == $key) ? 'selected' : '' }}>{{$value}}</option>
                                         @empty
                                         <option value="">Error...</option>
                                         @endforelse
@@ -115,7 +112,7 @@
                                     <select class="custom-select form-control @error('furnishing_type') is-invalid @enderror" id="furnishing_type" name="furnishing_type">
                                         <option value="">Select...</option>
                                         @forelse(App\References\FurnishingType::furnishingTypeList() as $key => $value)
-                                        <option value="{{$key}}" {{ old('furnishing_type')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                        <option value="{{$key}}" {{ old('furnishing_type')== $key || (session('profile_setup.place_listings.furnishing_type') == $key)  ? 'selected' : '' }}>{{$value}}</option>
                                         @empty
                                         <option value="">Error...</option>
                                         @endforelse
@@ -134,7 +131,7 @@
                             <div class="col-md-6">
                                 <label for="min_stay_period text-small">Min Stay Period</label><br>
                                 <small class="text-muted">(Indicate the minimum stay period you expect)</small>
-                                <input id="min_stay_period" type="number" placeholder="1" class="form-control @error('min_stay_period') is-invalid @enderror" name="min_stay_period" value="{{ old('min_stay_period') }}" autocomplete="min_stay_period">
+                                <input id="min_stay_period" type="number" placeholder="1" class="form-control @error('min_stay_period') is-invalid @enderror" name="min_stay_period" value="{{ old('min_stay_period') ? old('min_stay_period') : session('profile_setup.place_listings.min_stay_period') }}" autocomplete="min_stay_period">
 
                                 @error('min_stay_period')
                                 <span class="invalid-feedback" role="alert">
@@ -149,7 +146,7 @@
                                 <select class="custom-select form-control @error('min_stay_period') is-invalid @enderror" id="min_stay_period_type" name="min_stay_period_type">
                                     <option value="">Select...</option>
                                     @forelse(App\References\PeriodType::stayPeriodTypeList() as $key => $value)
-                                    <option value="{{$key}}" {{ old('min_stay_period_type')== $key  ? 'selected' : '' }}>{{$value}}</option>
+                                    <option value="{{$key}}" {{ old('min_stay_period_type')== $key  || (session('profile_setup.place_listings.min_stay_period_type') == $key)  ? 'selected' : '' }}>{{$value}}</option>
                                     @empty
                                     <option value="">Error...</option>
                                     @endforelse
@@ -166,7 +163,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label for="availability_date">Availability Date</label>
-                                <input type="date" class="form-control @error('availability_date') is-invalid @enderror" id="availability_date" name="availability_date" value="{{ old('availability_date') }}">
+                                <input type="date" class="form-control @error('availability_date') is-invalid @enderror" id="availability_date" name="availability_date" value="{{ old('availability_date') ? old('availability_date') :  session('profile_setup.place_listings.availability_date')}}">
 
                                 @error('availability_date')
                                 <span class="invalid-feedback">
@@ -179,7 +176,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label for="validationTextarea">Description</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="description">{{ old('description') }}</textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="description">{{ old('description') ? old('description') : session('profile_setup.place_listings.description')}}</textarea>
 
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -207,9 +204,7 @@
                         <hr>
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
-                                <button type="submit" class="btn btn-warning">
-                                    {{ __('<< Back') }}
-                                </button>
+                                <a href="{{ route('user.profile-setup.basic-profile.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Continue >>') }}
                                 </button>

@@ -55,13 +55,19 @@ class InterestsController extends Controller
         ]);
 
         // Store the personal preferences in the session
-        $request->session()->put('profile_setup.interests', [
-            'interests' => $validatedData['interests'],
-        ]);
+        $request->session()->put('profile_setup.interests', 
+            $validatedData['interests']
+        );
 
-        dd(session('profile_setup'));
+        // dd($validatedData['interests']);
+
+        // dd($request->session()->get('profile_setup.interests'));
+
+        // dd($request->session()->get('profile_setup'));
         
         // auth()->user()->interests()->attach($validatedData['interests']);
+        // auth()->user()->interests()->attach($request->session()->get('profile_setup.interests'));
+        // dd('hit');
 
         /**
          * Note: at the last step, push all session account setup information to the queue,
@@ -69,7 +75,7 @@ class InterestsController extends Controller
          * is being setup, and they will be notified when complete.
          */
 
-        $next_step = ProfileSetup::determineNextStep();
+        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_5);
         return redirect($next_step);
     }
 
