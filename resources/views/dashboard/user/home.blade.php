@@ -3,12 +3,16 @@
 @section('content')
 <div class="container">
     <div class="row mt-4">
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
             <div class="alert alert-warning" role="alert">
                 <a href="{{ route('user.profile-setup.basic-profile.create') }}" class="alert-link">
                     Click here to complete your profile
                 </a>
             </div>
+        </div> -->
+
+        <div class="col-md-12">
+            Here retrieve all users that match your preferences.
         </div>
     </div>
 </div>

@@ -56,10 +56,11 @@ class PlaceListingPreferencesController extends Controller
         ]);
 
         // Store the validated data in the session
-        $request->session()->put('profile_setup.place_listing_preference', [
+        $request->session()->put('profile_setup.place_listing_preferences', [
             'min_rent_amount' => $validatedData['min_rent_amount'],
             'max_rent_amount' => $validatedData['max_rent_amount'],
             'rent_period' => PeriodType::convertPeriodTypeToDays($validatedData['rent_period_type']),
+            'availability_date' => $validatedData['availability_date'],
         ]);
         
         $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_2_SEARCHER);

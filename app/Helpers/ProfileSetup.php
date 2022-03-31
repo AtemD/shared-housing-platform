@@ -68,6 +68,7 @@ class ProfileSetup
         {
             // First determine that all steps form data is in the session
             if(!self::isProfileSetupInfoComplete()){
+                dd(session('profile_setup'));
                 session()->flash('warning', 'Some steps were skipped, please try again!');
                 $next_step_url = route('user.profile-setup.basic-profile.create');
                 return $next_step_url;

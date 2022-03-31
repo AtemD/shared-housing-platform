@@ -170,7 +170,12 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
+                                @can('create', App\Models\PlaceListing::class)
                                 <a href="{{ route('user.profile-setup.place-listings.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
+                                @elsecan('create', App\Models\PlaceListingPreference::class)
+                                <a href="{{ route('user.profile-setup.place-listing-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
+                                @endcan
+
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Continue >>') }}
                                 </button>

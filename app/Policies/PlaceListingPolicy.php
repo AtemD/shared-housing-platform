@@ -2,12 +2,13 @@
 
 namespace App\Policies;
 
-use App\Models\BasicProfile;
+use App\Models\PlaceListing;
 use App\Models\User;
 use App\References\ProfileStatus;
+use App\References\UserType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class BasicProfilePolicy
+class PlaceListingPolicy
 {
     use HandlesAuthorization;
 
@@ -26,10 +27,10 @@ class BasicProfilePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BasicProfile  $basicProfile
+     * @param  \App\Models\PlaceListing  $placeListing
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, BasicProfile $basicProfile)
+    public function view(User $user, PlaceListing $placeListing)
     {
         //
     }
@@ -44,8 +45,7 @@ class BasicProfilePolicy
     {
         $is_allowed = false;
 
-        // refactor to ternary operator
-        if($user->profile_status == ProfileStatus::INCOMPLETE){
+        if(($user->type == UserType::LISTER) && ($user->profile_status == ProfileStatus::INCOMPLETE)){
             $is_allowed = true;
         }
 
@@ -56,10 +56,10 @@ class BasicProfilePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BasicProfile  $basicProfile
+     * @param  \App\Models\PlaceListing  $placeListing
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, BasicProfile $basicProfile)
+    public function update(User $user, PlaceListing $placeListing)
     {
         //
     }
@@ -68,10 +68,10 @@ class BasicProfilePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BasicProfile  $basicProfile
+     * @param  \App\Models\PlaceListing  $placeListing
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, BasicProfile $basicProfile)
+    public function delete(User $user, PlaceListing $placeListing)
     {
         //
     }
@@ -80,10 +80,10 @@ class BasicProfilePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BasicProfile  $basicProfile
+     * @param  \App\Models\PlaceListing  $placeListing
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, BasicProfile $basicProfile)
+    public function restore(User $user, PlaceListing $placeListing)
     {
         //
     }
@@ -92,10 +92,10 @@ class BasicProfilePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\BasicProfile  $basicProfile
+     * @param  \App\Models\PlaceListing  $placeListing
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, BasicProfile $basicProfile)
+    public function forceDelete(User $user, PlaceListing $placeListing)
     {
         //
     }
