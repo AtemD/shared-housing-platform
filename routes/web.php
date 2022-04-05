@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\User\AccountSettingsController;
+use App\Http\Controllers\User\CompatibilityQuestionsController;
+use App\Http\Controllers\User\AnsweredCompatibilityQuestionsController;
+use App\Http\Controllers\User\UnansweredCompatibilityQuestionsController;
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as BasicProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\PersonalPreferencesController as PersonalPreferencesSetupController;
 use App\Http\Controllers\User\ProfileSetup\CompatibilityPreferencesController as CompatibilityPreferencesSetupController;
@@ -34,6 +38,45 @@ Route::get('/user/dashboard/', [UserHomeController::class, 'index'])
 // admin dashboard home
 Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
 ->name('admin.home');
+
+// Account setting
+Route::get('/user/dashboard/account-settings', [AccountSettingsController::class, 'index'])
+->name('user.account-settings.index');
+
+// User Answered Questions
+Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'index'])
+->name('user.compatibility-questions.unanswered.index');
+Route::post('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'store'])
+->name('user.compatibility-questions.unanswered.store');
+
+// User Answered Questions
+Route::get('/user/dashboard/account-settings/compatibility-questions/answered', [AnsweredCompatibilityQuestionsController::class, 'index'])
+->name('user.compatibility-questions.answered.index');
+ Route::put('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/answered', [AnsweredCompatibilityQuestionsController::class, 'update'])
+ ->name('user.compatibility-questions.answered.update');
+ Route::delete('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/answered', [AnsweredCompatibilityQuestionsController::class, 'destroy'])
+ ->name('user.compatibility-questions.answered.destroy');
+
+// Compatibility Questions
+Route::get('/user/dashboard/account-settings/compatibility-questions/', [CompatibilityQuestionsController::class, 'index'])
+->name('user.compatibility-questions.index');
+Route::get('/user/dashboard/account-settings/compatibility-questions/create', [CompatibilityQuestionsController::class, 'create'])
+->name('user.compatibility-questions.create');
+Route::post('/user/dashboard/account-settings/compatibility-questions', [CompatibilityQuestionsController::class, 'store'])
+->name('user.compatibility-questions.store');
+Route::get('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [CompatibilityQuestionsController::class, 'show'])
+->name('user.compatibility-questions.show');
+Route::get('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/edit', [CompatibilityQuestionsController::class, 'edit'])
+->name('user.compatibility-questions.edit'); // they own the question and its not verified yet
+Route::put('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [CompatibilityQuestionsController::class, 'update'])
+->name('user.compatibility-questions.update');
+Route::delete('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [CompatibilityQuestionsController::class, 'destroy'])
+->name('user.compatibility-questions.destroy');
+
+// Answer Compatibility questions controller
+// Route::get('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [AnswerCompatibilityQuestionsController::class, 'index'])
+// ->name('user.compatibility-questions.index');
+
 
 Route::get('/user/dashboard/profile-setup/place-listing-preferences/create', [PlaceListingPreferencesSetupController::class, 'create'])
 ->name('user.profile-setup.place-listing-preferences.create');

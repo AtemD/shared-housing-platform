@@ -123,4 +123,15 @@ class User extends Authenticatable
      {
          return $this->belongsToMany(Interest::class, 'user_has_interests', 'user_id', 'interest_id');
      }
+
+     public function compatibilityQuestions()
+     {
+         return $this->belongsToMany(CompatibilityQuestion::class, 'user_has_compatibility_question_answers', 'user_id', 'compatibility_question_id')
+         ->withPivot('compatibility_question_relevance', 'user_answer_id', 'match_answer_id');
+     }
+
+     public function answerChoices()
+     {
+         return $this->belongsToMany(AnswerChoice::class, 'user_has_compatibility_question_answers', 'user_id', 'user_answer_id');
+     }
 }

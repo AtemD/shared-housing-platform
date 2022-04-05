@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+// use App\Models\CompatibilityQuestion;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,8 +22,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(PlaceListingPreferencesTableSeeder::class);
         // $this->call(PersonalPreferencesTableSeeder::class);
         // $this->call(CompatibilityPreferencesTableSeeder::class);
-        $this->call(InterestsTableSeeder::class);
+        // $this->call(InterestsTableSeeder::class);
         // $this->call(UserHasInterestsTableSeeder::class);
         // $this->call(ImagesTableSeeder::class);
+        
+        // $this->call(CompatibilityQuestionsTableSeeder::class);
+        // $this->call(AnswerChoicesTableSeeder::class);
+        // $this->call(UserHasCompatibilityQuestionAnswersTableSeeder::class);
+
+        // CompatibilityQuestion::factory()->times(3)->create();
     }
 }
