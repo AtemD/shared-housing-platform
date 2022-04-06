@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\ProfileSetup;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Helpers\ProfileSetup;
@@ -43,7 +43,7 @@ class CompatibilityPreferencesController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/profile-setup/compatibility-preferences/create');
+        return view('dashboard/user/compatibility-preferences/create');
     }
 
     /**

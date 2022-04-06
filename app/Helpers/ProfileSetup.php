@@ -26,8 +26,9 @@ class ProfileSetup
      public static function determineNextStep($current_step = self::STEP_START)
      {  
         if($current_step == self::STEP_START)
-        {
-            $next_step_url = route('user.profile-setup.basic-profile.create');
+        { 
+            // dd('hit');
+            $next_step_url = route('user.basic-profile.create');
             return $next_step_url;
         }
 
@@ -35,31 +36,31 @@ class ProfileSetup
         {
             $user_type = auth()->user()->type;
             if($user_type == UserType::LISTER) {
-                $next_step_url = route('user.profile-setup.place-listings.create');
+                $next_step_url = route('user.place-listings.create');
                 return $next_step_url;
             }
 
             if($user_type == UserType::SEARCHER) {
-                $next_step_url = route('user.profile-setup.place-listing-preferences.create');
+                $next_step_url = route('user.place-listing-preferences.create');
                 return $next_step_url;
             }
         }
 
         if($current_step == self::STEP_2_LISTER || $current_step == self::STEP_2_SEARCHER)
         {
-            $next_step_url = route('user.profile-setup.personal-preferences.create');
+            $next_step_url = route('user.personal-preferences.create');
             return $next_step_url;
         }
 
         if($current_step == self::STEP_3)
         {
-            $next_step_url = route('user.profile-setup.compatibility-preferences.create');
+            $next_step_url = route('user.compatibility-preferences.create');
             return $next_step_url;
         }
 
         if($current_step == self::STEP_4)
         {
-            $next_step_url = route('user.profile-setup.interests.create');
+            $next_step_url = route('user.interests.create');
             return $next_step_url;
         }
 
@@ -68,9 +69,9 @@ class ProfileSetup
         {
             // First determine that all steps form data is in the session
             if(!self::isProfileSetupInfoComplete()){
-                dd(session('profile_setup'));
+                // dd(session('profile_setup'));
                 session()->flash('warning', 'Some steps were skipped, please try again!');
-                $next_step_url = route('user.profile-setup.basic-profile.create');
+                $next_step_url = route('user.basic-profile.create');
                 return $next_step_url;
             }
             // dd('success');

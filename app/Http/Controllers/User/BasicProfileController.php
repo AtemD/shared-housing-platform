@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Helpers\ProfileSetup;
+use App\References\Gender;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use App\Models\BasicProfile;
 
 class BasicProfileController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware(['auth']);
     }
 
     /**
@@ -22,14 +27,22 @@ class BasicProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        // Get the current authenticated user
-        $user = auth()->user();
+        // First use the account controller to determine if the user is in the right step,
+        // The account controller should determine which step is next.
 
-        return view('dashboard/user/basic-profile/create', compact(
-            'user'
-        ));
+        // The you can show the form, if this is the correct next step.
+        // dd('hit bpc');
+
+        // if ($request->session()->has('profile_setup.basic_profile')) {
+        //     // dd('has session');
+        // }
+
+        // use policy to check if the user is allowed to create a basic profile
+        $this->authorize('create', BasicProfile::class);
+
+        return view('dashboard/user/basic-profile/create');
     }
 
     /**
@@ -40,7 +53,44 @@ class BasicProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', BasicProfile::class);
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'gender' => ['required', 'integer', Rule::in([Gender::MALE, Gender::FEMALE])],
+            'dob' => ['required', 'date_format:Y-m-d'],
+            'bio' => ['required', 'max:1000'],
+        ]);
+
+        // Store the validated data in the session
+        $request->session()->put('profile_setup.basic_profile', [
+            'gender' => $validatedData['gender'],
+            'dob' => $validatedData['dob'],
+            'bio' => $validatedData['bio'],
+        ]);
+
+        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_1);
+        return redirect($next_step);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\BasicProfile  $basic_profile
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(BasicProfile $basic_profile)
+    {
+        // Authorize that the user can update products
+        // $this->authorize('update', $basic_profile);
+
+        // $shop = $shop->load('sections', 'taxes', 'discounts');
+        // $product = $product->load('taxes', 'discounts');
+
+        // return view('dashboard/retailer/products/edit', compact(
+        //     'shop',
+        //     'product'
+        // ));
     }
 
     /**
@@ -50,17 +100,6 @@ class BasicProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

@@ -94,7 +94,7 @@ class User extends Authenticatable
          return $this->hasOne(BasicProfile::class);
      }
 
-     public function placeListingPreferences()
+     public function placeListingPreference()
      {
          return $this->hasOne(PlaceListingPreference::class);
      }

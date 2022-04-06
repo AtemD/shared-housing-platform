@@ -126,7 +126,6 @@ class CompatibilityQuestionsController extends Controller
         // Notify the user about this activity.
         // the account number, the user name, the amount deposited, the time it was deposited
 
-
         return back()->with('success', 'Question answer updated successfully');
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\ProfileSetup;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Helpers\ProfileSetup;
@@ -33,7 +33,7 @@ class PersonalPreferencesController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/profile-setup/personal-preferences/create');
+        return view('dashboard/user/personal-preferences/create');
     }
 
     /**

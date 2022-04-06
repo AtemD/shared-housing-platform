@@ -20,6 +20,7 @@ class RedirectIfNotCorrectProfileSetupStep
     {
         
         if(auth()->user()->profile_status == ProfileStatus::INCOMPLETE){
+            // dd('hit');
             $next_step = ProfileSetup::determineNextStep();
             return redirect($next_step);
         }

@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.profile-setup.interests.store') }}">
+                    <form method="POST" action="{{ route('user.interests.store') }}">
                         @csrf
 
                         <div class="form-group">
@@ -45,7 +45,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
-                                <a href="{{ route('user.profile-setup.compatibility-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
+                                <a href="{{ route('user.compatibility-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
 
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit >>') }}

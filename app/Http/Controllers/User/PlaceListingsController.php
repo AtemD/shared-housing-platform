@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\ProfileSetup;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\PlaceListing;
@@ -42,7 +42,7 @@ class PlaceListingsController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/profile-setup/place-listings/create');
+        return view('dashboard/user/place-listings/create');
     }
 
     /**

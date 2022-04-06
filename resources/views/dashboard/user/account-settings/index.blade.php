@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('user.basic-profile.edit') }}" class="list-group-item list-group-item-action">
                     Basic Profile Settings
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">

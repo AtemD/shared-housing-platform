@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\User\ProfileSetup;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 use App\Helpers\ProfileSetup;
-use App\Models\Interest;
+use App\References\PeriodType;
 use Illuminate\Http\Request;
 
-class InterestsController extends Controller
+class PlaceListingPreferencesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -36,10 +37,7 @@ class InterestsController extends Controller
      */
     public function create()
     {
-        $interests = Interest::all();
-        // dd($interests->toArray());
-
-        return view('dashboard/user/profile-setup/interests/create', compact('interests'));
+        return view('dashboard/user/place-listing-preferences/create');
     }
 
     /**
@@ -51,31 +49,21 @@ class InterestsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'interests' => ['required', 'min:1', 'exists:interests,id'],
+            'min_rent_amount' => ['required', 'integer'],
+            'max_rent_amount' => ['required', 'integer'],
+            'rent_period_type' => ['required', 'integer', Rule::in(array_keys(PeriodType::rentPeriodTypeList()))],
+            'availability_date' => ['required', 'date_format:Y-m-d'],
         ]);
 
-        // Store the personal preferences in the session
-        $request->session()->put('profile_setup.interests', 
-            $validatedData['interests']
-        );
-
-        // dd($validatedData['interests']);
-
-        // dd($request->session()->get('profile_setup.interests'));
-
-        // dd($request->session()->get('profile_setup'));
+        // Store the validated data in the session
+        $request->session()->put('profile_setup.place_listing_preferences', [
+            'min_rent_amount' => $validatedData['min_rent_amount'],
+            'max_rent_amount' => $validatedData['max_rent_amount'],
+            'rent_period' => PeriodType::convertPeriodTypeToDays($validatedData['rent_period_type']),
+            'availability_date' => $validatedData['availability_date'],
+        ]);
         
-        // auth()->user()->interests()->attach($validatedData['interests']);
-        // auth()->user()->interests()->attach($request->session()->get('profile_setup.interests'));
-        // dd('hit');
-
-        /**
-         * Note: at the last step, push all session account setup information to the queue,
-         * and redirect the user to homepage with success or information message that profile 
-         * is being setup, and they will be notified when complete.
-         */
-
-        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_5);
+        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_2_SEARCHER);
         return redirect($next_step);
     }
 
