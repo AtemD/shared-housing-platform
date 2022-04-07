@@ -20,7 +20,7 @@ class PlaceListingPreferencePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->type === UserType::SEARCHER;
     }
 
     /**

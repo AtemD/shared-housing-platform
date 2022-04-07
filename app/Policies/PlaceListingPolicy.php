@@ -20,7 +20,7 @@ class PlaceListingPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->type === UserType::LISTER;
     }
 
     /**
@@ -61,7 +61,7 @@ class PlaceListingPolicy
      */
     public function update(User $user, PlaceListing $placeListing)
     {
-        //
+        return $user->id === $placeListing->user_id;
     }
 
     /**

@@ -61,7 +61,7 @@ class BasicProfilePolicy
      */
     public function update(User $user, BasicProfile $basicProfile)
     {
-        //
+        return $user->id === $basicProfile->user_id;
     }
 
     /**

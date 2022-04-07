@@ -1,94 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white">
+            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item">Account Settings</li>
+            <li class="breadcrumb-item active" aria-current="page">Basic Profile</li>
+        </ol>
+    </nav>
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
-                    <h4><b>{{ __('Create A New Account') }}</b></h4>
+                    <h5><b>{{ __('Basic Profile') }}</b></h4>
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('user.basic-profile.update', ['basic_profile' => $basic_profile]) }}">
+                        @method('PUT')
                         @csrf
 
-                        <h5 class="text-muted">What are you looking to do?</h5>
                         <div class="form-group row">
-                            <div class="col-md-6">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_1" name="user_type" class="custom-control-input" value="{{App\References\UserType::LISTER}}" {{ old('user_type')== App\References\UserType::LISTER ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="user_type_1">List a Place</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="user_type_2" name="user_type" class="custom-control-input" value="{{App\References\UserType::SEARCHER}}" {{ old('user_type')== App\References\UserType::SEARCHER ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="user_type_2">Search for a Place</label>
-                                </div>
-                            </div>
-
-                            @error('user_type')
-                            <span class="text-danger pl-3" role="alert">
-                                <small><strong>{{ $message }}</strong></small>
-                            </span>
-                            @enderror
-                        </div>
-                        <hr>
-
-                        <div class="form-group row">
-
-                            <div class="col-md-6 pb-1">
-                                <input id="first_name" type="text" placeholder="First Name" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
-
-                                @error('first_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6">
-                                <input id="last_name" type="text" placeholder="Last Name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" autocomplete="last_name">
-
-                                @error('last_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-
-                            <div class="col-3 pr-0">
-                                <select class="custom-select">
-                                    <option value="{{App\References\AreaCode::ETHIOPIA}}">{{App\References\AreaCode::ETHIOPIA}}</option>
+                            <div class="col-12">
+                                <label for="gender">Gender</label>
+                                <select class="custom-select form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
+                                    <option value="">Gender...</option>
+                                    @forelse(App\References\Gender::genderList() as $key => $gender)
+                                    <option value="{{$key}}" {{ old('gender')== $key || ($basic_profile->gender == $key ) ? 'selected' : '' }}>{{$gender}}</option>
+                                    @empty
+                                    <option value="">Error...</option>
+                                    @endforelse
                                 </select>
 
-                                @error('area_code')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-9 pl-0 bl-0">
-                                <input id="phone" type="tel" placeholder="980 123456" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone">
-
-                                @error('phone')
+                                @error('gender')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -97,11 +45,11 @@
                         </div>
 
                         <div class="form-group row">
+                            <div class="col-12">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') ? old('dob') : $basic_profile->dob }}">
 
-                            <div class="col-md-12">
-                                <input id="password" type="password" placeholder="New Password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-
-                                @error('password')
+                                @error('dob')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -110,16 +58,22 @@
                         </div>
 
                         <div class="form-group row">
+                            <div class="col-12">
+                                <label for="validationTextarea">Bio</label>
+                                <textarea class="form-control @error('bio') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="bio">{{ old('bio') ? old('bio') : $basic_profile->bio }}</textarea>
 
-                            <div class="col-md-12">
-                                <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                                @error('bio')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-2">
-                                <button type="submit" class="btn btn-success btn-block">
-                                    {{ __('Sign Up') }}
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    {{ __('Update') }}
                                 </button>
                             </div>
                         </div>

@@ -30,8 +30,6 @@ class BasicProfileController extends Controller
     public function index()
     {
         $basic_profile = auth()->user()->basicProfile()->firstOrFail();
-
-        dd($basic_profile->toArray());
         return view('user/basic-profile/index', compact('basic_profile'));
     }
 
@@ -84,17 +82,7 @@ class BasicProfileController extends Controller
      */
     public function edit(BasicProfile $basic_profile)
     {
-        dd('hit edit form');
-        // Authorize that the user can update products
-        // $this->authorize('update', $basic_profile);
-
-        // $shop = $shop->load('sections', 'taxes', 'discounts');
-        // $product = $product->load('taxes', 'discounts');
-
-        // return view('dashboard/retailer/products/edit', compact(
-        //     'shop',
-        //     'product'
-        // ));
+        //
     }
 
     /**
@@ -112,12 +100,26 @@ class BasicProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  BasicProfile  $basic_profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BasicProfile  $basic_profile)
     {
-        //
+        $this->authorize('update', $basic_profile);
+
+        $validatedData = $request->validate([
+            'gender' => ['required', 'integer', Rule::in([Gender::MALE, Gender::FEMALE])],
+            'dob' => ['required', 'date_format:Y-m-d'],
+            'bio' => ['required', 'max:1000'],
+        ]);
+
+        $basic_profile->update([
+            'gender' => $validatedData['gender'],
+            'dob' => $validatedData['dob'],
+            'bio' => $validatedData['bio'],
+        ]);
+    
+        return back()->with('success', 'Your Basic Profile Information Has Updated Successfully');
     }
 
     /**

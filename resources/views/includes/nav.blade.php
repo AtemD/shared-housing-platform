@@ -53,8 +53,13 @@
 
                         <div class="dropdown-menu dropright" aria-labelledby="navbarNested">
                             <a href="{{ route('user.basic-profile.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Basic Profile</a>
+
+                            @can('viewAny', App\Models\PlaceListing::class)
                             <a href="{{ route('user.place-listings.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Listings</a>
+                            @elsecan('viewAny', App\Models\PlaceListingPreference::class)
                             <a href="{{ route('user.place-listing-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Listing Preferences</a>
+                            @endcan
+
                             <a href="{{ route('user.personal-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Personal Preferences</a>
                             <a href="{{ route('user.compatibility-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Compatibility Preferences</a>
                             <a href="{{ route('user.interests.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Interests</a>
