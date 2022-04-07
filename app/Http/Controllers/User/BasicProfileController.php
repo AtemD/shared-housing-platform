@@ -23,22 +23,25 @@ class BasicProfileController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $basic_profile = auth()->user()->basicProfile()->firstOrFail();
+
+        dd($basic_profile->toArray());
+        return view('user/basic-profile/index', compact('basic_profile'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
-        // First use the account controller to determine if the user is in the right step,
-        // The account controller should determine which step is next.
-
-        // The you can show the form, if this is the correct next step.
-        // dd('hit bpc');
-
-        // if ($request->session()->has('profile_setup.basic_profile')) {
-        //     // dd('has session');
-        // }
-
         // use policy to check if the user is allowed to create a basic profile
         $this->authorize('create', BasicProfile::class);
 
@@ -81,6 +84,7 @@ class BasicProfileController extends Controller
      */
     public function edit(BasicProfile $basic_profile)
     {
+        dd('hit edit form');
         // Authorize that the user can update products
         // $this->authorize('update', $basic_profile);
 

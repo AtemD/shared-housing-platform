@@ -32,7 +32,7 @@ Route::get('/', function () {
 // Note: Login and register auth routes in FortifyServiceProvider.php
 
 // user dashboard home
-Route::get('/user/dashboard/', [UserHomeController::class, 'index'])
+Route::get('/user/home', [UserHomeController::class, 'index'])
 ->name('user.home');
 
 // admin dashboard home
@@ -57,69 +57,86 @@ Route::get('/user/dashboard/account-settings/compatibility-questions/answered', 
  Route::delete('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/answered', [AnsweredCompatibilityQuestionsController::class, 'destroy'])
  ->name('user.compatibility-questions.answered.destroy');
 
-// Compatibility Questions
-Route::get('/user/dashboard/account-settings/compatibility-questions/', [CompatibilityQuestionsController::class, 'index'])
-->name('user.compatibility-questions.index');
-Route::get('/user/dashboard/account-settings/compatibility-questions/create', [CompatibilityQuestionsController::class, 'create'])
-->name('user.compatibility-questions.create');
-Route::post('/user/dashboard/account-settings/compatibility-questions', [CompatibilityQuestionsController::class, 'store'])
-->name('user.compatibility-questions.store');
-Route::get('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [CompatibilityQuestionsController::class, 'show'])
-->name('user.compatibility-questions.show');
-Route::get('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/edit', [CompatibilityQuestionsController::class, 'edit'])
-->name('user.compatibility-questions.edit'); // they own the question and its not verified yet
-Route::put('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [CompatibilityQuestionsController::class, 'update'])
-->name('user.compatibility-questions.update');
-Route::delete('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [CompatibilityQuestionsController::class, 'destroy'])
-->name('user.compatibility-questions.destroy');
+// User Compatibility Questions
+Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)->names([
+    'index'     => 'user.compatibility-questions.index',
+    'create'    => 'user.compatibility-questions.create',
+    'store'     => 'user.compatibility-questions.store',
+    'show'      => 'user.compatibility-questions.show',
+    'edit'      => 'user.compatibility-questions.edit',
+    'store'     => 'user.compatibility-questions.store',
+    'update'    => 'user.compatibility-questions.update',
+    'destroy'   => 'user.compatibility-questions.destroy'
+]);
 
-// Answer Compatibility questions controller
-// Route::get('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}', [AnswerCompatibilityQuestionsController::class, 'index'])
-// ->name('user.compatibility-questions.index');
+// User Place Listing Preferences
+Route::resource('/user/place-listing-preferences', UserPlaceListingPreferencesController::class)->names([
+    'index'     => 'user.place-listing-preferences.index',
+    'create'    => 'user.place-listing-preferences.create',
+    'store'     => 'user.place-listing-preferences.store',
+    'show'      => 'user.place-listing-preferences.show',
+    'edit'      => 'user.place-listing-preferences.edit',
+    'store'     => 'user.place-listing-preferences.store',
+    'update'    => 'user.place-listing-preferences.update',
+    'destroy'   => 'user.place-listing-preferences.destroy'
+]);
 
+// User Place Listings
+Route::resource('/user/place-listings', UserPlaceListingsController::class)->names([
+    'index'     => 'user.place-listings.index',
+    'create'    => 'user.place-listings.create',
+    'store'     => 'user.place-listings.store',
+    'show'      => 'user.place-listings.show',
+    'edit'      => 'user.place-listings.edit',
+    'store'     => 'user.place-listings.store',
+    'update'    => 'user.place-listings.update',
+    'destroy'   => 'user.place-listings.destroy'
+]);
 
-Route::get('/user/dashboard/place-listing-preferences/create', [UserPlaceListingPreferencesController::class, 'create'])
-->name('user.place-listing-preferences.create');
-Route::post('/user/dashboard/place-listing-preferences/store', [UserPlaceListingPreferencesController::class, 'store'])
-->name('user.place-listing-preferences.store');
+// User basic profile
+Route::resource('/user/basic-profile', UserBasicProfileController::class)->names([
+    'index'     => 'user.basic-profile.index',
+    'create'    => 'user.basic-profile.create',
+    'store'     => 'user.basic-profile.store',
+    'show'      => 'user.basic-profile.show',
+    'edit'      => 'user.basic-profile.edit',
+    'store'     => 'user.basic-profile.store',
+    'update'    => 'user.basic-profile.update',
+    'destroy'   => 'user.basic-profile.destroy'
+]);
 
-Route::get('/user/dashboard/place-listings/create', [UserPlaceListingsController::class, 'create'])
-->name('user.place-listings.create');
-Route::post('/user/dashboard/places-listings/store', [UserPlaceListingsController::class, 'store'])
-->name('user.place-listings.store');
+// User personal preferences
+Route::resource('/user/personal-preferences', UserPersonalPreferencesController::class)->names([
+    'index'     => 'user.personal-preferences.index',
+    'create'    => 'user.personal-preferences.create',
+    'store'     => 'user.personal-preferences.store',
+    'show'      => 'user.personal-preferences.show',
+    'edit'      => 'user.personal-preferences.edit',
+    'store'     => 'user.personal-preferences.store',
+    'update'    => 'user.personal-preferences.update',
+    'destroy'   => 'user.personal-preferences.destroy'
+]);
 
-// Basic profile
-// Route::get('/user/dashboard/account/basic-profile/create', [BasicProfileController::class, 'create'])
-// ->name('user.basic-profile.create');
-// Route::post('/user/dashboard/account/basic-profile', [BasicProfileController::class, 'store'])
-// ->name('user.basic-profile.store');
-// Route::get('/user/dashboard/account/basic-profile/{user}/edit', [BasicProfileController::class, 'edit'])
-// ->name('user.basic-profile.edit');
-// Route::put('/user/dashboard/account/basic-profile/{user}', [BasicProfileController::class, 'update'])
-// ->name('user.basic-profile.update');
-// Route::delete('/user/dashboard/account/basic-profile/{user}', [BasicProfileController::class, 'destroy'])
-// ->name('user.basic-profile.destroy');
+// User compatibility preferences
+Route::resource('/user/compatibility-preferences', UserCompatibilityPreferencesController::class)->names([
+    'index'     => 'user.compatibility-preferences.index',
+    'create'    => 'user.compatibility-preferences.create',
+    'store'     => 'user.compatibility-preferences.store',
+    'show'      => 'user.compatibility-preferences.show',
+    'edit'      => 'user.compatibility-preferences.edit',
+    'store'     => 'user.compatibility-preferences.store',
+    'update'    => 'user.compatibility-preferences.update',
+    'destroy'   => 'user.compatibility-preferences.destroy'
+]);
 
-
-// Profile Setup Routes
-Route::get('/user/dashboard/basic-profile/create', [UserBasicProfileController::class, 'create'])
-->name('user.basic-profile.create');
-Route::get('/user/dashboard/basic-profile/{BasicProfile}/edit', [UserBasicProfileController::class, 'edit'])
-->name('user.basic-profile.edit');
-Route::post('/user/dashboard/basic-profile', [UserBasicProfileController::class, 'store'])
-->name('user.basic-profile.store');
-
-Route::get('/user/dashboard/personal-preferences/create', [UserPersonalPreferencesController::class, 'create'])
-->name('user.personal-preferences.create');
-Route::post('/user/dashboard/personal-preferences/store', [UserPersonalPreferencesController::class, 'store'])
-->name('user.personal-preferences.store');
-
-Route::get('/user/dashboard/compatibility-preferences/create', [UserCompatibilityPreferencesController::class, 'create'])
-->name('user.compatibility-preferences.create');
-Route::post('/user/dashboard/compatibility-preferences/store', [UserCompatibilityPreferencesController::class, 'store'])
-->name('user.compatibility-preferences.store');
-
-Route::get('/user/dashboard/interests/create', [UserInterestsController::class, 'create'])
-->name('user.interests.create');
-Route::post('/user/dashboard/interests/store', [UserInterestsController::class, 'store'])
-->name('user.interests.store');
+// User Interests
+Route::resource('/user/interests', UserInterestsController::class)->names([
+    'index'     => 'user.interests.index',
+    'create'    => 'user.interests.create',
+    'store'     => 'user.interests.store',
+    'show'      => 'user.interests.show',
+    'edit'      => 'user.interests.edit',
+    'store'     => 'user.interests.store',
+    'update'    => 'user.interests.update',
+    'destroy'   => 'user.interests.destroy'
+]);

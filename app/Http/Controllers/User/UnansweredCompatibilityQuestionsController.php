@@ -36,7 +36,7 @@ class UnansweredCompatibilityQuestionsController extends Controller
 
         $compatibility_question_importance = collect(CompatibilityQuestionRelevance::compatibilityQuestionRelevanceList());
 
-        return view('dashboard/user/account-settings/compatibility-questions/unanswered/index', compact(
+        return view('user/compatibility-questions/unanswered/index', compact(
             'compatibility_questions',
             'compatibility_question_importance'
         ));

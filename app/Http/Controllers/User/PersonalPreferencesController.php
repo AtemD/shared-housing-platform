@@ -33,7 +33,7 @@ class PersonalPreferencesController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/personal-preferences/create');
+        return view('user/personal-preferences/create');
     }
 
     /**

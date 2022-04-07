@@ -42,7 +42,7 @@ class PlaceListingsController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/place-listings/create');
+        return view('user/place-listings/create');
     }
 
     /**

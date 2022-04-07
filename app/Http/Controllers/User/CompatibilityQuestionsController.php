@@ -35,7 +35,7 @@ class CompatibilityQuestionsController extends Controller
 
         $compatibility_question_importance = collect(CompatibilityQuestionRelevance::compatibilityQuestionRelevanceList());
 
-        return view('dashboard/user/account-settings/compatibility-questions/index', compact(
+        return view('user/compatibility-questions/index', compact(
             'compatibility_questions',
             'compatibility_question_importance'
         ));
@@ -51,7 +51,7 @@ class CompatibilityQuestionsController extends Controller
         // Get the current authenticated user
         $user = auth()->user();
 
-        return view('dashboard/user/basic-profile/create', compact(
+        return view('user/basic-profile/create', compact(
             'user'
         ));
     }

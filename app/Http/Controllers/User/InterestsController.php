@@ -39,7 +39,7 @@ class InterestsController extends Controller
         $interests = Interest::all();
         // dd($interests->toArray());
 
-        return view('dashboard/user/interests/create', compact('interests'));
+        return view('user/interests/create', compact('interests'));
     }
 
     /**

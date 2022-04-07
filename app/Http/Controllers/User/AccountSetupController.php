@@ -17,7 +17,7 @@ class AccountSetupController extends Controller
         // Get the current authenticated user
         $user = auth()->user();
 
-        return view('dashboard/user/basic-profile/create', compact(
+        return view('user/basic-profile/create', compact(
             'user'
         ));
     }

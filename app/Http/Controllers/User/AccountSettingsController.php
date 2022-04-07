@@ -24,7 +24,7 @@ class AccountSettingsController extends Controller
      */
     public function index()
     {
-        return view('dashboard/user/account-settings/index');
+        return view('user/account-settings/index');
     }
 
 }

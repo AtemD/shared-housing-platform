@@ -37,7 +37,7 @@ class PlaceListingPreferencesController extends Controller
      */
     public function create()
     {
-        return view('dashboard/user/place-listing-preferences/create');
+        return view('user/place-listing-preferences/create');
     }
 
     /**

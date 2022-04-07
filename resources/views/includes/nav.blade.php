@@ -46,9 +46,21 @@
                         <a class="dropdown-item" href="#">
                             <i class="fas fa-percent mr-2"></i> {{ __('Matches') }}
                         </a>
-                        <a class="dropdown-item" href="{{ route('user.account-settings.index') }}">
+
+                        <a id="navbarNested" class="dropdown-item dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-cogs"></i> {{ __('Account Settings') }}
                         </a>
+
+                        <div class="dropdown-menu dropright" aria-labelledby="navbarNested">
+                            <a href="{{ route('user.basic-profile.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Basic Profile</a>
+                            <a href="{{ route('user.place-listings.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Listings</a>
+                            <a href="{{ route('user.place-listing-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Listing Preferences</a>
+                            <a href="{{ route('user.personal-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Personal Preferences</a>
+                            <a href="{{ route('user.compatibility-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Compatibility Preferences</a>
+                            <a href="{{ route('user.interests.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Interests</a>
+                            <a href="{{ route('user.compatibility-questions.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Compatibility Questions</a>
+                        </div>
+
                         <hr>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

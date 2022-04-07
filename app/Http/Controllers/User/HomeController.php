@@ -33,10 +33,10 @@ class HomeController extends Controller
 
         //     // Redirect the user to appropriate step page
 
-        //     return view('dashboard/user/home');
+        //     return view('user/home');
         // }
 
 
-        return view('dashboard/user/home');
+        return view('user/home');
     }
 }
