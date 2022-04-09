@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Helpers\ProfileSetup;
 use App\Models\Interest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InterestsController extends Controller
@@ -26,7 +27,10 @@ class InterestsController extends Controller
      */
     public function index()
     {
-        //
+        $interests = Interest::all();
+        $user = User::with('interests')->where('id', auth()->user()->id)->firstOrFail();
+        
+        return view('user/interests/index', compact('interests', 'user'));
     }
 
     /**
@@ -37,8 +41,6 @@ class InterestsController extends Controller
     public function create()
     {
         $interests = Interest::all();
-        // dd($interests->toArray());
-
         return view('user/interests/create', compact('interests'));
     }
 
@@ -108,9 +110,17 @@ class InterestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Interest $interest)
     {
-        //
+        // dd($request->interests);
+        $this->validate($request,[
+            'interests' => 'nullable',
+        ]);
+        // dd('hit');
+
+        auth()->user()->interests()->sync($request->interests);
+    
+        return back()->with('success', 'Your Interests Have Been Updated Successfully');
     }
 
     /**

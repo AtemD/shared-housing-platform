@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PlaceListing;
+use App\Models\CompatibilityPreference;
 use App\Models\User;
-use App\References\ProfileStatus;
-use App\References\UserType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PlaceListingPolicy
+class CompatibilityPreferencePolicy
 {
     use HandlesAuthorization;
 
@@ -20,17 +18,17 @@ class PlaceListingPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type === UserType::LISTER;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\CompatibilityPreference  $compatibilityPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, PlaceListing $placeListing)
+    public function view(User $user, CompatibilityPreference $compatibilityPreference)
     {
         //
     }
@@ -43,29 +41,29 @@ class PlaceListingPolicy
      */
     public function create(User $user)
     {
-        return $user->type === UserType::LISTER;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\CompatibilityPreference  $compatibilityPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, PlaceListing $placeListing)
+    public function update(User $user, CompatibilityPreference $compatibilityPreference)
     {
-        return $user->id === $placeListing->user_id;
+        return $user->id === $compatibilityPreference->user->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\CompatibilityPreference  $compatibilityPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, PlaceListing $placeListing)
+    public function delete(User $user, CompatibilityPreference $compatibilityPreference)
     {
         //
     }
@@ -74,10 +72,10 @@ class PlaceListingPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\CompatibilityPreference  $compatibilityPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, PlaceListing $placeListing)
+    public function restore(User $user, CompatibilityPreference $compatibilityPreference)
     {
         //
     }
@@ -86,10 +84,10 @@ class PlaceListingPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\CompatibilityPreference  $compatibilityPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, PlaceListing $placeListing)
+    public function forceDelete(User $user, CompatibilityPreference $compatibilityPreference)
     {
         //
     }

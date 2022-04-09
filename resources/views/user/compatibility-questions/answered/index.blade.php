@@ -33,22 +33,15 @@
                         <div class="tab-pane fade active show" role="tabpanel">
                             <br>
                             <h4>Answered Questions List</h4>
-                            <small class="text-muted">
-                                *Note 1: For each question, you provide your own answer, the answer you expect from your match
-                                and the questions importance to you.
-                                These answers will be used to calculate your match percentage with potential matches.
-                            </small><br>
-                            <small class="text-muted">
-                                *Note 2: the more questions you answer, the more the accuracy of your match percentage will improve.
-                            </small><br><br>
+                            <br><br>
                             <div class="row">
-                                @foreach($compatibility_questions as $compatibility_question)
+                                @forelse($compatibility_questions as $compatibility_question)
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="card-title text-bold">{{$compatibility_question->title}}</h5>
                                         </div>
-                                        <form method="POST" action="{{ route('user.compatibility-questions.update', ['CompatibilityQuestion' => $compatibility_question->slug]) }}">
+                                        <form method="POST" action="{{ route('user.compatibility-questions.update', ['compatibility_question' => $compatibility_question->slug]) }}">
                                             @method('PUT')
                                             @csrf
                                             <input type="hidden" name="question" value="{{$compatibility_question->id}}">
@@ -112,7 +105,15 @@
                                         </form>
                                     </div>
                                 </div>
-                                @endforeach
+                                @empty
+                                <div class="col-12">
+                                    <div class="alert alert-info alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-ban"></i> info!</h5>
+                                        You have not answered any questions yet.
+                                    </div>
+                                </div>
+                                @endforelse
                             </div>
                             <div class="row">
                                 <div class="col-md-12">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Helpers\ProfileSetup;
+use App\Models\CompatibilityPreference;
 use App\References\DietHabit;
 use App\References\SmokingHabit;
 use App\References\AlcoholHabit;
@@ -33,7 +34,9 @@ class CompatibilityPreferencesController extends Controller
      */
     public function index()
     {
-        //
+        $compatibility_preference = auth()->user()->compatibilityPreference()->firstOrFail();
+
+        return view('user/compatibility-preferences/index', compact('compatibility_preference'));
     }
 
     /**
@@ -119,12 +122,34 @@ class CompatibilityPreferencesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  CompatibilityPreference  $compatibility_preference
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CompatibilityPreference  $compatibility_preference)
     {
-        //
+        $this->authorize('update', $compatibility_preference);
+
+        $validatedData = $request->validate([
+            'diet_habit' => ['required', 'integer', Rule::in(array_keys(DietHabit::dietHabitList()))],
+            'smoking_habit' => ['required', 'integer', Rule::in(array_keys(SmokingHabit::smokingHabitList()))],
+            'alcohol_habit' => ['required', 'integer', Rule::in(array_keys(AlcoholHabit::alcoholHabitList()))],
+            'partying_habit' => ['required', 'integer', Rule::in(array_keys(PartyingHabit::partyingHabitList()))],
+            'guest_habit' => ['required', 'integer', Rule::in(array_keys(GuestHabit::guestHabitList()))],
+            'occupation_type' => ['required', 'integer', Rule::in(array_keys(OccupationType::occupationTypeList()))],
+            'marital_status' => ['required', 'integer', Rule::in(array_keys(MaritalStatus::maritalStatusList()))],
+        ]);
+
+        $compatibility_preference->update([
+            'diet_habit' => $validatedData['diet_habit'],
+            'smoking_habit' => $validatedData['smoking_habit'],
+            'alcohol_habit' => $validatedData['alcohol_habit'],
+            'partying_habit' => $validatedData['partying_habit'],
+            'guest_habit' => $validatedData['guest_habit'],
+            'occupation_type' => $validatedData['occupation_type'],
+            'marital_status' => $validatedData['marital_status'],
+        ]);
+
+        return back()->with('success', 'Your Compatibility Preference Information Has Been Updated Successfully');
     }
 
     /**

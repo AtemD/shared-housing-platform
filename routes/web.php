@@ -46,16 +46,10 @@ Route::get('/user/dashboard/account-settings', [AccountSettingsController::class
 // User Answered Questions
 Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'index'])
 ->name('user.compatibility-questions.unanswered.index');
-Route::post('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'store'])
-->name('user.compatibility-questions.unanswered.store');
 
 // User Answered Questions
 Route::get('/user/dashboard/account-settings/compatibility-questions/answered', [AnsweredCompatibilityQuestionsController::class, 'index'])
 ->name('user.compatibility-questions.answered.index');
- Route::put('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/answered', [AnsweredCompatibilityQuestionsController::class, 'update'])
- ->name('user.compatibility-questions.answered.update');
- Route::delete('/user/dashboard/account-settings/compatibility-questions/{CompatibilityQuestion}/answered', [AnsweredCompatibilityQuestionsController::class, 'destroy'])
- ->name('user.compatibility-questions.answered.destroy');
 
 // User Compatibility Questions
 Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)->names([

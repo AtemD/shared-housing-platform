@@ -32,7 +32,11 @@ class PlaceListingsController extends Controller
      */
     public function index()
     {
-        //
+        $place_listings = auth()->user()->placeListings()->get();
+
+        // dd($place_listings->toArray());
+
+        return view('user/place-listings/index', compact('place_listings'));
     }
 
     /**

@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PlaceListing;
+use App\Models\PersonalPreference;
 use App\Models\User;
-use App\References\ProfileStatus;
-use App\References\UserType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PlaceListingPolicy
+class PersonalPreferencePolicy
 {
     use HandlesAuthorization;
 
@@ -20,17 +18,17 @@ class PlaceListingPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type === UserType::LISTER;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\PersonalPreference  $personalPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, PlaceListing $placeListing)
+    public function view(User $user, PersonalPreference $personalPreference)
     {
         //
     }
@@ -43,29 +41,29 @@ class PlaceListingPolicy
      */
     public function create(User $user)
     {
-        return $user->type === UserType::LISTER;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\PersonalPreference  $personalPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, PlaceListing $placeListing)
+    public function update(User $user, PersonalPreference $personalPreference)
     {
-        return $user->id === $placeListing->user_id;
+        return $user->id === $personalPreference->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\PersonalPreference  $personalPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, PlaceListing $placeListing)
+    public function delete(User $user, PersonalPreference $personalPreference)
     {
         //
     }
@@ -74,10 +72,10 @@ class PlaceListingPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\PersonalPreference  $personalPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, PlaceListing $placeListing)
+    public function restore(User $user, PersonalPreference $personalPreference)
     {
         //
     }
@@ -86,10 +84,10 @@ class PlaceListingPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PlaceListing  $placeListing
+     * @param  \App\Models\PersonalPreference  $personalPreference
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, PlaceListing $placeListing)
+    public function forceDelete(User $user, PersonalPreference $personalPreference)
     {
         //
     }
