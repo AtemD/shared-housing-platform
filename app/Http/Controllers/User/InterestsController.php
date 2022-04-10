@@ -28,7 +28,7 @@ class InterestsController extends Controller
     public function index()
     {
         $interests = Interest::all();
-        $user = User::with('interests')->where('id', auth()->user()->id)->firstOrFail();
+        $user = auth()->user()->load('interests');
         
         return view('user/interests/index', compact('interests', 'user'));
     }

@@ -42,7 +42,7 @@
                                 *Note 2: the more questions you answer, the more the accuracy of your match percentage will improve.
                             </small><br><br>
                             <div class="row">
-                                @foreach($compatibility_questions as $compatibility_question)
+                                @forelse($compatibility_questions as $compatibility_question)
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
@@ -112,7 +112,15 @@
                                         </form>
                                     </div>
                                 </div>
-                                @endforeach
+                                @empty
+                                <div class="col-12">
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-ban"></i> Success!</h5>
+                                        You have answered all the questions currently available.
+                                    </div>
+                                </div>
+                                @endforelse
                             </div>
                             <div class="row">
                                 <div class="col-md-12">

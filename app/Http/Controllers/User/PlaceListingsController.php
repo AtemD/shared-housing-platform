@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\PlaceListing;
 use App\Helpers\ProfileSetup;
+use App\Models\User;
 use App\References\Currency;
 use App\References\PlaceType;
 use App\References\FurnishingType;
@@ -32,11 +33,9 @@ class PlaceListingsController extends Controller
      */
     public function index()
     {
-        $place_listings = auth()->user()->placeListings()->get();
+        $user = auth()->user()->load('placeListings');
 
-        // dd($place_listings->toArray());
-
-        return view('user/place-listings/index', compact('place_listings'));
+        return view('user/place-listings/index', compact('user'));
     }
 
     /**

@@ -32,7 +32,7 @@
             <div class="col-12">
                 <div class="alert alert-warning alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-ban"></i> Warning!</h5>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Warning!</h5>
                     {{Session::get('warning')}}
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <div class="col-12">
                 <div class="alert alert-info alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-ban"></i> info!</h5>
+                    <h5><i class="icon fas fa-info"></i> info!</h5>
                     {{Session::get('info')}}
                 </div>
             </div>

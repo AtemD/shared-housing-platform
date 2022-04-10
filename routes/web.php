@@ -14,6 +14,14 @@ use App\Http\Controllers\User\PlaceListingPreferencesController as UserPlaceList
 use App\Http\Controllers\User\PlaceListingsController as UserPlaceListingsController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
 
+// Profile Setup Controllers
+use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\PersonalPreferencesController as UserPersonalPreferencesProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\CompatibilityPreferencesController as UserCompatibilityPreferencesProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\PlaceListingPreferencesController as UserPlaceListingPreferencesProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\PlaceListingsController as UserPlaceListingsProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsProfileSetupController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +58,76 @@ Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered'
 // User Answered Questions
 Route::get('/user/dashboard/account-settings/compatibility-questions/answered', [AnsweredCompatibilityQuestionsController::class, 'index'])
 ->name('user.compatibility-questions.answered.index');
+
+// User Compatibility Questions
+Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.compatibility-questions.create',
+    'store'     => 'user.compatibility-questions.store',
+]);
+
+// User Place Listing Preferences Profile Setup
+Route::resource('/user/profile-setup/place-listing-preferences', UserPlaceListingPreferencesProfileSetupController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.profile-setup.place-listing-preferences.create',
+    'store'     => 'user.profile-setup.place-listing-preferences.store',
+]);
+
+// User Place Listings Profile Setup
+Route::resource('/user/profile-setup/place-listings', UserPlaceListingsProfileSetupController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.profile-setup.place-listings.create',
+    'store'     => 'user.profile-setup.place-listings.store',
+]);
+
+// User basic profile Profile Setup
+Route::resource('/user/profile-setup/basic-profile', UserBasicProfileProfileSetupController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.profile-setup.basic-profile.create',
+    'store'     => 'user.profile-setup.basic-profile.store',
+]);
+
+// User personal preferences Profile Setup
+Route::resource('/user/profile-setup/personal-preferences', UserPersonalPreferencesProfileSetupController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.profile-setup.personal-preferences.create',
+    'store'     => 'user.profile-setup.personal-preferences.store',
+]);
+
+// User compatibility preferences Profile Setup
+Route::resource('/user/profile-setup/compatibility-preferences', UserCompatibilityPreferencesProfileSetupController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.profile-setup.compatibility-preferences.create',
+    'store'     => 'user.profile-setup.compatibility-preferences.store',
+]);
+
+// User Interests Profile Setup
+Route::resource('/user/profile-setup/interests', UserInterestsProfileSetupController::class)
+->only([
+    'create', 'store'
+])
+->names([
+    'create'    => 'user.profile-setup.interests.create',
+    'store'     => 'user.profile-setup.interests.store',
+]);
 
 // User Compatibility Questions
 Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)->names([

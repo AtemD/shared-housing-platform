@@ -6,7 +6,7 @@
         <div class="col-md-5">
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
-                    <h5> <b>{{ __('Add New Place Listing') }}</b></h4>
+                    <h5><span class="badge badge-primary text-wrap">(Step 2/5)</span> <b>{{ __('Place Listings') }}</b></h4>
                         <small class="text-muted">Here you specify the details of the place you are listing.</small>
                 </div>
 
@@ -203,9 +203,10 @@
 
                         <hr>
                         <div class="form-group row mb-0">
-                            <div class="col-md-12 d-flex justify-content-end">
+                            <div class="col-md-12 d-flex justify-content-between">
+                                <a href="{{ route('user.basic-profile.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Continue to Locations>>') }}
+                                    {{ __('Continue >>') }}
                                 </button>
                             </div>
                         </div>

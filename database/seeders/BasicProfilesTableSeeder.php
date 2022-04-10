@@ -6,7 +6,7 @@ use App\Models\BasicProfile;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\References\UserType;
+use App\References\ProfileStatus;
 
 class BasicProfilesTableSeeder extends Seeder
 {
@@ -27,6 +27,8 @@ class BasicProfilesTableSeeder extends Seeder
             BasicProfile::factory()->make([
                 'user_id' => $user->id,
             ])->save();
+
+            $user->update(['profile_status' => ProfileStatus::COMPLETE]);
         });
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

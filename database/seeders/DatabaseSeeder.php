@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
         // $this->call(AnswerChoicesTableSeeder::class);
         // $this->call(UserHasCompatibilityQuestionAnswersTableSeeder::class);
 
+        
+        // $this->call(RegionsTableSeeder::class);
+        // $this->call(CitiesTableSeeder::class);
+        // $this->call(LocalitiesTableSeeder::class);
+        // $this->call(PlaceListingLocationsTableSeeder::class);
+
         // CompatibilityQuestion::factory()->times(3)->create();
     }
 }

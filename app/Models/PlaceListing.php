@@ -35,7 +35,7 @@ class PlaceListing extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         // Obtain living place type as string
         $place_types = PlaceType::placeTypeList();
@@ -46,7 +46,7 @@ class PlaceListing extends Model
         $furnishing_type = $furnishing_types[$this->furnishing_type];
 
         return SlugOptions::create()
-            ->generateSlugsFrom(function() use($place_type, $furnishing_type){
+            ->generateSlugsFrom(function () use ($place_type, $furnishing_type) {
                 return "{$place_type} {$furnishing_type}";
             })
             ->saveSlugsTo('slug');
@@ -73,7 +73,12 @@ class PlaceListing extends Model
     }
 
     public function images()
-     {
-         return $this->morphMany(Image::class, 'imageable');
-     }
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function placeListingLocation()
+    {
+        return $this->hasOne(PlaceListingLocation::class);
+    }
 }
