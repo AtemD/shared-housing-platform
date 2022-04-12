@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\PLaceListingSetup;
 use App\Http\Controllers\Controller;
 use App\Models\PlaceListing;
 use App\Helpers\ProfileSetup;
@@ -10,6 +11,7 @@ use App\References\Currency;
 use App\References\PlaceType;
 use App\References\FurnishingType;
 use App\References\PeriodType;
+use App\References\ProfileStatus;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -103,7 +105,7 @@ class PlaceListingsController extends Controller
         // store the image in temporary storage to be processed later.
         // $path = request()->file('featured_image')->storePublicly('/temp');
 
-        $request->session()->put('profile_setup.place_listings', [
+        $request->session()->put('place_listing_setup.place_listing', [
             'rent_amount' => $validatedData['rent_amount'],
             'rent_period' => $validatedData['rent_period'],
             'rent_currency' => $validatedData['currency'],
@@ -114,12 +116,12 @@ class PlaceListingsController extends Controller
             'min_stay_period_type' => $validatedData['min_stay_period_type'],
             'availability_date' => $validatedData['availability_date'],
             'description' => $validatedData['description'],
+            'profile_status' => ProfileStatus::PROCESSING,
             'featured_image' => 'imag1.jpg',
             // 'featured_image' => $path,
         ]);
 
-        // dd(session('profile_setup'));
-        $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_2_LISTER);
+        $next_step = PLaceListingSetup::determineNextStep(PLaceListingSetup::STEP_1);
         return redirect($next_step);
     }
 

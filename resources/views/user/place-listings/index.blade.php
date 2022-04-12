@@ -15,7 +15,7 @@
     <div class="row justify-content-end">
         <div class="col-md-12">
             <div class="d-flex justify-content-end">
-                <a href="{{route('user.place-listings.create')}}" class="btn btn-outline-primary">Add New Place</a>
+                <a href="{{route('user.place-listing-setup.place-listings.create')}}" class="btn btn-outline-primary">Add New Place</a>
             </div>
         </div>
     </div>

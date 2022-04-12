@@ -22,6 +22,12 @@ use App\Http\Controllers\User\ProfileSetup\PlaceListingPreferencesController as 
 use App\Http\Controllers\User\ProfileSetup\PlaceListingsController as UserPlaceListingsProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsProfileSetupController;
 
+// Place Listing Setup Controllers
+use App\Http\Controllers\User\PlaceListingSetup\PlaceListingsController as UserPlaceListingSetupController;
+use App\Http\Controllers\User\PlaceListingSetup\PlaceListingLocationsController as UserPlaceListingLocationSetupController;
+use App\Http\Controllers\User\PlaceListingSetup\PlaceListingAmenitiesController as UserPlaceListingAmenitiesSetupController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,8 +54,8 @@ Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
 ->name('admin.home');
 
 // Account setting
-Route::get('/user/dashboard/account-settings', [AccountSettingsController::class, 'index'])
-->name('user.account-settings.index');
+// Route::get('/user/dashboard/account-settings', [AccountSettingsController::class, 'index'])
+// ->name('user.account-settings.index');
 
 // User Answered Questions
 Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'index'])
@@ -61,73 +67,69 @@ Route::get('/user/dashboard/account-settings/compatibility-questions/answered', 
 
 // User Compatibility Questions
 Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.compatibility-questions.create',
-    'store'     => 'user.compatibility-questions.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.compatibility-questions.create','store' => 'user.compatibility-questions.store']);
+
+
+/**
+ * PROFILE SETUP ROUTES
+ * 
+ */
 
 // User Place Listing Preferences Profile Setup
 Route::resource('/user/profile-setup/place-listing-preferences', UserPlaceListingPreferencesProfileSetupController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.profile-setup.place-listing-preferences.create',
-    'store'     => 'user.profile-setup.place-listing-preferences.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.profile-setup.place-listing-preferences.create','store' => 'user.profile-setup.place-listing-preferences.store']);
 
 // User Place Listings Profile Setup
 Route::resource('/user/profile-setup/place-listings', UserPlaceListingsProfileSetupController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.profile-setup.place-listings.create',
-    'store'     => 'user.profile-setup.place-listings.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.profile-setup.place-listings.create','store' => 'user.profile-setup.place-listings.store']);
 
 // User basic profile Profile Setup
 Route::resource('/user/profile-setup/basic-profile', UserBasicProfileProfileSetupController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.profile-setup.basic-profile.create',
-    'store'     => 'user.profile-setup.basic-profile.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.profile-setup.basic-profile.create', 'store' => 'user.profile-setup.basic-profile.store']);
 
 // User personal preferences Profile Setup
 Route::resource('/user/profile-setup/personal-preferences', UserPersonalPreferencesProfileSetupController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.profile-setup.personal-preferences.create',
-    'store'     => 'user.profile-setup.personal-preferences.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.profile-setup.personal-preferences.create', 'store' => 'user.profile-setup.personal-preferences.store']);
 
 // User compatibility preferences Profile Setup
 Route::resource('/user/profile-setup/compatibility-preferences', UserCompatibilityPreferencesProfileSetupController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.profile-setup.compatibility-preferences.create',
-    'store'     => 'user.profile-setup.compatibility-preferences.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.profile-setup.compatibility-preferences.create','store' => 'user.profile-setup.compatibility-preferences.store']);
 
 // User Interests Profile Setup
 Route::resource('/user/profile-setup/interests', UserInterestsProfileSetupController::class)
-->only([
-    'create', 'store'
-])
-->names([
-    'create'    => 'user.profile-setup.interests.create',
-    'store'     => 'user.profile-setup.interests.store',
-]);
+->only(['create', 'store'])
+->names(['create' => 'user.profile-setup.interests.create','store' => 'user.profile-setup.interests.store']);
+
+
+/**
+ * PLACE LISTING SETUP ROUTES
+ * 
+ */
+
+// User Interests Profile Setup
+Route::resource('/user/place-listing-setup/place-listing', UserPlaceListingSetupController::class)
+->only(['create', 'store'])
+->names(['create' => 'user.place-listing-setup.place-listings.create','store' => 'user.place-listing-setup.place-listings.store']);
+// User place listing location Setup
+Route::resource('/user/place-listing-setup/place-listing-location', UserPlaceListingLocationSetupController::class)
+->only(['create', 'store'])
+->names(['create' => 'user.place-listing-setup.place-listing-locations.create','store' => 'user.place-listing-setup.place-listing-locations.store']);
+// User place listing amenities Setup
+Route::resource('/user/place-listing-setup/place-listing-amenities', UserPlaceListingAmenitiesSetupController::class)
+->only(['create', 'store'])
+->names(['create' => 'user.place-listing-setup.place-listing-amenities.create','store' => 'user.place-listing-setup.place-listing-amenities.store']);
+
+
+/**
+ * USER ACCOUNT ROUTES
+ * 
+ */
 
 // User Compatibility Questions
 Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)->names([

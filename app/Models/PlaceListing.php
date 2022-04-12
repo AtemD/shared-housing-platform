@@ -81,4 +81,9 @@ class PlaceListing extends Model
     {
         return $this->hasOne(PlaceListingLocation::class);
     }
+
+    public function amenities()
+    {
+        return $this->belongsToMany(Amenity::class, 'place_listing_has_amenities', 'place_listing_id', 'amenity_id');
+    }
 }

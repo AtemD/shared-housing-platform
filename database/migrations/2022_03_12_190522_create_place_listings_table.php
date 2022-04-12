@@ -32,10 +32,11 @@ class CreatePlaceListingsTable extends Migration
             $table->boolean('bills_included');
             $table->date('availability_date'); // the move in date
             $table->tinyInteger('furnishing_type'); // fully furnished, partially furnished, not furnished
+            $table->tinyInteger('profile_status');
             // $table->tinyInteger('size');
             // $table->tinyInteger('size_type');
             // $table->tinyInteger('no_of_roommates');
-            $table->string('slug'); // place_type + furnishing_type + by + user_full_name
+            $table->string('slug'); // place_type + furnishing_type + listed by + user_full_name
             $table->timestamps();
         });
     }

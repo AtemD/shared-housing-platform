@@ -8,6 +8,7 @@ use App\References\PeriodType;
 use App\References\FurnishingType;
 use App\References\PlaceType;
 use App\References\Currency;
+use App\References\ProfileStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -36,6 +37,7 @@ class PlaceListingFactory extends Factory
             'bills_included' => $this->faker->randomElement([true, false]),
             'availability_date' => Carbon::parse($this->faker->dateTimeBetween('2022/01/01', '2022/12/31')),
             'furnishing_type' => $this->faker->randomElement(array_keys(FurnishingType::furnishingTypeList())),
+            'profile_status' => $this->faker->randomElement(array_keys(ProfileStatus::ProfileStatusList())),
         ];
     }
 }
