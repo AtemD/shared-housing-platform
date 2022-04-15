@@ -6,6 +6,8 @@ use App\Helpers\PLaceListingSetup;
 use App\Http\Controllers\Controller;
 use App\Models\PlaceListing;
 use App\Helpers\ProfileSetup;
+use App\Models\Amenity;
+use App\Models\City;
 use App\Models\User;
 use App\References\Currency;
 use App\References\PlaceType;
@@ -139,12 +141,16 @@ class PlaceListingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  PlaceListing  $place_listing
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PlaceListing $place_listing)
     {
-        //
+        $place_listing = $place_listing->load(['placeListingLocation', 'amenities']);
+        $cities = City::all();
+        $amenities = Amenity::all();
+
+        return view('user/place-listings/edit', compact('place_listing', 'cities', 'amenities'));
     }
 
     /**

@@ -37,7 +37,7 @@
 
                             <div class="d-flex justify-content-between">
                                 <p class="card-text"><small class="text-muted">created {{$place_listing->created_at->diffForHumans()}}</small></p>
-                                <a href="#" class="btn btn-primary stretched-link">Edit Details</a>
+                                <a href="{{ route('user.place-listings.edit', $place_listing->slug) }}" class="btn btn-primary stretched-link">Edit Details</a>
                             </div>
                         </div>
                     </div>

@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(LocalitiesTableSeeder::class);
         // $this->call(PlaceListingLocationsTableSeeder::class);
 
-        $this->call(AmenitiesTableSeeder::class);
-        $this->call(PlaceListingHasAmenitiesTableSeeder::class);
+        // $this->call(AmenitiesTableSeeder::class);
+        // $this->call(PlaceListingHasAmenitiesTableSeeder::class);
 
         // CompatibilityQuestion::factory()->times(3)->create();
     }

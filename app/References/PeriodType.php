@@ -79,4 +79,26 @@ class PeriodType
         }
     }
 
+    public static function convertDaysToPeriodType($days)
+    {
+        switch($days) {
+            case self::DAYS_PER_MONTH:
+                // convert days to month
+                return self::MONTH;
+                break;
+            case self::DAYS_PER_WEEK:
+                // convert days to week
+                return self::WEEK;
+                break;
+            case self::DAYS_PER_YEAR:
+                // convert days to year
+                return self::YEAR;
+                break;
+            default:
+                // assume it already in months
+                return self::DAY;
+                break;
+        }
+    }
+
 }

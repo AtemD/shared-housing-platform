@@ -27,8 +27,9 @@ class PlaceListingLocationsTableSeeder extends Seeder
         $listings->each(function($listing) use($cities){
             $city = $cities->random();
             $locality = $city->localities->random();
-            
+
             PlaceListingLocation::factory()->make([
+                'place_listing_id' => $listing->id,
                 'city_id' => $city->id,
                 'locality_id' => $locality->id,
             ])->save();

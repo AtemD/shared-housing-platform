@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
             <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('user.account-settings.index') }}">Account Settings</a></li>
+            <li class="breadcrumb-item"><a href="#">Account Settings</a></li>
             <li class="breadcrumb-item active" aria-current="page">Compatibility Questions</li>
         </ol>
     </nav>

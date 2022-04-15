@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\References\FurnishingType;
+use App\References\PeriodType;
 use App\References\PlaceType;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -60,6 +61,28 @@ class PlaceListing extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     * Get the place listings rent period.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRentPeriodAttribute($value)
+    {
+        return PeriodType::convertDaysToPeriodType($value);
+    }
+
+    /**
+     * Get the place listings minimum stay period.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getMinStayPeriodAttribute($value)
+    {
+        return PeriodType::convertDaysToPeriodType($value);
     }
 
     public function user()
