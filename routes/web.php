@@ -12,6 +12,8 @@ use App\Http\Controllers\User\PersonalPreferencesController as UserPersonalPrefe
 use App\Http\Controllers\User\CompatibilityPreferencesController as UserCompatibilityPreferencesController;
 use App\Http\Controllers\User\PlaceListingPreferencesController as UserPlaceListingPreferencesController;
 use App\Http\Controllers\User\PlaceListingsController as UserPlaceListingsController;
+use App\Http\Controllers\User\PlaceListingLocationsController as UserPlaceListingLocationsController;
+use App\Http\Controllers\User\PlaceListingAmenitiesController as UserPlaceListingAmenitiesController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
 
 // Profile Setup Controllers
@@ -26,7 +28,8 @@ use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsP
 use App\Http\Controllers\User\PlaceListingSetup\PlaceListingsController as UserPlaceListingSetupController;
 use App\Http\Controllers\User\PlaceListingSetup\PlaceListingLocationsController as UserPlaceListingLocationSetupController;
 use App\Http\Controllers\User\PlaceListingSetup\PlaceListingAmenitiesController as UserPlaceListingAmenitiesSetupController;
-
+use App\Models\PlaceListing;
+use App\Models\PlaceListingLocation;
 
 /*
 |--------------------------------------------------------------------------
@@ -166,6 +169,24 @@ Route::resource('/user/place-listings', UserPlaceListingsController::class)->nam
     'update'    => 'user.place-listings.update',
     'destroy'   => 'user.place-listings.destroy'
 ]);
+
+// User Place Listing Location
+Route::resource('/user/place-listing-locations', UserPlaceListingLocationsController::class)->names([
+    'index'     => 'user.place-listing-locations.index',
+    'create'    => 'user.place-listing-locations.create',
+    'store'     => 'user.place-listing-locations.store',
+    'show'      => 'user.place-listing-locations.show',
+    'edit'      => 'user.place-listing-locations.edit',
+    'store'     => 'user.place-listing-locations.store',
+    'update'    => 'user.place-listing-locations.update',
+    'destroy'   => 'user.place-listing-locations.destroy'
+]);
+
+Route::get('/user/place-listing/{place_listing}/amenities/edit', [UserPlaceListingAmenitiesController::class, 'edit'])
+->name('user.place-listing.amenities.edit');
+Route::put('/user/place-listing/{place_listing}/amenities', [UserPlaceListingAmenitiesController::class, 'update'])
+->name('user.place-listing.amenities.update');
+
 
 // User basic profile
 Route::resource('/user/basic-profile', UserBasicProfileController::class)->names([

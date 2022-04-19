@@ -29,8 +29,11 @@ class BasicProfileController extends Controller
      */
     public function index()
     {
-        $basic_profile = auth()->user()->basicProfile()->firstOrFail();
-        return view('user/basic-profile/index', compact('basic_profile'));
+        // $basic_profile = auth()->user()->basicProfile()->firstOrFail();
+        $user = auth()->user()->load('basicProfile.occupations');
+        // dd($user->basicProfile->occupations->toArray());
+        // dd($user->occupations->first()->toArray());
+        return view('user/basic-profile/index', compact('user'));
     }
 
     /**

@@ -32,7 +32,7 @@ class User extends Authenticatable
         'verification_status',
         'account_status',
         'profile_status',
-        'user_type',
+        'type',
     ];
 
     /**

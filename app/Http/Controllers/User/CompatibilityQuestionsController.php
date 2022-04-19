@@ -75,7 +75,7 @@ class CompatibilityQuestionsController extends Controller
             'user_answer_id' => $validatedData["your_answer_question_{$request->question}"],
             'match_answer_id' => $validatedData["your_matches_answer_question_{$request->question}"]
         ]);
-
+        
         // redirect back with a success message
         return redirect()->back()->with('success', 'Your answer has been submitted successfully.');
     }

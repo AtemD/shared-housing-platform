@@ -3,18 +3,19 @@
 @section('content')
 <div class="container mt-4">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-white">
+        <ol class="breadcrumb bg-white pl-0">
             <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
             <li class="breadcrumb-item">Account Settings</li>
             <li class="breadcrumb-item"><a href="{{ route('user.place-listings.index') }}">Place Listings</a></li>
-            <li class="breadcrumb-item">{{$place_listing->slug}}</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.place-listings.show', $place_listing->slug) }}">{{$place_listing->slug}}</a></li>
+            <li class="breadcrumb-item">Details</li>
             <li class="breadcrumb-item active" aria-current="page">edit</li>
         </ol>
     </nav>
 </div>
 
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-md-5">
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
@@ -24,6 +25,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.place-listings.update', $place_listing->slug) }}" enctype="multipart/form-data">
+                        @method('PUT')
                         @csrf
 
                         <div class="form-group row">
@@ -216,164 +218,11 @@
                         <hr>
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-block btn-primary">
                                     {{ __('Update Place Details') }}
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card card-default card-outline card-primary mt-4 shadow">
-                <div class="card-header">
-                    <h5><b>{{ __('Place Listing Location') }}</b></h4>
-                        <small class="text-muted">Here you specify the location details.</small>
-                </div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('user.place-listing-setup.place-listing-locations.store') }}">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <select name="city" class="form-control @error('city') is-invalid @enderror" id="city" required>
-                                @forelse($cities as $city)
-                                <option value="{{$city->id}}" {{ (old('city') == $city->id) || (session('place_listing_setup.place_listing_location.city') == $city->id) ? 'selected' : '' }}>
-                                    {{ $city->name }}
-                                </option>
-                                @empty
-                                <div class="alert alert-warning" role="alert">
-                                    No cities cities to show, contact admin for help!
-                                </div>
-                                @endforelse
-                            </select>
-
-                            @error('city')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="street">Street Name</label>
-                            <input type="text" name="street" class="form-control @error('street') is-invalid @enderror" value="{{ old('street') ? old('street') : session('place_listing_setup.place_listing_location.street') }}" id="street" required>
-
-                            @error('street')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="specific_information">Specific Location Information</label>
-                            <textarea type="text" rows="3" name="specific_information" id="specific_information" class="form-control @error('specific_information') is-invalid @enderror" required>{{old('specific_information') ? old('specific_information') : session('place_listing_setup.place_listing_location.specific_information') }}
-                            </textarea>
-
-                            @error('specific_information')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            <textarea type="text" rows="2" name="address" id="address" class="form-control @error('address') is-invalid @enderror" required>{{old('address') ? old('address') : session('place_listing_setup.place_listing_location.address')}}</textarea>
-
-                            @error('address')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="latitude">Latitude</label>
-                                <input type="text" name="latitude" class="form-control @error('latitude') is-invalid @enderror" value="{{ old('latitude') ? old('latitude') : session('place_listing_setup.place_listing_location.lat')}}" id="latitude" required>
-
-                                @error('latitude')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="longitude">Longitude</label>
-                                <input type="text" name="longitude" class="form-control @error('longitude') is-invalid @enderror" value="{{ old('longitude') ? old('longitude') : session('place_listing_setup.place_listing_location.lng')}}" id="longitude" required>
-
-                                @error('longitude')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <hr>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-12 d-flex justify-content-between">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update Location Details') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-default card-outline card-primary mt-4 shadow">
-                <div class="card-header">
-                    <h5><b>{{ __('Amenities') }}</b></h4>
-                        <small class="text-muted">Here you select the amenities that the place listing contains</small>
-                </div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('user.place-listing-setup.place-listing-amenities.store') }}">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="amenities">Select or Add Your Amenities</label>
-                            <div class="row">
-
-                                @forelse($amenities as $amenity)
-                                <div class="col-md-12">
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" name="amenities[]" value="{{$amenity->id}}" class="form-check-input" id="add-amenity-{{$amenity->id}}">
-                                        <label class="form-check-label" for="add-amenity-{{$amenity->id}}" >
-                                            {{$amenity->name}}
-                                        </label>
-                                    </div>
-                                </div>
-                                @empty
-                                <div class="alert alert-warning" role="alert">
-                                    No amenities to show, create one here.
-                                </div>
-                                @endforelse
-
-                            </div>
-
-
-                            @error('amenities')
-                            <span class="text-danger" role="alert">
-                                <strong>*{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-12 d-flex justify-content-between">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update Amenities') }}
-                                </button>
-                            </div>
-                        </div>
-
                     </form>
                 </div>
             </div>

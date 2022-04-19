@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BasicProfile extends Model
+class Occupation extends Model
 {
     use HasFactory;
 
@@ -15,20 +15,12 @@ class BasicProfile extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'gender',
-        'dob',
-        'bio',
+        'basic_profile_id',
+        'name',
     ];
 
-
-    public function user()
+    public function basicProfile()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function occupations()
-    {
-        return $this->hasMany(Occupation::class);
+        return $this->belongsTo(BasicProfile::class);
     }
 }

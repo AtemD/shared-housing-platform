@@ -1,8 +1,14 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
+        @guest
         <a class="navbar-brand" href="{{url('/')}}">
-            <span class="text-primary text-capitalize"><b>1234</b></span>
+            <span class="text-primary text-capitalize"><b>SHUMA</b></span>
         </a>
+        @else
+        <a class="navbar-brand" href="{{ route('user.home') }}">
+            <span class="text-primary text-capitalize"><b>SHUMA</b></span>
+        </a>
+        @endguest
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>

@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(AmenitiesTableSeeder::class);
         // $this->call(PlaceListingHasAmenitiesTableSeeder::class);
+        // $this->call(OccupationsTableSeeder::class);
 
         // CompatibilityQuestion::factory()->times(3)->create();
     }

@@ -53,7 +53,7 @@ class PlaceListingLocationPolicy
      */
     public function update(User $user, PlaceListingLocation $placeListingLocation)
     {
-        //
+        // return true;
     }
 
     /**

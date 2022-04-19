@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
             <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('user.account-settings.index') }}">Account Settings</a></li>
+            <li class="breadcrumb-item">Account Settings</li>
             <li class="breadcrumb-item active" aria-current="page">Compatibility Questions</li>
         </ol>
     </nav>
@@ -18,12 +18,12 @@
                     <ul class="nav nav-tabs nav-justified" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="in-progress-tab" href="{{route('user.compatibility-questions.index', ['list' => 'unanswered'])}}" role="tab" aria-controls="in-progress" aria-selected="false">
-                            <i class="fa-solid fa-circle-question"></i>
+                            <i class="fa-solid fa-circle-question"></i> Unanswered
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="new-tab" href="{{route('user.compatibility-questions.index', ['list' => 'answered'])}}" role="tab" aria-controls="new" aria-selected="false">
-                                <i class="fas fa-check"></i>
+                                <i class="fas fa-check"></i> Answered
                             </a>
                         </li>
                     </ul>
