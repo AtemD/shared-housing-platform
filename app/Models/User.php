@@ -134,4 +134,12 @@ class User extends Authenticatable
      {
          return $this->belongsToMany(AnswerChoice::class, 'user_has_compatibility_question_answers', 'user_id', 'user_answer_id');
      }
+
+     /**
+     * Get all of the occupations for the user.
+     */
+    public function occupations()
+    {
+        return $this->hasManyThrough(Occupation::class, BasicProfile::class);
+    }
 }

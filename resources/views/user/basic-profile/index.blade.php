@@ -89,7 +89,7 @@
                             <h5><b>{{ __('Occupation') }}</b></h4>
                         </div>
                         <div class="col-8 d-flex justify-content-end">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#add-occupation">
+                            <a href="{{ route('user.occupations.create') }}" class="btn btn-primary">
                                 <i class="fas fa-plus xs"></i> {{ __('Add New') }}
                             </a>
                         </div>
@@ -103,7 +103,7 @@
                             <p class="text-bold">{{ $occupation->name }}</p>
                         </div>
                         <div class="col-3">
-                            <a href="#" class="btn btn-block btn-primary btn-sm">
+                            <a href="{{ route('user.occupations.edit', ['occupation' => $occupation->id ]) }}" class="btn btn-block btn-primary btn-sm">
                                 <i class="fas fa-pencil-alt"></i> {{ __('Edit') }}
                             </a>
                         </div>
@@ -126,7 +126,12 @@
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+
+                                            <form role="form" method="POST" action="{{ route('user.occupations.destroy', ['occupation' => $occupation->id]) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->

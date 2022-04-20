@@ -15,6 +15,7 @@ use App\Http\Controllers\User\PlaceListingsController as UserPlaceListingsContro
 use App\Http\Controllers\User\PlaceListingLocationsController as UserPlaceListingLocationsController;
 use App\Http\Controllers\User\PlaceListingAmenitiesController as UserPlaceListingAmenitiesController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
+use App\Http\Controllers\User\OccupationsController as UserOccupationsController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
@@ -198,6 +199,18 @@ Route::resource('/user/basic-profile', UserBasicProfileController::class)->names
     'store'     => 'user.basic-profile.store',
     'update'    => 'user.basic-profile.update',
     'destroy'   => 'user.basic-profile.destroy'
+]);
+
+// User occupations
+Route::resource('/user/occupations', UserOccupationsController::class)->names([
+    'index'     => 'user.occupations.index',
+    'create'    => 'user.occupations.create',
+    'store'     => 'user.occupations.store',
+    'show'      => 'user.occupations.show',
+    'edit'      => 'user.occupations.edit',
+    'store'     => 'user.occupations.store',
+    'update'    => 'user.occupations.update',
+    'destroy'   => 'user.occupations.destroy'
 ]);
 
 // User personal preferences
