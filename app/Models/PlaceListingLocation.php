@@ -29,4 +29,14 @@ class PlaceListingLocation extends Model
     {
         return $this->belongsTo(PlaceListing::class);
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function locality()
+    {
+        return $this->belongsTo(Locality::class);
+    }
 }

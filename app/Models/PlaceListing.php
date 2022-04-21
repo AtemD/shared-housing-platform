@@ -5,14 +5,12 @@ namespace App\Models;
 use App\References\FurnishingType;
 use App\References\PeriodType;
 use App\References\PlaceType;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PlaceListing extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -34,34 +32,14 @@ class PlaceListing extends Model
     ];
 
     /**
-     * Get the options for generating the slug.
-     */
-    public function getSlugOptions(): SlugOptions
-    {
-        // Obtain living place type as string
-        $place_types = PlaceType::placeTypeList();
-        $place_type = $place_types[$this->place_type];
-
-        // Obtain furnishing as string
-        $furnishing_types = FurnishingType::furnishingTypeList();
-        $furnishing_type = $furnishing_types[$this->furnishing_type];
-
-        return SlugOptions::create()
-            ->generateSlugsFrom(function () use ($place_type, $furnishing_type) {
-                return "{$place_type} {$furnishing_type}";
-            })
-            ->saveSlugsTo('slug');
-    }
-
-    /**
      * Get the route key for the model.
      *
      * @return string
      */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 
     /**
      * Get the place listings rent period.
@@ -83,6 +61,27 @@ class PlaceListing extends Model
     public function getMinStayPeriodAttribute($value)
     {
         return PeriodType::convertDaysToPeriodType($value);
+    }
+
+    /**
+     * Get the place listings furnishing type
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getFurnishingTypeAttribute($value)
+    {
+        return FurnishingType::getTypeName($value);
+    }
+
+    public function getRentAmountAttribute($value)
+    {
+        return $value/100;
+    }
+
+    public function getPlaceTypeAttribute($value)
+    {
+        return PlaceType::getName($value);
     }
 
     public function user()

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -13,12 +13,24 @@ class PlaceType
      * 
      * @return array
      */
-     public static function placeTypeList()
-     {
+    public static function placeTypeList()
+    {
         return [
             self::PRIVATE_ROOM => 'Private Room',
             self::SHARED_ROOM => 'Shared Room'
         ];
-     }
+    }
 
+    /**
+     * return list of currencies and their labels
+     * 
+     * @return array
+     */
+    public static function getName($value)
+    {
+        return [
+            self::PRIVATE_ROOM => 'Private Room',
+            self::SHARED_ROOM => 'Shared Room'
+        ][$value];
+    }
 }

@@ -24,4 +24,9 @@ class Locality extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function placeListings()
+    {
+        return $this->hasMany(PlaceListing::class);
+    }
 }

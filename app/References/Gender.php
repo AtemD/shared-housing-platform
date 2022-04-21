@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -12,12 +12,19 @@ class Gender
      * 
      * @return array
      */
-     public static function genderList()
-     {
+    public static function genderList()
+    {
         return [
             self::MALE => 'male',
             self::FEMALE => 'female'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::MALE => 'male',
+            self::FEMALE => 'female'
+        ][$value];
+    }
 }

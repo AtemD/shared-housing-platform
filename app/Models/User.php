@@ -8,6 +8,7 @@ use Spatie\Sluggable\SlugOptions;
 use Laravel\Sanctum\HasApiTokens;
 use App\References\UserType;
 use App\Models\Image;
+use App\References\UserVerificationStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -87,6 +88,17 @@ class User extends Authenticatable
      public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Get the place listings minimum stay period.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getVerificationStatusAttribute($value)
+    {
+        return UserVerificationStatus::getName($value);
     }
 
      public function basicProfile()

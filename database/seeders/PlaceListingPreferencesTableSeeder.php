@@ -20,8 +20,8 @@ class PlaceListingPreferencesTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('place_listing_preferences')->truncate();
 
-        // for every user that is not an admin, create a place listing preference
-        $users = User::where('type', '!=', UserType::ADMIN)->get();
+        // for every user that is a Searcher, insert a place listing preference
+        $users = User::where('type', UserType::SEARCHER)->get();
         $users->each(function($user){
             PlaceListingPreference::factory()->make([
                 'user_id' => $user->id,

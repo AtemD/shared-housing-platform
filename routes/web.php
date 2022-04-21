@@ -16,6 +16,8 @@ use App\Http\Controllers\User\PlaceListingLocationsController as UserPlaceListin
 use App\Http\Controllers\User\PlaceListingAmenitiesController as UserPlaceListingAmenitiesController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
 use App\Http\Controllers\User\OccupationsController as UserOccupationsController;
+use App\Http\Controllers\User\UserMatchesController as UserUserMatchesController;
+use App\Http\Controllers\User\PlaceListingMatchesController as UserPlaceListingMatchesController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
@@ -29,8 +31,6 @@ use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsP
 use App\Http\Controllers\User\PlaceListingSetup\PlaceListingsController as UserPlaceListingSetupController;
 use App\Http\Controllers\User\PlaceListingSetup\PlaceListingLocationsController as UserPlaceListingLocationSetupController;
 use App\Http\Controllers\User\PlaceListingSetup\PlaceListingAmenitiesController as UserPlaceListingAmenitiesSetupController;
-use App\Models\PlaceListing;
-use App\Models\PlaceListingLocation;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +52,16 @@ Route::get('/', function () {
 // user dashboard home
 Route::get('/user/home', [UserHomeController::class, 'index'])
 ->name('user.home');
+
+Route::get('/user/matches/users', [UserUserMatchesController::class, 'index'])
+->name('user.matches.users.index');
+Route::get('user/matches/users/{user}', [UserUserMatchesController::class, 'show'])
+->name('user.matches.users.show');
+
+Route::get('/user/matches/place-listings', [UserPlaceListingMatchesController::class, 'index'])
+->name('user.matches.place-listings.index');
+Route::get('/user/matches/place-listings{placeListing}', [UserPlaceListingMatchesController::class, 'show'])
+->name('user.matches.place-listings.show');
 
 // admin dashboard home
 Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])

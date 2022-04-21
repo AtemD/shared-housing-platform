@@ -29,4 +29,9 @@ class City extends Model
     {
         return $this->hasMany(Locality::class);
     }
+
+    public function placeListingLocations()
+    {
+        return $this->hasMany(PlaceListingLocation::class);
+    }
 }

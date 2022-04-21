@@ -20,4 +20,17 @@ class UserVerificationStatus
         ];
      }
 
+     /**
+     * return list of currencies and their labels
+     * 
+     * @return array
+     */
+    public static function getName($value)
+    {
+       return [
+        self::VERIFIED => 'verified',
+        self::UNVERIFIED => 'unverified'
+       ][$value];
+    }
+
 }

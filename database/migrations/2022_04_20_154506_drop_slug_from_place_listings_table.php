@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProfileStatusToPlaceListingsTable extends Migration
+class DropSlugFromPlaceListingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,12 @@ class AddProfileStatusToPlaceListingsTable extends Migration
     public function up()
     {
         Schema::table('place_listings', function (Blueprint $table) {
-            $table->tinyInteger('profile_status')->nullable();
+            // if the id column exists on place listings table
+			if(Schema::hasColumn('place_listings', 'slug')){
+                Schema::table('place_listings', function(Blueprint $table) {
+                    $table->dropColumn('slug');
+                });
+            }
         });
     }
 
@@ -26,7 +31,7 @@ class AddProfileStatusToPlaceListingsTable extends Migration
     public function down()
     {
         Schema::table('place_listings', function (Blueprint $table) {
-            $table->dropColumn('profile_status');
+            //
         });
     }
 }
