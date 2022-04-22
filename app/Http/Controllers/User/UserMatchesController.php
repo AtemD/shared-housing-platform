@@ -38,4 +38,22 @@ class UserMatchesController extends Controller
         return view('user/matches/users/index', compact('people'));
         
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  User  $User
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        $user = $user->load([
+            'basicProfile.occupations',
+            'placeListingPreference',
+            'compatibilityPreference'
+        ]);
+
+// dd($user->toArray());
+        return view('user/matches/users/show', compact('user'));
+    }
 }

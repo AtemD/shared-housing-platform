@@ -13,6 +13,7 @@ use App\Http\Controllers\User\CompatibilityPreferencesController as UserCompatib
 use App\Http\Controllers\User\PlaceListingPreferencesController as UserPlaceListingPreferencesController;
 use App\Http\Controllers\User\PlaceListingsController as UserPlaceListingsController;
 use App\Http\Controllers\User\PlaceListingLocationsController as UserPlaceListingLocationsController;
+use App\Http\Controllers\User\UserLocationsController as UserUserLocationsController;
 use App\Http\Controllers\User\PlaceListingAmenitiesController as UserPlaceListingAmenitiesController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
 use App\Http\Controllers\User\OccupationsController as UserOccupationsController;
@@ -192,6 +193,18 @@ Route::resource('/user/place-listing-locations', UserPlaceListingLocationsContro
     'store'     => 'user.place-listing-locations.store',
     'update'    => 'user.place-listing-locations.update',
     'destroy'   => 'user.place-listing-locations.destroy'
+]);
+
+// User Location
+Route::resource('/user/user-locations', UserUserLocationsController::class)->names([
+    'index'     => 'user.user-locations.index',
+    'create'    => 'user.user-locations.create',
+    'store'     => 'user.user-locations.store',
+    'show'      => 'user.user-locations.show',
+    'edit'      => 'user.user-locations.edit',
+    'store'     => 'user.user-locations.store',
+    'update'    => 'user.user-locations.update',
+    'destroy'   => 'user.user-locations.destroy'
 ]);
 
 Route::get('/user/place-listing/{place_listing}/amenities/edit', [UserPlaceListingAmenitiesController::class, 'edit'])

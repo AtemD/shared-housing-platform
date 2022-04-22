@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Locality extends Model
+class UserLocation extends Model
 {
     use HasFactory;
 
@@ -15,23 +15,23 @@ class Locality extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'user_id',
         'city_id',
-        'acronym',
+        'locality_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function city()
     {
         return $this->belongsTo(City::class);
     }
 
-    public function placeListings()
+    public function locality()
     {
-        return $this->hasMany(PlaceListing::class);
-    }
-
-    public function userLocations()
-    {
-        return $this->hasMany(UserLocation::class);
+        return $this->belongsTo(Locality::class);
     }
 }

@@ -58,7 +58,7 @@ class User extends Authenticatable
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom(['first_name', 'last_name'])
@@ -81,11 +81,11 @@ class User extends Authenticatable
      * @return bool
      */
     public function isAdmin()
-     {
-         return Auth::check() && $this->user_type === UserType::ADMIN;
-     }
+    {
+        return Auth::check() && $this->user_type === UserType::ADMIN;
+    }
 
-     public function getFullNameAttribute()
+    public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
     }
@@ -101,53 +101,58 @@ class User extends Authenticatable
         return UserVerificationStatus::getName($value);
     }
 
-     public function basicProfile()
-     {
-         return $this->hasOne(BasicProfile::class);
-     }
+    public function basicProfile()
+    {
+        return $this->hasOne(BasicProfile::class);
+    }
 
-     public function placeListingPreference()
-     {
-         return $this->hasOne(PlaceListingPreference::class);
-     }
+    public function placeListingPreference()
+    {
+        return $this->hasOne(PlaceListingPreference::class);
+    }
 
-     public function placeListings()
-     {
-         return $this->hasMany(PlaceListing::class);
-     }
+    public function placeListings()
+    {
+        return $this->hasMany(PlaceListing::class);
+    }
 
-     public function images()
-     {
-         return $this->morphMany(Image::class, 'imageable');
-     }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 
-     public function personalPreference()
-     {
-         return $this->hasOne(PersonalPreference::class);
-     }
+    public function personalPreference()
+    {
+        return $this->hasOne(PersonalPreference::class);
+    }
 
-     public function compatibilityPreference()
-     {
-         return $this->hasOne(CompatibilityPreference::class);
-     }
+    public function compatibilityPreference()
+    {
+        return $this->hasOne(CompatibilityPreference::class);
+    }
 
-     public function interests()
-     {
-         return $this->belongsToMany(Interest::class, 'user_has_interests', 'user_id', 'interest_id');
-     }
+    public function interests()
+    {
+        return $this->belongsToMany(Interest::class, 'user_has_interests', 'user_id', 'interest_id');
+    }
 
-     public function compatibilityQuestions()
-     {
-         return $this->belongsToMany(CompatibilityQuestion::class, 'user_has_compatibility_question_answers', 'user_id', 'compatibility_question_id')
-         ->withPivot('compatibility_question_relevance', 'user_answer_id', 'match_answer_id');
-     }
+    public function compatibilityQuestions()
+    {
+        return $this->belongsToMany(CompatibilityQuestion::class, 'user_has_compatibility_question_answers', 'user_id', 'compatibility_question_id')
+            ->withPivot('compatibility_question_relevance', 'user_answer_id', 'match_answer_id');
+    }
 
-     public function answerChoices()
-     {
-         return $this->belongsToMany(AnswerChoice::class, 'user_has_compatibility_question_answers', 'user_id', 'user_answer_id');
-     }
+    public function answerChoices()
+    {
+        return $this->belongsToMany(AnswerChoice::class, 'user_has_compatibility_question_answers', 'user_id', 'user_answer_id');
+    }
 
-     /**
+    public function userLocation()
+    {
+        return $this->hasOne(UserLocation::class);
+    }
+
+    /**
      * Get all of the occupations for the user.
      */
     public function occupations()

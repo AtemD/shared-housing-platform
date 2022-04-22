@@ -69,6 +69,7 @@
                             <a href="{{ route('user.personal-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Personal Preferences</a>
                             <a href="{{ route('user.compatibility-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Compatibility Preferences</a>
                             <a href="{{ route('user.interests.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Interests</a>
+                            <a href="{{ route('user.user-locations.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Location</a>
                             <a href="{{ route('user.compatibility-questions.unanswered.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Compatibility Questions</a>
                         </div>
 
