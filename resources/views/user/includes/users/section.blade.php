@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-md-6">
-        <hr>
         <h3>Place Preference</h3>
         <div class="row">
             <div class="col-6">
@@ -57,7 +56,6 @@
         </div>
     </div>
     <div class="col-md-6">
-        <hr>
         <h3>Compatibility Preference</h3>
         <div class="row">
             <div class="col-6">

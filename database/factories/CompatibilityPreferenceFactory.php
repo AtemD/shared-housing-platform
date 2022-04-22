@@ -10,6 +10,7 @@ use App\References\GuestHabit;
 use App\References\OccupationType;
 use App\References\MaritalStatus;
 use App\References\DietHabit;
+use App\References\Gender;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompatibilityPreferenceFactory extends Factory
@@ -32,6 +33,7 @@ class CompatibilityPreferenceFactory extends Factory
             'guest_habit' => $this->faker->randomElement(array_keys(GuestHabit::guestHabitList())),
             'occupation_type' => $this->faker->randomElement(array_keys(OccupationType::occupationTypeList())),
             'marital_status' => $this->faker->randomElement(array_keys(MaritalStatus::maritalStatusList())),
+            'preferred_gender' => $this->faker->randomElement(array_keys(Gender::genderList())),
         ];
     }
 }

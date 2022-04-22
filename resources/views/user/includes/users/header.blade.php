@@ -1,10 +1,10 @@
 <header class="shop-item-header">
     <div class="row pt-4">
         <div class="col-md-6">
-            <h2>{{$user->basicProfile->dob}} year old {{$user->basicProfile->gender}} looking for a private room</h2>
+            <h2>{{$user->basicProfile->dob}} year old {{$user->basicProfile->gender}}</h2>
             <p>
                 <i class="fas fa-map-marker"></i> 
-                Bole, Addis Ababa
+                {{$user->userLocation->locality->name}}, {{$user->userLocation->city->name}}
             </p>
         </div>
         <div class="col-md-6 d-flex justify-content-end">

@@ -6,6 +6,7 @@ class Gender
 {
     const MALE = 1;
     const FEMALE = 2;
+    const ALL = 3;
 
     /**
      * return list of gender and their labels
@@ -16,7 +17,8 @@ class Gender
     {
         return [
             self::MALE => 'male',
-            self::FEMALE => 'female'
+            self::FEMALE => 'female',
+            self::ALL => 'male or female'
         ];
     }
 
@@ -24,7 +26,8 @@ class Gender
     {
         return [
             self::MALE => 'male',
-            self::FEMALE => 'female'
+            self::FEMALE => 'female',
+            self::ALL => 'male or female'
         ][$value];
     }
 }

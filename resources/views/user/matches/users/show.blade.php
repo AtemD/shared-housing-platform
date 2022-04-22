@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white pl-0">
+            <li class="breadcrumb-item"><a href="{{ route('user.matches.users.index') }}" class="text-decoration-none">People Matches</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{$user->slug}}</li>
+        </ol>
+    </nav>
+</div>
+
 <div class="container">
-    <div class="shop-item-details">
+    <div class="user-item-details">
         @include('user.includes.users.header')
 
         
@@ -15,7 +24,7 @@
             </div>
         </div>
 
-        <p id="menu"></p>
+        <hr>
 
         <div class="row">
             <div class="col-md-12">

@@ -31,8 +31,10 @@ class UserMatchesController extends Controller
         $people = User::where('type', UserType::SEARCHER)
             ->where('profile_status', ProfileStatus::COMPLETE)
             ->with([
-                'basicProfile',
-                'placeListingPreference'
+                'basicProfile.occupations',
+                'placeListingPreference',
+                'userLocation.city',
+                'userLocation.locality'
             ])->simplePaginate();
             // dd($people->toArray());
         return view('user/matches/users/index', compact('people'));
@@ -50,7 +52,9 @@ class UserMatchesController extends Controller
         $user = $user->load([
             'basicProfile.occupations',
             'placeListingPreference',
-            'compatibilityPreference'
+            'personalPreference',
+            'compatibilityPreference',
+            'interests',
         ]);
 
 // dd($user->toArray());
