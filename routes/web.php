@@ -16,6 +16,7 @@ use App\Http\Controllers\User\PlaceListingLocationsController as UserPlaceListin
 use App\Http\Controllers\User\PlaceListingAmenitiesController as UserPlaceListingAmenitiesController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
 use App\Http\Controllers\User\OccupationsController as UserOccupationsController;
+use App\Http\Controllers\User\SpokenLanguagesController as UserSpokenLanguagesController;
 use App\Http\Controllers\User\UserMatchesController as UserUserMatchesController;
 use App\Http\Controllers\User\PlaceListingMatchesController as UserPlaceListingMatchesController;
 
@@ -221,6 +222,18 @@ Route::resource('/user/occupations', UserOccupationsController::class)->names([
     'store'     => 'user.occupations.store',
     'update'    => 'user.occupations.update',
     'destroy'   => 'user.occupations.destroy'
+]);
+
+// User spoken languages
+Route::resource('/user/spoken-languages', UserSpokenLanguagesController::class)->names([
+    'index'     => 'user.spoken-languages.index',
+    'create'    => 'user.spoken-languages.create',
+    'store'     => 'user.spoken-languages.store',
+    'show'      => 'user.spoken-languages.show',
+    'edit'      => 'user.spoken-languages.edit',
+    'store'     => 'user.spoken-languages.store',
+    'update'    => 'user.spoken-languages.update',
+    'destroy'   => 'user.spoken-languages.destroy'
 ]);
 
 // User personal preferences

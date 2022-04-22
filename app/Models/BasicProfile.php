@@ -48,4 +48,9 @@ class BasicProfile extends Model
     {
         return $this->hasMany(Occupation::class);
     }
+
+    public function spokenLanguages()
+    {
+        return $this->hasMany(SpokenLanguage::class);
+    }
 }

@@ -8,13 +8,13 @@
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs nav-justified" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.matches.people')}}" role="tab" aria-selected="false">
+                            <a class="nav-link" href="{{route('user.matches.users.index')}}" role="tab" aria-selected="false">
                                 <i class="fas fa-users"></i>
                                 People
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('user.matches.places')}}" role="tab" aria-selected="false">
+                            <a class="nav-link active" href="{{route('user.matches.place-listings.index')}}" role="tab" aria-selected="false">
                                 <i class="fas fa-house-user"></i>
                                 Places
                             </a>
