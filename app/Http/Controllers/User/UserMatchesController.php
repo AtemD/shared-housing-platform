@@ -32,7 +32,7 @@ class UserMatchesController extends Controller
             ->where('profile_status', ProfileStatus::COMPLETE)
             ->with([
                 'basicProfile.occupations',
-                'placeListingPreference',
+                'placePreference',
                 'userLocation.city',
                 'userLocation.locality'
             ])->simplePaginate();
@@ -51,7 +51,7 @@ class UserMatchesController extends Controller
     {
         $user = $user->load([
             'basicProfile.occupations',
-            'placeListingPreference',
+            'placePreference',
             'personalPreference',
             'compatibilityPreference',
             'interests',

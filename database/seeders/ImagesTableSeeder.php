@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Image;
 use App\Models\User;
-use App\Models\PlaceListing;
+use App\Models\Place;
 
 class ImagesTableSeeder extends Seeder
 {
@@ -29,10 +28,10 @@ class ImagesTableSeeder extends Seeder
             ]);
         });
 
-        // for every place listing create at least 1 image
-        $place_listings = PlaceListing::all();
-        $place_listings->each(function($place_listing){
-            $place_listing->images()->createMany([
+        // for every place  create at least 1 image
+        $places = Place::all();
+        $places->each(function($place){
+            $place->images()->createMany([
                 ['name' => time(). '_' . mt_rand(1, 100) . '.' . 'jpg'],
                 ['name' => time(). '_' . mt_rand(1, 100) . '.' . 'jpg'],
             ]);

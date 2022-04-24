@@ -11,7 +11,7 @@
                 </div>
                
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.personal-preferences.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.personal-preferences.store') }}">
                         @csrf
 
                         <h5>Diet Habits?</h5>
@@ -170,10 +170,10 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
-                                @can('create', App\Models\PlaceListing::class)
-                                <a href="{{ route('user.place-listings.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
-                                @elsecan('create', App\Models\PlaceListingPreference::class)
-                                <a href="{{ route('user.place-listing-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
+                                @can('create', App\Models\Place::class)
+                                <a href="{{ route('user.profile-setup.places.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
+                                @elsecan('create', App\Models\PlacePreference::class)
+                                <a href="{{ route('user.profile-setup.place-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
                                 @endcan
 
                                 <button type="submit" class="btn btn-primary">

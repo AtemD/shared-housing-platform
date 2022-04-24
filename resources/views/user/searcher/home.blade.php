@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('user.matches.place-listings.index')}}" role="tab" aria-selected="false">
+                            <a class="nav-link active" href="{{route('user.matches.places.index')}}" role="tab" aria-selected="false">
                                 <i class="fas fa-house-user"></i>
                                 Places
                             </a>
@@ -30,7 +30,7 @@
                                 <img src="/uploads/places/pic04.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <p class="h6">{{$place->place_type}} &bull; {{$place->furnishing_type}}</p>
-                                    <p class="text-muted mb-0 pb-0">{{$place->placeListingLocation->locality->name}}, {{$place->placeListingLocation->city->name}}</p>
+                                    <p class="text-muted mb-0 pb-0">{{$place->placeLocation->locality->name}}, {{$place->placeLocation->city->name}}</p>
                                     <!-- <p class="text-muted mt-0 pt-0"><small>Private + 1 bed + private amenities</small></p> -->
                                     <p class="h5 mt-0">{{$place->rent_amount}} ETB/month</p>
 

@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
         Relation::morphMap([
             'users' => 'App\Models\User',
-            'placelistings' => 'App\Models\PlaceListing',
+            'places' => 'App\Models\Place',
         ]);
     }
 }

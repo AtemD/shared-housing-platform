@@ -16,12 +16,12 @@ trait AccountSetup
             return redirect()->route('user.account-setup.basic-profile.create');
         }
 
-        if ((!$this->hasPlaceListingPreferences($user)) && ($user_type == UserType::SEARCHER)) {
-            return redirect()->route('user.account-setup.place-listing-preferences.create');
+        if ((!$this->hasPlacePreferences($user)) && ($user_type == UserType::SEARCHER)) {
+            return redirect()->route('user.account-setup.place-preferences.create');
         }
 
-        if (!$this->hasPlaceListings($user) && ($user_type == UserType::LISTER)) {
-            redirect()->route('user.account-setup.place-listings.create');
+        if (!$this->hasPlaces($user) && ($user_type == UserType::LISTER)) {
+            redirect()->route('user.account-setup.places.create');
         }
 
 
@@ -77,20 +77,20 @@ trait AccountSetup
      * 
      * @return bool
      */
-    protected function hasPlaceListingPreferences($user)
+    protected function hasPlacePreferences($user)
     {
-        $result = $user->placeListingPreferences()->exists();
+        $result = $user->placePreferences()->exists();
         return $result;
     }
 
     /**
-     * Check whether the users has living place listings.
+     * Check whether the users has living place s.
      * 
      * @return bool
      */
-    protected function hasPlaceListings($user)
+    protected function hasPlaces($user)
     {
-        $result = $user->placeListings()->exists();
+        $result = $user->places()->exists();
         return $result;
     }
 }

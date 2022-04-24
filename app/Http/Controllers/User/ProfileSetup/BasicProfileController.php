@@ -45,11 +45,12 @@ class BasicProfileController extends Controller
     {
         $this->authorize('create', BasicProfile::class);
 
-        // Validate the request data
         $validatedData = $request->validate([
-            'gender' => ['required', 'integer', Rule::in([Gender::MALE, Gender::FEMALE])],
+            'gender' => ['required', 'integer', Rule::in(array_keys(Gender::genderList()))],
             'dob' => ['required', 'date_format:Y-m-d'],
             'bio' => ['required', 'max:1000'],
+            'occupations' => ['required', 'min:1', 'max:255'],
+            'spoken_languages' => ['required', 'min:1', 'max:255'],
         ]);
 
         // Store the validated data in the session
@@ -57,6 +58,14 @@ class BasicProfileController extends Controller
             'gender' => $validatedData['gender'],
             'dob' => $validatedData['dob'],
             'bio' => $validatedData['bio'],
+        ]);
+
+        $request->session()->put('profile_setup.occupations', [
+            $validatedData['occupations'],
+        ]);
+
+        $request->session()->put('profile_setup.spoken_languages', [
+            $validatedData['spoken_languages'],
         ]);
 
         $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_1);

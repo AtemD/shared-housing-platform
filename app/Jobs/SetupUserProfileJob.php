@@ -16,8 +16,11 @@ class SetupUserProfileJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $basic_profile;
-    public $place_listing;
-    public $place_listing_preferences;
+    public $occupations;
+    public $spoken_languages;
+    public $place;
+    public $place_preferences;
+    public $place_preference_preferred_locations;
     public $personal_preferences;
     public $compatibility_preferences;
     public $interests;
@@ -32,17 +35,22 @@ class SetupUserProfileJob implements ShouldQueue
     {
         $this->basic_profile = $profile_setup_details['basic_profile'];
 
-        if (array_key_exists("place_listing", $profile_setup_details)) {
-            $this->place_listing = $profile_setup_details['place_listing'];
+        $this->occupations = $profile_setup_details['occupations'];
+
+        $this->spoken_languages = $profile_setup_details['spoken_languages'];
+
+        if (array_key_exists("place", $profile_setup_details)) {
+            $this->place = $profile_setup_details['place'];
         } else {
-            $this->place_listing = null;
+            $this->place = null;
         }
 
 
-        if (array_key_exists("place_listing_preferences", $profile_setup_details)) {
-            $this->place_listing_preferences = $profile_setup_details['place_listing_preferences'];
+        if (array_key_exists("place_preferences", $profile_setup_details)) {
+            $this->place_preferences = $profile_setup_details['place_preferences'];
+            $this->place_preference_preferred_locations = $profile_setup_details['place_preference_preferred_locations']
         } else {
-            $this->place_listing_preferences = null;
+            $this->place_preferences = null;
         }
 
         $this->personal_preferences = $profile_setup_details['personal_preferences'];
@@ -53,7 +61,7 @@ class SetupUserProfileJob implements ShouldQueue
 
         
         // dd($this->interests);
-        // dd($this->place_listing['rent_amount']);
+        // dd($this->place['rent_amount']);
     }
 
     /**
@@ -65,38 +73,42 @@ class SetupUserProfileJob implements ShouldQueue
     {
         DB::transaction(function () {
 
-            $this->user->basicProfile()->create([
+            $basic_profile = $this->user->basicProfile()->create([
                 'gender' => $this->basic_profile['gender'],
                 'dob' => $this->basic_profile['dob'],
                 'bio' => $this->basic_profile['bio'],
             ]);
 
-            if($this->place_listing != null) {
-                $this->user->placeListings()->create([
-                    'rent_amount' => $this->place_listing['rent_amount'],
-                    'rent_period' => $this->place_listing['rent_period'],
-                    'rent_currency' => $this->place_listing['rent_currency'],
-                    'bills_included' => $this->place_listing['bills_included'],
-                    'place_type' => $this->place_listing['place_type'],
-                    'furnishing_type' => $this->place_listing['furnishing_type'],
-                    'min_stay_period' => $this->place_listing['min_stay_period'],
-                    'availability_date' => $this->place_listing['availability_date'],
-                    'description' => $this->place_listing['description'],
-                    // 'featured_image' => $this->place_listing['featured_image']
+            $basic_profile->occupations()->saveMany($this->occupations);
+
+            $basic_profile->spokenLanguages()->saveMany($this->spoken_languages);
+
+            if($this->place != null) {
+                $this->user->places()->create([
+                    'rent_amount' => $this->place['rent_amount'],
+                    'rent_period' => $this->place['rent_period'],
+                    'rent_currency' => $this->place['rent_currency'],
+                    'bills_included' => $this->place['bills_included'],
+                    'place_type' => $this->place['place_type'],
+                    'furnishing_type' => $this->place['furnishing_type'],
+                    'min_stay_period' => $this->place['min_stay_period'],
+                    'availability_date' => $this->place['availability_date'],
+                    'description' => $this->place['description'],
+                    // 'featured_image' => $this->place['featured_image']
                 ]);
 
 
-                // process the image, update the place listing with an image id
+                // process the image, update the place  with an image id
             }
             
 
-            // Note: a place listing preference has locations too, locations that the user prefers
-            if($this->place_listing_preferences != null){
-                $this->user->placeListingPreference()->create([
-                    'min_rent_amount' => $this->place_listing_preferences['min_rent_amount'],
-                    'max_rent_amount' => $this->place_listing_preferences['max_rent_amount'],
-                    'rent_period' => $this->place_listing_preferences['rent_period'],
-                    'availability_date' => $this->place_listing_preferences['availability_date'],
+            // Note: a place  preference has locations too, locations that the user prefers
+            if($this->place_preferences != null){
+                $this->user->placePreference()->create([
+                    'min_rent_amount' => $this->place_preferences['min_rent_amount'],
+                    'max_rent_amount' => $this->place_preferences['max_rent_amount'],
+                    'rent_period' => $this->place_preferences['rent_period'],
+                    'availability_date' => $this->place_preferences['availability_date'],
                 ]);
             }
             

@@ -30,9 +30,9 @@ class City extends Model
         return $this->hasMany(Locality::class);
     }
 
-    public function placeListingLocations()
+    public function placeLocations()
     {
-        return $this->hasMany(PlaceListingLocation::class);
+        return $this->hasMany(PlaceLocation::class);
     }
 
     public function userLocations()

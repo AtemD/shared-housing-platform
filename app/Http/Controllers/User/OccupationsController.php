@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Helpers\ProfileSetup;
-use App\References\Gender;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use App\Models\BasicProfile;
 use App\Models\Occupation;
 
 class OccupationsController extends Controller

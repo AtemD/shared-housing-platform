@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.matches.place-listings.index') }}" role="tab" aria-selected="false">
+                            <a class="nav-link" href="{{ route('user.matches.places.index') }}" role="tab" aria-selected="false">
                                 <i class="fas fa-house-user"></i>
                                 Places
                             </a>
@@ -49,12 +49,12 @@
                                             <div class="col-md-12">
                                                 <a class="product-title button text-decoration-none float-left">
                                                     <small class="text-muted">Budget </small>
-                                                    <h6 class="text-dark">{{$person->placeListingPreference->min_rent_amount}}-{{$person->placeListingPreference->max_rent_amount}} ETB/month</h6>
+                                                    <h6 class="text-dark">{{$person->placePreference->min_rent_amount}}-{{$person->placePreference->max_rent_amount}} ETB/month</h6>
                                                 </a>
 
                                                 <a class="product-title text-decoration-none float-right">
                                                     <small class="text-muted">Available to shift </small>
-                                                    <h6 class="text-dark">{{$person->placeListingPreference->availability_date}}</h6>
+                                                    <h6 class="text-dark">{{$person->placePreference->availability_date}}</h6>
                                                 </a>
                                             </div>
                                         </div>

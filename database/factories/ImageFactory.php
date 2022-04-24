@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\PlaceListing;
+use App\Models\Place;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,7 +17,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         $imageable = $this->faker->randomElement([
-            PlaceListing::class,
+            Place::class,
             User::class,
         ]);
 
@@ -25,8 +25,8 @@ class ImageFactory extends Factory
             $item = User::factory()->create();
         }
 
-        if($imageable == 'App\Models\PlaceListing'){
-            $item = PlaceListing::factory()->create();
+        if($imageable == 'App\Models\Place'){
+            $item = Place::factory()->create();
         }
     
         return [
@@ -35,7 +35,7 @@ class ImageFactory extends Factory
             'imageable_type' => array_search(
                     $imageable, 
                     Relation::morphMap([
-                        'placelisting' => 'App\Models\PlaceListing',
+                        'place' => 'App\Models\Place',
                         'user' => 'App\Models\User',
                     ])
             ),

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User\ProfileSetup;
 
 use App\Http\Controllers\Controller;
 use App\Helpers\ProfileSetup;
-use App\Models\CompatibilityPreference;
 use App\References\DietHabit;
 use App\References\SmokingHabit;
 use App\References\AlcoholHabit;

@@ -17,10 +17,10 @@
                     Basic Profile Settings
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    Place Listing Settings
+                    Place Settings
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    Place Listing Preferences Settings
+                    Place Preferences Settings
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     Personal Preferences Settings

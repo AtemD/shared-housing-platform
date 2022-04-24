@@ -64,7 +64,7 @@ class BasicProfileController extends Controller
 
         // Validate the request data
         $validatedData = $request->validate([
-            'gender' => ['required', 'integer', Rule::in([Gender::MALE, Gender::FEMALE])],
+            'gender' => ['required', 'integer', Rule::in(array_keys(Gender::genderList()))],
             'dob' => ['required', 'date_format:Y-m-d'],
             'bio' => ['required', 'max:1000'],
         ]);
@@ -114,7 +114,7 @@ class BasicProfileController extends Controller
         $this->authorize('update', $basic_profile);
 
         $validatedData = $request->validate([
-            'gender' => ['required', 'integer', Rule::in([Gender::MALE, Gender::FEMALE])],
+            'gender' => ['required', 'integer', Rule::in(array_keys(Gender::genderList()))],
             'dob' => ['required', 'date_format:Y-m-d'],
             'bio' => ['required', 'max:1000'],
         ]);

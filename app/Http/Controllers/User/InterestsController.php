@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Helpers\ProfileSetup;
 use App\Models\Interest;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class InterestsController extends Controller
@@ -21,7 +20,7 @@ class InterestsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a  of the resource.
      *
      * @return \Illuminate\Http\Response
      */

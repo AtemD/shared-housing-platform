@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Occupation;
 use App\Models\SpokenLanguage;
 
 class SpokenLanguagesController extends Controller

@@ -48,12 +48,12 @@
                                         <div class="col-md-12">
                                             <a href="javascript:void(0)" class="product-title button float-left">
                                                 <small class="text-muted">Budget </small>
-                                                <h6 class="text-dark">{{$person->placeListingPreference->min_rent_amount}}-{{$person->placeListingPreference->max_rent_amount}} ETB/month</h6>
+                                                <h6 class="text-dark">{{$person->placePreference->min_rent_amount}}-{{$person->placePreference->max_rent_amount}} ETB/month</h6>
                                             </a>
 
                                             <a href="javascript:void(0)" class="product-title float-right">
                                                 <small class="text-muted">Available to shift </small>
-                                                <h6 class="text-dark">{{$person->placeListingPreference->availability_date}}</h6>
+                                                <h6 class="text-dark">{{$person->placePreference->availability_date}}</h6>
                                             </a>
                                         </div>
                                     </div>

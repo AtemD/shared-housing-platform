@@ -14,8 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Models\BasicProfile' => 'App\Policies\BasicProfilePolicy',
-        'App\Models\PlaceListing' => 'App\Policies\PlaceListingPolicy',
-        'App\Models\PlaceListingPreference' => 'App\Policies\PlaceListingPreferencePolicy',
+        'App\Models\Place' => 'App\Policies\PlacePolicy',
+        'App\Models\PlacePreference' => 'App\Policies\PlacePreferencePolicy',
     ];
 
     /**

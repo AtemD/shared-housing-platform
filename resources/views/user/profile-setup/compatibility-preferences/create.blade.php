@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.compatibility-preferences.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.compatibility-preferences.store') }}">
                         @csrf
 
                         <h5>Diet Habits?</h5>
@@ -170,7 +170,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
-                                <a href="{{ route('user.personal-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
+                                <a href="{{ route('user.profile-setup.personal-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
 
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Continue >>') }}

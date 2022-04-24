@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // $this->call(UsersTableSeeder::class);
-        // $this->call(PlaceListingsTableSeeder::class);
+        // $this->call(PlacesTableSeeder::class);
         // $this->call(BasicProfilesTableSeeder::class);
-        // $this->call(PlaceListingPreferencesTableSeeder::class);
+        // $this->call(PlacePreferencesTableSeeder::class);
         // $this->call(PersonalPreferencesTableSeeder::class);
         // $this->call(CompatibilityPreferencesTableSeeder::class);
         // $this->call(InterestsTableSeeder::class);
@@ -34,13 +34,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(RegionsTableSeeder::class);
         // $this->call(CitiesTableSeeder::class);
         // $this->call(LocalitiesTableSeeder::class);
-        // $this->call(PlaceListingLocationsTableSeeder::class);
+        // $this->call(PlaceLocationsTableSeeder::class);
         // $this->call(UserLocationsTableSeeder::class);
 
         // $this->call(AmenitiesTableSeeder::class);
-        // $this->call(PlaceListingHasAmenitiesTableSeeder::class);
+        // $this->call(PlaceHasAmenitiesTableSeeder::class);
         // $this->call(OccupationsTableSeeder::class);
         // $this->call(SpokenLanguagesTableSeeder::class);
+        $this->call(PlacePreferenceHasPreferredLocationsTableSeeder::class);
 
         // CompatibilityQuestion::factory()->times(3)->create();
     }

@@ -9,8 +9,8 @@ class Amenity extends Model
 {
     use HasFactory;
 
-    public function placeListings()
+    public function places()
     {
-        return $this->belongsToMany(PlaceListing::class, 'place_listing_has_amenities', 'amenity_id', 'place_listing_id');
+        return $this->belongsToMany(Place::class, 'place_has_amenities', 'amenity_id', 'place_id');
     }
 }

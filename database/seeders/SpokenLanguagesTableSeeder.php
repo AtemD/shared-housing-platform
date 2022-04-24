@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\BasicProfile;
-use App\Models\Occupation;
 use App\Models\SpokenLanguage;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

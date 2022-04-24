@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.basic-profile.store') }}">
+                    <form method="POST" action="{{ route('user.profile-setup.basic-profile.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -53,6 +53,33 @@
                                 <textarea class="form-control @error('bio') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="bio">{{ old('bio') ? old('bio') : session('profile_setup.basic_profile.bio') }}</textarea>
 
                                 @error('bio')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label for="occupations">Occupations:</label>
+                                <small class="text-muted">What do you do for a living?</small>
+                                <input type="text" class="form-control @error('occupations') is-invalid @enderror" id="occupations" name="occupations[]" placeholder="software engineer" value="{{ old('occupations') ? old('occupations') : session('profile_setup.basic_profile.occupations')}}">
+
+                                @error('occupations')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label for="spoken_languages">Spoken Languages:</label>
+                                <input type="text" class="form-control @error('spoken_languages') is-invalid @enderror" id="spoken_languages" name="spoken_languages[]" placeholder="English" value="{{ old('spoken_languages') ? old('spoken_languages') : session('profile_setup.basic_profile.spoken_languages')}}">
+
+                                @error('spoken_languages')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

@@ -91,7 +91,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the place listings minimum stay period.
+     * Get the place s minimum stay period.
      *
      * @param  string  $value
      * @return string
@@ -106,14 +106,14 @@ class User extends Authenticatable
         return $this->hasOne(BasicProfile::class);
     }
 
-    public function placeListingPreference()
+    public function placePreference()
     {
-        return $this->hasOne(PlaceListingPreference::class);
+        return $this->hasOne(PlacePreference::class);
     }
 
-    public function placeListings()
+    public function places()
     {
-        return $this->hasMany(PlaceListing::class);
+        return $this->hasMany(Place::class);
     }
 
     public function images()

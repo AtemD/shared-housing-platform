@@ -60,10 +60,10 @@
                         <div class="dropdown-menu dropright" aria-labelledby="navbarNested">
                             <a href="{{ route('user.basic-profile.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Basic Profile</a>
 
-                            @can('viewAny', App\Models\PlaceListing::class)
-                            <a href="{{ route('user.place-listings.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Listings</a>
-                            @elsecan('viewAny', App\Models\PlaceListingPreference::class)
-                            <a href="{{ route('user.place-listing-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Listing Preferences</a>
+                            @can('viewAny', App\Models\Place::class)
+                            <a href="{{ route('user.places.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Places</a>
+                            @elsecan('viewAny', App\Models\PlacePreference::class)
+                            <a href="{{ route('user.place-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Place Preferences</a>
                             @endcan
 
                             <a href="{{ route('user.personal-preferences.index') }}" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Personal Preferences</a>

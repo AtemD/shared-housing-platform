@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\PlaceListing;
+use App\Models\Place;
 use App\Models\User;
 use App\References\ProfileStatus;
 use App\References\UserType;
@@ -49,7 +49,7 @@ class HomeController extends Controller
                 ->where('profile_status', ProfileStatus::COMPLETE)
                 ->with([
                     'basicProfile',
-                    'placeListingPreference'
+                    'placePreference'
                 ])->paginate();
                 // dd($people->toArray());
             return view('user/lister/home', compact('people'));
@@ -58,13 +58,13 @@ class HomeController extends Controller
         if ($user_type == UserType::SEARCHER) {
             // A searcher should be matched with places and people
 
-            // for now just generate all the place listing or people that match the current user preferences
+            // for now just generate all the place  or people that match the current user preferences
             // $people = User::where('type', UserType::SEARCHER);
-            $places = PlaceListing::with([
+            $places = Place::with([
                 'user', 
                 'amenities',
-                'placeListingLocation.city',
-                'placeListingLocation.locality'
+                'placeLocation.city',
+                'placeLocation.locality'
             ])->paginate();
 
             // dd($places->toArray());

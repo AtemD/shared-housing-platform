@@ -3,36 +3,36 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\User\AccountSettingsController;
 use App\Http\Controllers\User\CompatibilityQuestionsController;
 use App\Http\Controllers\User\AnsweredCompatibilityQuestionsController;
 use App\Http\Controllers\User\UnansweredCompatibilityQuestionsController;
 use App\Http\Controllers\User\BasicProfileController as UserBasicProfileController;
 use App\Http\Controllers\User\PersonalPreferencesController as UserPersonalPreferencesController;
 use App\Http\Controllers\User\CompatibilityPreferencesController as UserCompatibilityPreferencesController;
-use App\Http\Controllers\User\PlaceListingPreferencesController as UserPlaceListingPreferencesController;
-use App\Http\Controllers\User\PlaceListingsController as UserPlaceListingsController;
-use App\Http\Controllers\User\PlaceListingLocationsController as UserPlaceListingLocationsController;
+use App\Http\Controllers\User\PlacePreferencesController as UserPlacePreferencesController;
+use App\Http\Controllers\User\PlacesController as UserPlacesController;
+use App\Http\Controllers\User\PlaceLocationsController as UserPlaceLocationsController;
 use App\Http\Controllers\User\UserLocationsController as UserUserLocationsController;
-use App\Http\Controllers\User\PlaceListingAmenitiesController as UserPlaceListingAmenitiesController;
+use App\Http\Controllers\User\PlaceAmenitiesController as UserPlaceAmenitiesController;
 use App\Http\Controllers\User\InterestsController as UserInterestsController;
 use App\Http\Controllers\User\OccupationsController as UserOccupationsController;
 use App\Http\Controllers\User\SpokenLanguagesController as UserSpokenLanguagesController;
 use App\Http\Controllers\User\UserMatchesController as UserUserMatchesController;
-use App\Http\Controllers\User\PlaceListingMatchesController as UserPlaceListingMatchesController;
+use App\Http\Controllers\User\PlaceMatchesController as UserPlaceMatchesController;
+use App\Http\Controllers\User\PlacePreferenceLocationsController as UserPlacePreferenceLocationsController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\PersonalPreferencesController as UserPersonalPreferencesProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\CompatibilityPreferencesController as UserCompatibilityPreferencesProfileSetupController;
-use App\Http\Controllers\User\ProfileSetup\PlaceListingPreferencesController as UserPlaceListingPreferencesProfileSetupController;
-use App\Http\Controllers\User\ProfileSetup\PlaceListingsController as UserPlaceListingsProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\PlacePreferencesController as UserPlacePreferencesProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\PlacesController as UserPlacesProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsProfileSetupController;
 
-// Place Listing Setup Controllers
-use App\Http\Controllers\User\PlaceListingSetup\PlaceListingsController as UserPlaceListingSetupController;
-use App\Http\Controllers\User\PlaceListingSetup\PlaceListingLocationsController as UserPlaceListingLocationSetupController;
-use App\Http\Controllers\User\PlaceListingSetup\PlaceListingAmenitiesController as UserPlaceListingAmenitiesSetupController;
+// Place  Setup Controllers
+use App\Http\Controllers\User\PlaceSetup\PlacesController as UserPlaceSetupController;
+use App\Http\Controllers\User\PlaceSetup\PlaceLocationsController as UserPlaceLocationSetupController;
+use App\Http\Controllers\User\PlaceSetup\PlaceAmenitiesController as UserPlaceAmenitiesSetupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,10 +60,10 @@ Route::get('/user/matches/users', [UserUserMatchesController::class, 'index'])
 Route::get('user/matches/users/{user}', [UserUserMatchesController::class, 'show'])
 ->name('user.matches.users.show');
 
-Route::get('/user/matches/place-listings', [UserPlaceListingMatchesController::class, 'index'])
-->name('user.matches.place-listings.index');
-Route::get('/user/matches/place-listings{placeListing}', [UserPlaceListingMatchesController::class, 'show'])
-->name('user.matches.place-listings.show');
+Route::get('/user/matches/places', [UserPlaceMatchesController::class, 'index'])
+->name('user.matches.places.index');
+Route::get('/user/matches/places{place}', [UserPlaceMatchesController::class, 'show'])
+->name('user.matches.places.show');
 
 // admin dashboard home
 Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
@@ -92,15 +92,15 @@ Route::resource('/user/compatibility-questions', CompatibilityQuestionsControlle
  * 
  */
 
-// User Place Listing Preferences Profile Setup
-Route::resource('/user/profile-setup/place-listing-preferences', UserPlaceListingPreferencesProfileSetupController::class)
+// User Place  Preferences Profile Setup
+Route::resource('/user/profile-setup/place-preferences', UserPlacePreferencesProfileSetupController::class)
 ->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.place-listing-preferences.create','store' => 'user.profile-setup.place-listing-preferences.store']);
+->names(['create' => 'user.profile-setup.place-preferences.create','store' => 'user.profile-setup.place-preferences.store']);
 
-// User Place Listings Profile Setup
-Route::resource('/user/profile-setup/place-listings', UserPlaceListingsProfileSetupController::class)
+// User Place s Profile Setup
+Route::resource('/user/profile-setup/places', UserPlacesProfileSetupController::class)
 ->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.place-listings.create','store' => 'user.profile-setup.place-listings.store']);
+->names(['create' => 'user.profile-setup.places.create','store' => 'user.profile-setup.places.store']);
 
 // User basic profile Profile Setup
 Route::resource('/user/profile-setup/basic-profile', UserBasicProfileProfileSetupController::class)
@@ -124,22 +124,22 @@ Route::resource('/user/profile-setup/interests', UserInterestsProfileSetupContro
 
 
 /**
- * PLACE LISTING SETUP ROUTES
+ * PLACE  SETUP ROUTES
  * 
  */
 
 // User Interests Profile Setup
-Route::resource('/user/place-listing-setup/place-listing', UserPlaceListingSetupController::class)
+Route::resource('/user/place-setup/place', UserPlaceSetupController::class)
 ->only(['create', 'store'])
-->names(['create' => 'user.place-listing-setup.place-listings.create','store' => 'user.place-listing-setup.place-listings.store']);
-// User place listing location Setup
-Route::resource('/user/place-listing-setup/place-listing-location', UserPlaceListingLocationSetupController::class)
+->names(['create' => 'user.place-setup.places.create','store' => 'user.place-setup.places.store']);
+// User place  location Setup
+Route::resource('/user/place-setup/place-location', UserPlaceLocationSetupController::class)
 ->only(['create', 'store'])
-->names(['create' => 'user.place-listing-setup.place-listing-locations.create','store' => 'user.place-listing-setup.place-listing-locations.store']);
-// User place listing amenities Setup
-Route::resource('/user/place-listing-setup/place-listing-amenities', UserPlaceListingAmenitiesSetupController::class)
+->names(['create' => 'user.place-setup.place-locations.create','store' => 'user.place-setup.place-locations.store']);
+// User place  amenities Setup
+Route::resource('/user/place-setup/place-amenities', UserPlaceAmenitiesSetupController::class)
 ->only(['create', 'store'])
-->names(['create' => 'user.place-listing-setup.place-listing-amenities.create','store' => 'user.place-listing-setup.place-listing-amenities.store']);
+->names(['create' => 'user.place-setup.place-amenities.create','store' => 'user.place-setup.place-amenities.store']);
 
 
 /**
@@ -159,40 +159,52 @@ Route::resource('/user/compatibility-questions', CompatibilityQuestionsControlle
     'destroy'   => 'user.compatibility-questions.destroy'
 ]);
 
-// User Place Listing Preferences
-Route::resource('/user/place-listing-preferences', UserPlaceListingPreferencesController::class)->names([
-    'index'     => 'user.place-listing-preferences.index',
-    'create'    => 'user.place-listing-preferences.create',
-    'store'     => 'user.place-listing-preferences.store',
-    'show'      => 'user.place-listing-preferences.show',
-    'edit'      => 'user.place-listing-preferences.edit',
-    'store'     => 'user.place-listing-preferences.store',
-    'update'    => 'user.place-listing-preferences.update',
-    'destroy'   => 'user.place-listing-preferences.destroy'
+// User Place  Preferences
+Route::resource('/user/place-preferences', UserPlacePreferencesController::class)->names([
+    'index'     => 'user.place-preferences.index',
+    'create'    => 'user.place-preferences.create',
+    'store'     => 'user.place-preferences.store',
+    'show'      => 'user.place-preferences.show',
+    'edit'      => 'user.place-preferences.edit',
+    'store'     => 'user.place-preferences.store',
+    'update'    => 'user.place-preferences.update',
+    'destroy'   => 'user.place-preferences.destroy'
 ]);
 
-// User Place Listings
-Route::resource('/user/place-listings', UserPlaceListingsController::class)->names([
-    'index'     => 'user.place-listings.index',
-    'create'    => 'user.place-listings.create',
-    'store'     => 'user.place-listings.store',
-    'show'      => 'user.place-listings.show',
-    'edit'      => 'user.place-listings.edit',
-    'store'     => 'user.place-listings.store',
-    'update'    => 'user.place-listings.update',
-    'destroy'   => 'user.place-listings.destroy'
+// User Place  Preferences
+Route::resource('/user/place-preference-locations', UserPlacePreferenceLocationsController::class)->names([
+    'index'     => 'user.place-preference-locations.index',
+    'create'    => 'user.place-preference-locations.create',
+    'store'     => 'user.place-preference-locations.store',
+    'show'      => 'user.place-preference-locations.show',
+    'edit'      => 'user.place-preference-locations.edit',
+    'store'     => 'user.place-preference-locations.store',
+    'update'    => 'user.place-preference-locations.update',
+    'destroy'   => 'user.place-preference-locations.destroy'
 ]);
 
-// User Place Listing Location
-Route::resource('/user/place-listing-locations', UserPlaceListingLocationsController::class)->names([
-    'index'     => 'user.place-listing-locations.index',
-    'create'    => 'user.place-listing-locations.create',
-    'store'     => 'user.place-listing-locations.store',
-    'show'      => 'user.place-listing-locations.show',
-    'edit'      => 'user.place-listing-locations.edit',
-    'store'     => 'user.place-listing-locations.store',
-    'update'    => 'user.place-listing-locations.update',
-    'destroy'   => 'user.place-listing-locations.destroy'
+// User Place s
+Route::resource('/user/places', UserPlacesController::class)->names([
+    'index'     => 'user.places.index',
+    'create'    => 'user.places.create',
+    'store'     => 'user.places.store',
+    'show'      => 'user.places.show',
+    'edit'      => 'user.places.edit',
+    'store'     => 'user.places.store',
+    'update'    => 'user.places.update',
+    'destroy'   => 'user.places.destroy'
+]);
+
+// User Place  Location
+Route::resource('/user/place-locations', UserPlaceLocationsController::class)->names([
+    'index'     => 'user.place-locations.index',
+    'create'    => 'user.place-locations.create',
+    'store'     => 'user.place-locations.store',
+    'show'      => 'user.place-locations.show',
+    'edit'      => 'user.place-locations.edit',
+    'store'     => 'user.place-locations.store',
+    'update'    => 'user.place-locations.update',
+    'destroy'   => 'user.place-locations.destroy'
 ]);
 
 // User Location
@@ -207,10 +219,10 @@ Route::resource('/user/user-locations', UserUserLocationsController::class)->nam
     'destroy'   => 'user.user-locations.destroy'
 ]);
 
-Route::get('/user/place-listing/{place_listing}/amenities/edit', [UserPlaceListingAmenitiesController::class, 'edit'])
-->name('user.place-listing.amenities.edit');
-Route::put('/user/place-listing/{place_listing}/amenities', [UserPlaceListingAmenitiesController::class, 'update'])
-->name('user.place-listing.amenities.update');
+Route::get('/user/place/{place_}/amenities/edit', [UserPlaceAmenitiesController::class, 'edit'])
+->name('user.place.amenities.edit');
+Route::put('/user/place/{place_}/amenities', [UserPlaceAmenitiesController::class, 'update'])
+->name('user.place.amenities.update');
 
 
 // User basic profile
