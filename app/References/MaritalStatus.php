@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -12,12 +12,19 @@ class MaritalStatus
      * 
      * @return array
      */
-     public static function MaritalStatusList()
-     {
+    public static function MaritalStatusList()
+    {
         return [
             self::MARRIED => 'Married',
             self::UNMARRIED => 'Unmarried'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::MARRIED => 'Married',
+            self::UNMARRIED => 'Unmarried'
+        ][$value];
+    }
 }

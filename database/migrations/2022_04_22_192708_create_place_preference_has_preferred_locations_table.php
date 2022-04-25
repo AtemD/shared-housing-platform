@@ -26,6 +26,7 @@ class CreatePlacePreferenceHasPreferredLocationsTable extends Migration
             $table->foreign('locality_id')->references('id')->on('localities')->onDelete('cascade');
 
             $table->timestamps();
+            $table->unique(['place_preference_id', 'city_id', 'locality_id']);
         });
     }
 

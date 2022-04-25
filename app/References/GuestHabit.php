@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -13,13 +13,21 @@ class GuestHabit
      * 
      * @return array
      */
-     public static function GuestHabitList()
-     {
+    public static function GuestHabitList()
+    {
         return [
-            self::OCCASIONAL => 'Occasionally invite Guests',
-            self::FREQUENT => 'Frequently invite Guests',
-            self::NONE => 'I Do Not invite Guests'
+            self::OCCASIONAL => 'Occasionally',
+            self::FREQUENT => 'Frequently',
+            self::NONE => 'None'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::OCCASIONAL => 'Occasionally',
+            self::FREQUENT => 'Frequently',
+            self::NONE => 'None'
+        ][$value];
+    }
 }

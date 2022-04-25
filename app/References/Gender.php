@@ -16,18 +16,18 @@ class Gender
     public static function genderList()
     {
         return [
-            self::MALE => 'male',
-            self::FEMALE => 'female',
-            self::ALL => 'male or female'
+            self::MALE => 'Male',
+            self::FEMALE => 'Female',
+            self::ALL => 'Male or Female'
         ];
     }
 
     public static function getName($value)
     {
         return [
-            self::MALE => 'male',
-            self::FEMALE => 'female',
-            self::ALL => 'male or female'
+            self::MALE => 'Male',
+            self::FEMALE => 'Female',
+            self::ALL => 'Male or Female'
         ][$value];
     }
 }

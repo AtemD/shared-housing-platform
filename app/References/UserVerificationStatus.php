@@ -15,21 +15,21 @@ class UserVerificationStatus
      public static function userVerificationStatusList()
      {
         return [
-            self::VERIFIED => 'verified',
-            self::UNVERIFIED => 'unverified'
+            self::VERIFIED => 'Verified',
+            self::UNVERIFIED => 'Unverified'
         ];
      }
 
      /**
-     * return list of currencies and their labels
+     * return the name of a specific constant, given the id
      * 
      * @return array
      */
     public static function getName($value)
     {
        return [
-        self::VERIFIED => 'verified',
-        self::UNVERIFIED => 'unverified'
+        self::VERIFIED => 'Verified',
+        self::UNVERIFIED => 'Unverified'
        ][$value];
     }
 

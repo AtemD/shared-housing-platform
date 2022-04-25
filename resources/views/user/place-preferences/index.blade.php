@@ -104,7 +104,7 @@
                         @method('PUT')
                         @csrf
 
-                        @forelse($user->placePreference->placePreferenceLocations as $location)
+                        @forelse($user->placePreference->preferredLocations->take(1) as $location)
                         <div class="form-group">
                             <label for="city">City</label>
                             <select name="city" class="form-control @error('city') is-invalid @enderror" id="city" required>

@@ -34,4 +34,9 @@ class Locality extends Model
     {
         return $this->hasMany(UserLocation::class);
     }
+
+    public function preferredLocations()
+    {
+        return $this->belongsToMany(PlacePreference::class, 'place_preference_has_preferred_locations', 'locality_id', 'place_preference_id');
+    }
 }

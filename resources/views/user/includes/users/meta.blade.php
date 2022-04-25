@@ -1,7 +1,7 @@
 <div class="shop-item-meta">
     <div class="shop-item-rating pt-4 mt-2">
         <p class="h4 mb-0">
-            {{$user->full_name}}, {{$user->basicProfile->dob}}, {{$user->basicProfile->gender}}
+            {{$user->full_name}} &bull; {{$user->basicProfile->dob}} &bull; {{$user->basicProfile->gender}}
             <small class="float-right">
                 @if($user->getAttributes()['verification_status'] === App\References\UserVerificationStatus::VERIFIED)
                 <span class="badge badge-info"><i class="fas fa-user-check"></i> {{$user->verification_status}}</span>

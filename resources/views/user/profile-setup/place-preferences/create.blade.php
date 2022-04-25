@@ -76,8 +76,9 @@
                         <div class="form-group">
                             <label for="city">City</label>
                             <select name="city" class="form-control @error('city') is-invalid @enderror" id="city" required>
+                                <option value="">Select City...</option>
                                 @forelse($cities as $city)
-                                <option value="{{$city->id}}" {{ (old('city') == $city->id) || (12 == $city->id) ? 'selected' : '' }}>
+                                <option value="{{$city->id}}" {{ (old('city') == $city->id) || (session('profile_setup.place_preference_preferred_locations.city') == $city->id)  ? 'selected' : '' }}>
                                     {{ $city->name }}
                                 </option>
                                 @empty

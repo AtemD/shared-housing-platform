@@ -45,6 +45,6 @@ class PlacePreference extends Model
 
     public function preferredLocations()
     {
-        return $this->belongsToMany(City::class, 'place_preference_has_preferred_locations', 'place_id', 'city_id');
+        return $this->belongsToMany(Locality::class, 'place_preference_has_preferred_locations', 'place_preference_id', 'locality_id');
     }
 }

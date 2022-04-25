@@ -30,8 +30,9 @@ class PlacePreferencesController extends Controller
     public function index()
     {
         $user = auth()->user()->load([
-            'placePreference.placePreferenceLocations',
+            'placePreference.preferredLocations',
         ]);
+        // dd($user->toArray());
         $cities = City::all();
 // dd($user->toArray());
         return view('user/place-preferences/index', compact('user', 'cities'));

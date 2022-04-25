@@ -35,9 +35,15 @@ class SetupUserProfileJob implements ShouldQueue
     {
         $this->basic_profile = $profile_setup_details['basic_profile'];
 
-        $this->occupations = $profile_setup_details['occupations'];
+        // process occupations
+        foreach($profile_setup_details['occupations'] as $occupation){
+            $this->occupations[] = ['name' => $occupation];
+        }
+        $this->occupations[] = ['name' => 'doctor'];
 
-        $this->spoken_languages = $profile_setup_details['spoken_languages'];
+        foreach($profile_setup_details['spoken_languages'] as $language){
+            $this->spoken_languages[] = ['name' => $language];
+        }
 
         if (array_key_exists("place", $profile_setup_details)) {
             $this->place = $profile_setup_details['place'];
@@ -48,9 +54,10 @@ class SetupUserProfileJob implements ShouldQueue
 
         if (array_key_exists("place_preferences", $profile_setup_details)) {
             $this->place_preferences = $profile_setup_details['place_preferences'];
-            $this->place_preference_preferred_locations = $profile_setup_details['place_preference_preferred_locations']
+            $this->place_preference_preferred_locations = $profile_setup_details['place_preference_preferred_locations']; // contains the chosen city and localities
         } else {
             $this->place_preferences = null;
+            $this->place_preference_preferred_locations = null;
         }
 
         $this->personal_preferences = $profile_setup_details['personal_preferences'];
@@ -62,6 +69,7 @@ class SetupUserProfileJob implements ShouldQueue
         
         // dd($this->interests);
         // dd($this->place['rent_amount']);
+        // dd($this->occupations);
     }
 
     /**
@@ -79,9 +87,9 @@ class SetupUserProfileJob implements ShouldQueue
                 'bio' => $this->basic_profile['bio'],
             ]);
 
-            $basic_profile->occupations()->saveMany($this->occupations);
+            $basic_profile->occupations()->createMany($this->occupations);
 
-            $basic_profile->spokenLanguages()->saveMany($this->spoken_languages);
+            $basic_profile->spokenLanguages()->createMany($this->spoken_languages);
 
             if($this->place != null) {
                 $this->user->places()->create([
@@ -99,17 +107,31 @@ class SetupUserProfileJob implements ShouldQueue
 
 
                 // process the image, update the place  with an image id
-            }
-            
+            }       
 
             // Note: a place  preference has locations too, locations that the user prefers
             if($this->place_preferences != null){
-                $this->user->placePreference()->create([
+                $place_preference = $this->user->placePreference()->create([
                     'min_rent_amount' => $this->place_preferences['min_rent_amount'],
                     'max_rent_amount' => $this->place_preferences['max_rent_amount'],
                     'rent_period' => $this->place_preferences['rent_period'],
                     'availability_date' => $this->place_preferences['availability_date'],
                 ]);
+                // $place_preference->
+
+                // $user->roles()->attach([
+                //     1 => ['expires' => $expires],
+                //     2 => ['expires' => $expires],
+                // ]);
+
+                $preferred_locations = [];
+                $city_id = $this->place_preference_preferred_locations['city'];
+
+                foreach($this->place_preference_preferred_locations['localities'] as $locality){
+                    $preferred_locations[$locality] = ['city_id' => $city_id];
+                }
+
+                $place_preference->preferredLocations()->attach($preferred_locations);
             }
             
 

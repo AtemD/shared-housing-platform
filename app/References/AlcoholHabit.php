@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -13,13 +13,21 @@ class AlcoholHabit
      * 
      * @return array
      */
-     public static function alcoholHabitList()
-     {
+    public static function alcoholHabitList()
+    {
         return [
-            self::OCCASIONAL => 'Occasional Drinker',
-            self::FREQUENT => 'Frequent Drinker',
-            self::NONE => 'Not a Drinker'
+            self::OCCASIONAL => 'Occasional',
+            self::FREQUENT => 'Frequent',
+            self::NONE => 'None'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::OCCASIONAL => 'Occasional',
+            self::FREQUENT => 'Frequent',
+            self::NONE => 'None'
+        ][$value];
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\PlaceLocation;
 // use App\Http\Requests\StorePlaceLocationRequest;
 // use App\Http\Requests\UpdatePlaceLocationRequest;
 use App\Models\City;
+use App\Models\Locality;
 use Illuminate\Http\Request;
 
 class PlaceLocationsController extends Controller
@@ -89,7 +90,7 @@ class PlaceLocationsController extends Controller
 
         $placeLocation->update([
             'city_id' => $validatedData['city'],
-            'locality_id' => 12,  // $validatedData['locality'],
+            'locality_id' => Locality::where('city_id', $validatedData['city'])->get()->random(1)->pluck('id'),  // $validatedData['locality'],
             'street' => $validatedData['street'],
             'specific_information' => $validatedData['specific_information'],
             'address' => $validatedData['address'],

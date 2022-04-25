@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -12,12 +12,19 @@ class DietHabit
      * 
      * @return array
      */
-     public static function dietHabitList()
-     {
+    public static function dietHabitList()
+    {
         return [
             self::VEGETARIAN => 'Vegetarian',
             self::NON_VEGETARIAN => 'Non-Vegetarian'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::VEGETARIAN => 'Vegetarian',
+            self::NON_VEGETARIAN => 'Non-Vegetarian'
+        ][$value];
+    }
 }
