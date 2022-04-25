@@ -1,5 +1,5 @@
-<div class="shop-item-meta">
-    <div class="shop-item-rating pt-4 mt-2">
+<div class="user-item-meta">
+    <div class="user-item-rating">
         <p class="h4 mb-0">
             {{$user->full_name}} &bull; {{$user->basicProfile->dob}} &bull; {{$user->basicProfile->gender}}
             <small class="float-right">
@@ -10,13 +10,17 @@
                 @endif
             </small>
         </p>
-        <!-- <p class="text-muted pt-0"><small>male</small></p> -->
+
         <a class="product-title"><span class="badge badge-success">80% Compatible</a>
+        <p class="text-muted mb-0"><i class="fas fa-map-marker"></i> {{$user->userLocation->locality->name}}, {{$user->userLocation->city->name}}</p>
+
+        <p class="text-muted mb-0"><span class="fas fa-briefcase"></span>
         @forelse($user->basicProfile->occupations as $occupation)
-        <p class="text-muted mb-0"><span class="fas fa-briefcase"></span> {{$occupation->name}}</p>
+         {{$occupation->name}}, 
         @empty
-        <p>No occupations</p>
+        No occupations
         @endforelse
+        </p>
 
         <p class="text-muted"><span class="fas fa-globe"></span> Speaks
             @forelse($user->basicProfile->spokenLanguages as $language)
@@ -26,13 +30,11 @@
         <p>No spoken languages</p>
         @endforelse
     </div>
-    <div class="shop-item-meta-data">
+    <div class="user-item-meta-data">
         <hr>
-        <div class="shop-item-about-us">
+        <div class="user-item-about-us">
             <h5>Bio</h5>
-            <p>
-                {{$user->basicProfile->bio}}
-            </p>
+            <p>{{$user->basicProfile->bio}}</p>
             <div class="row">
                 <div class="col-md-6 col-6">
                     <a href="#" class="btn btn-success btn-block">

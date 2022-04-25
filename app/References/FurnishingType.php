@@ -16,9 +16,9 @@ class FurnishingType
      public static function furnishingTypeList()
      {
         return [
-            self::FULLY_FURNISHED => 'Fully Furnished',
-            self::PARTIALLY_FURNISHED => 'Partially Furnished',
-            self::NOT_FURNISHED => 'Not Furnished',
+            self::FULLY_FURNISHED => 'Fully-Furnished',
+            self::PARTIALLY_FURNISHED => 'Partially-Furnished',
+            self::NOT_FURNISHED => 'Non-Furnished',
         ];
      }
 
@@ -30,9 +30,9 @@ class FurnishingType
     public static function getTypeName($value)
     {
        return [
-           self::FULLY_FURNISHED => 'Fully Furnished',
-           self::PARTIALLY_FURNISHED => 'Partially Furnished',
-           self::NOT_FURNISHED => 'Not Furnished',
+           self::FULLY_FURNISHED => 'Fully-Furnished',
+           self::PARTIALLY_FURNISHED => 'Partially-Furnished',
+           self::NOT_FURNISHED => 'Non-Furnished',
        ][$value];
     }
 

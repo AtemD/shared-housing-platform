@@ -1,4 +1,44 @@
+@if($user->type == \App\References\UserType::LISTER)
 <div class="row">
+    @forelse($user->places as $place)
+    <div class="col-md-12">
+    <h3 class="mb-1">My Place Listings</h3>
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="/uploads/places/room_3.jpg" class="card-img" alt="..." height="177">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body pt-1">
+
+                        <h6 class="text-dark">{{$place->place_type}} &bull; {{$place->furnishing_type}}</h6>
+                        <h5 class="mt-0 text-dark">{{$place->rent_amount}} ETB/month</h5>
+
+                        <p class="card-text">{!! mb_substr($place->description, 0,120) !!}...</p>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text"><small class="text-muted">created {{$place->created_at->diffForHumans()}}</small></p>
+                            <a href="{{ route('user.matches.places.show', $place->id) }}" class="btn btn-outline-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @empty
+    <div class="col-12">
+        <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+            This user has not listed any places yet.
+        </div>
+    </div>
+    @endforelse
+</div>
+<hr>
+@endif
+<div class="row">
+    @if($user->type == \App\References\UserType::SEARCHER)
     <div class="col-md-6">
         <h3 class="mb-1">Place Preference</h3>
         <small class="text-muted text-bold">I prefer a place that matches the following:</small>
@@ -54,6 +94,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="col-md-6">
         <h3>Personal Preference</h3>
         <small class="text-muted text-bold">The following attributes describe me:</small>
@@ -114,9 +155,6 @@
             </div>
         </div>
     </div>
-</div>
-<hr>
-<div class="row">
     <div class="col-md-6">
         <h3>Compatibility Preference</h3>
         <small class="text-muted text-bold">I prefer a person who match the following:</small>
@@ -186,11 +224,11 @@
                     <small class="text-muted">Interests </small>
 
                     <h6 class="text-dark">
-                    @forelse($user->interests as $interest)
-                    {{$interest->name}}, 
-                    @empty
-                    No interest selected
-                    @endforelse
+                        @forelse($user->interests as $interest)
+                        {{$interest->name}},
+                        @empty
+                        No interest selected
+                        @endforelse
                     </h6>
                 </a>
             </div>

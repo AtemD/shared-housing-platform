@@ -21,7 +21,7 @@ class PlacesTableSeeder extends Seeder
         DB::table('places')->truncate();
 
         // Obtain all users of type lister
-        $users = User::where('type', '=', UserType::LISTER)->get();
+        $users = User::where('type', UserType::LISTER)->get();
 
         $users->each(function($user){
             Place::factory()->make([

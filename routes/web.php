@@ -62,7 +62,7 @@ Route::get('user/matches/users/{user}', [UserUserMatchesController::class, 'show
 
 Route::get('/user/matches/places', [UserPlaceMatchesController::class, 'index'])
 ->name('user.matches.places.index');
-Route::get('/user/matches/places{place}', [UserPlaceMatchesController::class, 'show'])
+Route::get('/user/matches/places/{place}', [UserPlaceMatchesController::class, 'show'])
 ->name('user.matches.places.show');
 
 // admin dashboard home

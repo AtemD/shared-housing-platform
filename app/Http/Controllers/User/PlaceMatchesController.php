@@ -37,4 +37,23 @@ class PlaceMatchesController extends Controller
 
         return view('user/matches/places/index', compact('places'));
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Place  $place
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Place $place)
+    {
+        $place = $place->load([
+            'user.compatibilityPreference',
+            'amenities',
+            'placeLocation.city',
+            'placeLocation.locality',
+        ]);
+
+// dd($place->toArray());
+        return view('user/matches/places/show', compact('place'));
+    }
 }

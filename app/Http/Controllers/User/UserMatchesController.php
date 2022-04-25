@@ -49,8 +49,10 @@ class UserMatchesController extends Controller
      */
     public function show(User $user)
     {
+        // dd(User::where('type', UserType::LISTER)->get()->toArray());
         $user = $user->load([
             'basicProfile.occupations',
+            'places',
             'placePreference',
             'personalPreference',
             'compatibilityPreference',

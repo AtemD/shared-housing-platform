@@ -84,6 +84,11 @@ class Place extends Model
         return PlaceType::getName($value);
     }
 
+    public function getBillsIncludedAttribute($value)
+    {
+        return $value == 1 ? 'Included' : 'Not Included';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

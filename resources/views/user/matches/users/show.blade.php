@@ -12,8 +12,6 @@
 
 <div class="container">
     <div class="user-item-details">
-        @include('user.includes.users.header')
-
         <div class="row">
             <div class="col-md-6">
                 @include('user.includes.users.tab')
