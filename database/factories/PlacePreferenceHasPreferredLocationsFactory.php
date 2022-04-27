@@ -7,7 +7,7 @@ use App\Models\Locality;
 use App\Models\PlacePreference;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PlacePreferenceLocationFactory extends Factory
+class PlacePreferenceHasPreferredLocationsFactory extends Factory
 {
     /**
      * Define the model's default state.

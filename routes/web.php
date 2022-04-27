@@ -20,6 +20,7 @@ use App\Http\Controllers\User\SpokenLanguagesController as UserSpokenLanguagesCo
 use App\Http\Controllers\User\UserMatchesController as UserUserMatchesController;
 use App\Http\Controllers\User\PlaceMatchesController as UserPlaceMatchesController;
 use App\Http\Controllers\User\PlacePreferenceLocationsController as UserPlacePreferenceLocationsController;
+use App\Http\Controllers\User\PlaceRequestsController as UserPlaceRequestsController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
@@ -53,21 +54,21 @@ Route::get('/', function () {
 
 // user dashboard home
 Route::get('/user/home', [UserHomeController::class, 'index'])
-->name('user.home');
+    ->name('user.home');
 
 Route::get('/user/matches/users', [UserUserMatchesController::class, 'index'])
-->name('user.matches.users.index');
+    ->name('user.matches.users.index');
 Route::get('user/matches/users/{user}', [UserUserMatchesController::class, 'show'])
-->name('user.matches.users.show');
+    ->name('user.matches.users.show');
 
 Route::get('/user/matches/places', [UserPlaceMatchesController::class, 'index'])
-->name('user.matches.places.index');
+    ->name('user.matches.places.index');
 Route::get('/user/matches/places/{place}', [UserPlaceMatchesController::class, 'show'])
-->name('user.matches.places.show');
+    ->name('user.matches.places.show');
 
 // admin dashboard home
 Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
-->name('admin.home');
+    ->name('admin.home');
 
 // Account setting
 // Route::get('/user/dashboard/account-settings', [AccountSettingsController::class, 'index'])
@@ -75,16 +76,16 @@ Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
 
 // User Answered Questions
 Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'index'])
-->name('user.compatibility-questions.unanswered.index');
+    ->name('user.compatibility-questions.unanswered.index');
 
 // User Answered Questions
 Route::get('/user/dashboard/account-settings/compatibility-questions/answered', [AnsweredCompatibilityQuestionsController::class, 'index'])
-->name('user.compatibility-questions.answered.index');
+    ->name('user.compatibility-questions.answered.index');
 
 // User Compatibility Questions
 Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.compatibility-questions.create','store' => 'user.compatibility-questions.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.compatibility-questions.create', 'store' => 'user.compatibility-questions.store']);
 
 
 /**
@@ -94,33 +95,33 @@ Route::resource('/user/compatibility-questions', CompatibilityQuestionsControlle
 
 // User Place  Preferences Profile Setup
 Route::resource('/user/profile-setup/place-preferences', UserPlacePreferencesProfileSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.place-preferences.create','store' => 'user.profile-setup.place-preferences.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.profile-setup.place-preferences.create', 'store' => 'user.profile-setup.place-preferences.store']);
 
 // User Place s Profile Setup
 Route::resource('/user/profile-setup/places', UserPlacesProfileSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.places.create','store' => 'user.profile-setup.places.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.profile-setup.places.create', 'store' => 'user.profile-setup.places.store']);
 
 // User basic profile Profile Setup
 Route::resource('/user/profile-setup/basic-profile', UserBasicProfileProfileSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.basic-profile.create', 'store' => 'user.profile-setup.basic-profile.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.profile-setup.basic-profile.create', 'store' => 'user.profile-setup.basic-profile.store']);
 
 // User personal preferences Profile Setup
 Route::resource('/user/profile-setup/personal-preferences', UserPersonalPreferencesProfileSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.personal-preferences.create', 'store' => 'user.profile-setup.personal-preferences.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.profile-setup.personal-preferences.create', 'store' => 'user.profile-setup.personal-preferences.store']);
 
 // User compatibility preferences Profile Setup
 Route::resource('/user/profile-setup/compatibility-preferences', UserCompatibilityPreferencesProfileSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.compatibility-preferences.create','store' => 'user.profile-setup.compatibility-preferences.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.profile-setup.compatibility-preferences.create', 'store' => 'user.profile-setup.compatibility-preferences.store']);
 
 // User Interests Profile Setup
 Route::resource('/user/profile-setup/interests', UserInterestsProfileSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.profile-setup.interests.create','store' => 'user.profile-setup.interests.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.profile-setup.interests.create', 'store' => 'user.profile-setup.interests.store']);
 
 
 /**
@@ -130,22 +131,34 @@ Route::resource('/user/profile-setup/interests', UserInterestsProfileSetupContro
 
 // User Interests Profile Setup
 Route::resource('/user/place-setup/place', UserPlaceSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.place-setup.places.create','store' => 'user.place-setup.places.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.place-setup.places.create', 'store' => 'user.place-setup.places.store']);
 // User place  location Setup
 Route::resource('/user/place-setup/place-location', UserPlaceLocationSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.place-setup.place-locations.create','store' => 'user.place-setup.place-locations.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.place-setup.place-locations.create', 'store' => 'user.place-setup.place-locations.store']);
 // User place  amenities Setup
 Route::resource('/user/place-setup/place-amenities', UserPlaceAmenitiesSetupController::class)
-->only(['create', 'store'])
-->names(['create' => 'user.place-setup.place-amenities.create','store' => 'user.place-setup.place-amenities.store']);
+    ->only(['create', 'store'])
+    ->names(['create' => 'user.place-setup.place-amenities.create', 'store' => 'user.place-setup.place-amenities.store']);
 
 
 /**
  * USER ACCOUNT ROUTES
  * 
  */
+
+// User Place Requests
+Route::resource('/user/place-requests', UserPlaceRequestsController::class)->names([
+    'index'     => 'user.place-requests.index',
+    'create'    => 'user.place-requests.create',
+    'store'     => 'user.place-requests.store',
+    'show'      => 'user.place-requests.show',
+    'edit'      => 'user.place-requests.edit',
+    'store'     => 'user.place-requests.store',
+    'update'    => 'user.place-requests.update',
+    'destroy'   => 'user.place-requests.destroy'
+]);
 
 // User Compatibility Questions
 Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)->names([
@@ -220,9 +233,9 @@ Route::resource('/user/user-locations', UserUserLocationsController::class)->nam
 ]);
 
 Route::get('/user/place/{place_}/amenities/edit', [UserPlaceAmenitiesController::class, 'edit'])
-->name('user.place.amenities.edit');
+    ->name('user.place.amenities.edit');
 Route::put('/user/place/{place_}/amenities', [UserPlaceAmenitiesController::class, 'update'])
-->name('user.place.amenities.update');
+    ->name('user.place.amenities.update');
 
 
 // User basic profile

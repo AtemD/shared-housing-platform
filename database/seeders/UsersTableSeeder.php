@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
 
-        User::factory()->times(10)->create();
+        User::factory()->times(50)->create();
 
         User::factory()->create([
             'first_name' => 'Admin',

@@ -46,7 +46,7 @@
                             <i class=" nav-icon fas fa-comments mr-1"></i>{{ __('Messages') }}
                         </a>
 
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('user.place-requests.index') }}">
                             <i class="fas fa-question-circle mr-1"></i> {{ __('Requests') }}
                         </a>
                         <a class="dropdown-item" href="#">
