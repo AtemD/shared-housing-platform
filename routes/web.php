@@ -21,6 +21,8 @@ use App\Http\Controllers\User\UserMatchesController as UserUserMatchesController
 use App\Http\Controllers\User\PlaceMatchesController as UserPlaceMatchesController;
 use App\Http\Controllers\User\PlacePreferenceLocationsController as UserPlacePreferenceLocationsController;
 use App\Http\Controllers\User\PlaceRequestsController as UserPlaceRequestsController;
+use App\Http\Controllers\User\SentPlaceRequestsController as UserSentPlaceRequestsController;
+use App\Http\Controllers\User\ReceivedPlaceRequestsController as UserReceivedPlaceRequestsController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
@@ -147,6 +149,12 @@ Route::resource('/user/place-setup/place-amenities', UserPlaceAmenitiesSetupCont
  * USER ACCOUNT ROUTES
  * 
  */
+
+ // User Answered Questions
+Route::get('/user/place-requests/sent', [UserSentPlaceRequestsController::class, 'index'])
+->name('user.place-requests.sent.index');
+Route::get('/user/place-requests/received', [UserReceivedPlaceRequestsController::class, 'index'])
+->name('user.place-requests.received.index');
 
 // User Place Requests
 Route::resource('/user/place-requests', UserPlaceRequestsController::class)->names([

@@ -2,10 +2,10 @@
 
 namespace App\References;
 
-class RequestStatus
+class PlaceRequestStatus
 {
     const ACCEPTED = 1;
-    const REJECTED = 2;
+    const DECLINED = 2;
     const PENDING = 3;
 
     /**
@@ -13,11 +13,11 @@ class RequestStatus
      * 
      * @return array
      */
-     public static function requestStatusList()
+     public static function placeRequestStatusList()
      {
         return [
             self::ACCEPTED => 'Accepted',
-            self::REJECTED => 'Rejected',
+            self::DECLINED => 'Declined',
             self::PENDING => 'Pending'
         ];
      }

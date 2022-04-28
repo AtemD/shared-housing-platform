@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PlaceRequestsController extends Controller
+class sentPlaceRequestsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,11 +24,9 @@ class PlaceRequestsController extends Controller
      */
     public function index()
     {
-        $user = auth()->user()->load('sentPlaceRequests');
-        // $user = auth()->user()->load('receivedPlaceRequests');
-        // dd($user->toArray());
+        $user = auth()->user()->load('sentPlaceRequests')->paginate();
 
-        return view('user/place-requests/index', compact('user'));
+        return view('user/place-requests/sent/index', compact('user'));
     }
 
     /**
@@ -83,21 +81,7 @@ class PlaceRequestsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // authorize the user to ensure, they can perform this action
-        dd(auth()->user()->id);
-        dd($id);
-
-        // dd($place_request->toArray());
-
-        if($request->has('accepted')){
-            dd('accepted');
-        }
-
-        if($request->has('declined')){
-            dd('declined');
-        }
-
-        dd($request->toArray());
+        //
     }
 
     /**

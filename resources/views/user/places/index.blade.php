@@ -32,12 +32,12 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{$place->slug}}</h5>
+                            <h5 class="card-title">{{$place->id}}</h5>
                             <p class="card-text">{!! mb_substr($place->description, 0,190) !!}...</p>
 
                             <div class="d-flex justify-content-between">
                                 <p class="card-text"><small class="text-muted">created {{$place->created_at->diffForHumans()}}</small></p>
-                                <a href="{{ route('user.places.show', $place->slug) }}" class="btn btn-primary stretched-link">Edit Details</a>
+                                <a href="{{ route('user.places.show', $place->id) }}" class="btn btn-primary stretched-link">Edit Details</a>
                             </div>
                         </div>
                     </div>
