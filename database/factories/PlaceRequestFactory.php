@@ -20,7 +20,7 @@ class PlaceRequestFactory extends Factory
             'sender_id' => function () {
                 return User::factory()->create()->id;
             },
-            'receiver_id' => function () {
+            'user_id' => function () {
                 return User::factory()->create()->id;
             },
             'Place_id' => function () {

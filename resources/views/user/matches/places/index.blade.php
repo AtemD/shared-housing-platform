@@ -26,7 +26,7 @@
                     <div class="row">
                         @forelse($places as $place)
                         <div class="col-md-4">
-                            <a href="{{route('user.matches.places.show', $place->id)}}" class="stretched-link text-decoration-none">
+                            <a href="{{route('user.matches.places.show', $place->slug)}}" class="stretched-link text-decoration-none">
                                 <div class="card">
                                     <img src="/uploads/places/pic04.jpg" class="card-img-top" alt="...">
                                     <div class="card-body">

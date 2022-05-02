@@ -45,18 +45,24 @@
                                                 <div class="col-9">
                                                     <!-- <h2 class="lead"><b>Nicole Pearson</b></h2>
                             <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p> -->
-                                                    <p class="text-muted"><a href="{{ route('user.matches.users.show', $request->slug) }}">{{$request->full_name}}</a> sent you a request for your place <a href="{{ route('user.matches.places.show', $request->pivot->place_id) }}">place-{{$request->pivot->place_id}}</a></p>
+                                                    <p class="text-muted">
+                                                        <a href="{{ route('user.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
+                                                        sent you a request for your place <a href="{{ route('user.matches.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                            {{$places->find($request->pivot->place_id)->slug}}
+                                                        </a>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-footer">
+                                            @if($request->pivot->status == \App\References\PlaceRequestStatus::PENDING)
                                             <div class="text-right d-flex justify-content-end">
                                                 <form method="POST" action="{{ route('user.place-requests.update', $request->id) }}">
                                                     @method('PUT')
                                                     @csrf
                                                     <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
                                                     <button type="submit" class="btn btn-sm btn-secondary">
-                                                        Declined
+                                                        Decline
                                                     </button>
                                                 </form>
 
@@ -69,6 +75,29 @@
                                                     </button>
                                                 </form>
                                             </div>
+                                            @elseif($request->pivot->status == \App\References\PlaceRequestStatus::ACCEPTED)
+                                            <div class="text-right d-flex justify-content-end">
+                                                <!-- <form method="POST" action="{{ route('user.place-requests.update', $request->id) }}"> -->
+                                                    <!-- @method('PUT')
+                                                    @csrf -->
+                                                    <input type="hidden" name="accepted" value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
+                                                    <button class="btn btn-sm btn-success ml-2">
+                                                        Accepted
+                                                    </button>
+                                                <!-- </form> -->
+                                            </div>
+                                            @else
+                                            <div class="text-right d-flex justify-content-end">
+                                                <!-- <form method="POST" action="{{ route('user.place-requests.update', $request->id) }}">
+                                                    @method('PUT')
+                                                    @csrf -->
+                                                    <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
+                                                    <button class="btn btn-sm btn-warning">
+                                                        Declined
+                                                    </button>
+                                                <!-- </form> -->
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

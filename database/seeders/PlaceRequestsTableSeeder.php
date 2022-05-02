@@ -38,7 +38,7 @@ class PlaceRequestsTableSeeder extends Seeder
             // get all the users that are of type searcher
             // send request to each of the searchers, assigning a random place to the searcher
 
-            if ($user->type == UserType::SEARCHER) {
+            if ($user->getAttributes()['type'] == UserType::SEARCHER) {
                 $random_listers = $listers->random(mt_rand(1, $listers_count));
                 $requests = [];
                 foreach ($random_listers as $lister) {
@@ -50,7 +50,7 @@ class PlaceRequestsTableSeeder extends Seeder
                 $user->placeRequests()->attach($requests);
             }
 
-            if ($user->type == UserType::LISTER) {
+            if ($user->getAttributes()['type'] == UserType::LISTER) {
                 $random_searchers = $searchers->random(mt_rand(1, $searchers_count));
                 $lister = $listers->where('id', $user->id)->first();
                 $requests = [];

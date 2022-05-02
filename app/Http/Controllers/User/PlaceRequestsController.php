@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\References\PlaceRequestStatus;
 use Illuminate\Http\Request;
 
 class PlaceRequestsController extends Controller
@@ -83,21 +84,34 @@ class PlaceRequestsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // authorize the user to ensure, they can perform this action
-        dd(auth()->user()->id);
-        dd($id);
-
-        // dd($place_request->toArray());
-
-        if($request->has('accepted')){
-            dd('accepted');
+        // dd($request->toArray());
+        // authorize the user, to ensure they can perform this action
+        if(!auth()->user()->placeRequests()->find($id)){
+            // If the users does not own this place request, then deny its update
+            return redirect()->back()->with('error', 'There was a problem updating this request');
         }
 
-        if($request->has('declined')){
-            dd('declined');
+        if($request->has('accepted') || $request->has('accept')){
+            // dd('hit accepted');
+            auth()->user()->placeRequests()->updateExistingPivot($id, ['status' => PlaceRequestStatus::ACCEPTED]);
+            return redirect()->back()->with('success', 'Your have successfully accepted the place request');
         }
 
-        dd($request->toArray());
+        if($request->has('declined') || $request->has('decline')){
+            // dd('hit declined');
+            auth()->user()->placeRequests()->updateExistingPivot($id, ['status' => PlaceRequestStatus::DECLINED]);
+            return redirect()->back()->with('success', 'Your have successfully declined the request');
+        }
+
+        if($request->has('cancelled') || $request->has('cancel')){
+            // dd('hit cancelled');
+            auth()->user()->placeRequests()->updateExistingPivot($id, ['status' => PlaceRequestStatus::PENDING]);
+            return redirect()->back()->with('success', 'Your have successfully cancelled the request');
+        }
+
+        // dd('hit nothing');
+        
+        return redirect()->back()->with('error', 'There was a problem updating this request');
     }
 
     /**

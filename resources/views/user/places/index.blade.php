@@ -27,17 +27,17 @@
         <div class="col-md-12">
             <div class="card mb-3">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <img src="/uploads/places/room_3.jpg" class="card-img" alt="..." height="177">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="card-body">
-                            <h5 class="card-title">{{$place->id}}</h5>
+                            <h5 class="card-title">{{$place->slug}}</h5>
                             <p class="card-text">{!! mb_substr($place->description, 0,190) !!}...</p>
 
                             <div class="d-flex justify-content-between">
                                 <p class="card-text"><small class="text-muted">created {{$place->created_at->diffForHumans()}}</small></p>
-                                <a href="{{ route('user.places.show', $place->id) }}" class="btn btn-primary stretched-link">Edit Details</a>
+                                <a href="{{ route('user.places.show', $place->slug) }}" class="btn btn-primary stretched-link">Edit Details</a>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
         @empty
         <div class="col-12">
             <div class="alert alert-warning alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="alert" aria-hslugden="true">×</button>
                 <h5><i class="icon fas fa-ban"></i> Alert!</h5>
                 You have not registered any living places yet, click the add new place button.
             </div>

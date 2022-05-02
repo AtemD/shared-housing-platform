@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(PlaceHasAmenitiesTableSeeder::class);
         // $this->call(OccupationsTableSeeder::class);
         // $this->call(SpokenLanguagesTableSeeder::class);
-        // $this->call(PlacePreferenceHasPreferredLocationsTableSeeder::class);
+        // $this->call(PreferredLocationsTableSeeder::class);
         // $this->call(PlaceRequestsTableSeeder::class);
 
         // CompatibilityQuestion::factory()->times(3)->create();

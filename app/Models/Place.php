@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use App\References\FurnishingType;
 use App\References\PeriodType;
 use App\References\PlaceType;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -29,17 +31,32 @@ class Place extends Model
         'description',
         'featured_image_id',
         'rent_currency',
+        'slug'
     ];
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
+    {
+        $model = $this->load('user');
+
+        return SlugOptions::create()
+            ->generateSlugsFrom(function($model){
+                return "{$model->user->slug}-place";
+            })
+            ->saveSlugsTo('slug');
+    }
 
     /**
      * Get the route key for the model.
      *
      * @return string
      */
-    // public function getRouteKeyName()
-    // {
-    //     return 'slug';
-    // }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * Get the place s rent period.

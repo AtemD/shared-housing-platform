@@ -36,7 +36,7 @@ class UserMatchesController extends Controller
                 'userLocation.city',
                 'userLocation.locality'
             ])->simplePaginate();
-            // dd($people->toArray());
+
         return view('user/matches/users/index', compact('people'));
         
     }
@@ -49,6 +49,10 @@ class UserMatchesController extends Controller
      */
     public function show(User $user)
     {
+        // get the place request the currently authenticated user sent to this user
+        $requestSentToAuthenticatedUser = auth()->user()->placeRequests()->where('sender_id', $user->id)->first();
+        // dd($requestSentToAuthenticatedUser->toArray());
+        
         // dd(User::where('type', UserType::LISTER)->get()->toArray());
         $user = $user->load([
             'basicProfile.occupations',
@@ -57,9 +61,12 @@ class UserMatchesController extends Controller
             'personalPreference',
             'compatibilityPreference',
             'interests',
+            'placeRequests' => function ($query) {
+                $query->where('sender_id', auth()->user()->id);
+            },
         ]);
 
 // dd($user->toArray());
-        return view('user/matches/users/show', compact('user'));
+        return view('user/matches/users/show', compact('user', 'requestSentToAuthenticatedUser'));
     }
 }

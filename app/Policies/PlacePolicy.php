@@ -20,7 +20,7 @@ class PlacePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type === UserType::LISTER;
+        return $user->getAttributes()['type'] == UserType::LISTER;
     }
 
     /**
@@ -43,7 +43,7 @@ class PlacePolicy
      */
     public function create(User $user)
     {
-        return $user->type === UserType::LISTER;
+        return $user->getAttributes()['type'] === UserType::LISTER;
     }
 
     /**

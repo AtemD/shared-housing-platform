@@ -24,9 +24,20 @@ class ReceivedPlaceRequestsController extends Controller
      */
     public function index()
     {
-        $received_place_requests = auth()->user()->receivedPlaceRequests()->paginate();
-// dd($received_place_requests->toArray());
-        return view('user/place-requests/received/index', compact('received_place_requests'));
+        $received_place_requests = auth()->user()->placeRequests()->paginate();
+        // dd($received_place_requests->first()->toArray());
+        // dd($received_place_requests->toArray());
+        // dd($received_place_requests->toArray());
+        // dd(auth()->user()->id);
+        $places = auth()->user()->places()->get();
+        // dd($places->toArray());
+        
+        // dd($places->find(66)->slug);
+        // dd($places->where('id', $received_place_requests->pivot->place_id)->first());
+        // dd($places->where('id', $request->pivot->place_id)->first())
+        // dd($places->where('id', 66)->first()->slug);
+
+        return view('user/place-requests/received/index', compact('received_place_requests', 'places'));
     }
 
     /**

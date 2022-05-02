@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -12,12 +12,19 @@ class UserAccountStatus
      * 
      * @return array
      */
-     public static function userAccountStatusList()
-     {
+    public static function userAccountStatusList()
+    {
         return [
             self::ACTIVATED => 'activated',
             self::DEACTIVATED => 'deactivated'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::ACTIVATED => 'activated',
+            self::DEACTIVATED => 'deactivated'
+        ][$value];
+    }
 }

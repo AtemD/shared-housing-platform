@@ -7,7 +7,7 @@ use App\Models\PlacePreference;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PlacePreferenceHasPreferredLocationsTableSeeder extends Seeder
+class PreferredLocationsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class PlacePreferenceHasPreferredLocationsTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('place_preference_has_preferred_locations')->truncate();
+        DB::table('preferred_locations')->truncate();
 
         // for every place , give it a location
         $place_preferences = PlacePreference::all();

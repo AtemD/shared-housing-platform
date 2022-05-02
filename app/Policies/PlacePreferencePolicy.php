@@ -20,7 +20,7 @@ class PlacePreferencePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->type === UserType::SEARCHER;
+        return $user->getAttributes()['type'] === UserType::SEARCHER;
     }
 
     /**
@@ -45,7 +45,7 @@ class PlacePreferencePolicy
     {
          $is_allowed = false;
         
-        if(($user->type == UserType::SEARCHER) && ($user->profile_status == ProfileStatus::INCOMPLETE)){
+        if(($user->getAttributes()['type'] == UserType::SEARCHER) && ($user->profile_status == ProfileStatus::INCOMPLETE)){
             $is_allowed = true;
         }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class sentPlaceRequestsController extends Controller
+class SentPlaceRequestsController extends Controller
 {
     /**
      * Create a new controller instance.

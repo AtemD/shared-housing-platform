@@ -22,4 +22,13 @@ class ProfileStatus
         ];
      }
 
+     public static function getName($value)
+    {
+        return [
+            self::INCOMPLETE => 'Incomplete',
+            self::COMPLETE => 'Complete',
+            self::PROCESSING => 'Processing'
+        ][$value];
+    }
+
 }

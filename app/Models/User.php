@@ -8,6 +8,8 @@ use Spatie\Sluggable\SlugOptions;
 use Laravel\Sanctum\HasApiTokens;
 use App\References\UserType;
 use App\Models\Image;
+use App\References\ProfileStatus;
+use App\References\UserAccountStatus;
 use App\References\UserVerificationStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -101,6 +103,21 @@ class User extends Authenticatable
         return UserVerificationStatus::getName($value);
     }
 
+    public function getAccountStatusAttribute($value)
+    {
+        return UserAccountStatus::getName($value);
+    }
+
+    public function getProfileStatusAttribute($value)
+    {
+        return ProfileStatus::getName($value);
+    }
+
+    public function getTypeAttribute($value)
+    {
+        return UserType::getName($value);
+    }
+
     public function basicProfile()
     {
         return $this->hasOne(BasicProfile::class);
@@ -160,17 +177,17 @@ class User extends Authenticatable
         return $this->hasManyThrough(Occupation::class, BasicProfile::class);
     }
 
-    public function sentPlaceRequests()
-    {
-        return $this->belongsToMany(User::class, 'place_requests', 'sender_id', 'receiver_id')
-            ->withPivot('place_id')
-            ->withTimestamps();
-    }
+    // public function sentPlaceRequests()
+    // {
+    //     return $this->belongsToMany(User::class, 'place_requests', 'sender_id', 'user_id')
+    //         ->withPivot('place_id')
+    //         ->withTimestamps();
+    // }
 
-    public function receivedPlaceRequests()
+    public function placeRequests()
     {
-        return $this->belongsToMany(User::class, 'place_requests', 'receiver_id', 'sender_id')
-            ->withPivot('place_id')
+        return $this->belongsToMany(User::class, 'place_requests', 'user_id', 'sender_id')
+            ->withPivot(['place_id', 'status'])
             ->withTimestamps();
     }
 }

@@ -7,7 +7,7 @@
             <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Account Settings</li>
             <li class="breadcrumb-item"><a href="{{ route('user.places.index') }}">Places</a></li>
-            <li class="breadcrumb-item">{{$place->id}}</li>
+            <li class="breadcrumb-item">{{$place->slug}}</li>
             <li class="breadcrumb-item active" aria-current="page">settings</li>
         </ol>
     </nav>
@@ -16,7 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="list-group">
-                <a href="{{ route('user.places.edit', $place->id) }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('user.places.edit', $place->slug) }}" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-between">
                             <p class="mb-0">Details Settings</p>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('user.place.amenities.edit', $place->id) }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('user.place.amenities.edit', $place->slug) }}" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-between">
                             <p class="mb-0">Amenities Settings</p>

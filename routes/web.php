@@ -19,7 +19,7 @@ use App\Http\Controllers\User\OccupationsController as UserOccupationsController
 use App\Http\Controllers\User\SpokenLanguagesController as UserSpokenLanguagesController;
 use App\Http\Controllers\User\UserMatchesController as UserUserMatchesController;
 use App\Http\Controllers\User\PlaceMatchesController as UserPlaceMatchesController;
-use App\Http\Controllers\User\PlacePreferenceLocationsController as UserPlacePreferenceLocationsController;
+// use App\Http\Controllers\User\PlacePreferenceLocationsController as UserPlacePreferenceLocationsController;
 use App\Http\Controllers\User\PlaceRequestsController as UserPlaceRequestsController;
 use App\Http\Controllers\User\SentPlaceRequestsController as UserSentPlaceRequestsController;
 use App\Http\Controllers\User\ReceivedPlaceRequestsController as UserReceivedPlaceRequestsController;
@@ -36,6 +36,10 @@ use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsP
 use App\Http\Controllers\User\PlaceSetup\PlacesController as UserPlaceSetupController;
 use App\Http\Controllers\User\PlaceSetup\PlaceLocationsController as UserPlaceLocationSetupController;
 use App\Http\Controllers\User\PlaceSetup\PlaceAmenitiesController as UserPlaceAmenitiesSetupController;
+
+// Admin Controllers
+use App\Http\Controllers\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Admin\PlacesController as AdminPlacesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +75,30 @@ Route::get('/user/matches/places/{place}', [UserPlaceMatchesController::class, '
 // admin dashboard home
 Route::get('/admin/dashboard', [AdminHomeController::class, 'index'])
     ->name('admin.home');
+
+// Admin Users
+Route::get('/admin/users', [AdminUsersController::class, 'index'])
+    ->name('admin.users.index');
+Route::post('/admin/users', [AdminUsersController::class, 'store'])
+    ->name('admin.users.store');
+Route::get('/admin/users/{user}/edit', [AdminUsersController::class, 'edit'])
+    ->name('admin.users.edit');
+Route::put('/admin/users/{user}', [AdminUsersController::class, 'update'])
+    ->name('admin.users.update');
+Route::delete('/admin/users/{user}', [AdminUsersController::class, 'destroy'])
+    ->name('admin.users.destroy');
+
+// Admin places
+Route::get('/admin/places', [AdminPlacesController::class, 'index'])
+    ->name('admin.places.index');
+Route::post('/admin/places', [AdminPlacesController::class, 'store'])
+    ->name('admin.places.store');
+Route::get('/admin/places/{place}/edit', [AdminPlacesController::class, 'edit'])
+    ->name('admin.places.edit');
+Route::put('/admin/places/{place}', [AdminPlacesController::class, 'update'])
+    ->name('admin.places.update');
+Route::delete('/admin/places/{place}', [AdminPlacesController::class, 'destroy'])
+    ->name('admin.places.destroy');
 
 // Account setting
 // Route::get('/user/dashboard/account-settings', [AccountSettingsController::class, 'index'])
@@ -150,11 +178,11 @@ Route::resource('/user/place-setup/place-amenities', UserPlaceAmenitiesSetupCont
  * 
  */
 
- // User Answered Questions
+// User Answered Questions
 Route::get('/user/place-requests/sent', [UserSentPlaceRequestsController::class, 'index'])
-->name('user.place-requests.sent.index');
+    ->name('user.place-requests.sent.index');
 Route::get('/user/place-requests/received', [UserReceivedPlaceRequestsController::class, 'index'])
-->name('user.place-requests.received.index');
+    ->name('user.place-requests.received.index');
 
 // User Place Requests
 Route::resource('/user/place-requests', UserPlaceRequestsController::class)->names([
@@ -193,16 +221,16 @@ Route::resource('/user/place-preferences', UserPlacePreferencesController::class
 ]);
 
 // User Place  Preferences
-Route::resource('/user/place-preference-locations', UserPlacePreferenceLocationsController::class)->names([
-    'index'     => 'user.place-preference-locations.index',
-    'create'    => 'user.place-preference-locations.create',
-    'store'     => 'user.place-preference-locations.store',
-    'show'      => 'user.place-preference-locations.show',
-    'edit'      => 'user.place-preference-locations.edit',
-    'store'     => 'user.place-preference-locations.store',
-    'update'    => 'user.place-preference-locations.update',
-    'destroy'   => 'user.place-preference-locations.destroy'
-]);
+// Route::resource('/user/place-preference-locations', UserPlacePreferenceLocationsController::class)->names([
+//     'index'     => 'user.place-preference-locations.index',
+//     'create'    => 'user.place-preference-locations.create',
+//     'store'     => 'user.place-preference-locations.store',
+//     'show'      => 'user.place-preference-locations.show',
+//     'edit'      => 'user.place-preference-locations.edit',
+//     'store'     => 'user.place-preference-locations.store',
+//     'update'    => 'user.place-preference-locations.update',
+//     'destroy'   => 'user.place-preference-locations.destroy'
+// ]);
 
 // User Place s
 Route::resource('/user/places', UserPlacesController::class)->names([
@@ -240,9 +268,10 @@ Route::resource('/user/user-locations', UserUserLocationsController::class)->nam
     'destroy'   => 'user.user-locations.destroy'
 ]);
 
-Route::get('/user/place/{place_}/amenities/edit', [UserPlaceAmenitiesController::class, 'edit'])
+// User place amenities
+Route::get('/user/place/{place}/amenities/edit', [UserPlaceAmenitiesController::class, 'edit'])
     ->name('user.place.amenities.edit');
-Route::put('/user/place/{place_}/amenities', [UserPlaceAmenitiesController::class, 'update'])
+Route::put('/user/place/{place}/amenities', [UserPlaceAmenitiesController::class, 'update'])
     ->name('user.place.amenities.update');
 
 

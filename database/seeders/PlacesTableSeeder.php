@@ -26,6 +26,7 @@ class PlacesTableSeeder extends Seeder
         $users->each(function($user){
             Place::factory()->make([
                 'user_id' => $user->id,
+                'featured_image_id' => 1
             ])->save();
         });
 

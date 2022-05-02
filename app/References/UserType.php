@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -13,13 +13,21 @@ class UserType
      * 
      * @return array
      */
-     public static function userTypeList()
-     {
+    public static function userTypeList()
+    {
         return [
             self::LISTER => 'Lister',
             self::SEARCHER => 'Searcher',
             self::ADMIN => 'Admin'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::LISTER => 'Lister',
+            self::SEARCHER => 'Searcher',
+            self::ADMIN => 'Admin'
+        ][$value];
+    }
 }

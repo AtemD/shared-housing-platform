@@ -15,7 +15,8 @@ class LoginResponse implements LoginResponseContract
      */
     public function toResponse($request)
     {
-        $user_type = Auth::user()->type;
+        
+        $user_type = Auth::user()->getAttributes()['type'];
 
         if($user_type == UserType::SEARCHER){
             return redirect()->intended(RouteServiceProvider::HOME_SEARCHER);

@@ -16,10 +16,34 @@ class PlaceRequestStatus
      public static function placeRequestStatusList()
      {
         return [
-            self::ACCEPTED => 'Accepted',
-            self::DECLINED => 'Declined',
-            self::PENDING => 'Pending'
+            self::ACCEPTED => 'accepted',
+            self::DECLINED => 'declined',
+            // self::PENDING => 'pending'
         ];
      }
 
+     public static function placeRequestStatusListInPresentTense()
+     {
+        return [
+            self::ACCEPTED => 'accept',
+            self::DECLINED => 'decline',
+            // self::PENDING => 'pending'
+        ];
+     }
+
+     public static function getName($value)
+    {
+        return [
+            self::ACCEPTED => 'accepted',
+            self::DECLINED => 'declined',
+        ][$value];
+    }
+
+    public static function getNameInPresentTense($value)
+    {
+        return [
+            self::ACCEPTED => 'accept',
+            self::DECLINED => 'decline',
+        ][$value];
+    }
 }
