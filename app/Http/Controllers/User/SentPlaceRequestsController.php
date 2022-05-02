@@ -24,9 +24,11 @@ class SentPlaceRequestsController extends Controller
      */
     public function index()
     {
-        $user = auth()->user()->load('sentPlaceRequests')->paginate();
-
-        return view('user/place-requests/sent/index', compact('user'));
+        $sent_place_requests = auth()->user()->sentPlaceRequests()->with('places')->paginate();
+        // dd($sent_place_requests->toArray());
+        // $places = auth()->user()->places()->get();
+        // dd($places->toArray());
+        return view('user/place-requests/sent/index', compact('sent_place_requests'));
     }
 
     /**

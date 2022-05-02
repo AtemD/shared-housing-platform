@@ -177,12 +177,12 @@ class User extends Authenticatable
         return $this->hasManyThrough(Occupation::class, BasicProfile::class);
     }
 
-    // public function sentPlaceRequests()
-    // {
-    //     return $this->belongsToMany(User::class, 'place_requests', 'sender_id', 'user_id')
-    //         ->withPivot('place_id')
-    //         ->withTimestamps();
-    // }
+    public function sentPlaceRequests()
+    {
+        return $this->belongsToMany(User::class, 'place_requests', 'sender_id', 'user_id')
+            ->withPivot(['place_id', 'status'])
+            ->withTimestamps();
+    }
 
     public function placeRequests()
     {

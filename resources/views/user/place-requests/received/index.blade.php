@@ -35,7 +35,7 @@
                             <br><br>
                             <div class="row">
                                 @forelse($received_place_requests as $request)
-                                <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch">
+                                <div class="col-12 col-sm-6 col-md-6 d-flex flex-column">
                                     <div class="card bg-light">
                                         <div class="card-body pt-0">
                                             <div class="row">
@@ -43,11 +43,9 @@
                                                     <img src="/uploads/users/person_avatar.png" alt="" class="img-circle img-fluid" height="80" width="80">
                                                 </div>
                                                 <div class="col-9">
-                                                    <!-- <h2 class="lead"><b>Nicole Pearson</b></h2>
-                            <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p> -->
                                                     <p class="text-muted">
                                                         <a href="{{ route('user.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
-                                                        sent you a request for your place <a href="{{ route('user.matches.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                        sent you request for your place <a href="{{ route('user.matches.places.show', $places->find($request->pivot->place_id)->slug) }}">
                                                             {{$places->find($request->pivot->place_id)->slug}}
                                                         </a>
                                                     </p>
@@ -81,9 +79,9 @@
                                                     <!-- @method('PUT')
                                                     @csrf -->
                                                     <input type="hidden" name="accepted" value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                    <button class="btn btn-sm btn-success ml-2">
-                                                        Accepted
-                                                    </button>
+                                                    <a href="{{ route('user.matches.users.show', $request->slug) }}" class="btn btn-sm btn-success ml-2">
+                                                        You Accepted
+                                                    </a>
                                                 <!-- </form> -->
                                             </div>
                                             @else
@@ -92,9 +90,9 @@
                                                     @method('PUT')
                                                     @csrf -->
                                                     <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                    <button class="btn btn-sm btn-warning">
-                                                        Declined
-                                                    </button>
+                                                    <a href="{{ route('user.matches.users.show', $request->slug) }}" class="btn btn-sm btn-warning">
+                                                        You Declined
+                                                    </a>
                                                 <!-- </form> -->
                                             </div>
                                             @endif
