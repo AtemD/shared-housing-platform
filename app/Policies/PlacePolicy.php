@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Place;
 use App\Models\User;
-use App\References\ProfileStatus;
 use App\References\UserType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -20,7 +19,8 @@ class PlacePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->getAttributes()['type'] == UserType::LISTER;
+        // A user type of Lister is not allowed to view any places.
+        return $user->getAttributes()['type'] != UserType::LISTER; // meaning only Listers and Admins are allowed
     }
 
     /**

@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Lister;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\References\PlaceRequestStatus;
+use App\References\UserType;
 use Illuminate\Http\Request;
 
 class PlaceRequestsController extends Controller
@@ -50,7 +52,39 @@ class PlaceRequestsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'user_to_send_request_to' => ['required', 'string', 'exists:users,slug'],
+        ]);
+
+        $current_logged_in_user = auth()->user();
+        $user_to_send_request_to = User::where('slug', $validatedData['user_to_send_request_to'])->first();
+
+        // A Lister cannot send a request to another Lister
+        if($user_to_send_request_to->getAttributes()['type'] == UserType::LISTER && $current_logged_in_user->getAttributes()['type'] == UserType::LISTER){
+            return redirect()->back()->with('error', 'There was a problem sending this place request');
+        }
+
+        // A user cannot send a request to an Admin user
+        if($user_to_send_request_to->getAttributes()['type'] == UserType::ADMIN){
+            return redirect()->back()->with('error', 'There was a problem sending this place request');
+        }
+
+        // dd($user_to_send_request_to->getAttributes()['type']);
+        // dd($current_logged_in_user);
+        // store the new place request
+        if($request->has('place_request')){
+            // dd('hit');
+            auth()->user()->placeRequests()->attach($user_to_send_request_to->id, [
+                'status' => PlaceRequestStatus::PENDING,
+                'place_id' => auth()->user()->places()->first()->id,
+            ]);
+
+
+            // $user->roles()->attach($roleId, ['expires' => $expires]);
+            return redirect()->back()->with('success', 'Your have successfully accepted the place request');
+        }
+
+        return redirect()->back()->with('error', 'There was a problem sending this place request');
     }
 
     /**
@@ -88,7 +122,7 @@ class PlaceRequestsController extends Controller
         // authorize the user, to ensure they can perform this action
         if(!auth()->user()->placeRequests()->find($id)){
             // If the users does not own this place request, then deny its update
-            return redirect()->back()->with('error', 'There was a problem updating this request');
+            return redirect()->back()->with('error', 'There was a problem updating this place request');
         }
 
         if($request->has('accepted') || $request->has('accept')){
@@ -108,10 +142,8 @@ class PlaceRequestsController extends Controller
             auth()->user()->placeRequests()->updateExistingPivot($id, ['status' => PlaceRequestStatus::PENDING]);
             return redirect()->back()->with('success', 'Your have successfully cancelled the request');
         }
-
-        // dd('hit nothing');
         
-        return redirect()->back()->with('error', 'There was a problem updating this request');
+        return redirect()->back()->with('error', 'There was a problem updating this place request');
     }
 
     /**

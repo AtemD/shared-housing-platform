@@ -66,23 +66,23 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 @foreach(\App\References\PlaceRequestStatus::placeRequestStatusListInPresentTense() as $status)
-                                    @if($status == \App\References\PlaceRequestStatus::getNameInPresentTense($requestSentToAuthenticatedUser->pivot->status))
-                                    @continue
-                                    @endif
-                                    <!-- <a class="dropdown-item" href="#">{{$status}}</a> -->
-                                    <form method="POST" action="{{ route('user.place-requests.update', $requestSentToAuthenticatedUser->id) }}">
-                                        @method('PUT')
-                                        @csrf
-                                        <input type="hidden" name="{{$status}}" value="{{$requestSentToAuthenticatedUser->pivot->status}}">
-                                        <button class="btn btn-link dropdown-item" type="submit">{{ucfirst($status)}}</button>
-                                    </form>
+                                @if($status == \App\References\PlaceRequestStatus::getNameInPresentTense($requestSentToAuthenticatedUser->pivot->status))
+                                @continue
+                                @endif
+                                <!-- <a class="dropdown-item" href="#">{{$status}}</a> -->
+                                <form method="POST" action="{{ route('user.place-requests.update', $requestSentToAuthenticatedUser->id) }}">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="hidden" name="{{$status}}" value="{{$requestSentToAuthenticatedUser->pivot->status}}">
+                                    <button class="btn btn-link dropdown-item" type="submit">{{ucfirst($status)}}</button>
+                                </form>
                                 @endforeach
 
                                 <form method="POST" action="{{ route('user.place-requests.update', $requestSentToAuthenticatedUser->id) }}">
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::PENDING}}">
-                                    <button class="btn btn-link dropdown-item"type="submit">Cancel</button>
+                                    <button class="btn btn-link dropdown-item" type="submit">Cancel</button>
                                 </form>
                             </div>
                         </div>
@@ -91,9 +91,19 @@
                 </div>
                 @else
                 <div class="col-md-6 col-6">
-                    <a href="#" class="btn btn-success btn-block">
+
+                    <form method="POST" action="{{ route('user.place-requests.store') }}">
+                        @csrf
+                        <input type="hidden" name="user_to_send_request_to" value="{{$user->slug}}">
+                        <input type="hidden" name="place_request" value="{{\App\References\PlaceRequestStatus::PENDING}}">
+                        <button type="submit" class="btn btn-success btn-block">
+                            <span class="badge"> <i class="fas fa-paper-plane"></i> Send Request</span>
+                        </button>
+                    </form>
+
+                    <!-- <a href="#" class="btn btn-success btn-block">
                         <span class="badge"> <i class="fas fa-paper-plane"></i> Send Request</span>
-                    </a>
+                    </a> -->
                 </div>
                 @endif
                 <div class="col-md-6 col-6">

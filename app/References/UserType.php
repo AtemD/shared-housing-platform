@@ -16,18 +16,18 @@ class UserType
     public static function userTypeList()
     {
         return [
-            self::LISTER => 'Lister',
-            self::SEARCHER => 'Searcher',
-            self::ADMIN => 'Admin'
+            self::LISTER => 'lister',
+            self::SEARCHER => 'searcher',
+            self::ADMIN => 'admin'
         ];
     }
 
     public static function getName($value)
     {
         return [
-            self::LISTER => 'Lister',
-            self::SEARCHER => 'Searcher',
-            self::ADMIN => 'Admin'
+            self::LISTER => 'lister',
+            self::SEARCHER => 'searcher',
+            self::ADMIN => 'admin'
         ][$value];
     }
 }

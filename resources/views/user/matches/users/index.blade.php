@@ -13,12 +13,14 @@
                                 People
                             </a>
                         </li>
+                        @if(auth()->user()->getAttributes()['type'] == App\References\UserType::SEARCHER)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.matches.places.index') }}" role="tab" aria-selected="false">
                                 <i class="fas fa-house-user"></i>
                                 Places
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="card-body px-0">

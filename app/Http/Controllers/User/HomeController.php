@@ -29,6 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // dd('hit');
+        return view('user/home');
         /**
          * If the user is a Lister or Searcher
          * If the user is a Lister, then show all searchers that match the Listers posting
@@ -39,37 +41,37 @@ class HomeController extends Controller
 
         // Obtain the user_type,
         // generate all the people or and places
-        $user_type = auth()->user()->type;
+        // $user_type = auth()->user()->type;
 
 
 
         // return a view based on the user type
-        if ($user_type == UserType::LISTER) {
-            $people = User::where('type', UserType::SEARCHER)
-                ->where('profile_status', ProfileStatus::COMPLETE)
-                ->with([
-                    'basicProfile',
-                    'placePreference'
-                ])->paginate();
+        // if ($user_type == UserType::LISTER) {
+        //     $people = User::where('type', UserType::SEARCHER)
+        //         ->where('profile_status', ProfileStatus::COMPLETE)
+        //         ->with([
+        //             'basicProfile',
+        //             'placePreference'
+        //         ])->paginate();
                 // dd($people->toArray());
-            return view('user/lister/home', compact('people'));
-        }
+            // return view('user/lister/home', compact('people'));
+        // }
 
-        if ($user_type == UserType::SEARCHER) {
+        // if ($user_type == UserType::SEARCHER) {
             // A searcher should be matched with places and people
 
             // for now just generate all the place  or people that match the current user preferences
             // $people = User::where('type', UserType::SEARCHER);
-            $places = Place::with([
-                'user', 
-                'amenities',
-                'placeLocation.city',
-                'placeLocation.locality'
-            ])->paginate();
+            // $places = Place::with([
+            //     'user', 
+            //     'amenities',
+            //     'placeLocation.city',
+            //     'placeLocation.locality'
+            // ])->paginate();
 
             // dd($places->toArray());
 
-            return view('user/searcher/home', compact('places'));
-        }
+            // return view('user/home', compact('places'));
+        // }
     }
 }

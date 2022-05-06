@@ -18,7 +18,7 @@ class PlaceRequestStatus
         return [
             self::ACCEPTED => 'accepted',
             self::DECLINED => 'declined',
-            // self::PENDING => 'pending'
+            self::PENDING => 'pending'
         ];
      }
 
@@ -27,7 +27,7 @@ class PlaceRequestStatus
         return [
             self::ACCEPTED => 'accept',
             self::DECLINED => 'decline',
-            // self::PENDING => 'pending'
+            self::PENDING => 'pending'
         ];
      }
 
@@ -36,6 +36,7 @@ class PlaceRequestStatus
         return [
             self::ACCEPTED => 'accepted',
             self::DECLINED => 'declined',
+            self::PENDING => 'pending'
         ][$value];
     }
 
@@ -44,6 +45,7 @@ class PlaceRequestStatus
         return [
             self::ACCEPTED => 'accept',
             self::DECLINED => 'decline',
+            self::PENDING => 'pending'
         ][$value];
     }
 }

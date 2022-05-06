@@ -23,19 +23,19 @@ class PlaceSetup
     {
         if ($current_step == self::STEP_START) 
         {
-            $next_step_url = route('user.place-setup.places.create');
+            $next_step_url = route('lister.place-setup.places.create');
             return $next_step_url;
         }
 
         if ($current_step == self::STEP_1) 
         {
-            $next_step_url = route('user.place-setup.place-locations.create');
+            $next_step_url = route('lister.place-setup.place-locations.create');
             return $next_step_url;
         }
 
         if ($current_step == self::STEP_2) 
         {
-            $next_step_url = route('user.place-setup.place-amenities.create');
+            $next_step_url = route('lister.place-setup.place-amenities.create');
             return $next_step_url;
         }
 
@@ -44,9 +44,9 @@ class PlaceSetup
             // First determine that all steps form data is in the session
             if (!self::isPlaceSetupInfoComplete()) 
             {
-                dd(session('place_setup'));
+                // dd(session('place_setup'));
                 session()->flash('warning', 'You missed some steps, please try again!');
-                $next_step_url = route('user.place-setup.places.create');
+                $next_step_url = route('lister.place-setup.places.create');
                 return $next_step_url;
             }
 
@@ -56,7 +56,7 @@ class PlaceSetup
             // clear the session.
             // session()->forget('place_setup');
 
-            $next_step_url = route('user.places.index');
+            $next_step_url = route('lister.places.index');
             session()->flash('success', 'Your place registration is currently being processed, you will be notified when complete.');
             return $next_step_url;
         }
