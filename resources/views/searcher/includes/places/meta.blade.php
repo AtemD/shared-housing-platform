@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-6 col-6">
                     <a href="#" class="btn btn-success btn-block">
-                        <span class="badge"> <i class="fas fa-paper-plane"></i> Send Request</span>
+                        <span class="badge"> <i class="fas fa-paper-plane"></i> Send Place Request</span>
                     </a>
                 </div>
                 <div class="col-md-6 col-6">

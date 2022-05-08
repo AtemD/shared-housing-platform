@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -13,13 +13,21 @@ class VerificationStatus
      * 
      * @return array
      */
-     public static function verificationStatusList()
-     {
+    public static function verificationStatusList()
+    {
         return [
             self::VERIFIED => 'verified',
             self::UNVERIFIED => 'unverified',
             self::PENDING => 'pending'
         ];
-     }
+    }
 
+    public static function getName($value)
+    {
+        return [
+            self::VERIFIED => 'verified',
+            self::UNVERIFIED => 'unverified',
+            self::PENDING => 'pending'
+        ][$value];
+    }
 }

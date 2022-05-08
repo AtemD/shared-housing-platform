@@ -1,8 +1,7 @@
-@if($user->getAttributes()['type'] == \App\References\UserType::LISTER)
 <div class="row">
     @forelse($user->places as $place)
     <div class="col-md-12">
-    <h3 class="mb-1">My Place Listings</h3>
+        <h3 class="mb-1">My Place Listings</h3>
         <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-4">
@@ -18,7 +17,7 @@
 
                         <div class="d-flex justify-content-between">
                             <p class="card-text"><small class="text-muted">created {{$place->created_at->diffForHumans()}}</small></p>
-                            <a href="{{ route('searcher.matches.places.show', $place->id) }}" class="btn btn-outline-primary stretched-link">View Details</a>
+                            <a href="{{ route('searcher.matches.places.show', $place->slug) }}" class="btn btn-outline-primary stretched-link">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -36,65 +35,8 @@
     @endforelse
 </div>
 <hr>
-@endif
+
 <div class="row">
-    @if($user->type == \App\References\UserType::SEARCHER)
-    <div class="col-md-6">
-        <h3 class="mb-1">Place Preference</h3>
-        <small class="text-muted text-bold">I prefer a place that matches the following:</small>
-        <div class="row">
-            <div class="col-6">
-                <a class="product-title text-decoration-none">
-                    <small class="text-muted">Rent Budget </small>
-                    <h6 class="text-dark">{{$user->placePreference->min_rent_amount}}-{{$user->placePreference->max_rent_amount}} ETB/month</h6>
-                </a>
-            </div>
-            <div class="col-6">
-                <a class="product-title text-decoration-none">
-                    <small class="text-muted">Place type</small>
-                    <h6 class="text-dark">{{$user->placePreference->place_type}}</h6>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <a class="product-title text-decoration-none">
-                    <small class="text-muted">Furnishing </small>
-                    <h6 class="text-dark">Furnished</h6>
-                </a>
-            </div>
-            <div class="col-6">
-                <a class="product-title text-decoration-none">
-                    <small class="text-muted">Stay period</small>
-                    <h6 class="text-dark">6 months</h6>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a class="product-title text-decoration-none">
-                    <small class="text-muted">Desired Amenities </small>
-                    <h6>
-                        <span class="badge badge-info text-white">parking</span>
-                        <span class="badge badge-info text-white">Private shower</span>
-                        <span class="badge badge-info text-white">Cooker</span>
-                    </h6>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a class="product-title text-decoration-none">
-                    <small class="text-muted">Location Preference </small>
-                    <h6 class="text-dark">
-                        <span class="badge badge-secondary">Piassa, Hawassa</span>
-                        <span class="badge badge-secondary">Bole, Addis</span>
-                    </h6>
-                </a>
-            </div>
-        </div>
-    </div>
-    @endif
     <div class="col-md-6">
         <h3>Personal Preference</h3>
         <small class="text-muted text-bold">The following attributes describe me:</small>

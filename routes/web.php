@@ -56,7 +56,7 @@ use App\Http\Controllers\Searcher\UnansweredCompatibilityQuestionsController as 
 use App\Http\Controllers\Searcher\BasicProfileController as SearcherBasicProfileController;
 use App\Http\Controllers\Searcher\PersonalPreferencesController as SearcherPersonalPreferencesController;
 use App\Http\Controllers\Searcher\CompatibilityPreferencesController as SearcherCompatibilityPreferencesController;
-use App\Http\Controllers\Searcher\PlacesController as SearcherPlacesController;
+// use App\Http\Controllers\Searcher\PlacesController as SearcherPlacesController;
 use App\Http\Controllers\Searcher\PlaceLocationsController as SearcherPlaceLocationsController;
 use App\Http\Controllers\Searcher\PlacePreferencesController as SearcherPlacePreferencesController;
 use App\Http\Controllers\Searcher\UserLocationsController as SearcherUserLocationsController;
@@ -84,8 +84,10 @@ use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsP
 // use App\Http\Controllers\User\PlaceSetup\PlaceAmenitiesController as UserPlaceAmenitiesSetupController;
 
 // Admin Controllers
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\PlacesController as AdminPlacesController;
+use App\Http\Controllers\Admin\CompatibilityQuestionsController as AdminCompatibilityQuestionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -526,6 +528,18 @@ Route::prefix('admin')->group(function () {
         ->name('admin.places.update');
     Route::delete('places/{place}', [AdminPlacesController::class, 'destroy'])
         ->name('admin.places.destroy');
+
+    // Admin Users
+    Route::get('compatibility-questions', [AdminCompatibilityQuestionsController::class, 'index'])
+        ->name('admin.compatibility-questions.index');
+    Route::post('compatibility-questions', [AdminCompatibilityQuestionsController::class, 'store'])
+        ->name('admin.compatibility-questions.store');
+    Route::get('compatibility-questions/{compatibility_question}/edit', [AdminCompatibilityQuestionsController::class, 'edit'])
+        ->name('admin.compatibility-questions.edit');
+    Route::put('compatibility-questions/{compatibility_question}', [AdminCompatibilityQuestionsController::class, 'update'])
+        ->name('admin.compatibility-questions.update');
+    Route::delete('compatibility-questions/{compatibility_question}', [AdminCompatibilityQuestionsController::class, 'destroy'])
+        ->name('admin.compatibility-questions.destroy');
 });
 
 
@@ -535,17 +549,17 @@ Route::prefix('admin')->group(function () {
 // ->name('user.account-settings.index');
 
 // User Answered Questions
-Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'index'])
-    ->name('user.compatibility-questions.unanswered.index');
+// Route::get('/user/dashboard/account-settings/compatibility-questions/unanswered', [UnansweredCompatibilityQuestionsController::class, 'index'])
+//     ->name('user.compatibility-questions.unanswered.index');
 
-// User Answered Questions
-Route::get('/user/dashboard/account-settings/compatibility-questions/answered', [AnsweredCompatibilityQuestionsController::class, 'index'])
-    ->name('user.compatibility-questions.answered.index');
+// // User Answered Questions
+// Route::get('/user/dashboard/account-settings/compatibility-questions/answered', [AnsweredCompatibilityQuestionsController::class, 'index'])
+//     ->name('user.compatibility-questions.answered.index');
 
-// User Compatibility Questions
-Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)
-    ->only(['create', 'store'])
-    ->names(['create' => 'user.compatibility-questions.create', 'store' => 'user.compatibility-questions.store']);
+// // User Compatibility Questions
+// Route::resource('/user/compatibility-questions', CompatibilityQuestionsController::class)
+//     ->only(['create', 'store'])
+//     ->names(['create' => 'user.compatibility-questions.create', 'store' => 'user.compatibility-questions.store']);
 
 
 /**

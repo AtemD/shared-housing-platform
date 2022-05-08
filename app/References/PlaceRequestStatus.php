@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\References;
 
@@ -13,25 +13,25 @@ class PlaceRequestStatus
      * 
      * @return array
      */
-     public static function placeRequestStatusList()
-     {
+    public static function placeRequestStatusList()
+    {
         return [
             self::ACCEPTED => 'accepted',
             self::DECLINED => 'declined',
             self::PENDING => 'pending'
         ];
-     }
+    }
 
-     public static function placeRequestStatusListInPresentTense()
-     {
+    public static function placeRequestStatusListInPresentTense()
+    {
         return [
             self::ACCEPTED => 'accept',
             self::DECLINED => 'decline',
             self::PENDING => 'pending'
         ];
-     }
+    }
 
-     public static function getName($value)
+    public static function getName($value)
     {
         return [
             self::ACCEPTED => 'accepted',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\References\VerificationStatus;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,6 +41,11 @@ class CompatibilityQuestion extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getVerificationStatusAttribute($value)
+    {
+        return VerificationStatus::getName($value);
     }
 
     public function users()
