@@ -29,7 +29,7 @@
                             @forelse(App\References\DietHabit::dietHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="diet_habit_{{$key}}" name="diet_habit" class="custom-control-input @error('diet_habit') is-invalid @enderror" value="{{$key}}" {{ old('diet_habit')== $key || $compatibility_preference->diet_habit == $key ? 'checked' : '' }}>
+                                    <input type="radio" id="diet_habit_{{$key}}" name="diet_habit" class="custom-control-input @error('diet_habit') is-invalid @enderror" value="{{$key}}" {{ old('diet_habit')== $key || $compatibility_preference->getAttributes()['diet_habit'] == $key ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="diet_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                             @forelse(App\References\SmokingHabit::smokingHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="smoking_habit_{{$key}}" name="smoking_habit" class="custom-control-input @error('smoking_habit') is-invalid @enderror" value="{{$key}}" {{ old('smoking_habit')== $key || $compatibility_preference->smoking_habit == $key ? 'checked' : '' }}>
+                                    <input type="radio" id="smoking_habit_{{$key}}" name="smoking_habit" class="custom-control-input @error('smoking_habit') is-invalid @enderror" value="{{$key}}" {{ old('smoking_habit')== $key || $compatibility_preference->getAttributes()['smoking_habit'] == $key ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="smoking_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                             @forelse(App\References\AlcoholHabit::alcoholHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="alcohol_habit_{{$key}}" name="alcohol_habit" class="custom-control-input @error('alcohol_habit') is-invalid @enderror" value="{{$key}}" {{ old('alcohol_habit')== $key || $compatibility_preference->alcohol_habit == $key ? 'checked' : '' }}>
+                                    <input type="radio" id="alcohol_habit_{{$key}}" name="alcohol_habit" class="custom-control-input @error('alcohol_habit') is-invalid @enderror" value="{{$key}}" {{ old('alcohol_habit')== $key || $compatibility_preference->getAttributes()['alcohol_habit'] == $key ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="alcohol_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             @forelse(App\References\PartyingHabit::partyingHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="partying_habit_{{$key}}" name="partying_habit" class="custom-control-input @error('partying_habit') is-invalid @enderror" value="{{$key}}" {{ old('partying_habit')== $key || $compatibility_preference->partying_habit == $key ? 'checked' : '' }}>
+                                    <input type="radio" id="partying_habit_{{$key}}" name="partying_habit" class="custom-control-input @error('partying_habit') is-invalid @enderror" value="{{$key}}" {{ old('partying_habit')== $key || $compatibility_preference->getAttributes()['partying_habit'] == $key ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="partying_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                             @forelse(App\References\GuestHabit::guestHabitList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="guest_habit_{{$key}}" name="guest_habit" class="custom-control-input @error('guest_habit') is-invalid @enderror" value="{{$key}}" {{ old('guest_habit')== $key || $compatibility_preference->guest_habit == $key ? 'checked' : '' }}>
+                                    <input type="radio" id="guest_habit_{{$key}}" name="guest_habit" class="custom-control-input @error('guest_habit') is-invalid @enderror" value="{{$key}}" {{ old('guest_habit')== $key || $compatibility_preference->getAttributes()['guest_habit'] == $key ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="guest_habit_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                             @forelse(App\References\MaritalStatus::maritalStatusList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="marital_status_{{$key}}" name="marital_status" class="custom-control-input @error('marital_status') is-invalid @enderror" value="{{$key}}" {{ old('marital_status')== $key || $compatibility_preference->marital_status == $key ? 'checked' : '' }}>
+                                    <input type="radio" id="marital_status_{{$key}}" name="marital_status" class="custom-control-input @error('marital_status') is-invalid @enderror" value="{{$key}}" {{ old('marital_status')== $key || $compatibility_preference->getAttributes()['marital_status'] == $key ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="marital_status_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                             @forelse(App\References\OccupationType::occupationTypeList() as $key => $value)
                             <div class="col-md-12">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="occupation_type_{{$key}}" name="occupation_type" class="custom-control-input @error('occupation_type') is-invalid @enderror" value="{{$key}}" {{ old('occupation_type')== $key || $compatibility_preference->occupation_type == $key  ? 'checked' : '' }}>
+                                    <input type="radio" id="occupation_type_{{$key}}" name="occupation_type" class="custom-control-input @error('occupation_type') is-invalid @enderror" value="{{$key}}" {{ old('occupation_type')== $key || $compatibility_preference->getAttributes()['occupation_type'] == $key  ? 'checked' : '' }}>
                                     <label class="custom-control-label font-weight-normal" for="occupation_type_{{$key}}">{{$value}}</label>
                                 </div>
                             </div>

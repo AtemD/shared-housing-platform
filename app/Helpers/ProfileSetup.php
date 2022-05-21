@@ -17,6 +17,7 @@ class ProfileSetup
     const STEP_3            = "personal_preferences";
     const STEP_4            = "compatibility_preferences";
     const STEP_5            = "interests";
+    const STEP_6            = "user_locations";
 
     /**
      * determine next step
@@ -30,8 +31,10 @@ class ProfileSetup
             return $next_step_url;
         }
 
+        
+        $user_type = auth()->user()->getAttributes()['type'];
+
         if ($current_step == self::STEP_1) {
-            $user_type = auth()->user()->type;
             if ($user_type == UserType::LISTER) {
                 $next_step_url = route('user.profile-setup.places.create');
                 return $next_step_url;
@@ -58,8 +61,13 @@ class ProfileSetup
             return $next_step_url;
         }
 
-        // The final step 
         if ($current_step == self::STEP_5) {
+            $next_step_url = route('user.profile-setup.user-locations.create');
+            return $next_step_url;
+        }
+
+        // The final step 
+        if ($current_step == self::STEP_6) {
             // First determine that all steps form data is in the session
             if (!self::isProfileSetupInfoComplete()) {
                 // dd(session('profile_setup'));
@@ -80,7 +88,14 @@ class ProfileSetup
             // notify the user that their account if being setup
             // session(['info' => 'Your profile is being setup, you will be notified when its complete']);
 
-            $next_step_url = route('user.compatibility-questions.unanswered.index');
+            if($user_type ==  UserType::LISTER){
+                $next_step_url = route('lister.compatibility-questions.unanswered.index');
+            }elseif($user_type ==  UserType::SEARCHER){
+                $next_step_url = route('searcher.compatibility-questions.unanswered.index');
+            }else{
+                return redirect()->route('welcome');
+            }
+
             session()->flash('success', 'You successfully completed your profile Setup! Please answer one or more of the following questions that will be used for matching purpose.');
             return $next_step_url;
         }
@@ -94,11 +109,11 @@ class ProfileSetup
             $is_complete = false;
         }
 
-        if ((!session()->has('profile_setup.places')) && auth()->user()->type == UserType::LISTER) {
+        if ((!session()->has('profile_setup.places')) && auth()->user()->getAttributes()['type'] == UserType::LISTER) {
             $is_complete = false;
         }
 
-        if ((!session()->has('profile_setup.place_preferences')) && auth()->user()->type == UserType::SEARCHER) {
+        if ((!session()->has('profile_setup.place_preferences')) && auth()->user()->getAttributes()['type'] == UserType::SEARCHER) {
             $is_complete = false;
         }
 
@@ -111,6 +126,10 @@ class ProfileSetup
         }
 
         if (!session()->has('profile_setup.interests')) {
+            $is_complete = false;
+        }
+
+        if (!session()->has('profile_setup.user_locations')) {
             $is_complete = false;
         }
 

@@ -48,7 +48,7 @@
                                 <a href="{{ route('user.profile-setup.compatibility-preferences.create') }}" class="btn btn-warning">{{ __('<< Back') }}</a>
 
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit >>') }}
+                                    {{ __('Continue >>') }}
                                 </button>
                             </div>
                         </div>

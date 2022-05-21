@@ -24,6 +24,7 @@ class SetupUserProfileJob implements ShouldQueue
     public $personal_preferences;
     public $compatibility_preferences;
     public $interests;
+    public $user_locations;
     public $user;
 
     /**
@@ -34,6 +35,7 @@ class SetupUserProfileJob implements ShouldQueue
     public function __construct($profile_setup_details, $auth_user)
     {
         $this->basic_profile = $profile_setup_details['basic_profile'];
+        $this->user_locations = $profile_setup_details['user_locations'];
 
         // process occupations
         foreach($profile_setup_details['occupations'] as $occupation){
@@ -85,6 +87,11 @@ class SetupUserProfileJob implements ShouldQueue
                 'gender' => $this->basic_profile['gender'],
                 'dob' => $this->basic_profile['dob'],
                 'bio' => $this->basic_profile['bio'],
+            ]);
+
+            $this->user->userLocation()->create([
+                'city_id' => $this->user_locations['city_id'],
+                'locality_id' => $this->user_locations['locality_id'],
             ]);
 
             $basic_profile->occupations()->createMany($this->occupations);

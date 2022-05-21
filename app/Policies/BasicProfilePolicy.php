@@ -45,7 +45,7 @@ class BasicProfilePolicy
         $is_allowed = false;
 
         // refactor to ternary operator, in a one line return statement.
-        if($user->profile_status == ProfileStatus::INCOMPLETE){
+        if($user->getAttributes()['profile_status'] == ProfileStatus::INCOMPLETE){
             $is_allowed = true;
         }
 

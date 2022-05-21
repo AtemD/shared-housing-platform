@@ -71,7 +71,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label for="availability_date">Availability Date</label>
-                                <input type="date" class="form-control @error('availability_date') is-invalid @enderror" id="availability_date" name="availability_date" value="{{ old('availability_date') ? old('availability_date') : $user->placePreference->availability_date }}">
+                                <input type="date" class="form-control @error('availability_date') is-invalid @enderror" id="availability_date" name="availability_date" value="{{ old('availability_date') ? old('availability_date') : $user->placePreference->getAttributes()['availability_date'] }}">
 
                                 @error('availability_date')
                                 <span class="invalid-feedback" role="alert">

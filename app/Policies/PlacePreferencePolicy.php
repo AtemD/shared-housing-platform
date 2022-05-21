@@ -45,7 +45,7 @@ class PlacePreferencePolicy
     {
          $is_allowed = false;
         
-        if(($user->getAttributes()['type'] == UserType::SEARCHER) && ($user->profile_status == ProfileStatus::INCOMPLETE)){
+        if(($user->getAttributes()['type'] == UserType::SEARCHER) && ($user->getAttributes()['profile_status'] == ProfileStatus::INCOMPLETE)){
             $is_allowed = true;
         }
 

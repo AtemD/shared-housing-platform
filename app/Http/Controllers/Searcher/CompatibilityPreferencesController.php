@@ -36,7 +36,7 @@ class CompatibilityPreferencesController extends Controller
     {
         $compatibility_preference = auth()->user()->compatibilityPreference()->firstOrFail();
 
-        return view('sercher/compatibility-preferences/index', compact('compatibility_preference'));
+        return view('searcher/compatibility-preferences/index', compact('compatibility_preference'));
     }
 
     /**

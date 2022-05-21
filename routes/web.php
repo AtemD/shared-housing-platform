@@ -59,6 +59,7 @@ use App\Http\Controllers\Searcher\CompatibilityPreferencesController as Searcher
 // use App\Http\Controllers\Searcher\PlacesController as SearcherPlacesController;
 use App\Http\Controllers\Searcher\PlaceLocationsController as SearcherPlaceLocationsController;
 use App\Http\Controllers\Searcher\PlacePreferencesController as SearcherPlacePreferencesController;
+use App\Http\Controllers\Searcher\PlacePreferenceLocationsController as SearcherPlacePreferenceLocationsController;
 use App\Http\Controllers\Searcher\UserLocationsController as SearcherUserLocationsController;
 use App\Http\Controllers\Searcher\PlaceAmenitiesController as SearcherPlaceAmenitiesController;
 use App\Http\Controllers\Searcher\InterestsController as SearcherInterestsController;
@@ -77,8 +78,9 @@ use App\Http\Controllers\User\ProfileSetup\CompatibilityPreferencesController as
 use App\Http\Controllers\User\ProfileSetup\PlacePreferencesController as UserPlacePreferencesProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\PlacesController as UserPlacesProfileSetupController;
 use App\Http\Controllers\User\ProfileSetup\InterestsController as UserInterestsProfileSetupController;
+use App\Http\Controllers\User\ProfileSetup\UserLocationsController as UserUserLocationProfileSetupController;
 
-// Place  Setup Controllers
+// Place Setup Controllers
 // use App\Http\Controllers\User\PlaceSetup\PlacesController as UserPlaceSetupController;
 // use App\Http\Controllers\User\PlaceSetup\PlaceLocationsController as UserPlaceLocationSetupController;
 // use App\Http\Controllers\User\PlaceSetup\PlaceAmenitiesController as UserPlaceAmenitiesSetupController;
@@ -191,6 +193,17 @@ Route::prefix('searcher')->group(function () {
         'store'     => 'searcher.place-preferences.store',
         'update'    => 'searcher.place-preferences.update',
         'destroy'   => 'searcher.place-preferences.destroy'
+    ]);
+
+    Route::resource('place-preference-locations', SearcherPlacePreferenceLocationsController::class)->names([
+        'index'     => 'searcher.place-preference-locations.index',
+        'create'    => 'searcher.place-preference-locations.create',
+        'store'     => 'searcher.place-preference-locations.store',
+        'show'      => 'searcher.place-preference-locations.show',
+        'edit'      => 'searcher.place-preference-locations.edit',
+        'store'     => 'searcher.place-preference-locations.store',
+        'update'    => 'searcher.place-preference-locations.update',
+        'destroy'   => 'searcher.place-preference-locations.destroy'
     ]);
 
     // User Place  Location
@@ -597,6 +610,11 @@ Route::prefix('user/profile-setup')->group(function () {
     Route::resource('interests', UserInterestsProfileSetupController::class)
         ->only(['create', 'store'])
         ->names(['create' => 'user.profile-setup.interests.create', 'store' => 'user.profile-setup.interests.store']);
+
+    // User locations
+    Route::resource('user-location', UserUserLocationProfileSetupController::class)
+        ->only(['create', 'store'])
+        ->names(['create' => 'user.profile-setup.user-locations.create', 'store' => 'user.profile-setup.user-locations.store']);
 });
 
 /**

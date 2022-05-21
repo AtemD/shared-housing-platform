@@ -18,8 +18,7 @@ class RedirectIfNotCorrectProfileSetupStep
      */
     public function handle(Request $request, Closure $next)
     {
-        
-        if(auth()->user()->profile_status == ProfileStatus::INCOMPLETE){
+        if(auth()->user()->getAttributes()['profile_status'] == ProfileStatus::INCOMPLETE){
             $next_step = ProfileSetup::determineNextStep();
             return redirect($next_step);
         }

@@ -20,7 +20,7 @@ class UserLocationsController extends Controller
         $user = auth()->user()->load([
             'userLocation'
         ]);
-
+        
         $cities = City::all();
 
         return view('searcher/user-locations/index', compact('user', 'cities'));
