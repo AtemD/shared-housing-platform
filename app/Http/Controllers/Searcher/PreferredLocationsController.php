@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Searcher;
 
 use App\Http\Controllers\Controller;
-use App\Models\PlaceListingPreferenceLocation;
+use App\Models\PreferredLocation;
 use Illuminate\Http\Request;
 
-class PlacePreferenceLocationsController extends Controller
+class PreferredLocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class PlacePreferenceLocationsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PlaceListingPreferenceLocation  $placeListingPreferenceLocation
+     * @param  \App\Models\PreferredLocation  $preferredLocation
      * @return \Illuminate\Http\Response
      */
-    public function show(PlaceListingPreferenceLocation $placeListingPreferenceLocation)
+    public function show(PreferredLocation $preferredLocation)
     {
         //
     }
@@ -53,10 +53,10 @@ class PlacePreferenceLocationsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PlaceListingPreferenceLocation  $placeListingPreferenceLocation
+     * @param  \App\Models\PreferredLocation  $preferredLocation
      * @return \Illuminate\Http\Response
      */
-    public function edit(PlaceListingPreferenceLocation $placeListingPreferenceLocation)
+    public function edit(PreferredLocation $preferredLocation)
     {
         //
     }
@@ -65,21 +65,21 @@ class PlacePreferenceLocationsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PlaceListingPreferenceLocation  $placeListingPreferenceLocation
+     * @param  \App\Models\PreferredLocation  $preferredLocation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PlaceListingPreferenceLocation $placeListingPreferenceLocation)
+    public function update(Request $request, PreferredLocation $preferredLocation)
     {
-        //
+        return back()->with('success', 'Preferred Location Updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PlaceListingPreferenceLocation  $placeListingPreferenceLocation
+     * @param  \App\Models\PreferredLocation  $preferredLocation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PlaceListingPreferenceLocation $placeListingPreferenceLocation)
+    public function destroy(PreferredLocation $preferredLocation)
     {
         //
     }

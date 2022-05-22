@@ -96,11 +96,11 @@
             <div class="card card-default card-outline card-primary mt-4 shadow">
                 <div class="card-header">
                     <h5><b>{{ __('Place  Preferred Location') }}</b></h4>
-                        <small class="text-muted">Here you can update your preferred location details.</small>
+                        <small class="text-muted">This is the location where you want to find a place in.</small>
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('searcher.place-preference-locations.update', 12) }}">
+                    <form method="POST" action="{{ route('searcher.preferred-locations.update', $user->placePreference->preferredLocations->first()->id) }}">
                         @method('PUT')
                         @csrf
 
@@ -133,7 +133,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-12 d-flex justify-content-between">
                                 <button type="submit" class="btn btn-block btn-primary">
-                                    {{ __('Update Location Details') }}
+                                    {{ __('Update Preferred Location Details') }}
                                 </button>
                             </div>
                         </div>

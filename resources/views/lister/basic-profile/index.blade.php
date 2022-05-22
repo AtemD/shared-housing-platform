@@ -30,7 +30,7 @@
                                 <select class="custom-select form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
                                     <option value="">Gender...</option>
                                     @forelse(App\References\Gender::genderList() as $key => $gender)
-                                    <option value="{{$key}}" {{ old('gender')== $key || ($user->basicProfile->gender == $key ) ? 'selected' : '' }}>{{$gender}}</option>
+                                    <option value="{{$key}}" {{ old('gender')== $key || ($user->basicProfile->getAttributes()['gender'] == $key ) ? 'selected' : '' }}>{{$gender}}</option>
                                     @empty
                                     <option value="">Error...</option>
                                     @endforelse
@@ -47,7 +47,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label for="dob">Date of Birth</label>
-                                <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') ? old('dob') : $user->basicProfile->dob }}">
+                                <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') ? old('dob') : $user->basicProfile->getAttributes()['dob'] }}">
 
                                 @error('dob')
                                 <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label for="validationTextarea">Bio</label>
-                                <textarea class="form-control @error('bio') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="bio">{{ old('bio') ? old('bio') : $user->basicProfile->bio }}</textarea>
+                                <textarea class="form-control @error('bio') is-invalid @enderror" id="validationTextarea" placeholder="Briefly write about yourself" rows="3" name="bio">{{ old('bio') ? old('bio') : $user->basicProfile->getAttributes()['bio'] }}</textarea>
 
                                 @error('bio')
                                 <span class="invalid-feedback" role="alert">

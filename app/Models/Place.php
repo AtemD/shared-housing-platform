@@ -31,6 +31,7 @@ class Place extends Model
         'description',
         'featured_image_id',
         'rent_currency',
+        'profile_status',
         'slug'
     ];
 
@@ -42,7 +43,7 @@ class Place extends Model
         $model = $this->load('user');
 
         return SlugOptions::create()
-            ->generateSlugsFrom(function($model){
+            ->generateSlugsFrom(function ($model) {
                 return "{$model->user->slug}-place";
             })
             ->saveSlugsTo('slug');
@@ -93,7 +94,7 @@ class Place extends Model
 
     public function getRentAmountAttribute($value)
     {
-        return $value/100;
+        return $value / 100;
     }
 
     public function getPlaceTypeAttribute($value)
@@ -104,6 +105,12 @@ class Place extends Model
     public function getBillsIncludedAttribute($value)
     {
         return $value == 1 ? 'Included' : 'Not Included';
+    }
+
+    public function setRentAmountAttribute($value)
+    {
+        // convert the rent amount to cents and store it in the database.
+        $this->attributes['rent_amount'] = $value * 100;
     }
 
     public function user()

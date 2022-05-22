@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\BasicProfile;
+use App\References\ProfileStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -51,6 +52,7 @@ class SetupPlaceJob implements ShouldQueue
                 'min_stay_period' => $this->place['min_stay_period'],
                 'availability_date' => $this->place['availability_date'],
                 'description' => $this->place['description'],
+                'profile_status' => ProfileStatus::PROCESSING,
                 // 'featured_image' => $this->place['featured_image']
             ]);
 
@@ -69,6 +71,10 @@ class SetupPlaceJob implements ShouldQueue
 
             // Insert the amenities
             $place->amenities()->attach($this->place_amenities);
+
+            $place->update([
+                'profile_status' => ProfileStatus::COMPLETE
+            ]);
         });
     }
 }

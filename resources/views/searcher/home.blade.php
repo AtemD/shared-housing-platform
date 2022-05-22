@@ -15,7 +15,7 @@
                     <i class="fa-solid fa-code-compare"></i>
                 </div>
 
-                <a href="{{ route('searcher.matches.users.index') }}" class="small-box-footer">
+                <a href="{{ route('searcher.matches.places.index') }}" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>

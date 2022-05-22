@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white pl-0">
-            <li class="breadcrumb-item"><a href="{{ route('searcher.matches.users.index') }}" class="text-decoration-none">People Matches</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('searcher.matches.places.index') }}" class="text-decoration-none">Place Matches</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{$user->slug}}</li>
         </ol>
     </nav>

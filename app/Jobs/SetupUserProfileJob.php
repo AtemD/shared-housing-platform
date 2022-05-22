@@ -67,11 +67,6 @@ class SetupUserProfileJob implements ShouldQueue
         $this->interests = $profile_setup_details['interests'];
 
         $this->user = $auth_user;
-
-        
-        // dd($this->interests);
-        // dd($this->place['rent_amount']);
-        // dd($this->occupations);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Searcher;
 
 use App\Http\Controllers\Controller;
+use App\Models\Place;
 use Illuminate\Http\Request;
 
 class ReceivedPlaceRequestsController extends Controller
@@ -25,11 +26,12 @@ class ReceivedPlaceRequestsController extends Controller
     public function index()
     {
         $received_place_requests = auth()->user()->placeRequests()->paginate();
+        $places = Place::whereIn('id', $received_place_requests->pluck('pivot.place_id'))->get();
+        // dd($places->toArray());
+        // $pla
+        // dd($places->toArray());
         // dd($received_place_requests->first()->toArray());
-        // dd($received_place_requests->toArray());
-        // dd($received_place_requests->toArray());
-        // dd(auth()->user()->id);
-        $places = auth()->user()->places()->get();
+        // $places = auth()->user()->places()->get();
         // dd($places->toArray());
         
         // dd($places->find(66)->slug);

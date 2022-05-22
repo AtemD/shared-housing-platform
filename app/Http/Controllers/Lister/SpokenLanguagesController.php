@@ -60,7 +60,7 @@ class SpokenLanguagesController extends Controller
             'name' => $validatedData['spoken_language']
         ]);
 
-        return redirect()->route('user.basic-profile.index')->with('success', 'Spoken Language Created Successfully');
+        return redirect()->route('lister.basic-profile.index')->with('success', 'Spoken Language Created Successfully');
     }
 
     /**

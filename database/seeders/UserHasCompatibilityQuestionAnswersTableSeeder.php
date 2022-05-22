@@ -29,6 +29,7 @@ class UserHasCompatibilityQuestionAnswersTableSeeder extends Seeder
         $questions = CompatibilityQuestion::with('answerChoices')->get();
 
         $users->each(function ($user) use ($questions) {
+            $questions = $questions->random(mt_rand(1, 3));
             $answer_choices = [];
             $questions->each(function ($question) use (&$answer_choices) {
                 $question_array = $question->toArray();

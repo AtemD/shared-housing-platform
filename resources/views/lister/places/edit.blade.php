@@ -34,7 +34,12 @@
 
                                 <div class="row d-flex justify-content-between">
                                     <div class="col-8 pr-0">
-                                        <input id="rent_amount" type="number" placeholder="rent amount" class="form-control @error('rent_amount') is-invalid @enderror" name="rent_amount" value="{{ old('rent_amount') ? old('rent_amount') : $place->rent_amount }}" autofocus>
+                                        <input id="rent_amount" type="text" placeholder="rent amount" class="form-control @error('rent_amount') is-invalid @enderror" name="rent_amount" value="{{ old('rent_amount') ? old('rent_amount') : $place->rent_amount }}" autofocus>
+                                        @error('rent_amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="col-4 pl-0">
                                         <select class="custom-select form-control @error('currency') is-invalid @enderror" id="currency" name="currency">
@@ -46,12 +51,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                @error('rent_amount')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
 
                             <div class="col-md-5">
@@ -107,7 +106,7 @@
                                     <select class="custom-select form-control @error('place_type') is-invalid @enderror" id="place_type" name="place_type">
                                         <option value="">Select...</option>
                                         @forelse(App\References\PlaceType::placeTypeList() as $key => $value)
-                                        <option value="{{$key}}" {{ old('place_type')== $key || $place->place_type == $key ? 'selected' : '' }}>{{$value}}</option>
+                                        <option value="{{$key}}" {{ old('place_type')== $key || $place->getAttributes()['place_type'] == $key ? 'selected' : '' }}>{{$value}}</option>
                                         @empty
                                         <option value="">Error...</option>
                                         @endforelse
@@ -126,7 +125,7 @@
                                     <select class="custom-select form-control @error('furnishing_type') is-invalid @enderror" id="furnishing_type" name="furnishing_type">
                                         <option value="">Select...</option>
                                         @forelse(App\References\FurnishingType::furnishingTypeList() as $key => $value)
-                                        <option value="{{$key}}" {{ old('furnishing_type')== $key || $place->furnishing_type == $key  ? 'selected' : '' }}>{{$value}}</option>
+                                        <option value="{{$key}}" {{ old('furnishing_type')== $key || $place->getAttributes()['furnishing_type'] == $key  ? 'selected' : '' }}>{{$value}}</option>
                                         @empty
                                         <option value="">Error...</option>
                                         @endforelse

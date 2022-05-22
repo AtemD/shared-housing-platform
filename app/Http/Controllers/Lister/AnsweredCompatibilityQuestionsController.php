@@ -39,7 +39,7 @@ class AnsweredCompatibilityQuestionsController extends Controller
 
         $compatibility_question_importance = collect(CompatibilityQuestionRelevance::compatibilityQuestionRelevanceList());
 
-        return view('user/compatibility-questions/answered/index', compact(
+        return view('lister/compatibility-questions/answered/index', compact(
             'compatibility_questions',
             'compatibility_question_importance'
         ));

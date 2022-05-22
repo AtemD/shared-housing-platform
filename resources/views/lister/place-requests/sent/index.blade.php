@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
-            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('lister.home') }}">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Sent Requests</li>
         </ol>
     </nav>
@@ -16,12 +16,12 @@
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs nav-justified" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="received" href="{{route('user.place-requests.received.index')}}" role="tab" aria-controls="received" aria-selected="false">
+                            <a class="nav-link" id="received" href="{{route('lister.place-requests.received.index')}}" role="tab" aria-controls="received" aria-selected="false">
                                 <i class="fas fa-inbox"></i> Received
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" id="sent" href="{{route('user.place-requests.sent.index')}}" role="tab" aria-controls="sent" aria-selected="false">
+                            <a class="nav-link active" id="sent" href="{{route('lister.place-requests.sent.index')}}" role="tab" aria-controls="sent" aria-selected="false">
                                 <i class="fa-solid fa-paper-plane"></i> Sent
                             </a>
                         </li>
@@ -31,7 +31,7 @@
                     <div class="tab-content" id="custom-tabs-three-tabContent">
                         <div class="tab-pane fade active show" role="tabpanel">
                             <br>
-                            <h5 class="text-muted">These are requests that you sent to other users</h5>
+                            <h5 class="text-muted">These are requests that you sent to other users to join your place.</h5>
                             <br><br>
                             <div class="row">
                                 @forelse($sent_place_requests as $request)
@@ -45,7 +45,7 @@
                                                 <div class="col-9">
                                                     <p class="text-muted">
                                                         You sent a place request to
-                                                        <a href="{{ route('user.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
+                                                        <a href="{{ route('lister.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -78,7 +78,7 @@
                                     <div class="alert alert-info alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                         <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                                        You have not sent any users a place request yet.
+                                        You have not sent any users a request to join your place yet.
                                     </div>
                                 </div>
                                 @endforelse

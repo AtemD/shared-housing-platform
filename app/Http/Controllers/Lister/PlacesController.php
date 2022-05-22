@@ -184,7 +184,7 @@ class PlacesController extends Controller
             // 'featured_image' => $path,
         ]);
 
-        return redirect()->route('user.places.edit', ['place' => $place->slug])
+        return redirect()->route('lister.places.edit', ['place' => $place->slug])
             ->with('success', 'Place  Details Have Been Updated Successfully');
     }
 

@@ -35,7 +35,7 @@
                                         <!-- <p class="text-muted mt-0 pt-0"><small>Private + 1 bed + private amenities</small></p> -->
                                         <h5 class="mt-0 text-dark">{{$place->rent_amount}} ETB/month</h5>
 
-                                        @forelse($place->amenities->take(3) as $amenity)
+                                        @forelse($place->amenities->take(2) as $amenity)
                                         <small class="text-dark">{{$amenity->name}} &plus; </small>
                                         @empty
                                         <p class="mt-0 mb-0">No amenities</p>

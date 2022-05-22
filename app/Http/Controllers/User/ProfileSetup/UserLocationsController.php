@@ -48,8 +48,8 @@ class UserLocationsController extends Controller
         ]);
         // dd('hit');
         $request->session()->put('profile_setup.user_locations', [
-            'city' => $validatedData['city'],
-            'locality' => 12,  // $validatedData['locality'],
+            'city_id' => $validatedData['city'],
+            'locality_id' => 12,  // $validatedData['locality'],
         ]);
 
         $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_6);

@@ -45,7 +45,7 @@
                                                 <div class="col-9">
                                                     <p class="text-muted">
                                                         <a href="{{ route('searcher.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
-                                                        sent you request for your place <a href="{{ route('searcher.matches.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                        sent you request for the place <a href="{{ route('searcher.matches.places.show', $places->find($request->pivot->place_id)->slug) }}">
                                                             {{$places->find($request->pivot->place_id)->slug}}
                                                         </a>
                                                     </p>
@@ -74,25 +74,43 @@
                                                 </form>
                                             </div>
                                             @elseif($request->pivot->status == \App\References\PlaceRequestStatus::ACCEPTED)
-                                            <div class="text-right d-flex justify-content-end">
+                                            <div class="text-right d-flex justify-content-between">
                                                 <!-- <form method="POST" action="{{ route('searcher.place-requests.update', $request->id) }}"> -->
-                                                    <!-- @method('PUT')
+                                                <!-- @method('PUT')
                                                     @csrf -->
-                                                    <input type="hidden" name="accepted" value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                    <a href="{{ route('searcher.matches.users.show', $request->slug) }}" class="btn btn-sm btn-success ml-2">
-                                                        You Accepted
-                                                    </a>
+                                                <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
+                                                <form method="POST" action="{{ route('searcher.place-requests.update', $request->id) }}">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::PENDING}}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-secondary ml-2">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
+                                                <button type="button" class="btn btn-sm btn-success" disabled>
+                                                    You Accepted
+                                                </button>
                                                 <!-- </form> -->
                                             </div>
                                             @else
-                                            <div class="text-right d-flex justify-content-end">
+                                            <div class="text-right d-flex justify-content-between">
                                                 <!-- <form method="POST" action="{{ route('searcher.place-requests.update', $request->id) }}">
                                                     @method('PUT')
                                                     @csrf -->
-                                                    <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                    <a href="{{ route('searcher.matches.users.show', $request->slug) }}" class="btn btn-sm btn-warning">
-                                                        You Declined
-                                                    </a>
+                                                <form method="POST" action="{{ route('searcher.place-requests.update', $request->id) }}">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::PENDING}}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-secondary ml-2">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
+                                                <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
+                                                <button type="button" class="btn btn-sm btn-warning" disabled>
+                                                    You Declined
+                                                </button>
                                                 <!-- </form> -->
                                             </div>
                                             @endif

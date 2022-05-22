@@ -31,7 +31,7 @@
                     <div class="tab-content" id="custom-tabs-three-tabContent">
                         <div class="tab-pane fade active show" role="tabpanel">
                             <br>
-                            <h5 class="text-muted">These are requests sent to you by other listers</h5>
+                            <h5 class="text-muted">These are requests sent to you by users wanting to join your place.</h5>
                             <br><br>
                             <div class="row">
                                 @forelse($received_place_requests as $request)
@@ -104,7 +104,7 @@
                                     <div class="alert alert-info alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                         <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                                        No listers has sent you any requests for your place(s) yet.
+                                        No users have sent you any requests for your place(s) yet.
                                     </div>
                                 </div>
                                 @endforelse

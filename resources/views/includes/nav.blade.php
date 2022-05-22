@@ -56,7 +56,7 @@
                         <a class="dropdown-item" href="{{ route('lister.place-requests.received.index') }}">
                             <i class="fas fa-paper-plane mr-1"></i> {{ __('Requests') }}
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('lister.matches.users.index') }}">
                             <i class="fas fa-percent mr-2"></i> {{ __('Matches') }}
                         </a>
 
@@ -96,7 +96,7 @@
                         <a class="dropdown-item" href="{{ route('searcher.place-requests.received.index') }}">
                             <i class="fas fa-paper-plane mr-1"></i> {{ __('Requests') }}
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('searcher.matches.places.index') }}">
                             <i class="fas fa-percent mr-2"></i> {{ __('Matches') }}
                         </a>
 

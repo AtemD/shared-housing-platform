@@ -59,7 +59,7 @@ use App\Http\Controllers\Searcher\CompatibilityPreferencesController as Searcher
 // use App\Http\Controllers\Searcher\PlacesController as SearcherPlacesController;
 use App\Http\Controllers\Searcher\PlaceLocationsController as SearcherPlaceLocationsController;
 use App\Http\Controllers\Searcher\PlacePreferencesController as SearcherPlacePreferencesController;
-use App\Http\Controllers\Searcher\PlacePreferenceLocationsController as SearcherPlacePreferenceLocationsController;
+use App\Http\Controllers\Searcher\PreferredLocationsController as SearcherPreferredLocationsController;
 use App\Http\Controllers\Searcher\UserLocationsController as SearcherUserLocationsController;
 use App\Http\Controllers\Searcher\PlaceAmenitiesController as SearcherPlaceAmenitiesController;
 use App\Http\Controllers\Searcher\InterestsController as SearcherInterestsController;
@@ -195,15 +195,15 @@ Route::prefix('searcher')->group(function () {
         'destroy'   => 'searcher.place-preferences.destroy'
     ]);
 
-    Route::resource('place-preference-locations', SearcherPlacePreferenceLocationsController::class)->names([
-        'index'     => 'searcher.place-preference-locations.index',
-        'create'    => 'searcher.place-preference-locations.create',
-        'store'     => 'searcher.place-preference-locations.store',
-        'show'      => 'searcher.place-preference-locations.show',
-        'edit'      => 'searcher.place-preference-locations.edit',
-        'store'     => 'searcher.place-preference-locations.store',
-        'update'    => 'searcher.place-preference-locations.update',
-        'destroy'   => 'searcher.place-preference-locations.destroy'
+    Route::resource('preferred-locations', SearcherPreferredLocationsController::class)->names([
+        'index'     => 'searcher.preferred-locations.index',
+        'create'    => 'searcher.preferred-locations.create',
+        'store'     => 'searcher.preferred-locations.store',
+        'show'      => 'searcher.preferred-locations.show',
+        'edit'      => 'searcher.preferred-locations.edit',
+        'store'     => 'searcher.preferred-locations.store',
+        'update'    => 'searcher.preferred-locations.update',
+        'destroy'   => 'searcher.preferred-locations.destroy'
     ]);
 
     // User Place  Location

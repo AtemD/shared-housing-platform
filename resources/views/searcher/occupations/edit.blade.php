@@ -4,9 +4,9 @@
 <div class="container mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
-            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('searcher.home') }}">Home</a></li>
             <li class="breadcrumb-item">Account Settings</li>
-            <li class="breadcrumb-item"><a href="{{ route('user.basic-profile.index') }}">Basic Profile</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('searcher.basic-profile.index') }}">Basic Profile</a></li>
             <li class="breadcrumb-item">{{$occupation->name}}</li>
             <li class="breadcrumb-item active" aria-current="page">edit</li>
         </ol>
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.occupations.update', ['occupation' => $occupation->id]) }}">
+                    <form method="POST" action="{{ route('searcher.occupations.update', ['occupation' => $occupation->id]) }}">
                         @method('PUT')
                         @csrf                        
 
