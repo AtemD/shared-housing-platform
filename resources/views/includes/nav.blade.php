@@ -89,7 +89,7 @@
                         <a class="dropdown-item nav-item" href="#">
                             <i class="nav-icon fas fa-heart mr-2"></i>{{ __('Favorites') }}
                         </a>
-                        <a class="dropdown-item nav-item" href="#">
+                        <a class="dropdown-item nav-item" href="{{ route('searcher.messages.index') }}">
                             <i class=" nav-icon fas fa-comments mr-1"></i>{{ __('Messages') }}
                         </a>
 

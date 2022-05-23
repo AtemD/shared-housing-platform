@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Searcher;
 
 use App\Http\Controllers\Controller;
-use App\Models\Place;
 use App\Models\User;
-use App\References\ProfileStatus;
-use App\References\UserType;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+use App\References\CompatibilityQuestionRelevance;
 
 // use Illuminate\Http\Request;
 
@@ -29,49 +26,99 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd('hit');
+
+//         // Here we match user A with user B
+//         // The compatibility matching algorithm
+//         $user_A = User::where('id', 1)->firstOrFail();
+//         $user_B = User::where('id', 2)->firstOrFail();
+
+//         // Obtain all questions answered by user_A
+//         $user_A = $user_A->load('compatibilityQuestions');
+//         $user_A_compatibility_questions = $user_A->compatibilityQuestions->pluck('id');
+
+//         $user_B = $user_B->load([
+//             'compatibilityQuestions' => function($query) use($user_A_compatibility_questions){
+//                 return $query->whereIn('compatibility_question_id', $user_A_compatibility_questions);
+//             }
+//         ]);
+
+//         // Obtain the set of common questions user A and B have
+//         $user_B_compatibility_questions = $user_B->compatibilityQuestions;
+//         $set_of_common_questions = $user_B_compatibility_questions->pluck('id'); // Note: User B now contains the set of common questions
+// // dd($set_of_common_questions->isEmpty());
+//         // If the set of common question is empty, no further processing,
+//         // indicate the match percentage as zero, for user A matched with user B
+
+//         $user_A_total_question_weight = 0;
+//         $user_B_weight_score_of_user_A_total_question_weight = 0;
+//         $user_A_total_percentage_score = 0.00; // ***Warning, when calculating, prevent dividing by zero.
+
+//         $user_B_total_question_weight = 0;
+//         $user_A_weight_score_of_user_B_total_question_weight = 0;
+//         $user_B_total_percentage_score = 0.00;
+
+//         $total_match_percentage = 0.00;
+
+//         // set the total match percentage for both users to 0.00
+//         // if($set_of_common_questions->isEmpty()){
+//         //     calculateTotalMatchPercentage();
+//         // }
+
+//         // Note: We are matching user_A to user_B
+
+//         // Calculate how B satisfied A
+//         // ...that is how did B score on A questions
+//         $set_of_common_questions->each(function($common_question_id) use(
+//             $user_A, 
+//             $user_B,
+//             &$user_A_total_question_weight,
+//             &$user_B_total_question_weight,
+//             &$user_B_weight_score_of_user_A_total_question_weight, 
+//             &$user_A_weight_score_of_user_B_total_question_weight) {
+
+//             // 1. CALCULATE HOW USER_B SATISFIED USER_A (that is how User_B score on User_A's question).
+
+//             // First get the question, 
+//             $user_A_common_question = $user_A->compatibilityQuestions->find($common_question_id);
+//             $user_B_common_question = $user_B->compatibilityQuestions->find($common_question_id);
+
+//             // Calculate and store the questions total weight score
+//             $question_relevance_user_A = $user_A_common_question->pivot->compatibility_question_relevance;
+//             $question_relevance_user_B = $user_B_common_question->pivot->compatibility_question_relevance;
+//             $user_A_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($question_relevance_user_A);
+//             $user_B_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($question_relevance_user_B);
+
+//             // If A's match_answer_id == B's user_answer_id, then give B the weight score as B got it right
+//             if($user_A_common_question->pivot->match_answer_id == $user_B_common_question->pivot->user_answer_id){
+//                 $relevance_A = $user_A_common_question->pivot->compatibility_question_relevance;
+//                 $user_B_weight_score_of_user_A_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($relevance_A);
+//             }
+
+//             // 2. CALCULATE HOW USER_A SATISFIED USER_B (that is how User_A scored on User_A's question)
+//             if($user_B_common_question->pivot->match_answer_id == $user_A_common_question->pivot->user_answer_id){
+//                 $relevance_B = $user_B_common_question->pivot->compatibility_question_relevance;
+//                 $user_A_weight_score_of_user_B_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($relevance_B);
+//             }
+//         });
+
+//         // Calculate percentage scores for each user
+//         $user_A_total_percentage_score = ($user_B_weight_score_of_user_A_total_question_weight / $user_A_total_question_weight) * 100;
+//         $user_B_total_percentage_score = ($user_A_weight_score_of_user_B_total_question_weight / $user_B_total_question_weight) * 100;
+
+//         // Calculate the total match percentage for both users.
+//         $total_match_percentage = sqrt($user_A_total_percentage_score * $user_B_total_percentage_score);
+
+        // dd([
+        //     'user A total question weight' =>  $user_A_total_question_weight,
+        //     'user B total question weight' =>  $user_B_total_question_weight,
+        //     'user_B_weight_score_of_user_A_total_question_weight' => $user_B_weight_score_of_user_A_total_question_weight,
+        //     'user_A_weight_score_of_user_B_total_question_weight' => $user_A_weight_score_of_user_B_total_question_weight,
+        //     'user_A_total_percentage_score' => $user_A_total_percentage_score,
+        //     'user_B_total_percentage_score' => $user_B_total_percentage_score,
+        //     'total_match_percentage' => $total_match_percentage
+        // ]);
+
         return view('searcher/home');
-        /**
-         * If the user is a Lister or Searcher
-         * If the user is a Lister, then show all searchers that match the Listers posting
-         * If the user is a Searcher, then show all the Listed places that match the users preferences
-         * Note: the Searcher can also be shown all other similar Listers to them, incase they want to rent a free space together
-         *      this feature should be implemented later on.
-         */
-
-        // Obtain the user_type,
-        // generate all the people or and places
-        // $user_type = auth()->user()->type;
-
-
-
-        // return a view based on the user type
-        // if ($user_type == UserType::LISTER) {
-        //     $people = User::where('type', UserType::SEARCHER)
-        //         ->where('profile_status', ProfileStatus::COMPLETE)
-        //         ->with([
-        //             'basicProfile',
-        //             'placePreference'
-        //         ])->paginate();
-                // dd($people->toArray());
-            // return view('user/lister/home', compact('people'));
-        // }
-
-        // if ($user_type == UserType::SEARCHER) {
-            // A searcher should be matched with places and people
-
-            // for now just generate all the place  or people that match the current user preferences
-            // $people = User::where('type', UserType::SEARCHER);
-            // $places = Place::with([
-            //     'user', 
-            //     'amenities',
-            //     'placeLocation.city',
-            //     'placeLocation.locality'
-            // ])->paginate();
-
-            // dd($places->toArray());
-
-            // return view('searcher/home', compact('places'));
-        // }
     }
+    
 }

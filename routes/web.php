@@ -70,6 +70,7 @@ use App\Http\Controllers\Searcher\PlaceMatchesController as SearcherPlaceMatches
 use App\Http\Controllers\Searcher\PlaceRequestsController as SearcherPlaceRequestsController;
 use App\Http\Controllers\Searcher\SentPlaceRequestsController as SearcherSentPlaceRequestsController;
 use App\Http\Controllers\Searcher\ReceivedPlaceRequestsController as SearcherReceivedPlaceRequestsController;
+use App\Http\Controllers\Searcher\MessagesController as SearcherMessagesController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
@@ -307,6 +308,18 @@ Route::prefix('searcher')->group(function () {
         'store'     => 'searcher.interests.store',
         'update'    => 'searcher.interests.update',
         'destroy'   => 'searcher.interests.destroy'
+    ]);
+
+    // User Messages
+    Route::resource('messages', SearcherMessagesController::class)->names([
+        'index'     => 'searcher.messages.index',
+        'create'    => 'searcher.messages.create',
+        'store'     => 'searcher.messages.store',
+        'show'      => 'searcher.messages.show',
+        'edit'      => 'searcher.messages.edit',
+        'store'     => 'searcher.messages.store',
+        'update'    => 'searcher.messages.update',
+        'destroy'   => 'searcher.messages.destroy'
     ]);
 
     // User Answered Questions

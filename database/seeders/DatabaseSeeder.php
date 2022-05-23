@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         
         // $this->call(CompatibilityQuestionsTableSeeder::class);
         // $this->call(AnswerChoicesTableSeeder::class);
-        $this->call(UserHasCompatibilityQuestionAnswersTableSeeder::class);
+        // $this->call(UserHasCompatibilityQuestionAnswersTableSeeder::class);
 
         
         // $this->call(RegionsTableSeeder::class);
@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(SpokenLanguagesTableSeeder::class);
         // $this->call(PreferredLocationsTableSeeder::class);
         // $this->call(PlaceRequestsTableSeeder::class);
+        $this->call(MessagesTableSeeder::class);
 
         // CompatibilityQuestion::factory()->times(3)->create();
     }

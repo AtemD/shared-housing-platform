@@ -190,4 +190,9 @@ class User extends Authenticatable
             ->withPivot(['place_id', 'status'])
             ->withTimestamps();
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\BasicProfile;
+use App\References\UserType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -38,12 +39,12 @@ class SetupUserProfileJob implements ShouldQueue
         $this->user_locations = $profile_setup_details['user_locations'];
 
         // process occupations
-        foreach($profile_setup_details['occupations'] as $occupation){
+        foreach ($profile_setup_details['occupations'] as $occupation) {
             $this->occupations[] = ['name' => $occupation];
         }
         $this->occupations[] = ['name' => 'doctor'];
 
-        foreach($profile_setup_details['spoken_languages'] as $language){
+        foreach ($profile_setup_details['spoken_languages'] as $language) {
             $this->spoken_languages[] = ['name' => $language];
         }
 
@@ -93,7 +94,7 @@ class SetupUserProfileJob implements ShouldQueue
 
             $basic_profile->spokenLanguages()->createMany($this->spoken_languages);
 
-            if($this->place != null) {
+            if ($this->place != null) {
                 $this->user->places()->create([
                     'rent_amount' => $this->place['rent_amount'],
                     'rent_period' => $this->place['rent_period'],
@@ -109,10 +110,10 @@ class SetupUserProfileJob implements ShouldQueue
 
 
                 // process the image, update the place  with an image id
-            }       
+            }
 
             // Note: a place  preference has locations too, locations that the user prefers
-            if($this->place_preferences != null){
+            if ($this->place_preferences != null) {
                 $place_preference = $this->user->placePreference()->create([
                     'min_rent_amount' => $this->place_preferences['min_rent_amount'],
                     'max_rent_amount' => $this->place_preferences['max_rent_amount'],
@@ -129,13 +130,13 @@ class SetupUserProfileJob implements ShouldQueue
                 $preferred_locations = [];
                 $city_id = $this->place_preference_preferred_locations['city'];
 
-                foreach($this->place_preference_preferred_locations['localities'] as $locality){
+                foreach ($this->place_preference_preferred_locations['localities'] as $locality) {
                     $preferred_locations[$locality] = ['city_id' => $city_id];
                 }
 
                 $place_preference->preferredLocations()->attach($preferred_locations);
             }
-            
+
 
             $this->user->personalPreference()->create([
                 'diet_habit' => $this->personal_preferences['diet_habit'],
@@ -157,9 +158,28 @@ class SetupUserProfileJob implements ShouldQueue
                 'marital_status' => $this->compatibility_preferences['marital_status'],
             ]);
 
-            
+
             $this->user->interests()->attach($this->interests);
-            
-        });
+
+            // Now dispatch another job to process the matching of this user and all the other matches
+
+            // If the user is a Searcher
+            // retrieve all place preferences,
+            // Search the DB for all place that match the place preference: date, price, location. 
+            // Then match the user with the owners of this places
+            // ...
+            // If the user is of type Lister
+            // Get all the users of type Searcher that match the current Listers place details
+            // The match each of the matches with the Lister
+        }, 5);
+
+        // if($this->user->getAttributes()['type'] == UserType::SEARCHER){
+        //     MatchSearcherWithListersJob::dispatch($this->user)->afterCommit();
+        // }
+
+        // dd('hit none');
+        // if($this->user->getAttributes()['type'] == UserType::LISTER){
+        //     MatchListerWithSearchersJob::dispatch($this->user)->afterCommit();
+        // }
     }
 }
