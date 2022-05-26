@@ -21,6 +21,9 @@ class CreateMatchesTable extends Migration
 
             $table->bigInteger('matched_user_id')->nullable()->unsigned();
             $table->foreign('matched_user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->bigInteger('place_id')->nullable()->unsigned();
+            $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
             
             $table->decimal('compatibility_percentage', 4, 2);
 

@@ -23,7 +23,7 @@ class CitiesTableSeeder extends Seeder
         
         // For each region generate a couple of cities
         $regions->each(function($region){
-            City::factory()->times(mt_rand(1, 6))->create([
+            City::factory()->times(1)->create([
                 'region_id' => $region->id,
             ]);
         });

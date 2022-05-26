@@ -40,12 +40,12 @@
                                         <div class="card-body pt-0">
                                             <div class="row">
                                                 <div class="col-3 text-center">
-                                                    <img src="/uploads/listers/person_avatar.png" alt="" class="img-circle img-fluid" height="80" width="80">
+                                                    <img src="/uploads/users/person_avatar.png" alt="" class="img-circle img-fluid" height="80" width="80">
                                                 </div>
                                                 <div class="col-9">
                                                     <p class="text-muted">
-                                                        <a href="{{ route('lister.matches.listers.show', $request->slug) }}">{{$request->full_name}}</a>
-                                                        sent you request for your place <a href="{{ route('lister.matches.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                        <a href="{{ route('lister.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
+                                                        sent you request for your place <a href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
                                                             {{$places->find($request->pivot->place_id)->slug}}
                                                         </a>
                                                     </p>
@@ -74,25 +74,40 @@
                                                 </form>
                                             </div>
                                             @elseif($request->pivot->status == \App\References\PlaceRequestStatus::ACCEPTED)
-                                            <div class="text-right d-flex justify-content-end">
+                                            <div class="text-right d-flex justify-content-between">
                                                 <!-- <form method="POST" action="{{ route('lister.place-requests.update', $request->id) }}"> -->
-                                                    <!-- @method('PUT')
+                                                <!-- @method('PUT')
                                                     @csrf -->
-                                                    <input type="hidden" name="accepted" value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                    <a href="{{ route('lister.matches.listers.show', $request->slug) }}" class="btn btn-sm btn-success ml-2">
-                                                        You Accepted
-                                                    </a>
+                                                <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
+                                                <form method="POST" action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::PENDING}}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-secondary ml-2">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
+                                                <button type="button" class="btn btn-sm btn-success" disabled>
+                                                    You Accepted
+                                                </button>
                                                 <!-- </form> -->
                                             </div>
                                             @else
-                                            <div class="text-right d-flex justify-content-end">
-                                                <!-- <form method="POST" action="{{ route('lister.place-requests.update', $request->id) }}">
+                                            <div class="text-right d-flex justify-content-between">
+                                                <form method="POST" action="{{ route('lister.place-requests.update', $request->id) }}">
                                                     @method('PUT')
-                                                    @csrf -->
-                                                    <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                    <a href="{{ route('lister.matches.listers.show', $request->slug) }}" class="btn btn-sm btn-warning">
-                                                        You Declined
-                                                    </a>
+                                                    @csrf
+                                                    <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::PENDING}}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-secondary ml-2">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
+                                                <input type="hidden" name="declined" value="{{\App\References\PlaceRequestStatus::DECLINED}}">
+                                                <button type="button" class="btn btn-sm btn-warning" disabled>
+                                                    You Declined
+                                                </button>
                                                 <!-- </form> -->
                                             </div>
                                             @endif

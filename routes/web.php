@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\User\SentPlaceRequestsController as UserSentPlaceRequestsController;
 // use App\Http\Controllers\User\ReceivedPlaceRequestsController as UserReceivedPlaceRequestsController;
 
+// ...........................................................................................................................
 // Lister controllers
 use App\Http\Controllers\Lister\HomeController as ListerHomeController;
 use App\Http\Controllers\Lister\CompatibilityQuestionsController as ListerCompatibilityQuestionsController;
@@ -43,11 +44,15 @@ use App\Http\Controllers\Lister\UserMatchesController as ListerUserMatchesContro
 use App\Http\Controllers\Lister\PlaceRequestsController as ListerPlaceRequestsController;
 use App\Http\Controllers\Lister\SentPlaceRequestsController as ListerSentPlaceRequestsController;
 use App\Http\Controllers\Lister\ReceivedPlaceRequestsController as ListerReceivedPlaceRequestsController;
+use App\Http\Controllers\Lister\MessagesController as ListerMessagesController;
+use App\Http\Controllers\Lister\FavoritesController as ListerFavoritesController;
 // Place  Setup Controllers
 use App\Http\Controllers\Lister\PlaceSetup\PlacesController as ListerPlaceSetupController;
 use App\Http\Controllers\Lister\PlaceSetup\PlaceLocationsController as ListerPlaceLocationSetupController;
 use App\Http\Controllers\Lister\PlaceSetup\PlaceAmenitiesController as ListerPlaceAmenitiesSetupController;
 
+
+// ...........................................................................................................................
 // Searcher controllers
 use App\Http\Controllers\Searcher\HomeController as SearcherHomeController;
 use App\Http\Controllers\Searcher\CompatibilityQuestionsController as SearcherCompatibilityQuestionsController;
@@ -71,6 +76,7 @@ use App\Http\Controllers\Searcher\PlaceRequestsController as SearcherPlaceReques
 use App\Http\Controllers\Searcher\SentPlaceRequestsController as SearcherSentPlaceRequestsController;
 use App\Http\Controllers\Searcher\ReceivedPlaceRequestsController as SearcherReceivedPlaceRequestsController;
 use App\Http\Controllers\Searcher\MessagesController as SearcherMessagesController;
+use App\Http\Controllers\Lister\FavoritesController as SearcherFavoritesController;
 
 // Profile Setup Controllers
 use App\Http\Controllers\User\ProfileSetup\BasicProfileController as UserBasicProfileProfileSetupController;
@@ -322,6 +328,18 @@ Route::prefix('searcher')->group(function () {
         'destroy'   => 'searcher.messages.destroy'
     ]);
 
+    // User Favorites
+    Route::resource('favorites', SearcherFavoritesController::class)->names([
+        'index'     => 'searcher.favorites.index',
+        'create'    => 'searcher.favorites.create',
+        'store'     => 'searcher.favorites.store',
+        'show'      => 'searcher.favorites.show',
+        'edit'      => 'searcher.favorites.edit',
+        'store'     => 'searcher.favorites.store',
+        'update'    => 'searcher.favorites.update',
+        'destroy'   => 'searcher.favorites.destroy'
+    ]);
+
     // User Answered Questions
     Route::get('account-settings/compatibility-questions/unanswered', [SearcherUnansweredCompatibilityQuestionsController::class, 'index'])
         ->name('searcher.compatibility-questions.unanswered.index');
@@ -490,6 +508,29 @@ Route::prefix('lister')->group(function () {
         'store'     => 'lister.interests.store',
         'update'    => 'lister.interests.update',
         'destroy'   => 'lister.interests.destroy'
+    ]);
+
+    // User Messages
+    Route::resource('messages', ListerMessagesController::class)->names([
+        'index'     => 'lister.messages.index',
+        'create'    => 'lister.messages.create',
+        'store'     => 'lister.messages.store',
+        'show'      => 'lister.messages.show',
+        'edit'      => 'lister.messages.edit',
+        'store'     => 'lister.messages.store',
+        'update'    => 'lister.messages.update',
+        'destroy'   => 'lister.messages.destroy'
+    ]);
+
+    Route::resource('favorites', ListerFavoritesController::class)->names([
+        'index'     => 'lister.favorites.index',
+        'create'    => 'lister.favorites.create',
+        'store'     => 'lister.favorites.store',
+        'show'      => 'lister.favorites.show',
+        'edit'      => 'lister.favorites.edit',
+        'store'     => 'lister.favorites.store',
+        'update'    => 'lister.favorites.update',
+        'destroy'   => 'lister.favorites.destroy'
     ]);
 
     /**

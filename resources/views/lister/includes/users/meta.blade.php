@@ -95,13 +95,12 @@
                     <div class="text-right d-flex justify-content-between">
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <small> Your Sent Request {{ucfirst(\App\References\PlaceRequestStatus::getName($requestSentByAuthenticatedUser->pivot->status))}} </small>
+                                <small> Your Sent Request {{ucfirst(\App\References\PlaceRequestStatus::getName($requestSentByAuthenticatedUser->pivot->status))}} </small>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <form method="POST" action="{{ route('lister.place-requests.destroy', $requestSentByAuthenticatedUser->id) }}">
                                     @method('DELETE')
                                     @csrf
-                                    <input type="hidden" name="cancelled" value="{{\App\References\PlaceRequestStatus::PENDING}}">
                                     <button class="btn btn-link dropdown-item" type="submit"><small>Delete Your Sent Request</small></button>
                                 </form>
                             </div>
@@ -122,9 +121,39 @@
                 @endif
                 @endif
                 <div class="col-md-6 col-6">
-                    <a href="#" class="btn btn-primary btn-block">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
                         <span class="badge"> <i class="fas fa-comments"></i> Send Message</span>
-                    </a>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="POST" action="{{ route('lister.messages.store') }}">
+                                    @csrf
+                                    <input type="hidden" name="receiver" value="{{$user->slug}}">
+
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <textarea class="form-control @error('message') is-invalid @enderror" id="validationTextarea" placeholder="type your message..." rows="3" name="message">{{ old('message') }}</textarea>
+
+                                                @error('message')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

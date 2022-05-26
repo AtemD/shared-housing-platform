@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class MatchUsersJob implements ShouldQueue
+class RecalculateCompatibilityPercentageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,7 +22,11 @@ class MatchUsersJob implements ShouldQueue
      */
     public function __construct($user_A)
     {
-        $this->user_A = $user_A;
+        // Since the user update the question, this will affect all match percentages for the user
+        // both the users he matched to and the users that matched to him, two different scenarios
+        // Retrieve all the matches for the current user
+        // Foreach match calculate new compatibility percentage
+
     }
 
     /**

@@ -26,8 +26,9 @@ class PlaceFactory extends Factory
                 return User::factory()->create()->id;
             },
             'description' => $this->faker->text(400),
-            'rent_amount' => $this->faker->randomElement([100000, 200000, 300000, 400000, 500000, 600000, 800000, 1000000, 1200000, 1400000]),
-            'rent_period' => $this->faker->randomElement(array_keys(PeriodType::periodTypeToDaysList())),
+            'rent_amount' => $this->faker->randomElement([1000, 2000, 3000, 4000, 5000]),
+            'rent_period' => $this->faker->randomElement(['30']),
+            // 'rent_period' => $this->faker->randomElement(array_keys(PeriodType::periodTypeToDaysList())),
             'rent_currency' => $this->faker->randomElement(array_keys(Currency::currencyList())),
             'min_stay_period' => $this->faker->randomElement(array_keys(PeriodType::periodTypeToDaysList())),
             'featured_image_id' => function () {

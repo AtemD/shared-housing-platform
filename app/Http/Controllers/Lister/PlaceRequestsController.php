@@ -7,6 +7,7 @@ use App\Models\User;
 use App\References\PlaceRequestStatus;
 use App\References\UserType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlaceRequestsController extends Controller
 {
@@ -156,12 +157,15 @@ class PlaceRequestsController extends Controller
      */
     public function destroy($id)
     {
-        dd('hit delete');
+        // dd($id);
+        // dd('hit delete');
         // The user hitting this method has to be of type Lister,
         // The Lister cannot delete a request that is not his own
-        $validatedData = $request->validate([
-            'user_to_delete_request_from' => ['required', 'string', 'exists:users,slug'],
-        ]);
+        // $validatedData = $request->validate([
+        //     'user_to_delete_request_from' => ['required', 'string', 'exists:users,slug'],
+        // ]);
+
+        DB::table('place_requests')->where('id', $id)->delete();
 
         // $current_logged_in_user = auth()->user();
         // $user_to_send_request_to = User::where('slug', $validatedData['user_to_send_request_to'])->first();
@@ -192,5 +196,8 @@ class PlaceRequestsController extends Controller
         // }
 
         // return redirect()->back()->with('error', 'There was a problem sending this place request');
+
+        
+        return redirect()->back()->with('success', 'The request has been deleted successfully');
     }
 }

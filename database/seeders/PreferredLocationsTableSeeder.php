@@ -31,7 +31,7 @@ class PreferredLocationsTableSeeder extends Seeder
             foreach($random_localities as $locality){
                 $locality_ids[$locality->id] = ['city_id' => $city->id];
             }
-            $place_preference->preferredLocations()->attach($locality_ids);
+            $place_preference->preferredLocations()->createMany($locality_ids);
         });
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

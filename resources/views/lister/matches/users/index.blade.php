@@ -44,7 +44,7 @@
                                         </span>
                                         <hr>
                                         <p class="h6 mb-0 pb-0">{{$person->basicProfile->dob}} year old {{$person->basicProfile->gender}} looking for a place.</p>
-                                        <p class="text-muted mb-0 pb-0"><small>Piassa, Hawassa (my current location)</small></p>
+                                        <p class="text-muted mb-0 pb-0"><small>{{ $person->userLocation->locality->name }}, {{ $person->userLocation->city->name }}</small></p>
                                         <!-- <p class="text-muted mt-0 pt-0"><small class="font-weight-light">Private + 1 Bed</small></p> -->
 
                                         <div class="row">

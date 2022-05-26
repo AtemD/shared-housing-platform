@@ -18,7 +18,7 @@ class RegionsTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('regions')->truncate();
 
-        Region::factory()->times(10)->create();
+        Region::factory()->times(1)->create();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

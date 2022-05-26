@@ -38,6 +38,18 @@ class PlacePreference extends Model
         return $value/100;
     }
 
+    public function setMinRentAmountAttribute($value)
+    {
+        // convert the min rent amount to cents and store it in the database.
+        $this->attributes['min_rent_amount'] = $value * 100;
+    }
+
+    public function setMaxRentAmountAttribute($value)
+    {
+        // convert the min rent amount to cents and store it in the database.
+        $this->attributes['max_rent_amount'] = $value * 100;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

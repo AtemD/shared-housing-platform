@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lister;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\MatchListerWithSearchersJob;
 use App\Models\Lister;
 use App\Models\User;
 use App\References\ProfileStatus;
@@ -28,7 +29,20 @@ class UserMatchesController extends Controller
      */
     public function index()
     {
+        // dd('hit');
+
+        // MatchListerWithSearchersJob::dispatch(auth()->user());
         
+        // dd('done lister job');
+        // $people = auth()->user()->matches()->with([
+        //     'basicProfile.occupations',
+        //         'placePreference',
+        //         'userLocation.city',
+        //         'userLocation.locality'
+        // ])->simplePaginate();;
+        // dd($matches->toArray());
+        // dd('done processing job');
+
         $people = User::where('type', UserType::SEARCHER)
             ->where('profile_status', ProfileStatus::COMPLETE)
             ->with([
@@ -37,6 +51,8 @@ class UserMatchesController extends Controller
                 'userLocation.city',
                 'userLocation.locality'
             ])->simplePaginate();
+
+        // $people = matches->
 
         return view('lister/matches/users/index', compact('people'));
         

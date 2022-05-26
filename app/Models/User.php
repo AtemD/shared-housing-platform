@@ -195,4 +195,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class, 'sender_id');
     }
+
+    public function matches()
+    {
+        return $this->belongsToMany(User::class, 'matches', 'user_id', 'matched_user_id')
+            ->withPivot(['compatibility_percentage'])
+            ->withTimestamps();
+    }
 }
