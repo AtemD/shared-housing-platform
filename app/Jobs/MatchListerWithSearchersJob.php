@@ -7,6 +7,7 @@ use App\References\CompatibilityQuestionRelevance;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -52,7 +53,7 @@ class MatchListerWithSearchersJob implements ShouldQueue
         $searchers = (new User)->newQuery();
         $searchers = $searchers->whereHas(
             'placePreference',
-            function ($query) use ($latest_listers_place) {
+            function (Builder $query) use ($latest_listers_place) {
                 $query->where('min_rent_amount', '<=', $latest_listers_place->getAttributes()['rent_amount'])
                     ->where('max_rent_amount', '>=', $latest_listers_place->getAttributes()['rent_amount']);
             }
@@ -60,7 +61,7 @@ class MatchListerWithSearchersJob implements ShouldQueue
 
         $searchers = $searchers->whereHas(
             'placePreference.preferredLocations',
-            function ($query) use ($latest_listers_place) {
+            function (Builder $query) use ($latest_listers_place) {
                 $query->where('city_id', $latest_listers_place->placeLocation->city_id);
             },
         );
@@ -70,23 +71,26 @@ class MatchListerWithSearchersJob implements ShouldQueue
         ])->get();
 
         // Listers compatibility questions
-        $this->user_A = $this->user_A->load('compatibilityQuestions');
+        $user_A = $this->user_A->load('compatibilityQuestions');
+
+        // Obtain all questions answered by user_A
+        $user_A_compatibility_questions = collect($this->user_A->compatibilityQuestions->pluck('id'));
 
         // for each searcher obtained calculate compatibility percentage
-        $searchers->each(function ($user_B) use (&$user_A, $latest_listers_place) {
+        $searchers->each(function ($user_B) use ($user_A, $latest_listers_place, $user_A_compatibility_questions) {
+            $set_of_common_questions = collect();
 
-            // Obtain all questions answered by user_A
-            $user_A_compatibility_questions = $user_A->compatibilityQuestions->pluck('id');
+            if (!$user_A_compatibility_questions->isEmpty()) {
+                $user_B = $user_B->load([
+                    'compatibilityQuestions' => function ($query) use ($user_A_compatibility_questions) {
+                        return $query->whereIn('compatibility_question_id', $user_A_compatibility_questions);
+                    }
+                ]);
 
-            $user_B = $user_B->load([
-                'compatibilityQuestions' => function ($query) use ($user_A_compatibility_questions) {
-                    return $query->whereIn('compatibility_question_id', $user_A_compatibility_questions);
-                }
-            ]);
-
-            // Obtain the set of common questions user A and B have
-            $user_B_compatibility_questions = $user_B->compatibilityQuestions;
-            $set_of_common_questions = $user_B_compatibility_questions->pluck('id'); // Note: User B now contains the set of common questions
+                // Obtain the set of common questions user A and B have
+                $user_B_compatibility_questions = $user_B->compatibilityQuestions;
+                $set_of_common_questions = collect($user_B_compatibility_questions->pluck('id')); // Note: User B now contains the set of common questions
+            }
 
             // If the set of common question is empty, no further processing,
             // Indicate the match percentage as zero, for user A matched with user B

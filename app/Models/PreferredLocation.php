@@ -30,8 +30,8 @@ class PreferredLocation extends Model
         return $this->belongsTo(City::class);
     }
 
-    public function locality()
-    {
-        return $this->belongsTo(Locality::class);
-    }
+    // public function locality()
+    // {
+    //     return $this->belongsTo(Locality::class);
+    // }
 }

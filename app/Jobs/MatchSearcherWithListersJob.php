@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Models\Place;
-use App\Models\User;
 use App\References\CompatibilityQuestionRelevance;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -71,7 +70,7 @@ class MatchSearcherWithListersJob implements ShouldQueue
         // Searchers compatibility questions
         $user_A = $this->user_A->load('compatibilityQuestions');
 
-        $places->each(function ($place) use (&$user_A) {
+        $places->each(function ($place) use ($user_A) {
             // Get the eager loaded Lister of this place
             $user_B = $place->user;
 

@@ -54,7 +54,7 @@ class PlaceLocationsController extends Controller
         // dd('hit');
         $request->session()->put('place_setup.place_location', [
             'city' => $validatedData['city'],
-            'locality' => 12,  // $validatedData['locality'],
+            'locality' => null,  // $validatedData['locality'],
             'street' => $validatedData['street'],
             'specific_information' => $validatedData['specific_information'],
             'address' => $validatedData['address'],

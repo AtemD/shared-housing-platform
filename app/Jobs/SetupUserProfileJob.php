@@ -19,7 +19,7 @@ class SetupUserProfileJob implements ShouldQueue
     public $basic_profile;
     public $occupations;
     public $spoken_languages;
-    public $place;
+    // public $place;
     public $place_preferences;
     public $place_preference_preferred_locations;
     public $personal_preferences;
@@ -56,7 +56,7 @@ class SetupUserProfileJob implements ShouldQueue
 
 
         if (array_key_exists("place_preferences", $profile_setup_details)) {
-            $this->place_preferences = $profile_setup_details['place_preferences'];
+            // $this->place_preferences = $profile_setup_details['place_preferences'];
             $this->place_preference_preferred_locations = $profile_setup_details['place_preference_preferred_locations']; // contains the chosen city and localities
         } else {
             $this->place_preferences = null;
@@ -94,23 +94,23 @@ class SetupUserProfileJob implements ShouldQueue
 
             $basic_profile->spokenLanguages()->createMany($this->spoken_languages);
 
-            if ($this->place != null) {
-                $this->user->places()->create([
-                    'rent_amount' => $this->place['rent_amount'],
-                    'rent_period' => $this->place['rent_period'],
-                    'rent_currency' => $this->place['rent_currency'],
-                    'bills_included' => $this->place['bills_included'],
-                    'place_type' => $this->place['place_type'],
-                    'furnishing_type' => $this->place['furnishing_type'],
-                    'min_stay_period' => $this->place['min_stay_period'],
-                    'availability_date' => $this->place['availability_date'],
-                    'description' => $this->place['description'],
-                    // 'featured_image' => $this->place['featured_image']
-                ]);
+            // if ($this->place != null) {
+            //     $this->user->places()->create([
+            //         'rent_amount' => $this->place['rent_amount'],
+            //         'rent_period' => $this->place['rent_period'],
+            //         'rent_currency' => $this->place['rent_currency'],
+            //         'bills_included' => $this->place['bills_included'],
+            //         'place_type' => $this->place['place_type'],
+            //         'furnishing_type' => $this->place['furnishing_type'],
+            //         'min_stay_period' => $this->place['min_stay_period'],
+            //         'availability_date' => $this->place['availability_date'],
+            //         'description' => $this->place['description'],
+            //         // 'featured_image' => $this->place['featured_image']
+            //     ]);
 
 
-                // process the image, update the place  with an image id
-            }
+            //     // process the image, update the place  with an image id
+            // }
 
             // Note: a place  preference has locations too, locations that the user prefers
             if ($this->place_preferences != null) {
@@ -165,8 +165,8 @@ class SetupUserProfileJob implements ShouldQueue
         if($this->user->getAttributes()['type'] == UserType::SEARCHER){
             MatchSearcherWithListersJob::dispatch($this->user)->afterCommit();
         }
-        if($this->user->getAttributes()['type'] == UserType::LISTER){
-            MatchListerWithSearchersJob::dispatch($this->user)->afterCommit();
-        }
+        // if($this->user->getAttributes()['type'] == UserType::LISTER){
+        //     MatchListerWithSearchersJob::dispatch($this->user)->afterCommit();
+        // }
     }
 }

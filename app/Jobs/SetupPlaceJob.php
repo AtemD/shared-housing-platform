@@ -60,8 +60,8 @@ class SetupPlaceJob implements ShouldQueue
 
             // Insert the location
             $place->placeLocation()->create([
-                'city' => $this->place_location['city'],
-                'locality' => $this->place_location['locality'],
+                'city_id' => $this->place_location['city'],
+                'locality_id' => $this->place_location['locality'],
                 'street' => $this->place_location['street'],
                 'specific_information' => $this->place_location['specific_information'],
                 'address' => $this->place_location['address'],

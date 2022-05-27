@@ -7,6 +7,7 @@ use App\Models\Place;
 use App\Models\User;
 use App\References\ProfileStatus;
 use App\References\UserType;
+use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 // use Illuminate\Http\Request;
@@ -29,6 +30,40 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $set_of_common_questions = collect();
+        // dd($set_of_common_questions->isEmpty());
+        // $user = auth()->user()->load('compatibilityQuestions');
+        // $user_A_compatibility_questions = $user->compatibilityQuestions->pluck('id');
+        // dd($user_A_compatibility_questions->isEmpty());
+//         $place = auth()->user()->places()->with('placeLocation')->latest()->first();
+//         // dd($place->toArray());
+// // dd($place->getAttributes()['rent_amount']);
+//         $searchers = (new User)->newQuery();
+//         $searchers = $searchers->whereHas(
+//             'placePreference', function (Builder $query) use ($place) {
+//                 $query->where('min_rent_amount', '<=', $place->getAttributes()['rent_amount'])
+//                     ->where('max_rent_amount', '>=', $place->getAttributes()['rent_amount']);
+//             }
+//         );
+
+//         dd($searchers->get()->toArray());
+
+//         $searchers = $searchers->whereHas(
+//             'placePreference.preferredLocations', function (Builder $query) use ($place) {
+//                 $query->where('city_id', $place->placeLocation->city_id);
+//             },
+//         );
+
+//         // dd($searchers->toSql());
+//         dd($searchers->get()->toArray());
+
+//         $searchers = $searchers->with([
+//             'compatibilityQuestions'
+//         ])->get();
+
+//         dd($searchers);
+
+//         dd($place->toArray());
         // dd('hit');
         return view('lister/home');
         /**

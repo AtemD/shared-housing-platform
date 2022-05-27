@@ -2,8 +2,11 @@
 
 namespace App\Helpers;
 
+use App\Jobs\MatchListerWithSearchersJob;
 use App\Jobs\SetupPlaceJob;
+use App\Models\CompatibilityQuestion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Bus;
 
 class PlaceSetup
 {
@@ -51,14 +54,30 @@ class PlaceSetup
             }
 
             // Dispatch the account setup job
+            // Chain the SetupPlace Job with the Matching,
+
             SetupPlaceJob::dispatch(session('place_setup'), Auth::user());
+
+            Bus::chain([
+                new SetupPlaceJob(session('place_setup'), Auth::user()),
+                new MatchListerWithSearchersJob(auth()->user()),
+            ])->dispatch();
 
             // clear the session.
             // session()->forget('place_setup');
 
-            $next_step_url = route('lister.places.index');
-            session()->flash('success', 'Your place registration is currently being processed, you will be notified when complete.');
-            return $next_step_url;
+            // If the user has not answered any compatibility questions, redirect them to that page.
+            $question = auth()->user()->compatibilityQuestions()->first();
+
+            if($question == null){
+                $next_step_url = route('lister.compatibility-questions.unanswered.index');
+                session()->flash('success', 'Your place registration is currently being processed, please answer at some questions to be matched');
+                return $next_step_url;
+            } else{
+                $next_step_url = route('lister.places.index');
+                session()->flash('success', 'Your place registration is currently being processed, you will be notified when complete.');
+                return $next_step_url;
+            }
         }
     }
 

@@ -202,4 +202,11 @@ class User extends Authenticatable
             ->withPivot(['place_id', 'compatibility_percentage'])
             ->withTimestamps();
     }
+
+    public function placeMatches()
+    {
+        return $this->belongsToMany(Place::class, 'matches', 'user_id', 'place_id')
+            ->withPivot(['matched_user_id', 'compatibility_percentage'])
+            ->withTimestamps();
+    }
 }

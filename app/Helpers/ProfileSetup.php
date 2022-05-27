@@ -89,7 +89,8 @@ class ProfileSetup
             // session(['info' => 'Your profile is being setup, you will be notified when its complete']);
 
             if($user_type ==  UserType::LISTER){
-                $next_step_url = route('lister.compatibility-questions.unanswered.index');
+                $next_step_url = route('lister.place-setup.places.create');
+                // $next_step_url = route('lister.compatibility-questions.unanswered.index');
             }elseif($user_type ==  UserType::SEARCHER){
                 $next_step_url = route('searcher.compatibility-questions.unanswered.index');
             }else{
