@@ -120,12 +120,6 @@ class SetupUserProfileJob implements ShouldQueue
                     'rent_period' => $this->place_preferences['rent_period'],
                     'availability_date' => $this->place_preferences['availability_date'],
                 ]);
-                // $place_preference->
-
-                // $user->roles()->attach([
-                //     1 => ['expires' => $expires],
-                //     2 => ['expires' => $expires],
-                // ]);
 
                 $preferred_locations = [];
                 $city_id = $this->place_preference_preferred_locations['city'];
@@ -160,26 +154,19 @@ class SetupUserProfileJob implements ShouldQueue
 
 
             $this->user->interests()->attach($this->interests);
-
-            // Now dispatch another job to process the matching of this user and all the other matches
-
-            // If the user is a Searcher
-            // retrieve all place preferences,
-            // Search the DB for all place that match the place preference: date, price, location. 
-            // Then match the user with the owners of this places
-            // ...
-            // If the user is of type Lister
-            // Get all the users of type Searcher that match the current Listers place details
-            // The match each of the matches with the Lister
         }, 5);
 
-        // if($this->user->getAttributes()['type'] == UserType::SEARCHER){
-        //     MatchSearcherWithListersJob::dispatch($this->user)->afterCommit();
-        // }
+        // Now dispatch another job to process the matching of this user and all the other matches
 
-        // dd('hit none');
-        // if($this->user->getAttributes()['type'] == UserType::LISTER){
-        //     MatchListerWithSearchersJob::dispatch($this->user)->afterCommit();
-        // }
+        // Process the matching after the profile setup is done,
+        // Ensure that the database commits first, since we need to fetch the above records process the matching.
+
+        // Based on user type do the appropriate matching
+        if($this->user->getAttributes()['type'] == UserType::SEARCHER){
+            MatchSearcherWithListersJob::dispatch($this->user)->afterCommit();
+        }
+        if($this->user->getAttributes()['type'] == UserType::LISTER){
+            MatchListerWithSearchersJob::dispatch($this->user)->afterCommit();
+        }
     }
 }

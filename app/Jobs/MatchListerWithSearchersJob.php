@@ -26,6 +26,24 @@ class MatchListerWithSearchersJob implements ShouldQueue
     public function __construct($user_A)
     {
         $this->user_A = $user_A;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        // Consider doing a refactor, this handle function is too large.
+
+        // Here we match user_A and user_B, 
+        // consider using A and B to make the algo reusable
+        // Also Note user_A is being matched with user_B, not the other way round 
+        // Let user_A = Searcher
+        // let user_B = Lister
+        // We match the Searcher with Listers whose places match what the Searcher is looking for.
+
 
         // 1. get the listers latest registered place details with its location
         $latest_listers_place = $this->user_A->places()->with('placeLocation')->latest()->first();
@@ -51,10 +69,8 @@ class MatchListerWithSearchersJob implements ShouldQueue
             'compatibilityQuestions'
         ])->get();
 
-        // dd($searchers->toArray());
-
         // Listers compatibility questions
-        $this->$user_A = $this->user_A->load('compatibilityQuestions');
+        $this->user_A = $this->user_A->load('compatibilityQuestions');
 
         // for each searcher obtained calculate compatibility percentage
         $searchers->each(function ($user_B) use (&$user_A, $latest_listers_place) {
@@ -76,10 +92,22 @@ class MatchListerWithSearchersJob implements ShouldQueue
             // Indicate the match percentage as zero, for user A matched with user B
             if ($set_of_common_questions->isEmpty()) {
                 $total_match_percentage = 0;
-                $user_A->matches()->attach(
-                    $user_B->id,
-                    ['compatibility_percentage' => $total_match_percentage]
-                );
+                $match_record = $user_A->matches()->where('matched_user_id', $user_B->id)->first();
+
+                if ($match_record == null) {
+                    $user_A->matches()->attach(
+                        $user_B->id,
+                        ['compatibility_percentage' => $total_match_percentage, 'place_id' => $latest_listers_place->id]
+                    );
+                }
+
+                if ($match_record != null) {
+                    DB::table('matches')
+                        ->where(['user_id' => $user_A->id, 'matched_user_id' => $user_B->id])
+                        ->update([
+                            'compatibility_percentage' => $total_match_percentage
+                        ]);
+                }
             }
 
 
@@ -161,19 +189,5 @@ class MatchListerWithSearchersJob implements ShouldQueue
                 }
             }
         });
-
-        // $place = $this->user_A->places
-        dd('Matching Lister with searcher processing done');
-
-    }
-
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        //
     }
 }

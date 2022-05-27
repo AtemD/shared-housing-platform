@@ -43,14 +43,14 @@ class UserMatchesController extends Controller
         // dd($matches->toArray());
         // dd('done processing job');
 
-        $people = User::where('type', UserType::SEARCHER)
-            ->where('profile_status', ProfileStatus::COMPLETE)
-            ->with([
-                'basicProfile.occupations',
-                'placePreference',
-                'userLocation.city',
-                'userLocation.locality'
-            ])->simplePaginate();
+        // $people = User::where('type', UserType::SEARCHER)
+        //     ->where('profile_status', ProfileStatus::COMPLETE)
+        //     ->with([
+        //         'basicProfile.occupations',
+        //         'placePreference',
+        //         'userLocation.city',
+        //         'userLocation.locality'
+        //     ])->simplePaginate();
 
         // $people = matches->
 

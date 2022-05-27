@@ -199,7 +199,7 @@ class User extends Authenticatable
     public function matches()
     {
         return $this->belongsToMany(User::class, 'matches', 'user_id', 'matched_user_id')
-            ->withPivot(['compatibility_percentage'])
+            ->withPivot(['place_id', 'compatibility_percentage'])
             ->withTimestamps();
     }
 }
