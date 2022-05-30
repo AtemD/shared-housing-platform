@@ -15,10 +15,10 @@
                 </p>
                 <div class="row">
                     <div class="col-md-4">
-                        <p><a class="btn btn-block btn-outline-primary" href="#" role="button">List a Place &raquo;</a></p>
+                        <p><a class="btn btn-block btn-outline-primary" href="{{ route('register') }}" role="button">List a Place &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
-                        <p><a class="btn btn-block btn-outline-primary" href="#" role="button">Search for a Place &raquo;</a></p>
+                        <p><a class="btn btn-block btn-outline-primary" href="{{ route('register') }}" role="button">Search for a Place &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <!-- <p><a class="btn btn-outline-primary" href="#" role="button">Search Places &raquo;</a></p> -->
@@ -77,9 +77,9 @@
                                     </button>
 
                                     @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        <!-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
-                                        </a>
+                                        </a> -->
                                     @endif
                                     <hr>
 

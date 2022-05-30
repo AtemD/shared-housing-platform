@@ -33,9 +33,9 @@ class PlacesController extends Controller
      */
     public function index()
     {
-        $user = auth()->user()->load('places');
-
-        return view('lister/places/index', compact('user'));
+        $places = auth()->user()->places()->simplePaginate();
+        
+        return view('lister/places/index', compact('places'));
     }
 
     /**

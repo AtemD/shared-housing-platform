@@ -25,6 +25,7 @@ class CompatibilityQuestionAnswersController extends Controller
      */
     public function store(Request $request)
     {
+        dd('hit');
         // dd($request->toArray());
         // *Needed validation: make sure that the question answer choices chosen are actually for the question
         $validatedData = $request->validate([

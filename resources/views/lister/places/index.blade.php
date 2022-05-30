@@ -23,7 +23,7 @@
 
 <div class="container">
     <div class="row">
-        @forelse($user->places as $place)
+        @forelse($places as $place)
         <div class="col-md-12">
             <div class="card mb-3">
                 <div class="row no-gutters">
@@ -53,6 +53,13 @@
             </div>
         </div>
         @endforelse
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <ul class="pagination pagination-sm m-0 float-right">
+                {{ $places->appends(request()->input())->links()}}
+            </ul>
+        </div>
     </div>
 </div>
 @endsection

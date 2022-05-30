@@ -31,7 +31,7 @@ class ProfileSetup
             return $next_step_url;
         }
 
-        
+
         $user_type = auth()->user()->getAttributes()['type'];
 
         if ($current_step == self::STEP_1) {
@@ -88,17 +88,18 @@ class ProfileSetup
             // notify the user that their account if being setup
             // session(['info' => 'Your profile is being setup, you will be notified when its complete']);
 
-            if($user_type ==  UserType::LISTER){
+            if ($user_type ==  UserType::LISTER) {
                 $next_step_url = route('lister.place-setup.places.create');
-                // $next_step_url = route('lister.compatibility-questions.unanswered.index');
-            }elseif($user_type ==  UserType::SEARCHER){
+                session()->flash('success', 'You successfully completed your profile Setup! Please register your place.');
+                return $next_step_url;
+            } elseif ($user_type ==  UserType::SEARCHER) {
                 $next_step_url = route('searcher.compatibility-questions.unanswered.index');
-            }else{
+                session()->flash('success', 'You successfully completed your profile Setup! Please answer one or more of the following questions that will be used for matching purpose.');
+                return $next_step_url;
+            } else {
+                session()->flash('success', 'There was a problem with the profile setup.');
                 return redirect()->route('welcome');
             }
-
-            session()->flash('success', 'You successfully completed your profile Setup! Please answer one or more of the following questions that will be used for matching purpose.');
-            return $next_step_url;
         }
     }
 

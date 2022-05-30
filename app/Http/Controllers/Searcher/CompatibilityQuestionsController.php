@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Searcher;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\RecalculateCompatibilityPercentageJob;
+use App\Jobs\UpdateMatchesCompatibilityPercentageJob;
 use Illuminate\Http\Request;
 use App\Models\CompatibilityQuestion;
 use App\References\CompatibilityQuestionRelevance;
+use Illuminate\Support\Facades\Bus;
 
 class CompatibilityQuestionsController extends Controller
 {
@@ -75,6 +78,11 @@ class CompatibilityQuestionsController extends Controller
             'user_answer_id' => $validatedData["your_answer_question_{$request->question}"],
             'match_answer_id' => $validatedData["your_matches_answer_question_{$request->question}"]
         ]);
+
+        Bus::chain([
+            new RecalculateCompatibilityPercentageJob(auth()->user()),
+            new UpdateMatchesCompatibilityPercentageJob(auth()->user())
+        ])->dispatch();
         
         // redirect back with a success message
         return redirect()->back()->with('success', 'Your answer has been submitted successfully.');

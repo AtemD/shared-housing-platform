@@ -2,12 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
+use App\References\CompatibilityQuestionRelevance;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 
 class RecalculateCompatibilityPercentageJob implements ShouldQueue
 {
@@ -22,11 +26,7 @@ class RecalculateCompatibilityPercentageJob implements ShouldQueue
      */
     public function __construct($user_A)
     {
-        // Since the user update the question, this will affect all match percentages for the user
-        // both the users he matched to and the users that matched to him, two different scenarios
-        // Retrieve all the matches for the current user
-        // Foreach match calculate new compatibility percentage
-
+        $this->user_A = $user_A;
     }
 
     /**
@@ -36,6 +36,110 @@ class RecalculateCompatibilityPercentageJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        // Since the user update the question, this will affect all match percentages for the user
+        // both the users he matched to and the users that matched to him, two different scenarios
+        // Retrieve all the matches for the current user
+        // Foreach match calculate new compatibility percentage
+
+        $user_A = $this->user_A->load('compatibilityQuestions');
+
+        // Obtain all questions answered by user_A
+        $user_A_compatibility_questions = collect($this->user_A->compatibilityQuestions->pluck('id'));
+
+        // Obtain all the matches for the user_A
+        $user_A_matches = $user_A->matches()->get();
+
+        // $user_A_matches 
+        // for each searcher obtained calculate compatibility percentage
+        $user_A_matches->each(function ($user_B) use ($user_A, $user_A_compatibility_questions) {
+            $set_of_common_questions = collect();
+
+            if (!$user_A_compatibility_questions->isEmpty()) {
+                $user_B = $user_B->load([
+                    'compatibilityQuestions' => function ($query) use ($user_A_compatibility_questions) {
+                        return $query->whereIn('compatibility_question_id', $user_A_compatibility_questions);
+                    }
+                ]);
+
+                // Obtain the set of common questions user A and B have
+                $user_B_compatibility_questions = $user_B->compatibilityQuestions;
+                $set_of_common_questions = collect($user_B_compatibility_questions->pluck('id')); // Note: User B now contains the set of common questions
+            }
+
+            // Note: If the set of common question is empty, no further processing, the percentage remains zero, no need for update
+
+
+            // If there is a set of common questions between the Lister matches, then, do the calculation.
+            if (!$set_of_common_questions->isEmpty()) {
+                $user_A_total_question_weight = 0;
+                $user_B_weight_score_of_user_A_total_question_weight = 0;
+                $user_A_total_percentage_score = 0.00; // ***Warning, when calculating, prevent dividing by zero.
+
+                $user_B_total_question_weight = 0;
+                $user_A_weight_score_of_user_B_total_question_weight = 0;
+                $user_B_total_percentage_score = 0.00;
+
+                $total_match_percentage = 0.00;
+                // Calculate the scores and weight
+                $set_of_common_questions->each(function ($common_question_id) use (
+                    $user_A,
+                    $user_B,
+                    &$user_A_total_question_weight,
+                    &$user_B_total_question_weight,
+                    &$user_B_weight_score_of_user_A_total_question_weight,
+                    &$user_A_weight_score_of_user_B_total_question_weight
+                ) {
+
+                    // 1. CALCULATE HOW USER_B SATISFIED USER_A (that is how User_B score on User_A's question).
+
+                    // First get the question, 
+                    $user_A_common_question = $user_A->compatibilityQuestions->find($common_question_id);
+                    $user_B_common_question = $user_B->compatibilityQuestions->find($common_question_id);
+
+                    // Calculate and store the questions total weight score
+                    $question_relevance_user_A = $user_A_common_question->pivot->compatibility_question_relevance;
+                    $question_relevance_user_B = $user_B_common_question->pivot->compatibility_question_relevance;
+                    $user_A_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($question_relevance_user_A);
+                    $user_B_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($question_relevance_user_B);
+
+                    // If A's match_answer_id == B's user_answer_id, then give B the weight score as B got it right
+                    if ($user_A_common_question->pivot->match_answer_id == $user_B_common_question->pivot->user_answer_id) {
+                        $relevance_A = $user_A_common_question->pivot->compatibility_question_relevance;
+                        $user_B_weight_score_of_user_A_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($relevance_A);
+                    }
+
+                    // 2. CALCULATE HOW USER_A SATISFIED USER_B (that is how User_A scored on User_A's question)
+                    if ($user_B_common_question->pivot->match_answer_id == $user_A_common_question->pivot->user_answer_id) {
+                        $relevance_B = $user_B_common_question->pivot->compatibility_question_relevance;
+                        $user_A_weight_score_of_user_B_total_question_weight += CompatibilityQuestionRelevance::getRelevanceWeight($relevance_B);
+                    }
+                });
+
+                // Calculate percentage scores for each 
+                // Make sure not to divide by zero
+                $user_A_total_percentage_score = $user_A_total_question_weight == 0 ? 0 : ($user_B_weight_score_of_user_A_total_question_weight / $user_A_total_question_weight) * 100;
+                $user_B_total_percentage_score = $user_B_total_question_weight == 0 ? 0 : ($user_A_weight_score_of_user_B_total_question_weight / $user_B_total_question_weight) * 100;
+
+                // Calculate the total match percentage for both users.
+                $total_match_percentage = sqrt($user_A_total_percentage_score * $user_B_total_percentage_score);
+
+                // Insert the match percentage in the database
+
+                // First check if the record exists, to avoid duplicate entry database error
+                $match_record = $user_A->matches()->where('matched_user_id', $user_B->id)->first();
+
+                // If the record exists, check if the compatibility percentage needs an update
+                if ($match_record != null) {
+                    if ($total_match_percentage != $match_record->pivot->compatibility_percentage) {
+
+                        DB::table('matches')
+                            ->where(['user_id' => $user_A->id, 'matched_user_id' => $user_B->id])
+                            ->update(['compatibility_percentage' => $total_match_percentage]);
+                    }
+                }
+
+                // If the record does not exist, then do nothing
+            }
+        });
     }
 }

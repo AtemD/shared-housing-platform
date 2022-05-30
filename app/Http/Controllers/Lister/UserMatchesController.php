@@ -34,12 +34,12 @@ class UserMatchesController extends Controller
         // MatchListerWithSearchersJob::dispatch(auth()->user());
         
         // dd('done lister job');
-        // $people = auth()->user()->matches()->with([
-        //     'basicProfile.occupations',
-        //         'placePreference',
-        //         'userLocation.city',
-        //         'userLocation.locality'
-        // ])->simplePaginate();;
+        $people = auth()->user()->matches()->with([
+            'basicProfile.occupations',
+                'placePreference',
+                'userLocation.city',
+                'userLocation.locality'
+        ])->simplePaginate();;
         // dd($matches->toArray());
         // dd('done processing job');
 
