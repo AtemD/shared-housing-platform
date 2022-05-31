@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Searcher;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use App\Helpers\ProfileSetup;
+use App\Jobs\MatchSearcherWithListersJob;
 use App\Models\City;
 use App\Models\PlacePreference;
 use App\References\PeriodType;
@@ -120,7 +121,9 @@ class PlacePreferencesController extends Controller
             'availability_date' => $validatedData['availability_date'],
         ]);
         
-        return back()->with('success', 'Your Place Lisiting Preference Has Been Updated Successfully');
+        MatchSearcherWithListersJob::dispatch(auth()->user());
+
+        return back()->with('success', 'Your Place Listing Preference Updated Successfully. Place Matching is being processed');
     }
 
     /**

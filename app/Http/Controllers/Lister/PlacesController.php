@@ -56,8 +56,6 @@ class PlacesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->toArray());
-
         $validatedData = $request->validate([
             'rent_amount' => ['required', 'integer'],
             'rent_period' => ['required', 'integer'],

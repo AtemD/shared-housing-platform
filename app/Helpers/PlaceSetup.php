@@ -53,11 +53,7 @@ class PlaceSetup
                 return $next_step_url;
             }
 
-            // Dispatch the account setup job
             // Chain the SetupPlace Job with the Matching,
-
-            SetupPlaceJob::dispatch(session('place_setup'), Auth::user());
-
             Bus::chain([
                 new SetupPlaceJob(session('place_setup'), Auth::user()),
                 new MatchListerWithSearchersJob(auth()->user()),

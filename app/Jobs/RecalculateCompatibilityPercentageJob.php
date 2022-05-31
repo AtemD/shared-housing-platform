@@ -122,7 +122,7 @@ class RecalculateCompatibilityPercentageJob implements ShouldQueue
 
                 // Calculate the total match percentage for both users.
                 $total_match_percentage = sqrt($user_A_total_percentage_score * $user_B_total_percentage_score);
-
+                $total_match_percentage = $total_match_percentage == 100 ? 99.99 : $total_match_percentage;
                 // Insert the match percentage in the database
 
                 // First check if the record exists, to avoid duplicate entry database error

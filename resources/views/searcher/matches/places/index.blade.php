@@ -61,7 +61,7 @@
                                                         </a>
 
                                                         <span class="product-description">
-                                                            <a class="product-title text-decoration-none"><span class="badge badge-secondary">{{mt_rand(30, 99)}}% Compatible</a>
+                                                            <a class="product-title text-decoration-none"><span class="badge badge-secondary">{{$place->pivot->compatibility_percentage}}% Compatible</a>
                                                         </span>
 
                                                     </div>
@@ -73,21 +73,26 @@
                             </a>
                         </div>
                         @empty
-                        <p>No places to show</p>
-                        @endforelse
-                    </div>
-                    <div class="row pt-2">
-                        <div class="col-md-12">
-                            <ul class="pagination pagination-sm float-right">
-                                {{ $places->appends(request()->input())->links()}}
-                            </ul>
+                        <div class="col-12">
+                            <div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-ban"></i> info!</h5>
+                                No places Match you yet. Refresh page or update your place preferences.
+                            </div>
+                            @endforelse
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-12">
+                                <ul class="pagination pagination-sm float-right">
+                                    {{ $places->appends(request()->input())->links()}}
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
+                <!-- /.nav-tabs-custom -->
             </div>
-            <!-- /.nav-tabs-custom -->
         </div>
     </div>
-</div>
-@endsection
+    @endsection

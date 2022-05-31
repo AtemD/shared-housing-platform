@@ -34,7 +34,7 @@ class PlaceMatchesController extends Controller
             'placeLocation.city',
             'placeLocation.locality'
         ])->simplePaginate();
-
+// dd($places->toArray());
         return view('searcher/matches/places/index', compact('places'));
     }
 

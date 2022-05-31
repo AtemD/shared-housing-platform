@@ -30,6 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
+
         // $set_of_common_questions = collect();
         // dd($set_of_common_questions->isEmpty());
         // $user = auth()->user()->load('compatibilityQuestions');

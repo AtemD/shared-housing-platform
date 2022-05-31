@@ -18,7 +18,7 @@ class CompatibilityQuestionsTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('compatibility_questions')->truncate();
 
-        CompatibilityQuestion::factory()->times(50)->create();
+        CompatibilityQuestion::factory()->times(5)->create();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

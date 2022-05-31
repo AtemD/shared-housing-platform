@@ -131,8 +131,10 @@ class CompatibilityQuestionsController extends Controller
             'match_answer_id' => $validatedData["your_matches_answer_question_{$request->question}"]
         ]);
 
-        // Notify the user about this activity.
-        // the account number, the user name, the amount deposited, the time it was deposited
+        Bus::chain([
+            new RecalculateCompatibilityPercentageJob(auth()->user()),
+            new UpdateMatchesCompatibilityPercentageJob(auth()->user())
+        ])->dispatch();
 
         return back()->with('success', 'Question answer updated successfully');
     }

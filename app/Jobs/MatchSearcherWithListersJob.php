@@ -50,7 +50,7 @@ class MatchSearcherWithListersJob implements ShouldQueue
         $place_preferences = $this->user_A->placePreference()->firstOrFail();
 
         // 2. Retrieve all the preferred locations of the place preference and extract the city_id
-        $city_id = $place_preferences->preferredLocations()->get()->pluck('city_id')[0];
+        $city_id = $place_preferences->preferredLocations()->get()->pluck('pivot.city_id')[0];
 
         // 3. Using the Searchers place preference, obtain all the matching listed places together with their Listers
         $places = (new Place)->newQuery();
@@ -69,6 +69,10 @@ class MatchSearcherWithListersJob implements ShouldQueue
 
         // Searchers compatibility questions
         $user_A = $this->user_A->load('compatibilityQuestions');
+
+        // *optimize this part for large match results, reduce memory use here.
+        $matched_places_to_delete = $user_A->placeMatches()->get()->pluck('id');
+        $user_A->placeMatches()->detach($matched_places_to_delete);
 
         $places->each(function ($place) use ($user_A) {
             // Get the eager loaded Lister of this place
@@ -89,8 +93,8 @@ class MatchSearcherWithListersJob implements ShouldQueue
 
             // If the set of common question is empty, no further processing,
             // Indicate the match percentage as zero, for user A matched with user B
-            if ($set_of_common_questions->isEmpty()) {
-                $total_match_percentage = 0;
+            if ($set_of_common_questions->isEmpty() || $set_of_common_questions == null) {
+                $total_match_percentage = 0.00;
 
                 $match_record = $user_A->matches()->where('matched_user_id', $user_B->id)->first();
 
@@ -164,6 +168,7 @@ class MatchSearcherWithListersJob implements ShouldQueue
 
                 // Calculate the total match percentage for both users.
                 $total_match_percentage = sqrt($user_A_total_percentage_score * $user_B_total_percentage_score);
+                $total_match_percentage = $total_match_percentage == 100 ? 99.99 : $total_match_percentage;
 
                 // Insert the match percentage in the database
 
