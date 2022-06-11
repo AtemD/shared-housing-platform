@@ -33,6 +33,11 @@ class CompatibilityQuestionsController extends Controller
         ]));
     }
 
+    public function create()
+    {
+        return view('admin/compatibility-questions/create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -9,8 +9,12 @@ use Illuminate\Http\Request;
 // use App\Models\UserAccountStatus;
 // use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\References\UserAccountStatus;
+use App\References\UserVerificationStatus;
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+
 // use Spatie\Permission\Models\Permission;
 
 class UsersController extends Controller
@@ -36,6 +40,14 @@ class UsersController extends Controller
 
         return view('admin/users/index', compact([
             'users',
+        ]));
+    }
+
+    public function create()
+    {
+        $compatibility_questions = 'this';
+        return view('admin/users/create', compact([
+            'compatibility_questions',
         ]));
     }
 
@@ -71,9 +83,17 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {   
+    {  
+        $account_statuses = UserAccountStatus::userAccountStatusList();
+        $verification_statuses = UserVerificationStatus::userVerificationStatusList();
+        // dd($account_statuses);
+        // foreach($account_statuses as $key => $value){
+        //     dd($key . '--' . $value);
+        // }
         return view('admin/users/edit', compact(
-            'user'
+            'user',
+            'account_statuses',
+            'verification_statuses'
         ));
     }
 
@@ -86,19 +106,31 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'. $user->id,
-        ]);
+        if($request->has('update_account_status')){
+            $validatedData = $request->validate([
+                'account_status' => ['required', 'integer', Rule::in(array_keys(UserAccountStatus::userAccountStatusList()))],
+            ]);
 
-        $user->update([
-            'first_name' => $validatedData['first_name'],
-            'last_name' => $validatedData['last_name'],
-            'email' => $validatedData['email'],
-        ]);
+            $user->update([
+                'account_status' => $validatedData['account_status'],
+            ]);
 
-        return back()->with('success', 'User Details Updated Successfully');
+            return redirect()->back()->with('success', 'Your have successfully Updated the Users Account Status');
+        }
+
+        if($request->has('update_verification_status')){
+            $validatedData = $request->validate([
+                'verification_status' => ['required', 'integer', Rule::in(array_keys(UserVerificationStatus::userVerificationStatusList()))],
+            ]);
+
+            $user->update([
+                'verification_status' => $validatedData['verification_status'],
+            ]);
+
+            return redirect()->back()->with('success', 'Your have successfully Updated the Users Verification Status');
+        }
+
+        return back()->with('error', 'There was a problem with the udpate');
     }
 
     /**
@@ -109,7 +141,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('delete', User::class);
+        $this->authorize('delete', $user);
 
         $user->delete();
 

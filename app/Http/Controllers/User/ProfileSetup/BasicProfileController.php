@@ -52,7 +52,7 @@ class BasicProfileController extends Controller
             'occupations' => ['required', 'min:1', 'max:255'],
             'spoken_languages' => ['required', 'min:1', 'max:255'],
         ]);
-// dd($request->toArray());
+        
         // Store the validated data in the session
         $request->session()->put('profile_setup.basic_profile', [
             'gender' => $validatedData['gender'],
@@ -63,7 +63,7 @@ class BasicProfileController extends Controller
         $request->session()->put('profile_setup.occupations', $validatedData['occupations']);
 
         $request->session()->put('profile_setup.spoken_languages', $validatedData['spoken_languages']);
-// dd($request->session()->get('profile_setup'));
+
         $next_step = ProfileSetup::determineNextStep(ProfileSetup::STEP_1);
         return redirect($next_step);
     }

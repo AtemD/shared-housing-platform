@@ -174,12 +174,6 @@
                                         <div class="modal fade" id="delete-user-{{$user->id}}" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title"><b class="text-danger">Delete</b> {{$user->full_name}}</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </button>
-                                                    </div>
                                                     <form role="form" method="POST" action="{{ route('admin.users.destroy', ['user' => $user]) }}">
                                                         @method('DELETE')
                                                         @csrf

@@ -97,6 +97,9 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\PlacesController as AdminPlacesController;
 use App\Http\Controllers\Admin\CompatibilityQuestionsController as AdminCompatibilityQuestionsController;
+// Compatibility questions setup controllers
+use App\Http\Controllers\Admin\CompatibilityQuestionSetup\CompatibilityQuestionsController as AdminCompatibilityQuestionsSetupController;
+use App\Http\Controllers\Admin\CompatibilityQuestionSetup\CompatibilityQuestionAnswersController as AdminCompatibilityQuestionAnswersSetupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -575,6 +578,8 @@ Route::prefix('admin')->group(function () {
     // Admin Users
     Route::get('users', [AdminUsersController::class, 'index'])
         ->name('admin.users.index');
+    Route::get('users/create', [AdminUsersController::class, 'create'])
+        ->name('admin.users.create');
     Route::post('users', [AdminUsersController::class, 'store'])
         ->name('admin.users.store');
     Route::get('users/{user}/edit', [AdminUsersController::class, 'edit'])
@@ -599,6 +604,8 @@ Route::prefix('admin')->group(function () {
     // Admin Users
     Route::get('compatibility-questions', [AdminCompatibilityQuestionsController::class, 'index'])
         ->name('admin.compatibility-questions.index');
+    Route::get('compatibility-questions/create', [AdminCompatibilityQuestionsController::class, 'create'])
+        ->name('admin.compatibility-questions.create');
     Route::post('compatibility-questions', [AdminCompatibilityQuestionsController::class, 'store'])
         ->name('admin.compatibility-questions.store');
     Route::get('compatibility-questions/{compatibility_question}/edit', [AdminCompatibilityQuestionsController::class, 'edit'])
@@ -607,6 +614,19 @@ Route::prefix('admin')->group(function () {
         ->name('admin.compatibility-questions.update');
     Route::delete('compatibility-questions/{compatibility_question}', [AdminCompatibilityQuestionsController::class, 'destroy'])
         ->name('admin.compatibility-questions.destroy');
+
+
+    // Compatibility Questions Setup
+    Route::resource('compatibility-questions-setup/question', AdminCompatibilityQuestionsSetupController::class)
+        ->only(['create', 'store'])
+        ->names(['create' => 'admin.compatibility-question-setup.question.create', 'store' => 'admin.compatibility-question-setup.question.store']);
+
+    Route::resource('compatibility-questions-setup/answers', AdminCompatibilityQuestionAnswersSetupController::class)
+        ->only(['create', 'store'])
+        ->names(['create' => 'admin.compatibility-question-setup.answer.create', 'store' => 'admin.compatibility-question-setup.answer.store']);
+
+    Route::delete('compatibility-questions-setup/answers/{answer_choice_id}', [AdminCompatibilityQuestionAnswersSetupController::class, 'destroy'])
+    ->name('admin.compatibility-question-setup.answer.destroy');
 });
 
 

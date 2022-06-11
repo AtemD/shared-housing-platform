@@ -39,25 +39,10 @@
                                     </div>
                                 </form>
                                 <div class="card-tools">
-                                    <button href="#add-question" class="btn btn-primary" data-toggle="modal" data-target="#add-question">
+                                    <a href="{{ route('admin.compatibility-question-setup.question.create') }}" class="btn btn-primary">
                                         <i class="fas fa-plus xs"></i>
                                         Add Question
-                                    </button>
-
-                                    <div class="modal fade" id="add-question" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog add-question">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Add New Question</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -170,12 +155,6 @@
                                         <div class="modal fade" id="delete-question-{{$question->id}}" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title"><b class="text-danger">Delete</b> {{$question->slug}}</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </button>
-                                                    </div>
                                                     <form role="form" method="POST" action="{{ route('admin.compatibility-questions.destroy', ['compatibility_question' => $question->id]) }}">
                                                         @method('DELETE')
                                                         @csrf
