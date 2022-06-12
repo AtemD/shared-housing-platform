@@ -45,6 +45,12 @@ class DatabaseSeeder extends Seeder
         $this->call(PlaceRequestsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
 
+        $this->call(RolesTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(RoleHasPermissionsTableSeeder::class);
+        $this->call(ModelHasRolesTableSeeder::class);
+        $this->call(ModelHasPermissionsTableSeeder::class);
+
         // CompatibilityQuestion::factory()->times(3)->create();
     }
 }

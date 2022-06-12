@@ -54,7 +54,7 @@
           </p>
         </a>
       </li>
-      <li class="nav-item has-treeview {{ (request()->segment(3) == 'settings') ? 'menu-open' : '' }}">
+      <li class="nav-item has-treeview {{ (request()->segment(2) == 'settings') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-cog"></i>
           <p>
@@ -98,7 +98,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview {{ (request()->segment(4) == 'locations') ? 'menu-open' : '' }}">
+          <li class="nav-item has-treeview {{ (request()->segment(3) == 'locations') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
@@ -108,19 +108,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link {{ (request()->routeIs('admin.countries.*')) ? 'active' : '' }}">
+                <a href="{{ route('admin.countries.index') }}" class="nav-link {{ (request()->routeIs('admin.countries.*')) ? 'active' : '' }}">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>countries</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link {{ (request()->routeIs('admin.regions.*')) ? 'active' : '' }}">
+                <a href="{{ route('admin.regions.index') }}" class="nav-link {{ (request()->routeIs('admin.regions.*')) ? 'active' : '' }}">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>regions</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link {{ (request()->routeIs('admin.cities.*')) ? 'active' : '' }}">
+                <a href="{{ route('admin.cities.index') }}" class="nav-link {{ (request()->routeIs('admin.cities.*')) ? 'active' : '' }}">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>cities</p>
                 </a>

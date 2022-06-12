@@ -98,6 +98,10 @@ use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\PlacesController as AdminPlacesController;
 use App\Http\Controllers\Admin\CompatibilityQuestionsController as AdminCompatibilityQuestionsController;
 use App\Http\Controllers\Admin\AnswerChoicesController as AdminAnswerChoicesController;
+use App\Http\Controllers\Admin\CountriesController as AdminCountriesController;
+use App\Http\Controllers\Admin\RegionsController as AdminRegionsController;
+use App\Http\Controllers\Admin\CitiesController as AdminCitiesController;
+
 
 // Compatibility questions setup controllers
 use App\Http\Controllers\Admin\CompatibilityQuestionSetup\CompatibilityQuestionsController as AdminCompatibilityQuestionsSetupController;
@@ -639,6 +643,39 @@ Route::prefix('admin')->group(function () {
         'store'     => 'admin.answer-choices.store',
         'update'    => 'admin.answer-choices.update',
         'destroy'   => 'admin.answer-choices.destroy'
+    ]);
+
+    Route::resource('settings/locations/countries', AdminCountriesController::class)->names([
+        'index'     => 'admin.countries.index',
+        'create'    => 'admin.countries.create',
+        'store'     => 'admin.countries.store',
+        'show'      => 'admin.countries.show',
+        'edit'      => 'admin.countries.edit',
+        'store'     => 'admin.countries.store',
+        'update'    => 'admin.countries.update',
+        'destroy'   => 'admin.countries.destroy'
+    ]);
+
+    Route::resource('settings/locations/regions', AdminRegionsController::class)->names([
+        'index'     => 'admin.regions.index',
+        'create'    => 'admin.regions.create',
+        'store'     => 'admin.regions.store',
+        'show'      => 'admin.regions.show',
+        'edit'      => 'admin.regions.edit',
+        'store'     => 'admin.regions.store',
+        'update'    => 'admin.regions.update',
+        'destroy'   => 'admin.regions.destroy'
+    ]);
+
+    Route::resource('settings/locations/cities', AdminCitiesController::class)->names([
+        'index'     => 'admin.cities.index',
+        'create'    => 'admin.cities.create',
+        'store'     => 'admin.cities.store',
+        'show'      => 'admin.cities.show',
+        'edit'      => 'admin.cities.edit',
+        'store'     => 'admin.cities.store',
+        'update'    => 'admin.cities.update',
+        'destroy'   => 'admin.cities.destroy'
     ]);
 });
 
