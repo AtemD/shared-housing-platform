@@ -97,6 +97,8 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\PlacesController as AdminPlacesController;
 use App\Http\Controllers\Admin\CompatibilityQuestionsController as AdminCompatibilityQuestionsController;
+use App\Http\Controllers\Admin\AnswerChoicesController as AdminAnswerChoicesController;
+
 // Compatibility questions setup controllers
 use App\Http\Controllers\Admin\CompatibilityQuestionSetup\CompatibilityQuestionsController as AdminCompatibilityQuestionsSetupController;
 use App\Http\Controllers\Admin\CompatibilityQuestionSetup\CompatibilityQuestionAnswersController as AdminCompatibilityQuestionAnswersSetupController;
@@ -627,6 +629,17 @@ Route::prefix('admin')->group(function () {
 
     Route::delete('compatibility-questions-setup/answers/{answer_choice_id}', [AdminCompatibilityQuestionAnswersSetupController::class, 'destroy'])
     ->name('admin.compatibility-question-setup.answer.destroy');
+
+    Route::resource('answer-choices', AdminAnswerChoicesController::class)->names([
+        'index'     => 'admin.answer-choices.index',
+        'create'    => 'admin.answer-choices.create',
+        'store'     => 'admin.answer-choices.store',
+        'show'      => 'admin.answer-choices.show',
+        'edit'      => 'admin.answer-choices.edit',
+        'store'     => 'admin.answer-choices.store',
+        'update'    => 'admin.answer-choices.update',
+        'destroy'   => 'admin.answer-choices.destroy'
+    ]);
 });
 
 

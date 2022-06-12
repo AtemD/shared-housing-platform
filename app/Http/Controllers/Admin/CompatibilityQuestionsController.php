@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CompatibilityQuestion;
+use App\References\VerificationStatus;
 
 class CompatibilityQuestionsController extends Controller
 {
@@ -69,11 +70,15 @@ class CompatibilityQuestionsController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(CompatibilityQuestion $compatibility_question)
     {   
-        // return view('admin/users/edit', compact(
-        //     'user'
-        // ));
+        // dd($compatibility_question->toArray());
+        $compatibility_question = $compatibility_question->load('answerChoices');
+        $verification_statuses = VerificationStatus::verificationStatusList();
+        return view('admin/compatibility-questions/edit', compact(
+            'compatibility_question',
+            'verification_statuses'
+        ));
     }
 
     /**

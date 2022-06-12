@@ -27,53 +27,52 @@
                 <div class="card card-default card-outline card-primary mt-4 shadow">
                     <div class="card-header">
                         <h5><span class="badge badge-primary text-wrap">(Step 2/2)</span> <b>{{ __('Answers') }}</b></h4>
-                            <!-- <small class="text-muted">Here you specify your basic profile information.</small> -->
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.compatibility-question-setup.answer.store') }}">
-                            @csrf
 
-                            <div class="form-group row">
-                                @if(session()->has('compatibility_question_setup.question.title'))
-                                <div class="col-12">
-                                    <label for="title">Question</label><br>
-                                    {{session('compatibility_question_setup.question.title')}}
-                                </div>
-                                @endif
 
-                                @if(session()->has('compatibility_question_setup.answer'))
-                                <div class="col-12">
-                                    <label for="choice">Choices Added</label>
-                                </div>
-                                @foreach(session('compatibility_question_setup.answer') as $key => $choice)
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="d-flex justify-content-between">
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" disabled>
-                                                    <label class="custom-control-label font-weight-normal">{{$choice['title']}}</label>
-                                                </div>
-                                                
-                                                <form role="form" method="POST" action="{{ route('admin.compatibility-question-setup.answer.destroy', ['answer_choice_id' => 100]) }}">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <input type="hidden" name="answer_choice" value="{{ $key }}">
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                        <i class="fas fa-trash">
-                                                            {{$key}}
-                                                        </i>
-                                                    </button>
-                                                </form>
+                        <div class="form-group row">
+                            @if(session()->has('compatibility_question_setup.question.title'))
+                            <div class="col-12">
+                                <label for="title">Question</label><br>
+                                {{session('compatibility_question_setup.question.title')}}
+                            </div>
+                            @endif
+
+                            @if(session()->has('compatibility_question_setup.answer'))
+                            <div class="col-12">
+                                <label for="choice">Choices Added</label>
+                            </div>
+                            @foreach(session('compatibility_question_setup.answer') as $key => $choice)
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" disabled>
+                                                <label class="custom-control-label font-weight-normal">{{$choice['title']}}</label>
                                             </div>
+
+                                            <form role="form" method="POST" action="{{ route('admin.compatibility-question-setup.answer.destroy', ['answer_choice_id' => $key]) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="answer_choice" value="{{ $key }}">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm mb-1">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
-                                @endif
                             </div>
+                            @endforeach
+                            @endif
+                        </div>
 
+                        <form method="POST" action="{{ route('admin.compatibility-question-setup.answer.store') }}">
+                            @csrf
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label for="title">Answer Choices</label>
@@ -91,7 +90,10 @@
                                     </button>
                                 </div>
                             </div>
+                        </form>
 
+                        <form method="POST" action="{{ route('admin.compatibility-question-setup.answer.store') }}">
+                            @csrf
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 d-flex justify-content-between">
                                     <a href="{{ route('admin.compatibility-question-setup.question.create') }}" class="btn btn-warning">
