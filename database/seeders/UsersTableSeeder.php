@@ -38,6 +38,24 @@ class UsersTableSeeder extends Seeder
             'type' => UserType::ADMIN,
         ]);
 
+        User::factory()->create([
+            'first_name' => 'Lister',
+            'last_name' => 'Lister',
+            'email' => 'lister@example.com',
+            'verification_status' => UserVerificationStatus::VERIFIED,
+            'account_status' => UserAccountStatus::ACTIVATED, 
+            'type' => UserType::LISTER,
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Searcher',
+            'last_name' => 'Searcher',
+            'email' => 'searcher@example.com',
+            'verification_status' => UserVerificationStatus::VERIFIED,
+            'account_status' => UserAccountStatus::ACTIVATED, 
+            'type' => UserType::SEARCHER,
+        ]);
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

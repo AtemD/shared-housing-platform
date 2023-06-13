@@ -29,12 +29,12 @@ class PlaceMatchesController extends Controller
     {
         // Obtain all the user matches
         $places = auth()->user()->placeMatches()->with([
-            'user', 
+            'user',
             'amenities',
             'placeLocation.city',
             'placeLocation.locality'
         ])->simplePaginate();
-// dd($places->toArray());
+        // dd($places->toArray());
         return view('searcher/matches/places/index', compact('places'));
     }
 
@@ -53,6 +53,20 @@ class PlaceMatchesController extends Controller
             'placeLocation.locality',
         ]);
 
-        return view('searcher/matches/places/show', compact('place'));
+        // Get the current authenticated user match that owns the retrieved place above
+        $auth_user = auth()->user()->load([
+            'matches' => function ($query) use($place){
+                $query->where('matched_user_id', $place->user->id)->first();
+            }
+        ]);
+
+        $placeRequestSentBySearcherToLister = auth()->user()->sentPlaceRequests()->where('place_id', $place->id)->first();
+
+        // dd($placeRequestSentBySearcherToLister->toArray());
+
+        // dd($auth_user->toArray());
+        // dd($auth_user->matches->first()->pivot->compatibility_percentage);
+
+        return view('searcher/matches/places/show', compact('place', 'auth_user', 'placeRequestSentBySearcherToLister'));
     }
 }

@@ -29,7 +29,7 @@ class MessagesController extends Controller
     {
         $messages = auth()->user()->messages()->paginate(6);
 // dd($messages->toArray());
-        return view('searcher/messages/index', compact('messages'));
+        return view('lister/messages/index', compact('messages'));
     }
 
     /**
@@ -50,8 +50,6 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(auth()->user());
-        // dd($request->toArray());
         $validatedData = $request->validate([
             'message' => ['required', 'max:1000'],
             'receiver' => ['required', 'max:1000'],

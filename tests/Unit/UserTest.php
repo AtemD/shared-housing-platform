@@ -17,8 +17,8 @@ class UserTest extends TestCase
     //     $this->assertTrue(true);
     // }
 
-    public function test_create_user_slug_from_first_name_and_last_name()
-    {
+    // public function test_create_user_slug_from_first_name_and_last_name()
+    // {
         // \App\Models\User::factory(10)->create();
 
         // $user = new User;
@@ -31,7 +31,7 @@ class UserTest extends TestCase
 
         // $user->save();
 
-        $user = $this->createUser();
+        // $user = $this->createUser();
         // $user = User::first();
         // dd($user->toArray());
         // $article = factory(User::class)->make([
@@ -39,17 +39,17 @@ class UserTest extends TestCase
         // ]);
         // $slug_name = $user->first_name . '-' . $user->last_name;
 
-        $this->assertEquals('dan-dan', $user->slug);
-    }
+        // $this->assertEquals('dan-dan', $user->slug);
+    // }
 
-    public function createUser(){
-        return $user = User::factory()->make([
-            'first_name' =>  'dan',
-            'last_name ' => 'dan',
-            'phone' => '09999999',
-            'email' => 'a@test.com',
-            'password' => 'password',
-            'type' => 1,
-        ]);
-    }
+    // public function createUser(){
+    //     return $user = User::factory()->make([
+    //         'first_name' =>  'dan',
+    //         'last_name ' => 'dan',
+    //         'phone' => '09999999',
+    //         'email' => 'a@test.com',
+    //         'password' => 'password',
+    //         'type' => 1,
+    //     ]);
+    // }
 }

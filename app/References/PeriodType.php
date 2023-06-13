@@ -26,9 +26,9 @@ class PeriodType
      {
         return [
             self::MONTH => 'month(s)',
-            self::WEEK => 'week(s)',
-            self::DAY => 'day(s)',
-            self::YEAR => 'year(s)'
+            // self::WEEK => 'week(s)',
+            // self::DAY => 'day(s)',
+            // self::YEAR => 'year(s)'
         ];
      }
 
@@ -41,9 +41,9 @@ class PeriodType
     {
        return [
            self::MONTH => '/month',
-           self::WEEK => '/week',
-           self::DAY => '/day',
-           self::YEAR => '/year'
+        //    self::WEEK => '/week',
+        //    self::DAY => '/day',
+        //    self::YEAR => '/year'
        ];
     }
 
@@ -51,9 +51,9 @@ class PeriodType
      {
         return [
             self::DAYS_PER_MONTH => 'days per month',
-            self::DAYS_PER_WEEK => 'days per week',
-            self::DAYS_PER_DAY => 'days per day',
-            self::DAYS_PER_YEAR => 'days per year'
+            // self::DAYS_PER_WEEK => 'days per week',
+            // self::DAYS_PER_DAY => 'days per day',
+            // self::DAYS_PER_YEAR => 'days per year'
         ];
      }
 

@@ -40,7 +40,11 @@
                                             @endif
                                         </p>
                                         <span class="product-description mt-0 pt-0">
-                                            <a class="product-title"><span class="badge badge-success">80% Compatible</a>
+                                            @if($person->pivot->compatibility_percentage > 50)
+                                            <a class="product-title"><span class="badge badge-success">{{$person->pivot->compatibility_percentage}}% Compatible</a>
+                                            @else
+                                            <a class="product-title"><span class="badge badge-secondary">{{$person->pivot->compatibility_percentage}}% Compatible</a>
+                                            @endif
                                         </span>
                                         <hr>
                                         <p class="h6 mb-0 pb-0">{{$person->basicProfile->dob}} year old {{$person->basicProfile->gender}} looking for a place.</p>

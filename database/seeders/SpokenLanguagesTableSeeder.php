@@ -23,7 +23,10 @@ class SpokenLanguagesTableSeeder extends Seeder
         
         // For each basic profile generate a couple of occupations
         $basic_profiles->each(function($profile){
+            $language = ['English', 'amharic'];
+
             SpokenLanguage::factory()->times(mt_rand(1, 2))->create([
+                'name' => $language[mt_rand(0, 1)],
                 'basic_profile_id' => $profile->id,
             ]);
         });

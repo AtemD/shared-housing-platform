@@ -12,7 +12,7 @@ class ProfileSetup
     // profile setup steps
     const STEP_START        = "start";
     const STEP_1            = "basic_profile";
-    const STEP_2_LISTER     = "place";
+    // const STEP_2_LISTER     = "place";
     const STEP_2_SEARCHER   = "place_preference";
     const STEP_3            = "personal_preferences";
     const STEP_4            = "compatibility_preferences";
@@ -35,10 +35,10 @@ class ProfileSetup
         $user_type = auth()->user()->getAttributes()['type'];
 
         if ($current_step == self::STEP_1) {
-            if ($user_type == UserType::LISTER) {
-                $next_step_url = route('user.profile-setup.places.create');
-                return $next_step_url;
-            }
+            // if ($user_type == UserType::LISTER) {
+            //     $next_step_url = route('user.profile-setup.places.create');
+            //     return $next_step_url;
+            // }
 
             if ($user_type == UserType::SEARCHER) {
                 $next_step_url = route('user.profile-setup.place-preferences.create');
@@ -46,7 +46,7 @@ class ProfileSetup
             }
         }
 
-        if ($current_step == self::STEP_2_LISTER || $current_step == self::STEP_2_SEARCHER) {
+        if ($current_step == self::STEP_2_SEARCHER || $current_step == self::STEP_1) {
             $next_step_url = route('user.profile-setup.personal-preferences.create');
             return $next_step_url;
         }
@@ -111,9 +111,9 @@ class ProfileSetup
             $is_complete = false;
         }
 
-        if ((!session()->has('profile_setup.places')) && auth()->user()->getAttributes()['type'] == UserType::LISTER) {
-            $is_complete = false;
-        }
+        // if ((!session()->has('profile_setup.places')) && auth()->user()->getAttributes()['type'] == UserType::LISTER) {
+        //     $is_complete = false;
+        // }
 
         if ((!session()->has('profile_setup.place_preferences')) && auth()->user()->getAttributes()['type'] == UserType::SEARCHER) {
             $is_complete = false;

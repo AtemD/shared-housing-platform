@@ -90,7 +90,7 @@
                     @endif
                 </div>
                 @else
-                <div class="col-md-6 col-6">
+                <!-- <div class="col-md-6 col-6">
 
                     <form method="POST" action="{{ route('searcher.place-requests.store') }}">
                         @csrf
@@ -100,17 +100,13 @@
                             <span class="badge"> <i class="fas fa-paper-plane"></i> Send Request</span>
                         </button>
                     </form>
-
-                    <!-- <a href="#" class="btn btn-success btn-block">
-                        <span class="badge"> <i class="fas fa-paper-plane"></i> Send Request</span>
-                    </a> -->
-                </div>
+                </div> -->
                 @endif
-                <div class="col-md-6 col-6">
+                <!-- <div class="col-md-6 col-6">
                     <a href="#" class="btn btn-primary btn-block">
                         <span class="badge"> <i class="fas fa-comments"></i> Send Message</span>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

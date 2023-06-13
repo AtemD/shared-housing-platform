@@ -57,7 +57,6 @@
                                 <div class="form-group">
                                     <label for="rent_period">Rent Per</label>
                                     <select class="custom-select form-control @error('rent_period') is-invalid @enderror" id="rent_period" name="rent_period">
-                                        <option value="">Select...</option>
                                         @forelse(App\References\PeriodType::rentPeriodTypeList() as $key => $value)
                                         <option value="{{$key}}" {{ old('rent_period')== $key || $place->rent_period == $key  ? 'selected' : '' }}>{{$value}}</option>
                                         @empty

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Searcher;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Place;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessagesController extends Controller
@@ -50,13 +51,20 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
+        // Store the Searcher messsage, sent to the receiver.
         $validatedData = $request->validate([
-            'rent_amount' => ['required', 'integer'],
-            'rent_period' => ['required', 'integer'],
-            'availability_date' => ['required', 'date_format:Y-m-d'],
-            'description' => ['required', 'max:1000'],
-            // 'featured_image' => ['required', 'image', 'max:4096', 'mimes:jpg,jpeg,png'],
+            'message' => ['required', 'max:1000'],
+            'receiver' => ['required', 'max:1000'],
         ]);
+
+        $receiver = User::where('slug', $validatedData['receiver'])->firstOrFail();
+
+        auth()->user()->messages()->create([
+            'body' => $validatedData['message'],
+            'receiver_id' => $receiver->id,
+        ]);
+
+        return back()->with('success', 'Your message has been sent successfully');
     }
 
     /**

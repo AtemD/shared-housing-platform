@@ -155,7 +155,7 @@
                                         <div class="modal fade" id="delete-question-{{$question->id}}" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <form role="form" method="POST" action="{{ route('admin.compatibility-questions.destroy', ['compatibility_question' => $question->id]) }}">
+                                                    <form role="form" method="POST" action="{{ route('admin.compatibility-questions.destroy', ['compatibility_question' => $question]) }}">
                                                         @method('DELETE')
                                                         @csrf
                                                         <div class="modal-body">

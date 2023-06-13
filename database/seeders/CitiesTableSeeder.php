@@ -24,6 +24,12 @@ class CitiesTableSeeder extends Seeder
         // For each region generate a couple of cities
         $regions->each(function($region){
             City::factory()->times(1)->create([
+                'name' => 'Addis Ababa',
+                'region_id' => $region->id,
+            ]);
+
+            City::factory()->times(1)->create([
+                'name' => 'Hawassa',
                 'region_id' => $region->id,
             ]);
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Lister;
 
 use App\Helpers\PLaceSetup;
 use App\Http\Controllers\Controller;
+use App\Jobs\MatchListerWithSearchersJob;
 use App\Models\Place;
 use App\References\Currency;
 use App\References\PlaceType;
@@ -181,6 +182,8 @@ class PlacesController extends Controller
             'featured_image' => 'imag1.jpg',
             // 'featured_image' => $path,
         ]);
+
+        MatchListerWithSearchersJob::dispatch(auth()->user());
 
         return redirect()->route('lister.places.edit', ['place' => $place->slug])
             ->with('success', 'Place  Details Have Been Updated Successfully');

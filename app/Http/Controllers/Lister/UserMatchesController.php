@@ -53,6 +53,7 @@ class UserMatchesController extends Controller
         //     ])->simplePaginate();
 
         // $people = matches->
+        // dd($people->first()->toArray());
 
         return view('lister/matches/users/index', compact('people'));
         
@@ -87,6 +88,13 @@ class UserMatchesController extends Controller
             },
         ]);
 
-        return view('lister/matches/users/show', compact('user', 'requestSentToAuthenticatedUser', 'listersPlacesMatchedToCurrentUser', 'requestSentByAuthenticatedUser'));
+        // Get the current authenticated user match that owns the retrieved place above
+        $auth_user = auth()->user()->load([
+            'matches' => function ($query) use($user){
+                $query->where('matched_user_id', $user->id)->first();
+            }
+        ]);
+
+        return view('lister/matches/users/show', compact('user', 'auth_user', 'requestSentToAuthenticatedUser', 'listersPlacesMatchedToCurrentUser', 'requestSentByAuthenticatedUser'));
     }
 }

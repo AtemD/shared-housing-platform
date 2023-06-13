@@ -69,25 +69,25 @@ class UserMatchesController extends Controller
             return view('searcher/matches/users/listers/show', compact('user', 'requestSentToAuthenticatedUser'));
         }
 
-        if ($user->getAttributes()['type'] == UserType::SEARCHER) 
-        {
-            // get the place request the currently authenticated user sent to this user
-            $requestSentToAuthenticatedUser = auth()->user()->placeRequests()->where('sender_id', $user->id)->first();
-            // dd($requestSentToAuthenticatedUser->toArray());
+        // if ($user->getAttributes()['type'] == UserType::SEARCHER) 
+        // {
+        //     // get the place request the currently authenticated user sent to this user
+        //     $requestSentToAuthenticatedUser = auth()->user()->placeRequests()->where('sender_id', $user->id)->first();
+        //     // dd($requestSentToAuthenticatedUser->toArray());
 
-            // dd(User::where('type', UserType::LISTER)->get()->toArray());
-            $user = $user->load([
-                'basicProfile.occupations',
-                'placePreference',
-                'personalPreference',
-                'compatibilityPreference',
-                'interests',
-                'placeRequests' => function ($query) {
-                    $query->where('sender_id', auth()->user()->id);
-                },
-            ]);
-            return view('searcher/matches/users/searchers/show', compact('user', 'requestSentToAuthenticatedUser'));
-        }
+        //     // dd(User::where('type', UserType::LISTER)->get()->toArray());
+        //     $user = $user->load([
+        //         'basicProfile.occupations',
+        //         'placePreference',
+        //         'personalPreference',
+        //         'compatibilityPreference',
+        //         'interests',
+        //         'placeRequests' => function ($query) {
+        //             $query->where('sender_id', auth()->user()->id);
+        //         },
+        //     ]);
+        //     return view('searcher/matches/users/searchers/show', compact('user', 'requestSentToAuthenticatedUser'));
+        // }
 
         return back()->with('error', 'There was a problem viewing this user');
     }

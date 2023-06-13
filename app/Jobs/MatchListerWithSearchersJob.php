@@ -54,8 +54,11 @@ class MatchListerWithSearchersJob implements ShouldQueue
         $searchers = $searchers->whereHas(
             'placePreference',
             function (Builder $query) use ($latest_listers_place) {
-                $query->where('min_rent_amount', '<=', $latest_listers_place->getAttributes()['rent_amount'])
-                    ->where('max_rent_amount', '>=', $latest_listers_place->getAttributes()['rent_amount']);
+                $query->where([
+                    ['min_rent_amount', '<=', $latest_listers_place->getAttributes()['rent_amount']],
+                    ['max_rent_amount', '>=', $latest_listers_place->getAttributes()['rent_amount']]
+                ]);
+                    
             }
         );
 
@@ -75,6 +78,10 @@ class MatchListerWithSearchersJob implements ShouldQueue
 
         // Obtain all questions answered by user_A
         $user_A_compatibility_questions = collect($this->user_A->compatibilityQuestions->pluck('id'));
+
+        // *optimize this part for large match results, reduce memory use here.
+        $matched_users_to_delete = $user_A->matches()->get()->pluck('id');
+        $user_A->placeMatches()->detach($matched_users_to_delete);
 
         // for each searcher obtained calculate compatibility percentage
         $searchers->each(function ($user_B) use ($user_A, $latest_listers_place, $user_A_compatibility_questions) {

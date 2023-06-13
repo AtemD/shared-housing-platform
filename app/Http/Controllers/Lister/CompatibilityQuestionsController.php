@@ -67,9 +67,6 @@ class CompatibilityQuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        // UpdateMatchesCompatibilityPercentageJob::dispatch(auth()->user());
-        // RecalculateCompatibilityPercentageJob::dispatch(auth()->user());
-        // dd('hit QC');
         $validatedData = $request->validate([
             "your_answer_question_{$request->question}" => ['required', 'integer'],
             "your_matches_answer_question_{$request->question}" => ['required', 'integer'],
@@ -120,25 +117,27 @@ class CompatibilityQuestionsController extends Controller
      * @param  CompatibilityQuestion  $compatibility_question
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, CompatibilityQuestion  $compatibility_question)
-    // {
-    //     $validatedData = $request->validate([
-    //         "your_answer_question_{$request->question}" => ['required', 'integer'],
-    //         "your_matches_answer_question_{$request->question}" => ['required', 'integer'],
-    //         "importance_question_{$request->question}" => ['required', 'integer'],
-    //     ]);
+    public function update(Request $request, CompatibilityQuestion  $compatibility_question)
+    {
+        $validatedData = $request->validate([
+            "your_answer_question_{$request->question}" => ['required', 'integer'],
+            "your_matches_answer_question_{$request->question}" => ['required', 'integer'],
+            "importance_question_{$request->question}" => ['required', 'integer'],
+        ]);
 
-    //     auth()->user()->compatibilityQuestions()->updateExistingPivot($request->question, [
-    //         'compatibility_question_relevance' => $validatedData["importance_question_{$request->question}"],
-    //         'user_answer_id' => $validatedData["your_answer_question_{$request->question}"],
-    //         'match_answer_id' => $validatedData["your_matches_answer_question_{$request->question}"]
-    //     ]);
+        auth()->user()->compatibilityQuestions()->updateExistingPivot($request->question, [
+            'compatibility_question_relevance' => $validatedData["importance_question_{$request->question}"],
+            'user_answer_id' => $validatedData["your_answer_question_{$request->question}"],
+            'match_answer_id' => $validatedData["your_matches_answer_question_{$request->question}"]
+        ]);
 
-    //     // Notify the user about this activity.
-    //     // the account number, the user name, the amount deposited, the time it was deposited
+        Bus::chain([
+            new RecalculateCompatibilityPercentageJob(auth()->user()),
+            new UpdateMatchesCompatibilityPercentageJob(auth()->user())
+        ])->dispatch();
 
-    //     return back()->with('success', 'Question answer updated successfully');
-    // }
+        return back()->with('success', 'Question answer updated successfully');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -146,8 +145,8 @@ class CompatibilityQuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        //
+    }
 }

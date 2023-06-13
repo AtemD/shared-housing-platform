@@ -17,8 +17,8 @@ class SetupUserProfileJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $basic_profile;
-    public $occupations;
-    public $spoken_languages;
+    // public $occupations;
+    // public $spoken_languages;
     // public $place;
     public $place_preferences;
     public $place_preference_preferred_locations;
@@ -39,20 +39,20 @@ class SetupUserProfileJob implements ShouldQueue
         $this->user_locations = $profile_setup_details['user_locations'];
 
         // process occupations
-        foreach ($profile_setup_details['occupations'] as $occupation) {
-            $this->occupations[] = ['name' => $occupation];
-        }
-        $this->occupations[] = ['name' => 'doctor'];
+        // foreach ($profile_setup_details['occupations'] as $occupation) {
+        //     $this->occupations[] = ['name' => $occupation];
+        // }
+        // $this->occupations[] = ['name' => 'doctor'];
 
-        foreach ($profile_setup_details['spoken_languages'] as $language) {
-            $this->spoken_languages[] = ['name' => $language];
-        }
+        // foreach ($profile_setup_details['spoken_languages'] as $language) {
+        //     $this->spoken_languages[] = ['name' => $language];
+        // }
 
-        if (array_key_exists("place", $profile_setup_details)) {
-            $this->place = $profile_setup_details['place'];
-        } else {
-            $this->place = null;
-        }
+        // if (array_key_exists("place", $profile_setup_details)) {
+        //     $this->place = $profile_setup_details['place'];
+        // } else {
+        //     $this->place = null;
+        // }
 
 
         if (array_key_exists("place_preferences", $profile_setup_details)) {
@@ -91,9 +91,9 @@ class SetupUserProfileJob implements ShouldQueue
                     'locality_id' => $this->user_locations['locality_id'],
                 ]);
 
-                $basic_profile->occupations()->createMany($this->occupations);
+                // $basic_profile->occupations()->createMany($this->occupations);
 
-                $basic_profile->spokenLanguages()->createMany($this->spoken_languages);
+                // $basic_profile->spokenLanguages()->createMany($this->spoken_languages);
 
                 // if ($this->place != null) {
                 //     $this->user->places()->create([

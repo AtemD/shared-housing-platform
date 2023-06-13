@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $this->call(UsersTableSeeder::class);
+        // $this->call(UsersTableSeeder::class);
         $this->call(PlacesTableSeeder::class);
         $this->call(BasicProfilesTableSeeder::class);
         $this->call(PlacePreferencesTableSeeder::class);
@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserHasInterestsTableSeeder::class);
         $this->call(ImagesTableSeeder::class);
         
-        $this->call(CompatibilityQuestionsTableSeeder::class);
         $this->call(AnswerChoicesTableSeeder::class);
+        $this->call(CompatibilityQuestionsTableSeeder::class);
         $this->call(UserHasCompatibilityQuestionAnswersTableSeeder::class);
 
         
@@ -42,14 +42,14 @@ class DatabaseSeeder extends Seeder
         $this->call(OccupationsTableSeeder::class);
         $this->call(SpokenLanguagesTableSeeder::class);
         $this->call(PreferredLocationsTableSeeder::class);
-        $this->call(PlaceRequestsTableSeeder::class);
+        // $this->call(PlaceRequestsTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
 
-        $this->call(RolesTableSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(RoleHasPermissionsTableSeeder::class);
-        $this->call(ModelHasRolesTableSeeder::class);
-        $this->call(ModelHasPermissionsTableSeeder::class);
+        // $this->call(RolesTableSeeder::class);
+        // $this->call(PermissionsTableSeeder::class);
+        // $this->call(RoleHasPermissionsTableSeeder::class);
+        // $this->call(ModelHasRolesTableSeeder::class);
+        // $this->call(ModelHasPermissionsTableSeeder::class);
 
         // CompatibilityQuestion::factory()->times(3)->create();
     }

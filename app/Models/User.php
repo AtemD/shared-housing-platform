@@ -184,14 +184,14 @@ class User extends Authenticatable
     public function sentPlaceRequests()
     {
         return $this->belongsToMany(User::class, 'place_requests', 'sender_id', 'user_id')
-            ->withPivot(['place_id', 'status'])
+            ->withPivot(['id', 'place_id', 'status'])
             ->withTimestamps();
     }
 
     public function placeRequests()
     {
         return $this->belongsToMany(User::class, 'place_requests', 'user_id', 'sender_id')
-            ->withPivot(['place_id', 'status'])
+            ->withPivot(['id', 'place_id', 'status'])
             ->withTimestamps();
     }
 

@@ -47,7 +47,7 @@
                 <div class="icon">
                     <i class="fas fa-paper-plane"></i>
                 </div>
-                <a href="#" class="small-box-footer text-dark">
+                <a href="{{ route('lister.place-requests.sent.index') }}" class="small-box-footer text-dark">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -63,7 +63,7 @@
                 <div class="icon">
                     <i class="fas fa-comments"></i>
                 </div>
-                <a href="#" class="small-box-footer text-dark">
+                <a href="{{ route('lister.messages.index') }}" class="small-box-footer text-dark">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -95,7 +95,7 @@
                 <div class="icon">
                     <i class="fas fa-question-circle"></i>
                 </div>
-                <a href="#" class="small-box-footer text-dark">
+                <a href="{{ route('lister.compatibility-questions.unanswered.index') }}" class="small-box-footer text-dark">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>

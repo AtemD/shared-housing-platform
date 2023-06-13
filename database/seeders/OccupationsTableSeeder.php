@@ -23,7 +23,9 @@ class OccupationsTableSeeder extends Seeder
         
         // For each basic profile generate a couple of occupations
         $basic_profiles->each(function($profile){
+            $occup = ['lecturer', 'Student', 'Software Engineer', 'data scientist', 'lawyer', ];
             Occupation::factory()->times(mt_rand(1, 2))->create([
+                'name' => $occup[mt_rand(0, 4)],
                 'basic_profile_id' => $profile->id,
             ]);
         });

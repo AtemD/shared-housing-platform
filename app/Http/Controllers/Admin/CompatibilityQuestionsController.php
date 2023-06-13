@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CompatibilityQuestion;
 use App\References\VerificationStatus;
+use Illuminate\Validation\Rule;
 
 class CompatibilityQuestionsController extends Controller
 {
@@ -47,21 +48,19 @@ class CompatibilityQuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'first_name' => 'required|string|max:255',
-        //     'last_name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:8|confirmed',
-        // ]);
+        $validatedData = $request->validate([
+            'verification_status' => ['required', 'integer', Rule::in(array_keys(VerificationStatus::verificationStatusList()))],
+            'title' => ['required', 'max:1000'],
+            'description' => ['required', 'max:1000'],
+        ]);
 
-        // $user = User::create([
-        //     'first_name' => $validatedData['first_name'],
-        //     'last_name' => $validatedData['last_name'],
-        //     'email' => $validatedData['email'],
-        //     'password' => Hash::make($validatedData['password']),
-        // ]);
+        $compatibility_question = CompatibilityQuestion::create([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'verification_status' => $validatedData['verification_status'],
+        ]);
 
-        // return redirect()->route('admin.users.edit', ['user' => $user])->with('success', 'User Added Successfully');
+        return redirect()->route('admin.compatibility-questions.index')->with('success', 'Compatibility Question Added Successfully');
     }
 
     /**
@@ -88,35 +87,36 @@ class CompatibilityQuestionsController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, CompatibilityQuestion $compatibility_question)
     {
-        // $validatedData = $request->validate([
-        //     'first_name' => 'required|string|max:255',
-        //     'last_name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users,email,'. $user->id,
-        // ]);
+        $validatedData = $request->validate([
+            'verification_status' => ['required', 'integer', Rule::in(array_keys(VerificationStatus::verificationStatusList()))],
+            'title' => ['required', 'max:1000'],
+            'description' => ['required', 'max:1000'],
+        ]);
 
-        // $user->update([
-        //     'first_name' => $validatedData['first_name'],
-        //     'last_name' => $validatedData['last_name'],
-        //     'email' => $validatedData['email'],
-        // ]);
+        $compatibility_question->update([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'verification_status' => $validatedData['verification_status'],
+        ]);
 
-        // return back()->with('success', 'User Details Updated Successfully');
+        return back()->with('success', 'Compatibility Question Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User $user
+     * @param  \App\Models\CompatibilityQuestion $compatibility_question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(CompatibilityQuestion $compatibility_question)
     {
-        // $this->authorize('delete', User::class);
+        // after implementing roles and permissions, you can do the authorize check
+        // $this->authorize('delete', CompatibilityQuestion::class);
 
-        // $user->delete();
+        $compatibility_question->delete();
 
-        // return back()->with('success', 'User Deleted Successfully');
+        return back()->with('success', 'Compatibility Question Deleted Successfully');
     }
 }

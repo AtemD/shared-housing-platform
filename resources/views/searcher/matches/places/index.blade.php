@@ -7,12 +7,12 @@
             <div class="card card-primary card-outline card-outline-tabs border-left-0 border-right-0 border-bottom-0 shadow-none">
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs nav-justified" id="custom-tabs-three-tab" role="tablist">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('searcher.matches.users.index')}}" role="tab" aria-selected="false">
                                 <i class="fas fa-users"></i>
                                 People
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link active" href="{{route('searcher.matches.places.index')}}" role="tab" aria-selected="false">
                                 <i class="fas fa-house-user"></i>
@@ -61,7 +61,11 @@
                                                         </a>
 
                                                         <span class="product-description">
+                                                            @if($place->pivot->compatibility_percentage >= 50)
+                                                            <a class="product-title text-decoration-none"><span class="badge badge-success">{{$place->pivot->compatibility_percentage}}% Compatible</a>
+                                                            @else
                                                             <a class="product-title text-decoration-none"><span class="badge badge-secondary">{{$place->pivot->compatibility_percentage}}% Compatible</a>
+                                                            @endif
                                                         </span>
 
                                                     </div>

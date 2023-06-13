@@ -11,7 +11,13 @@
             </small>
         </p>
 
-        <a class="product-title"><span class="badge badge-success">80% Compatible</a>
+        <!-- <a class="product-title"><span class="badge badge-success">80% Compatible</a> -->
+        @if($auth_user->matches->first()->pivot->compatibility_percentage >= 50)
+        <a class="product-title"><span class="badge badge-success">{{ $auth_user->matches->first()->pivot->compatibility_percentage }}% Compatible</a>
+        @else
+        <a class="product-title"><span class="badge badge-secondary">{{ $auth_user->matches->first()->pivot->compatibility_percentage }}% Compatible</a>
+        @endif
+
         <p class="text-muted mb-0"><i class="fas fa-map-marker"></i> {{$user->userLocation->locality->name}}, {{$user->userLocation->city->name}}</p>
 
         <p class="text-muted mb-0"><span class="fas fa-briefcase"></span>

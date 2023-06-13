@@ -60,7 +60,7 @@ class OccupationsController extends Controller
             'name' => $validatedData['occupation']
         ]);
 
-        return redirect()->route('user.basic-profile.index')->with('success', 'Occupation Created Successfully');
+        return redirect()->route('lister.basic-profile.index')->with('success', 'Occupation Created Successfully');
     }
 
     /**

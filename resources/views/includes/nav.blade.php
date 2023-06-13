@@ -49,11 +49,11 @@
                         <a class="dropdown-item nav-item" href="#">
                             <i class="nav-icon fas fa-heart mr-2"></i>{{ __('Favorites') }}
                         </a>
-                        <a class="dropdown-item nav-item" href="#">
+                        <a class="dropdown-item nav-item" href="{{ route('lister.messages.index') }}">
                             <i class=" nav-icon fas fa-comments mr-1"></i>{{ __('Messages') }}
                         </a>
 
-                        <a class="dropdown-item" href="{{ route('lister.place-requests.received.index') }}">
+                        <a class="dropdown-item" href="{{ route('lister.place-requests.sent.index') }}">
                             <i class="fas fa-paper-plane mr-1"></i> {{ __('Requests') }}
                         </a>
                         <a class="dropdown-item" href="{{ route('lister.matches.users.index') }}">
