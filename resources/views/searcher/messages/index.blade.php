@@ -52,7 +52,7 @@
                                     <td class="mailbox-subject"><b></b>{{$message->body}}
                                     </td>
                                     <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date">{{$message->created_at->diffForHumans}}</td>
+                                    <td class="mailbox-date">{{$message->created_at->diffForHumans()}}</td>
                                 </tr>
                                 @empty
                                 <tr>You have no new messages</tr>

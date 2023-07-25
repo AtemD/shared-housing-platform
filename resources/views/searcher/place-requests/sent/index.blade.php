@@ -36,42 +36,7 @@
                             <div class="row">
                                 @forelse($sent_place_requests as $request)
                                 <div class="col-12 col-sm-6 col-md-6 d-flex flex-column">
-                                    <div class="card bg-light">
-                                        <div class="card-body pt-0">
-                                            <div class="row">
-                                                <div class="col-3 text-center">
-                                                    <img src="/uploads/users/person_avatar.png" alt="" class="img-circle img-fluid" height="80" width="80">
-                                                </div>
-                                                <div class="col-9">
-                                                    <p class="text-muted">
-                                                        You sent a place request to
-                                                        <a href="{{ route('searcher.matches.users.show', $request->slug) }}">{{$request->full_name}}</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            @if($request->pivot->status == \App\References\PlaceRequestStatus::PENDING)
-                                            <div class="text-right d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-sm btn-secondary" disabled>
-                                                    Pending
-                                                </button>
-                                            </div>
-                                            @elseif($request->pivot->status == \App\References\PlaceRequestStatus::ACCEPTED)
-                                            <div class="text-right d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-sm btn-success" disabled>
-                                                    Accepted
-                                                </button>
-                                            </div>
-                                            @elseif($request->pivot->status == \App\References\PlaceRequestStatus::DECLINED)
-                                            <div class="text-right d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-sm btn-danger" disabled>
-                                                    Declined
-                                                </button>
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 @empty
                                 <div class="col-12">
