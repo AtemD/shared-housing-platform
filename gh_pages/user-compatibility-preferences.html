@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SHUMA | Preferences</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css" />
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css" />
+</head>
+
+<body>
+  <div id="app">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="./user-home.html">
+          <span class="text-primary text-capitalize"><b>SHUMA</b></span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left Side Of Navbar -->
+          <ul class="navbar-nav mr-auto"></ul>
+
+          <!-- Right Side Of Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" v-pre>
+                Daniel Atem <span class="caret"></span>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item nav-item" href="./user-favorites.html">
+                  <i class="nav-icon fas fa-heart mr-2"></i>Favorites
+                </a>
+                <a class="dropdown-item nav-item" href="./user-messages.html">
+                  <i class=" nav-icon fas fa-comments mr-1"></i>Messages
+                </a>
+
+                <a class="dropdown-item" href="./user-place-requests-sent.html">
+                  <i class="fas fa-paper-plane mr-1"></i> Requests
+                </a>
+                <a class="dropdown-item" href="./user-matches-people.html">
+                  <i class="fas fa-percent mr-2"></i> Matches
+                </a>
+
+                <a id="navbarNested" class="dropdown-item dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cogs"></i> Account Settings
+                </a>
+
+                <div class="dropdown-menu dropright" aria-labelledby="navbarNested">
+                  <a href="./user-basic-profile.html" class="dropdown-item nav-item"><i
+                      class="fas fa-cog mr-2"></i>Basic Profile</a>
+                  <a href="./user-places.html" class="dropdown-item nav-item"><i class="fas fa-cog mr-2"></i>Places</a>
+                  <a href="./user-personal-preferences.html" class="dropdown-item nav-item"><i
+                      class="fas fa-cog mr-2"></i>Personal Preferences</a>
+                  <a href="./user-compatibility-preferences.html" class="dropdown-item nav-item"><i
+                      class="fas fa-cog mr-2"></i>Compatibility
+                    Preferences</a>
+                  <a href="./user-interests.html" class="dropdown-item nav-item"><i
+                      class="fas fa-cog mr-2"></i>Interests</a>
+                  <a href="./user-locations.html" class="dropdown-item nav-item"><i
+                      class="fas fa-cog mr-2"></i>Location</a>
+                  <a href="./user-compatibility-questions.html" class="dropdown-item nav-item"><i
+                      class="fas fa-cog mr-2"></i>Compatibility Questions</a>
+                </div>
+
+                <hr />
+                <a class="dropdown-item" href="logout" onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                  <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </a>
+
+                <form id="logout-form" action="./welcome.html" method="POST" style="display: none"></form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pb-4">
+      <div class="container mt-4">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-white">
+            <li class="breadcrumb-item"><a href="./user-home.html">Home</a></li>
+            <li class="breadcrumb-item">Account Settings</li>
+            <li class="breadcrumb-item active" aria-current="page">Compatibility Preference</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <div class="card card-default card-outline card-primary mt-4 shadow">
+              <div class="card-header">
+                <h5><b>Compatibility Preferences</b></h4>
+                  <small class="text-muted">These are the habits that you want in a potential match.</small>
+              </div>
+
+              <div class="card-body">
+
+                <form method="POST" action="#">
+                  <h5>Diet Habits?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="diet_habit_1" name="diet_habit" class="custom-control-input" checked>
+                        <label class="custom-control-label font-weight-normal" for="diet_habit_1">Vegetarian</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="diet_habit_2" name="diet_habit" class="custom-control-input">
+                        <label class="custom-control-label font-weight-normal" for="diet_habit_2">Non-Vegetarian</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h5>Smoking Habits?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smoking_habit_1" name="smoking_habit" class="custom-control-input"
+                          value="1" checked>
+                        <label class="custom-control-label font-weight-normal"
+                          for="smoking_habit_1">Occasionally</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smoking_habit_2" name="smoking_habit" class="custom-control-input"
+                          value="2">
+                        <label class="custom-control-label font-weight-normal" for="smoking_habit_2">Frequently</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smoking_habit_3" name="smoking_habit" class="custom-control-input"
+                          value="3">
+                        <label class="custom-control-label font-weight-normal" for="smoking_habit_3">None</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h5>Alcohol Habits?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="alcohol_habit_1" name="alcohol_habit" class="custom-control-input"
+                          value="1" checked>
+                        <label class="custom-control-label font-weight-normal"
+                          for="alcohol_habit_1">Occasionally</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="alcohol_habit_2" name="alcohol_habit" class="custom-control-input"
+                          value="2">
+                        <label class="custom-control-label font-weight-normal" for="alcohol_habit_2">Frequently</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="alcohol_habit_3" name="alcohol_habit" class="custom-control-input"
+                          value="3">
+                        <label class="custom-control-label font-weight-normal" for="alcohol_habit_3">None</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h5>Partying Habits?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="partying_habit_1" name="partying_habit" class="custom-control-input"
+                          value="1" checked>
+                        <label class="custom-control-label font-weight-normal"
+                          for="partying_habit_1">Occasionally</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="partying_habit_2" name="partying_habit" class="custom-control-input"
+                          value="2">
+                        <label class="custom-control-label font-weight-normal" for="partying_habit_2">Frequently</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="partying_habit_3" name="partying_habit" class="custom-control-input"
+                          value="3">
+                        <label class="custom-control-label font-weight-normal" for="partying_habit_3">None</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h5>Guest Habits?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="guest_habit_1" name="guest_habit" class="custom-control-input" value="1"
+                          checked>
+                        <label class="custom-control-label font-weight-normal" for="guest_habit_1">Occasionally</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="guest_habit_2" name="guest_habit" class="custom-control-input"
+                          value="2">
+                        <label class="custom-control-label font-weight-normal" for="guest_habit_2">Frequently</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="guest_habit_3" name="guest_habit" class="custom-control-input"
+                          value="3">
+                        <label class="custom-control-label font-weight-normal" for="guest_habit_3">None</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h5>Marital Status?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="marital_status_1" name="marital_status" class="custom-control-input"
+                          value="1">
+                        <label class="custom-control-label font-weight-normal" for="marital_status_1">Married</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="marital_status_2" name="marital_status" class="custom-control-input"
+                          value="2" checked>
+                        <label class="custom-control-label font-weight-normal" for="marital_status_2">UnMarried</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h5>Occupation Type?</h5>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="occupation_type_1" name="occupation_type" class="custom-control-input"
+                          value="1" checked>
+                        <label class="custom-control-label font-weight-normal" for="occupation_type_1">Working
+                          Professional</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="occupation_type_2" name="occupation_type" class="custom-control-input"
+                          value="2">
+                        <label class="custom-control-label font-weight-normal" for="occupation_type_2">Student</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="occupation_type_3" name="occupation_type" class="custom-control-input"
+                          value="3">
+                        <label class="custom-control-label font-weight-normal" for="occupation_type_3">Working
+                          Student</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="occupation_type_4" name="occupation_type" class="custom-control-input"
+                          value="4">
+                        <label class="custom-control-label font-weight-normal" for="occupation_type_4">Others</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row mb-0">
+                    <div class="col-md-12 d-flex justify-content-between">
+                      <button type="submit" class="btn btn-block btn-primary">
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <br />
+
+    <footer class="bd-footer text-muted mt-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <h3 class="font-weight-light text-capitalize">SHUMA</h3>
+            <p>Shared Housing Using Matching Algorithms</p>
+            <!-- <a href="#">Learn more >></a> -->
+            <p class="py-1 m-0 text-muted">
+              &copy; Copyright - Industrial Project.
+              <a href="https://atemd.github.io" class="text-primary">(by Daniel Atem)</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge("uibutton", $.ui.button);
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="dist/js/pages/dashboard.js"></script>
+</body>
+
+</html>
