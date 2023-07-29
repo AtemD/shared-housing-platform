@@ -159,10 +159,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -172,24 +172,24 @@
                                                     <div class="card-footer">
                                                         <div class="text-right d-flex justify-content-end">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="declined"
-                                                                    value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                                <button type="submit" class="btn btn-sm btn-secondary">
+                                                                    value="STATUS">
+                                                                <a href="#" class="btn btn-sm btn-secondary">
                                                                     Decline
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="accepted"
-                                                                    value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                                <button type="submit"
+                                                                    value="ACCEPTED">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-primary ml-2">
                                                                     Accept
-                                                                </button>
+                                                                </a>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -206,10 +206,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -220,17 +220,17 @@
 
                                                         <div class="text-right d-flex justify-content-between">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
                                                                 <input type="hidden" name="cancelled"
-                                                                    value="{{\App\References\PlaceRequestStatus::PENDING}}">
-                                                                <button type="submit"
+                                                                    value="PENDING">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-outline-secondary ml-2">
                                                                     Cancel
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <input type="hidden" name="declined"
-                                                                value="{{\App\References\PlaceRequestStatus::DECLINED}}">
+                                                                value="STATUS">
                                                             <button type="button" class="btn btn-sm btn-warning"
                                                                 disabled>
                                                                 You Declined
@@ -251,10 +251,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -264,19 +264,19 @@
                                                     <div class="card-footer">
 
                                                         <div class="text-right d-flex justify-content-between">
-                                                            <!-- <form method="POST" action="{{ route('lister.place-requests.update', $request->id) }}"> -->
+                                                            <!-- <form method="POST" action="#"> -->
                                                             <!-- @method('PUT')
                                                             @csrf -->
                                                             <input type="hidden" name="cancelled"
-                                                                value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
+                                                                value="ACCEPTED">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
                                                                 <input type="hidden" name="cancelled"
-                                                                    value="{{\App\References\PlaceRequestStatus::PENDING}}">
-                                                                <button type="submit"
+                                                                    value="PENDING">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-outline-secondary ml-2">
                                                                     Cancel
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <button type="button" class="btn btn-sm btn-success"
@@ -299,10 +299,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -312,24 +312,24 @@
                                                     <div class="card-footer">
                                                         <div class="text-right d-flex justify-content-end">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="declined"
-                                                                    value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                                <button type="submit" class="btn btn-sm btn-secondary">
+                                                                    value="STATUS">
+                                                                <a href="#" class="btn btn-sm btn-secondary">
                                                                     Decline
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="accepted"
-                                                                    value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                                <button type="submit"
+                                                                    value="ACCEPTED">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-primary ml-2">
                                                                     Accept
-                                                                </button>
+                                                                </a>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -346,10 +346,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -359,24 +359,24 @@
                                                     <div class="card-footer">
                                                         <div class="text-right d-flex justify-content-end">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="declined"
-                                                                    value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                                <button type="submit" class="btn btn-sm btn-secondary">
+                                                                    value="STATUS">
+                                                                <a href="#" class="btn btn-sm btn-secondary">
                                                                     Decline
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="accepted"
-                                                                    value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                                <button type="submit"
+                                                                    value="ACCEPTED">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-primary ml-2">
                                                                     Accept
-                                                                </button>
+                                                                </a>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -393,10 +393,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -406,24 +406,24 @@
                                                     <div class="card-footer">
                                                         <div class="text-right d-flex justify-content-end">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="declined"
-                                                                    value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                                <button type="submit" class="btn btn-sm btn-secondary">
+                                                                    value="STATUS">
+                                                                <a href="#" class="btn btn-sm btn-secondary">
                                                                     Decline
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="accepted"
-                                                                    value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                                <button type="submit"
+                                                                    value="ACCEPTED">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-primary ml-2">
                                                                     Accept
-                                                                </button>
+                                                                </a>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -440,10 +440,10 @@
                                                             <div class="col-9">
                                                                 <p class="text-muted">
                                                                     <a
-                                                                        href="{{ route('lister.matches.users.show', $request->slug) }}">John
+                                                                        href="#">John
                                                                         Doe</a>
                                                                     sent you request for your place <a
-                                                                        href="{{ route('lister.places.show', $places->find($request->pivot->place_id)->slug) }}">
+                                                                        href="#">
                                                                         Daniel-Atems'-place
                                                                     </a>
                                                                 </p>
@@ -453,24 +453,24 @@
                                                     <div class="card-footer">
                                                         <div class="text-right d-flex justify-content-end">
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="declined"
-                                                                    value="{{\App\References\PlaceRequestStatus::DECLINED}}">
-                                                                <button type="submit" class="btn btn-sm btn-secondary">
+                                                                    value="STATUS">
+                                                                <a href="#" class="btn btn-sm btn-secondary">
                                                                     Decline
-                                                                </button>
+                                                                </a>
                                                             </form>
 
                                                             <form method="POST"
-                                                                action="{{ route('lister.place-requests.update', $request->id) }}">
+                                                                action="#">
 
                                                                 <input type="hidden" name="accepted"
-                                                                    value="{{\App\References\PlaceRequestStatus::ACCEPTED}}">
-                                                                <button type="submit"
+                                                                    value="ACCEPTED">
+                                                                <a href="#"
                                                                     class="btn btn-sm btn-primary ml-2">
                                                                     Accept
-                                                                </button>
+                                                                </a>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -480,7 +480,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ul class="pagination pagination-sm m-0 float-right">
-                                                    {{$received_place_requests->links()}}
+                                                    ...links
                                                 </ul>
                                             </div>
                                         </div>
